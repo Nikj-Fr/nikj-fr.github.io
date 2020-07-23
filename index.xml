@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Nikj | Website</title>
-    <link>https://nikj-fr.github.io/</link>
-    <description>Recent content on Nikj | Website</description>
+    <title></title>
+    <link>http://example.org/</link>
+    <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Jul 2020 18:16:23 +0200</lastBuildDate>
     
-	<atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Hello</title>
-      <link>https://nikj-fr.github.io/post/hello/</link>
-      <pubDate>Wed, 15 Jul 2020 18:16:23 +0200</pubDate>
-      
-      <guid>https://nikj-fr.github.io/post/hello/</guid>
-      <description>Hello, this is my first post..</description>
-    </item>
     
   </channel>
 </rss>
