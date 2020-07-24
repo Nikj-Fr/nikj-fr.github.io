@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cheatsheets on </title>
+    <link>https://nikj-fr.github.io/cheatsheets/</link>
+    <description>Recent content in Cheatsheets on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Thu, 23 Jul 2020 22:59:43 +0200</lastBuildDate>
+    
+	<atom:link href="https://nikj-fr.github.io/cheatsheets/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pwn</title>
+      <link>https://nikj-fr.github.io/cheatsheets/pwn/</link>
+      <pubDate>Thu, 23 Jul 2020 22:59:43 +0200</pubDate>
+      
+      <guid>https://nikj-fr.github.io/cheatsheets/pwn/</guid>
+      <description>Pwn Buffer Overflow ELF-x86 Format String %x %s %n Ressources link = LiveOverflow</description>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>https://nikj-fr.github.io/cheatsheets/web/</link>
+      <pubDate>Thu, 23 Jul 2020 22:59:43 +0200</pubDate>
+      
+      <guid>https://nikj-fr.github.io/cheatsheets/web/</guid>
+      <description>Web </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -5,10 +5,67 @@
     <link>https://nikj-fr.github.io/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>fr</language>
+    <lastBuildDate>Thu, 23 Jul 2020 22:59:55 +0200</lastBuildDate>
     
 	<atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Wls2</title>
+      <link>https://nikj-fr.github.io/articles/wls2/</link>
+      <pubDate>Thu, 23 Jul 2020 22:59:55 +0200</pubDate>
+      
+      <guid>https://nikj-fr.github.io/articles/wls2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pwn</title>
+      <link>https://nikj-fr.github.io/cheatsheets/pwn/</link>
+      <pubDate>Thu, 23 Jul 2020 22:59:43 +0200</pubDate>
+      
+      <guid>https://nikj-fr.github.io/cheatsheets/pwn/</guid>
+      <description>Pwn Buffer Overflow ELF-x86 Format String %x %s %n Ressources link = LiveOverflow</description>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>https://nikj-fr.github.io/cheatsheets/web/</link>
+      <pubDate>Thu, 23 Jul 2020 22:59:43 +0200</pubDate>
+      
+      <guid>https://nikj-fr.github.io/cheatsheets/web/</guid>
+      <description>Web </description>
+    </item>
+    
+    <item>
+      <title>NorzhCTF 2020 - OSINT - Familly Business</title>
+      <link>https://nikj-fr.github.io/writeup/norzhctf_osint_2020/</link>
+      <pubDate>Thu, 23 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/writeup/norzhctf_osint_2020/</guid>
+      <description>Le NorzhCTF est un CTF organisé par l&amp;rsquo;ENSIBS. Cet article traite de la résolution partielle de &amp;ldquo;Familly Business&amp;rdquo;. Partiel car &amp;ldquo;oui&amp;rdquo; lors du rejeu le serveur OVH n&amp;rsquo;était plus disponible.
+Sommaire  Enoncé Familly Business 1 Familly Business 2 Retex  </description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://nikj-fr.github.io/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/about/</guid>
+      <description>About nikj-fr.github.io Il s&amp;rsquo;agit d&amp;rsquo;un site personnel qui va référencer un ensemble de ressources qui me semble interessantes. J&amp;rsquo;y fais aussi mention des CTF auxquels j&amp;rsquo;ai participé et certains write-up de challenge quand j&amp;rsquo;ai le temps.
+About Me Etudiant en Cybersécurité dans une école Bretonne assez connu :p (Hello l&amp;rsquo;ENSIBS), je réalise mon alternance à Naval Group dans la direction Simulateur. J&amp;rsquo;adore l&amp;rsquo;investigation numérique, l&amp;rsquo;osint et je me découvre une passion pour le reverse (nécessite un temps d&amp;rsquo;apprentissage important).</description>
+    </item>
+    
+    <item>
+      <title>Nmap</title>
+      <link>https://nikj-fr.github.io/walkthroughs/nmap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/walkthroughs/nmap/</guid>
+      <description>Sommaire Was is that NMAAAPE ? </description>
+    </item>
     
   </channel>
 </rss>
