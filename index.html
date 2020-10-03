@@ -23,7 +23,7 @@
 <meta property="og:description" content="InfoSec Website | CTF WriteUp" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://nikj-fr.github.io/" />
-<meta property="og:updated_time" content="2020-07-23T22:59:55+02:00" /><meta property="og:site_name" content="Nikj | Personal Website" />
+<meta property="og:updated_time" content="2020-10-03T00:00:00+00:00" /><meta property="og:site_name" content="Nikj | Personal Website" />
 
 
     
@@ -199,16 +199,19 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/cheatsheets/pwn/" >Pwn</a>
+          <a href="/articles/suppression_built_in_apps_windows/" >Suppression des applications préinstallées sous Windows 10</a>
         </span>
         <span class="item__date">
-          Jul 23, 2020
+          Oct 3, 2020
         </span>
         <span >
         
-        Pwn Buffer Overflow ELF-x86 Format String %x %s %n Ressources link = LiveOverflow
+        Introduction Cet article fait suite à une envie de nettoyage de mon pc. Je vais vous partager la méthode que j&rsquo;ai utilisé pour supprimer les applications pré-installées sous Windows 10. Malheuresement, quelques applications parviennent à survivre à la méthode (Hello Cortana).
+Methodes Ouverture d&rsquo;un interpreteur Powershell  Rechercher le programme Powershell dans votre menu démarrer puis lancer le en tant qu&rsquo;administrateur.  Lister l&rsquo;ensemble des applications installées  Dans la fenêtre qui vient de s&rsquo;ouvrir, rentrer la commande suivante:  Get-AppxPackage | Select Name, PackageFullName Selection du package à supprimer  Lancer la commande suivante en remplaçant le nom du package à supprimer à la place de YourPackageName  Get-AppxPackage YourPackageName | Remove-AppxPackage Liste de toutes les applications possibles de supprimer Important:
         
         </span>
+        
+          ... <a class="read-more-symbol" href="/articles/suppression_built_in_apps_windows/">➦</a>
         
         </div>
         
@@ -218,16 +221,18 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/cheatsheets/web/" >Web</a>
+          <a href="/articles/wls2/" >WSL</a>
         </span>
         <span class="item__date">
-          Jul 23, 2020
+          Oct 3, 2020
         </span>
         <span >
         
-        Web 
+        Abstract Depuis quelques années, Microsoft s&rsquo;est tourné vers l&rsquo;Open Source en témoigne le rachat de Github. Ce type de licence est très apprécié de la communauté qui à la possibilité d&rsquo;accéder aux codes sources et d&rsquo;y effectuer des améliorations mais également par les développeurs car la communauté peut également remonter des bugs. Le seul moyen pour Microsoft d&rsquo;intégrer les outils du monde Linux dans son système est de passer par la virtualisation.
         
         </span>
+        
+          ... <a class="read-more-symbol" href="/articles/wls2/">➦</a>
         
         </div>
         

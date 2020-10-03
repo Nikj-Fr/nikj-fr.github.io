@@ -6,18 +6,28 @@
     <description>Recent content in Articles on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Thu, 23 Jul 2020 22:59:55 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 03 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nikj-fr.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Wls2</title>
+      <title>Suppression des applications préinstallées sous Windows 10</title>
+      <link>https://nikj-fr.github.io/articles/suppression_built_in_apps_windows/</link>
+      <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/articles/suppression_built_in_apps_windows/</guid>
+      <description>Introduction Cet article fait suite à une envie de nettoyage de mon pc. Je vais vous partager la méthode que j&amp;rsquo;ai utilisé pour supprimer les applications pré-installées sous Windows 10. Malheuresement, quelques applications parviennent à survivre à la méthode (Hello Cortana).
+Methodes Ouverture d&amp;rsquo;un interpreteur Powershell  Rechercher le programme Powershell dans votre menu démarrer puis lancer le en tant qu&amp;rsquo;administrateur.  Lister l&amp;rsquo;ensemble des applications installées  Dans la fenêtre qui vient de s&amp;rsquo;ouvrir, rentrer la commande suivante:  Get-AppxPackage | Select Name, PackageFullName Selection du package à supprimer  Lancer la commande suivante en remplaçant le nom du package à supprimer à la place de YourPackageName  Get-AppxPackage YourPackageName | Remove-AppxPackage Liste de toutes les applications possibles de supprimer Important:</description>
+    </item>
+    
+    <item>
+      <title>WSL</title>
       <link>https://nikj-fr.github.io/articles/wls2/</link>
-      <pubDate>Thu, 23 Jul 2020 22:59:55 +0200</pubDate>
+      <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/articles/wls2/</guid>
-      <description></description>
+      <description>Abstract Depuis quelques années, Microsoft s&amp;rsquo;est tourné vers l&amp;rsquo;Open Source en témoigne le rachat de Github. Ce type de licence est très apprécié de la communauté qui à la possibilité d&amp;rsquo;accéder aux codes sources et d&amp;rsquo;y effectuer des améliorations mais également par les développeurs car la communauté peut également remonter des bugs. Le seul moyen pour Microsoft d&amp;rsquo;intégrer les outils du monde Linux dans son système est de passer par la virtualisation.</description>
     </item>
     
   </channel>

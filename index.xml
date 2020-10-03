@@ -6,18 +6,28 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Thu, 23 Jul 2020 22:59:55 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 03 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Wls2</title>
+      <title>Suppression des applications préinstallées sous Windows 10</title>
+      <link>https://nikj-fr.github.io/articles/suppression_built_in_apps_windows/</link>
+      <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/articles/suppression_built_in_apps_windows/</guid>
+      <description>Introduction Cet article fait suite à une envie de nettoyage de mon pc. Je vais vous partager la méthode que j&amp;rsquo;ai utilisé pour supprimer les applications pré-installées sous Windows 10. Malheuresement, quelques applications parviennent à survivre à la méthode (Hello Cortana).
+Methodes Ouverture d&amp;rsquo;un interpreteur Powershell  Rechercher le programme Powershell dans votre menu démarrer puis lancer le en tant qu&amp;rsquo;administrateur.  Lister l&amp;rsquo;ensemble des applications installées  Dans la fenêtre qui vient de s&amp;rsquo;ouvrir, rentrer la commande suivante:  Get-AppxPackage | Select Name, PackageFullName Selection du package à supprimer  Lancer la commande suivante en remplaçant le nom du package à supprimer à la place de YourPackageName  Get-AppxPackage YourPackageName | Remove-AppxPackage Liste de toutes les applications possibles de supprimer Important:</description>
+    </item>
+    
+    <item>
+      <title>WSL</title>
       <link>https://nikj-fr.github.io/articles/wls2/</link>
-      <pubDate>Thu, 23 Jul 2020 22:59:55 +0200</pubDate>
+      <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/articles/wls2/</guid>
-      <description></description>
+      <description>Abstract Depuis quelques années, Microsoft s&amp;rsquo;est tourné vers l&amp;rsquo;Open Source en témoigne le rachat de Github. Ce type de licence est très apprécié de la communauté qui à la possibilité d&amp;rsquo;accéder aux codes sources et d&amp;rsquo;y effectuer des améliorations mais également par les développeurs car la communauté peut également remonter des bugs. Le seul moyen pour Microsoft d&amp;rsquo;intégrer les outils du monde Linux dans son système est de passer par la virtualisation.</description>
     </item>
     
     <item>
@@ -45,7 +55,7 @@
       
       <guid>https://nikj-fr.github.io/writeup/norzhctf_osint_2020/</guid>
       <description>Le NorzhCTF est un CTF organisé par l&amp;rsquo;ENSIBS. Cet article traite de la résolution partielle de &amp;ldquo;Familly Business&amp;rdquo;.
-Sommaire  Enoncé Familly Business 1 Familly Business 2 Retex  </description>
+Sommaire  Enoncé Familly Business 1 Familly Business 2 (Pas Flag) Retex  Enoncé Nous avons des doutes sur le fait que M. Lukas DUMMAS, l&amp;rsquo;ancien RSSI de Norzh Nuclea ait vendu des informations protégées de l’entreprise à un membre de sa famille et représentant d’une puissance étrangère. Nous vous demandons de mener l’enquête !</description>
     </item>
     
     <item>
@@ -55,7 +65,7 @@ Sommaire  Enoncé Familly Business 1 Familly Business 2 Retex  </description>
       
       <guid>https://nikj-fr.github.io/about/</guid>
       <description>About nikj-fr.github.io Il s&amp;rsquo;agit d&amp;rsquo;un site personnel qui va référencer un ensemble de ressources qui me semble interessantes. J&amp;rsquo;y fais aussi mention des CTF auxquels j&amp;rsquo;ai participé et certains write-up de challenge quand j&amp;rsquo;ai le temps.
-About Me Etudiant en Cybersécurité dans une école Bretonne assez connu :p (Hello l&amp;rsquo;ENSIBS), je réalise mon alternance à Naval Group dans la direction Simulateur. J&amp;rsquo;adore l&amp;rsquo;investigation numérique, l&amp;rsquo;osint et je me découvre une passion pour le reverse (nécessite un temps d&amp;rsquo;apprentissage important).</description>
+About Me Etudiant en Cybersécurité dans une école Bretonne assez connu :p (Hello l&amp;rsquo;ENSIBS), je réalise mon alternance à Naval Group dans la direction Simulateur. J&amp;rsquo;adore l&amp;rsquo;investigation numérique, l&amp;rsquo;osint et je me découvre une passion pour le reverse.</description>
     </item>
     
     <item>

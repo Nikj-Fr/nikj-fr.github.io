@@ -17,25 +17,22 @@
     
     
 
-<title>Wls2 • </title>
+<title>WSL • </title>
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Wls2"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="WSL"/>
+<meta name="twitter:description" content="Abstract Depuis quelques années, Microsoft s&rsquo;est tourné vers l&rsquo;Open Source en témoigne le rachat de Github. Ce type de licence est très apprécié de la communauté qui à la possibilité d&rsquo;accéder aux codes sources et d&rsquo;y effectuer des améliorations mais également par les développeurs car la communauté peut également remonter des bugs. Le seul moyen pour Microsoft d&rsquo;intégrer les outils du monde Linux dans son système est de passer par la virtualisation."/>
 
-<meta property="og:title" content="Wls2" />
-<meta property="og:description" content="" />
+<meta property="og:title" content="WSL" />
+<meta property="og:description" content="Abstract Depuis quelques années, Microsoft s&rsquo;est tourné vers l&rsquo;Open Source en témoigne le rachat de Github. Ce type de licence est très apprécié de la communauté qui à la possibilité d&rsquo;accéder aux codes sources et d&rsquo;y effectuer des améliorations mais également par les développeurs car la communauté peut également remonter des bugs. Le seul moyen pour Microsoft d&rsquo;intégrer les outils du monde Linux dans son système est de passer par la virtualisation." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nikj-fr.github.io/articles/wls2/" />
-<meta property="article:published_time" content="2020-07-23T22:59:55+02:00" />
-<meta property="article:modified_time" content="2020-07-23T22:59:55+02:00" /><meta property="og:site_name" content="Nikj | Personal Website" />
+<meta property="article:published_time" content="2020-10-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-03T00:00:00+00:00" /><meta property="og:site_name" content="Nikj | Personal Website" />
 
 
     
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
 
 
 
@@ -199,20 +196,20 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
     
 <article>
   <header>
-    <h1>Wls2</h1>
+    <h1>WSL</h1>
     
     
 <div class="post__meta">
     
     
-      <i class="fas fa-calendar-alt"></i> Jul 23, 2020
+      <i class="fas fa-calendar-alt"></i> Oct 3, 2020
     
     
     
     
     
     <br/>
-    <i class="fas fa-clock"></i> 0 min read
+    <i class="fas fa-clock"></i> 6 min read
 </div>
 
 
@@ -220,12 +217,90 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
   
   
   <div class="post">
-    
+    <h1 id="abstract">Abstract</h1>
+<p>Depuis quelques années, Microsoft s&rsquo;est tourné vers l&rsquo;Open Source en témoigne le rachat de Github. Ce type de licence est très apprécié de la communauté qui à la possibilité d&rsquo;accéder aux codes sources et d&rsquo;y effectuer des améliorations mais également par les développeurs car la communauté peut également remonter des bugs. Le seul moyen pour Microsoft d&rsquo;intégrer les outils du monde Linux dans son système est de passer par la virtualisation. La virtualisation permet de lancer des applications qui ne sont pas compatible nativement sur un système d&rsquo;exploitation. Microsoft s&rsquo;est penché sur le sujet en développant un outil basé sur l&rsquo;hyperviseur de type 1 Hyper-V appelé <strong>Windows Subsystem for Linux</strong> (WSL).<br>
+Ce projet permet d&rsquo;utiliser Windows pour réaliser des tâches qui ne sont possible que sur un système UNIX ou sur un dérivé. Le souhait des concepteurs est de faire devenir Windows l&rsquo;outil préféré des développeurs. Cet article va présenter le concept ainsi que les limites actuelles de l&rsquo;outil.</p>
+<h1 id="introduction">Introduction</h1>
+<p>L’Open-source est un modèle économique permettant à une communauté d’accéder au code source d’une application, l’accès y est complètement gratuit et il est possible de modifier le contenu à sa guise. De plus, il est souvent possible de remonter des bugs d’implémentation. Ce modèle est très apprécié par la communauté en témoigne la monté en puissance du système UNIX et de ses dérivés depuis plusieurs années.
+Microsoft a décidé de se lancer pleinement dans l’Open Source depuis le rachat de Github le 4 juin 2018 pour 7,5 milliard de dollars. Ensuite, en 2018, Microsoft lance un nouveau projet en partenariat avec les développeurs de la communauté Linux appelé Windows Subsystem for Linux (WSL).
+WSL est une couche de compatibilité permettant d’exécuter des binaires Linux (au format ELF) de manière native sur Windows 10 et Windows server 2019. Microsoft a introduit la deuxième version de ce projet lors d’une conférence Microsoft Build avant juin 2019. Cette nouvelle version comporte d’important changement, notamment avec l’intégration d’une véritable couche de virtualisation basée sur l’hyperviseur de type 1 <strong>Hyper-V</strong>. Cette couche a permis d’ajouter un véritable noyau Linux à coté de celui de Windows (kernel). Cette version de WSL est compatible sur toutes les éditions de Windows 10. Le but est de ramener dans un même environnement le meilleur des deux mondes Windows et Linux.</p>
+<h1 id="présentation-générale">Présentation générale</h1>
+<p>La technologie à l&rsquo;origine de WSL est issue du projet non publié Astoria, qui permettait à certaines applications Android de s&rsquo;exécuter sur Windows 10 Mobile
+Microsoft présente WSL comme un outil pour les développeurs - en particulier les développeurs Web et ceux qui travaillent sur ou avec des projets open source&quot;16. WSL utilise moins de ressources qu&rsquo;une machine virtuelle classique (avant WSL, une machine virtuelle était le moyen le plus direct pour exécuter un logiciel Linux dans un environnement Windows), tout en permettant aux utilisateurs d&rsquo;utiliser des applications Windows et des outils Linux sur le même ensemble de fichiers.</p>
+<h1 id="fonctionnement">Fonctionnement</h1>
+<p>Alors que les projets précédents de Microsoft et de Cygwin s’étaient concentrés sur la création de leurs propres environnements de type Unix basés sur le standard POSIX, WSL vise la compatibilité native avec Linux. Au lieu d&rsquo;encapsuler les fonctionnalités non natives dans les appels système Win32, la conception initiale de WSL (WSL1) exploitait l&rsquo;exécutif du noyau NT pour servir les programmes Linux en tant que processus minimaux isolés et uniques (appelés &ldquo;pico processus&rdquo;) liés au mode noyau &ldquo;pico providers&rdquo; en tant que gestionnaires d&rsquo;appels système et d&rsquo;exceptions dédiés, distincts de ceux d&rsquo;un processus NT classique, en choisissant de réutiliser les implémentations NT existantes dans la mesure du possible.</p>
+<h2 id="wsl1">WSL1</h2>
+<p>WSL1 ne peut pas exécuter tous les logiciels Linux, notamment les fichiers binaires 32bits, ou ceux nécessitant des services spécifiques du noyau Linux non implémentés dans WSL. En raison de l&rsquo;absence de &ldquo;vrai&rdquo; noyau Linux dans WSL1, les modules du noyau, tels que les pilotes de périphérique, ne peuvent pas être exécutés. WSL2, quant à lui, utilise des instances de noyau Linux virtualisées pour pallier ce problème.
+Il est possible d’exécuter certaines applications graphiques (comme Mozilla Firefox) en installant un serveur X11 dans l’environnement Windows (hôte) (Xming par exemple). Cependant, l&rsquo;audio ou l&rsquo;accélération matérielle ne sont pas pris en charge (ce qui entraîne de mauvaises performances graphiques).
+La prise en charge d’OpenCL et de CUDA n’est pas non plus mise en œuvre actuellement, bien que celle-ci soit prévue pour les versions futures de WSL2.</p>
+<p>Microsoft a déclaré que WSL1 était destiné principalement au développement d&rsquo;applications et non pas à l&rsquo;exécution d&rsquo;environnement de bureau ou de serveurs de production. Pour ce type d&rsquo;usage, Microsoft recommande l&rsquo;utilisation de machines virtuelles (Hyper-V), Kubernetes et Azure.
+Dans les tests de performance, les performances de WSL1 sont souvent proches des distributions Linux natives Ubuntu, Debian, Intel Clear Linux ou autres. Cependant, les performances observées sur les I/O sont très mauvaises pour WSL. Selon Microsoft, les modifications apportées à WSL sont censées offrir une vitesse multipliée par vingt sur certaines opérations par rapport à celle de WSL1</p>
+<h2 id="wsl2">WSL2</h2>
+<p>Bien que WSL (dans cette conception initiale) soit beaucoup plus rapide et sans doute beaucoup plus populaire que les autres solutions permettant d&rsquo;utiliser Linux sur Windows, les ingénieurs du noyau Windows ont eu du mal à augmenter les performances de WSL et la compatibilité des appels systèmes en essayant de remodeler le noyau NT existant pour qu&rsquo;il reconnaisse et fonctionnent correctement sur l&rsquo;API de Linux. Lors d&rsquo;une conférence Microsoft Ignite en 2018, les ingénieurs Microsoft ont donné un aperçu d&rsquo;une nouvelle technologie &ldquo;légère&rdquo; de machine virtuelle Hyper-V pour la conteneurisation dans laquelle un “vrai” noyau Linux virtualisé pouvait utiliser directement les primitives NT sur l&rsquo;hôte. En 2019, Microsoft a annoncé une architecture WSL2 entièrement repensée, utilisant cette technologie VM légère hébergeant des images de noyau Linux réelles (personnalisées), revendiquant ainsi une compatibilité complète.</p>
+<p>Voici une image comparant les deux versions de l&rsquo;outil:
+<!-- raw HTML omitted --></p>
+<p>Microsoft a opté pour la virtualisation via un sous-ensemble optimisé de fonctionnalités Hyper-V, afin d&rsquo;exécuter le noyau fourni et les distributions sous-jacentes, offrant des performances équivalentes à WSL1. La compatibilité avec les versions antérieures est prévue, les développeurs n’ont donc pas besoin de changer quoi que ce soit dans leurs distributions publiées.
+L&rsquo;installation de la distribution s&rsquo;effectue sur un système de fichiers au format ext4 dans un disque virtuel. Le système de fichiers hôte est accessible de manière transparente via le protocole 9P.</p>
+<h1 id="les-limites-de-wsl2">Les limites de WSL2</h1>
+<p>WSL2 permet de travailler sur un Linux natif.
+Tous les outils fonctionnant sur Linux fonctionnent également sur WSL:<br>
+<!-- raw HTML omitted --></p>
+<p>Cependant, il existe des limites à cet outil notamment au niveau de la prise en charge des cartes graphiques.
+En effet, WSL n’a pas un accès direct au Hardware et ne peut faire fonctionner CUDA (Compute Unified Device Architecture) ni OpenCL à ce jour.
+Voici un exemple d&rsquo;outils classés dans un tableau dans lequel il est mentionné si celui-ci est pris en charge ou non par WSL2.</p>
+<table>
+<thead>
+<tr>
+<th>Nom</th>
+<th>Prise en charge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td>Podman</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td>Cuda</td>
+<td>Non</td>
+</tr>
+<tr>
+<td>OpenCl</td>
+<td>Non</td>
+</tr>
+<tr>
+<td>Ansible</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td>Ubuntu/Debian/Fedora</td>
+<td>Oui</td>
+</tr>
+</tbody>
+</table>
+<h1 id="conclusion">Conclusion</h1>
+<p>Microsoft s&rsquo;inspire de plus en plus de ce qui fait l&rsquo;intérêt et la force des grandes distributions Linux. Microsoft permet maintenant l&rsquo;utilisation des systèmes Linux sans jamais avoir à quitter le système d&rsquo;exploitation Microsoft.
+Leur objectif est de faire de Windows 10, l&rsquo;OS qui permettra aux développeurs de tout avoir sur une même machine.
+Le nouveau terminal Windows en est un exemple. Il offre la possibilité de changer de langage à un autre: MS-Dos, Powershell et maintenant Bash en restant sur la même fenêtre.</p>
+
   </div>
   
 
 <div class="navigation navigation-single">
     
+    
+    <a href="/articles/suppression_built_in_apps_windows/" class="navigation-next">
+      <span class="navigation-tittle">Suppression des applications préinstallées sous Windows 10</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
     
 </div>
 
@@ -259,15 +334,6 @@ if (!doNotTrack) {
 
 <script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" integrity="sha384-b3ua1l97aVGAPEIe48b4TC60WUQbQaGi2jqAWM90y0OZXZeyaTCWtBTKtjW2GXG1" crossorigin="anonymous"></script>
 
-
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
-        
-    <script type="text/javascript">
-        
-        hljs.initHighlightingOnLoad();
-    </script>
-    
 
 
 
