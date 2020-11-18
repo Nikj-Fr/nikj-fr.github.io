@@ -6,11 +6,7 @@
     <description>Recent content in Articles on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Sat, 03 Oct 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://nikj-fr.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 03 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Suppression des applications préinstallées sous Windows 10</title>
       <link>https://nikj-fr.github.io/articles/suppression_built_in_apps_windows/</link>

@@ -6,10 +6,18 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Sat, 03 Oct 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 17 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ECW 2020 - OSINT - Sneakers</title>
+      <link>https://nikj-fr.github.io/writeup/ecw_osint_2020/</link>
+      <pubDate>Tue, 17 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/writeup/ecw_osint_2020/</guid>
+      <description>L’ECW 2020 est un challenge Jeopardy français organisé par le Pôle d’Excellence Cyber en partenariat avec la Région Bretagne, Airbus et Thalès.
+Sneakers est un challenge d&amp;rsquo;OSINT où l&amp;rsquo;on devait récupérer un ensemble d&amp;rsquo;informations à partir d&amp;rsquo;une photographie.
+Sommaire  Sneakers 1/4 Sneakers 2/4 Sneakers 3/4 Sneakers 4/4 Retex  Sneakers 1/4 What is the name of the shipping company operating the boat in the photo below ?
+Pour les non anglophones, il faut simplement récupérer le nom de la compagnie détenant le bateau.</description>
+    </item>
     
     <item>
       <title>Suppression des applications préinstallées sous Windows 10</title>
