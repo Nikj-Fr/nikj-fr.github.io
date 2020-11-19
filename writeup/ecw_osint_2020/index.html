@@ -237,7 +237,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p><em>What is the name of the shipping company operating the boat in the photo below ?</em></p>
 <p>Pour les non anglophones, il faut simplement récupérer le nom de la compagnie détenant le bateau.</p>
 <p>Voici la photo fournie:</p>
-<!-- raw HTML omitted -->
+<p><img src="/images/writeups/ecw_2020_osint_sneakers/ecw_osint_sneakers_bateau.jpeg" alt="Boat"></p>
 <p>La première chose à noter est le nom du bateau: <strong>Trans Africa</strong></p>
 <p>Comme il s&rsquo;agit d&rsquo;un challenge d&rsquo;OSINT maritime, nous allons utiliser des sites classiques connus comme:</p>
 <ul>
@@ -247,7 +247,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 </ul>
 <p>En parcourant l&rsquo;ensemble de ces sites, on se rend compte que l&rsquo;on obtient aucune informations sur le propriétaire de ce bateau.<br>
 La seule information exploitable que l&rsquo;on peut récupérer est que c&rsquo;est un cargo <strong>Maltais</strong></p>
-<!-- raw HTML omitted -->
+<p><img src="/images/writeups/ecw_2020_osint_sneakers/malta.png" alt="malta"></p>
 <p>Puisque les sites d&rsquo;OSINT classiques ne fonctionnent pas je me tourne vers les <strong>Google Dork</strong> (Je ferai un walkthrough d&rsquo;ici peu de temps pour ceux qui ne connaissent pas.)</p>
 <p>Par l&rsquo;intermédiaire de mots clefs nous allons pouvoir filtrer les résultats proposés par le moteur de recherche de Google.</p>
 <p><em>allintext</em>: Permet de chercher dans l&rsquo;ensemble d&rsquo;un texte</p>
@@ -255,7 +255,7 @@ La seule information exploitable que l&rsquo;on peut récupérer est que c&rsquo
 <p>Ceci étant dit, il nous reste plus qu&rsquo;a craft un &ldquo;payload de recherche :D&rdquo;.</p>
 <p>Voici le mien, très basique mais qui a plutôt bien fonctionné:</p>
 <pre><code>allintext: trans africa crew filetype: pdf
-</code></pre><!-- raw HTML omitted -->
+</code></pre><p><img src="/images/writeups/ecw_2020_osint_sneakers/recherche_google_dork.png" alt="Recherche google dork"></p>
 <p>On clique sur le 1er lien et on obtient un PDF parlant d&rsquo;une compagnie qui s&rsquo;appelle: <em>Chemikalien Seetransport</em></p>
 <p><a href="https://www.cst-shipping.com/wp-content/uploads/2014/04/CST18001_FleetMagazine_ES_180207.pdf">Lien vers le pdf</a></p>
 <p>On effectue un hash en utilisant l&rsquo;algorithme SHA-1, puis on valide le flag suivant:
@@ -269,9 +269,8 @@ What was this communication system?</em> (Quel est le nom du système de communi
 <p>De la même manière que la première étape nous continuons d&rsquo;utiliser les <em>Google Dork</em></p>
 <pre><code>allintext: Chemikalien Seetransport communication
 </code></pre><p><img src="/images/writeups/ecw_2020_osint_sneakers/recherche_google_dork_2.png" alt="Recherche google dork 2"></p>
-<!-- raw HTML omitted -->
 <p>Le 1er site que l&rsquo;on rencontre est le bon, il y est mentionné une solution de communication appelé <em>CommBox</em></p>
-<!-- raw HTML omitted -->
+<p><img src="/images/writeups/ecw_2020_osint_sneakers/system_communication.png" alt="Communication system"></p>
 <p>2ème flag: <em>ECW{1e041e2aa79e49f5d9dfeee5605431ea50b138bb}</em></p>
 <h3 id="sneakers-34"><strong>Sneakers 3/4</strong></h3>
 <h4 id="enoncé-1">Enoncé</h4>
@@ -289,13 +288,13 @@ In which place (now closed) did this event take place?</em></p>
 What was the domain name used (do not modify it to submit the flag)?</em></p>
 <p>Recherche sur google:</p>
 <pre><code>allintext: presentation hamburg 2012 chemikalien seetransport
-</code></pre><!-- raw HTML omitted -->
+</code></pre><p><img src="/images/writeups/ecw_2020_osint_sneakers/google_dork_presentation.png" alt="Communication system"></p>
 <p>Le lien numéro 2 nous envoie vers une page qui index toutes les présentations des conférences qui ont eu lieu.</p>
 <pre><code>CTRL + F  # Pour rechercher Patric Desanti
-</code></pre><!-- raw HTML omitted -->
+</code></pre><p><img src="/images/writeups/ecw_2020_osint_sneakers/presentation_pptx_find.png" alt="Communication system"></p>
 <p><a href="https://thedigitalship.com/conferences/presentations/2012hamburg/day1/DS_hamburg12_Desanti_Chemikalien_Seetransport.pdf">Lien vers la présentation</a></p>
 <p>On se rend à la diapo 11 du pdfn et on regarde quel est le nom de domaine utilisé:</p>
-<!-- raw HTML omitted -->
+<p><img src="/images/writeups/ecw_2020_osint_sneakers/domain_name.png" alt="Communication system"></p>
 <p>Il s&rsquo;agit de <em>citrix.cst-hamburg.de</em></p>
 <p>Le 4ème flag est: ECW{019a43fd28259d0d3a235de5d354d8e25f606953}</p>
 <h3 id="retex">Retex</h3>
