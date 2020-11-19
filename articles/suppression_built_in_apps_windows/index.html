@@ -128,7 +128,7 @@ Methodes Ouverture d&rsquo;un interpreteur Powershell  Rechercher le programme P
 		 
 			 
 				<li>
-					<a href="/about/">
+					<a href="about">
 						<span>About-Me</span>
 					</a>
 				</li>
@@ -230,13 +230,13 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <ul>
 <li>Dans la fenêtre qui vient de s&rsquo;ouvrir, rentrer la commande suivante:</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Get-AppxPackage | Select Name, PackageFullName
-</code></pre></div><h4 id="selection-du-package-à-supprimer"><strong>Selection du package à supprimer</strong></h4>
+<pre><code>Get-AppxPackage | Select Name, PackageFullName
+</code></pre><h4 id="selection-du-package-à-supprimer"><strong>Selection du package à supprimer</strong></h4>
 <ul>
 <li>Lancer la commande suivante en remplaçant le nom du package à supprimer à la place de <em>YourPackageName</em></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Get-AppxPackage YourPackageName | Remove-AppxPackage
-</code></pre></div><h4 id="liste-de-toutes-les-applications-possibles-de-supprimer"><strong>Liste de toutes les applications possibles de supprimer</strong></h4>
+<pre><code>Get-AppxPackage YourPackageName | Remove-AppxPackage
+</code></pre><h4 id="liste-de-toutes-les-applications-possibles-de-supprimer"><strong>Liste de toutes les applications possibles de supprimer</strong></h4>
 <p><strong>Important:</strong><br>
 Je vous conseille de ne pas supprimer le <em>Windows Store</em> afin de pouvoir récupérer les applications que vous allez supprimer.</p>
 <pre><code>To uninstall 3D Builder:
