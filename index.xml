@@ -6,7 +6,24 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Thu, 19 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Practical Malware Analysis - Lab 1</title>
+      <link>https://nikj-fr.github.io/walkthroughs/pma_lab1/</link>
+      <pubDate>Sat, 05 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/walkthroughs/pma_lab1/</guid>
+      <description>Lab 1-1 This lab uses the files Lab01-01.exe and Lab01-01.dll.
+Upload the files to http://wwww.VirusTotal.com/ and view the reports. Does either file match any existing antivirus signature ? a) Lab01-01.exe
+Virus Total a détecté un potentiel Trojan.
+La signature du malware (MD5) est: bb7425b82141a1c0f7d60e5106676bb1
+50/70 antivirus positifs
+b) Lab01-01.dll
+La signature est: 290934c61de9176ad682ffdd65f0a669
+42/67 antivirus positifs
+Les signatures des malwares peuvent être généré grâce à WinMD5 en lui fournissant le binaire.</description>
+    </item>
+    
     <item>
       <title>[Malware]-Analyse de Bokbot / IcedID</title>
       <link>https://nikj-fr.github.io/articles/analyze_bokbot/</link>
