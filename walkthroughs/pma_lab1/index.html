@@ -217,9 +217,9 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
   
   
   <div class="post">
-    <h3 id="lab-1-1">Lab 1-1</h3>
+    <h4 id="lab-1-1">Lab 1-1</h4>
 <p>This lab uses the files Lab01-01.exe and Lab01-01.dll.</p>
-<h4 id="upload-the-files-to-httpwwwwvirustotalcom-and-view-the-reports-does-either-file-match-any-existing-antivirus-signature-"><strong>Upload the files to <a href="http://wwww.VirusTotal.com/">http://wwww.VirusTotal.com/</a> and view the reports. Does either file match any existing antivirus signature ?</strong></h4>
+<h3 id="upload-the-files-to-httpwwwwvirustotalcom-and-view-the-reports-does-either-file-match-any-existing-antivirus-signature-"><strong>Upload the files to <a href="http://wwww.VirusTotal.com/">http://wwww.VirusTotal.com/</a> and view the reports. Does either file match any existing antivirus signature ?</strong></h3>
 <p>a) Lab01-01.exe<br>
 Virus Total a détecté un potentiel <em>Trojan</em>.<br>
 La signature du malware (MD5) est: <em>bb7425b82141a1c0f7d60e5106676bb1</em></p>
@@ -228,9 +228,9 @@ La signature du malware (MD5) est: <em>bb7425b82141a1c0f7d60e5106676bb1</em></p>
 La signature est: <em>290934c61de9176ad682ffdd65f0a669</em></p>
 <p><strong>42/67</strong> antivirus positifs</p>
 <p>Les signatures des malwares peuvent être généré grâce à WinMD5 en lui fournissant le binaire.</p>
-<h4 id="when-were-these-files-compiled-"><strong>When were these files compiled ?</strong></h4>
-<p>Le binaire a été compilé le 19/12/2010 à 16h16</p>
-<h4 id="are-there-any-indications-that-either-of-these-files-is-packed-or-obfuscated-if-so-what-are-these-indicators-"><strong>Are there any indications that either of these files is packed or obfuscated if so, what are these indicators ?</strong></h4>
+<h3 id="when-were-these-files-compiled-"><strong>When were these files compiled ?</strong></h3>
+<p>Les binaires ont été compilé le 19/12/2010 à 16h16</p>
+<h3 id="are-there-any-indications-that-either-of-these-files-is-packed-or-obfuscated-if-so-what-are-these-indicators-"><strong>Are there any indications that either of these files is packed or obfuscated if so, what are these indicators ?</strong></h3>
 <p>a) PEiD<br>
 Nous lançons le logiciel PEiD pour voir si Qles fichiers sont packés.
 Le logiciel détecte que l&rsquo;executable et la dll ont été compilé à l&rsquo;aide de Microsoft Visual C++ 6.0.<br>
@@ -278,7 +278,7 @@ Si la taille en mémoire est beaucoup plus grande que la taille sur le disque al
 </table>
 <p>La taille en mémoire n&rsquo;est pas plus grande que la taille sur le disque.
 On en déduit que le malware n&rsquo;est pas paqué.</p>
-<h4 id="do-any-imports-hint-at-what-this-malware-does--if-so-which-imports-are-they-"><strong>Do any imports hint at what this malware does ? If so, which imports are they ?</strong></h4>
+<h3 id="do-any-imports-hint-at-what-this-malware-does--if-so-which-imports-are-they-"><strong>Do any imports hint at what this malware does ? If so, which imports are they ?</strong></h3>
 <p>On utilise Dependencies Walker pour lister les fonctions importées.
 Quelques fonctions peuvent être intéressantes pour un malware parmis celles importées:</p>
 <ul>
@@ -296,22 +296,22 @@ Quelques fonctions peuvent être intéressantes pour un malware parmis celles im
 <li>send</li>
 </ul>
 <p><img src="/images/walkthoughs/pma_lab1/lab-1-1_4_import_dll.png" alt="image_import_dll"></p>
-<h4 id="are-there-any-other-files-or-host-based-indicators-that-you-could-look-on-infected-systems-"><strong>Are there any other files or host-based indicators that you could look on infected systems ?</strong></h4>
+<h3 id="are-there-any-other-files-or-host-based-indicators-that-you-could-look-on-infected-systems-"><strong>Are there any other files or host-based indicators that you could look on infected systems ?</strong></h3>
 <p>En utilisant la commande strings sur l&rsquo;executable on se rend compte que le malware utilise une DLL autre que Kernel32. En effet, il s&rsquo;agit de Kerne123. Le l a été remplacé par un 1.</p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-1_5_strings_kerne123.png" alt="strings_kerne123"></p>
-<h4 id="what-network-based-indicators-could-be-used-to-find-this-malware-on-infected-machines-"><strong>What network-based indicators could be used to find this malware on infected machines ?</strong></h4>
+<h3 id="what-network-based-indicators-could-be-used-to-find-this-malware-on-infected-machines-"><strong>What network-based indicators could be used to find this malware on infected machines ?</strong></h3>
 <p>On réalise la même commande mais sur la dll cette fois. On s&rsquo;est rendu compte dans la partie 4 que la DLL était utilisée pour effectuer des commandes réseaux.</p>
 <p>On récupère une adresse IP que l&rsquo;on peut considérer comme celle que l&rsquo;attaquant utilise pour communiquer avec le malware.</p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-1_6_strings_dll.png" alt="strings_dll"></p>
-<h4 id="what-would-you-guess-is-the-purpose-of-these-files-"><strong>What would you guess is the purpose of these files ?</strong></h4>
+<h3 id="what-would-you-guess-is-the-purpose-of-these-files-"><strong>What would you guess is the purpose of these files ?</strong></h3>
 <p>L&rsquo;executable va permettre d&rsquo;installer une DLL backdoor appelé <em>Kerne123.dll</em> qui va pouvoir communiquer avec son Command And Control (C2) à l&rsquo;adresse <em>127.26.152.13</em>.</p>
-<h3 id="lab-1-2">Lab 1-2</h3>
+<h4 id="lab-1-2">Lab 1-2</h4>
 <p>This lab uses the files Lab01-02.exe.</p>
-<h4 id="upload-the-file-to-httpwwwwvirustotalcom-does-it-match-any-existing-antivirus-definitions-"><strong>Upload the file to <a href="http://wwww.VirusTotal.com/">http://wwww.VirusTotal.com/</a>. Does it match any existing antivirus definitions ?</strong></h4>
+<h3 id="upload-the-file-to-httpwwwwvirustotalcom-does-it-match-any-existing-antivirus-definitions-"><strong>Upload the file to <a href="http://wwww.VirusTotal.com/">http://wwww.VirusTotal.com/</a>. Does it match any existing antivirus definitions ?</strong></h3>
 <p>Virus Total a détecté un potentiel <em>Trojan</em>.<br>
 La signature du malware (MD5) est: <em>8363436878404da0ae3e46991e355b83</em></p>
 <p><strong>55/71</strong> antivirus positifs</p>
-<h4 id="are-there-any-indications-that-this-file-is-packed-or-obfuscated--if-so-what-are-these-indicators--if-the-file-is-packed-unpack-it-if-possible"><strong>Are there any indications that this file is packed or obfuscated ? If so, what are these indicators ? If the file is packed, unpack it if possible.</strong></h4>
+<h3 id="are-there-any-indications-that-this-file-is-packed-or-obfuscated--if-so-what-are-these-indicators--if-the-file-is-packed-unpack-it-if-possible"><strong>Are there any indications that this file is packed or obfuscated ? If so, what are these indicators ? If the file is packed, unpack it if possible.</strong></h3>
 <p>Pour voir si un binaire est paqué, on va utiliser PEiD.
 Le binaire a été paqué avec UPX dans sa version 0.89.6.</p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-2_2_packed_binary.png" alt="packed_binary"></p>
@@ -319,9 +319,9 @@ Le binaire a été paqué avec UPX dans sa version 0.89.6.</p>
 <p><a href="https://sourceforge.net/projects/upx/">Téléchargement UPX</a></p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-2_2_unpacked_binary.png" alt="unpack_binary"></p>
 <p>Le malware n&rsquo;est plus paqué, on peut le vérifier en listant les chaînes de caractères présent dans la binaire ou en relançant PEiD.</p>
-<h4 id="do-any-imports-hint-at-this-programs-functionality--if-so-which-imports-are-they-and-what-do-they-tell-you-"><strong>Do any imports hint at this program&rsquo;s functionality ? If so, which imports are they and what do they tell you ?</strong></h4>
+<h3 id="do-any-imports-hint-at-this-programs-functionality--if-so-which-imports-are-they-and-what-do-they-tell-you-"><strong>Do any imports hint at this program&rsquo;s functionality ? If so, which imports are they and what do they tell you ?</strong></h3>
 <p>Pour regarder les imports réalisés par le malware on va utiliser <em>Dependencies Walker</em></p>
-<p><img src="/images/walkthroughs/pma_lab1/lab-1-2_3_import_dll.png" alt="imports_dll"></p>
+<p><img src="/images/walkthroughs/pma_lab1/lab-1-2_3_import_dll.png" alt="import_dll"></p>
 <p>ADVAPI32.DLL</p>
 <ul>
 <li>CreateServiceA</li>
@@ -336,7 +336,7 @@ Le binaire a été paqué avec UPX dans sa version 0.89.6.</p>
 </ul>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-2_3_import_functions_wininet.png" alt="imports_functions_wininet"></p>
 <p>D&rsquo;après les fonctions utilisés, on peut déduire que le malware crée un service qu&rsquo;il va connecter à Internet.</p>
-<h4 id="what-host-or-network-based-indicators-could-be-used-to-identify-this-malware-on-infected-machines-"><strong>What host or network-based indicators could be used to identify this malware on infected machines ?</strong></h4>
+<h3 id="what-host-or-network-based-indicators-could-be-used-to-identify-this-malware-on-infected-machines-"><strong>What host or network-based indicators could be used to identify this malware on infected machines ?</strong></h3>
 <p>On peut lister les chaînes de caractères du binaire pour voir si l&rsquo;URL à laquelle le service se connecte est clairement indiqué.<br>
 On découvre que le service crée est appelé <em>MalService</em> et que le malware se connecte à <em><a href="http://malwareanalysisbook.com">http://malwareanalysisbook.com</a></em></p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-2_4_strings.png" alt="strings"></p>
