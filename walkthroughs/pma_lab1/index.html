@@ -232,7 +232,7 @@ La signature est: <em>290934c61de9176ad682ffdd65f0a669</em></p>
 <p>Le binaire a été compilé le 19/12/2010 à 16h16</p>
 <h4 id="are-there-any-indications-that-either-of-these-files-is-packed-or-obfuscated-if-so-what-are-these-indicators-"><strong>Are there any indications that either of these files is packed or obfuscated if so, what are these indicators ?</strong></h4>
 <p>a) PEiD<br>
-Nous lançons le logiciel PEiD pour voir si les fichiers sont packés.
+Nous lançons le logiciel PEiD pour voir si Qles fichiers sont packés.
 Le logiciel détecte que l&rsquo;executable et la dll ont été compilé à l&rsquo;aide de Microsoft Visual C++ 6.0.<br>
 Pour le moment nous ne voyons pas de traces evidentes d&rsquo;un packer.</p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-1_3_peid.png" alt="image_peid"></p>
@@ -340,10 +340,10 @@ Le binaire a été paqué avec UPX dans sa version 0.89.6.</p>
 <p>On peut lister les chaînes de caractères du binaire pour voir si l&rsquo;URL à laquelle le service se connecte est clairement indiqué.<br>
 On découvre que le service crée est appelé <em>MalService</em> et que le malware se connecte à <em><a href="http://malwareanalysisbook.com">http://malwareanalysisbook.com</a></em></p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-2_4_strings.png" alt="strings"></p>
-<p>Les labs 3, 4 ne seront pas détaillés car la méthode de résolution reste la même que pour les labs 1 et 2.</p>
 <p>On peut retrouver ces informations sous IDA:</p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-2_4_ida_service.png" alt="ida_service">
 <img src="/images/walkthroughs/pma_lab1/lab-1-2_4_ida_url.png" alt="ida_url"></p>
+<p>Les labs 3, 4 ne seront pas détaillés car la méthode de résolution reste la même que pour les labs 1 et 2.</p>
 <p><strong>PS:</strong> Dans le lab 3, il n&rsquo;est pas possible de dépaquer le malware avec les outils / techniques enseignés a cette période du livre.</p>
 
   </div>
