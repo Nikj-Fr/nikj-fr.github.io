@@ -293,7 +293,7 @@ Some of them can be usefull for a malware:</p>
 <li>recv</li>
 <li>send</li>
 </ul>
-<p><img src="/images/walkthoughs/pma_lab1/lab-1-1_4_import_dll.png" alt="image_import_dll"></p>
+<p><img src="/images/walkthoughs/pma_lab1/lab-1-1_4_import_dlls.png" alt="image_import_dll"></p>
 <h4 id="are-there-any-other-files-or-host-based-indicators-that-you-could-look-on-infected-systems-"><strong>Are there any other files or host-based indicators that you could look on infected systems ?</strong></h4>
 <p>With the <em>strings</em> command we can show every characters that are inside a binary. We saw that the DLL Kernel32 wasn&rsquo;t used. Indeed, it was the Kerne132. The <em>L</em> was replace by <em>1</em></p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-1_5_strings_kerne123.png" alt="strings_kerne123"></p>
@@ -375,7 +375,7 @@ The signature of the malware is <em>0fa1498340fca6c562cfa389ad3e93395f44c72fd128
 <li>Msvcrt</li>
 </ul>
 <p>KERNEL32</p>
-<p><img src="/images/walkthroughs/pma_lab1/lab-1-4_4_imports_2_kernel.png" alt="1_4_imports_2_kernel"></p>
+<p><img src="/images/walkthroughs/pma_lab1/lab-1-4_4_imports_2_kernel32.png" alt="1_4_imports_2_kernel"></p>
 <p>Interesting functions for a malware amoung those imported:</p>
 <ul>
 <li>LoadLibrary</li>
