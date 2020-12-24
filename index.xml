@@ -6,22 +6,36 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Sat, 05 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Practical Malware Analysis - Lab 3</title>
+      <link>https://nikj-fr.github.io/walkthroughs/pma_lab3/</link>
+      <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/walkthroughs/pma_lab3/</guid>
+      <description>Basic Dynamic Analysis Lab 3-1 This lab use the file Lab03-01.exe
+What are this malware&amp;rsquo;s imports and strings ? Dependencies Walker..
+What are the malware&amp;rsquo;s host-based indicators ? Strings
+**Are there any usefull network-based signatures for this malware ? If so, what are they ? Strings
+Lab 3-2 This lab use the file Lab03-02.dll
+How can you get this malware to install itself ? Run32dll
+How would you get this malware to run after installation ?</description>
+    </item>
+    
     <item>
       <title>Practical Malware Analysis - Lab 1</title>
       <link>https://nikj-fr.github.io/walkthroughs/pma_lab1/</link>
       <pubDate>Sat, 05 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/walkthroughs/pma_lab1/</guid>
-      <description>Lab 1-1 This lab uses the files Lab01-01.exe and Lab01-01.dll.
+      <description>Basic Static Analysis Lab 1-1 This lab uses the files Lab01-01.exe and Lab01-01.dll.
 Upload the files to http://wwww.VirusTotal.com/ and view the reports. Does either file match any existing antivirus signature ? a) Lab01-01.exe
-Virus Total a détecté un potentiel Trojan.
-La signature du malware (MD5) est: bb7425b82141a1c0f7d60e5106676bb1
-50/70 antivirus positifs
+Virus Total detected a potential Trojan. The signature (MD5) of the malware is bb7425b82141a1c0f7d60e5106676bb1
+50/70 positifs antivirus
 b) Lab01-01.dll
-La signature est: 290934c61de9176ad682ffdd65f0a669
-42/67 antivirus positifs
-Les signatures des malwares peuvent être généré grâce à WinMD5 en lui fournissant le binaire.</description>
+The signature of the malware is 290934c61de9176ad682ffdd65f0a669
+42/67 positifs antivirus
+Signature of malware can be generated with WinMD5..</description>
     </item>
     
     <item>
@@ -39,15 +53,6 @@ Les signatures des malwares peuvent être généré grâce à WinMD5 en lui four
       <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/walkthroughs/google_dork/</guid>
-      <description>Sommaire </description>
-    </item>
-    
-    <item>
-      <title>WinDBG</title>
-      <link>https://nikj-fr.github.io/walkthroughs/win_dbg/</link>
-      <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nikj-fr.github.io/walkthroughs/win_dbg/</guid>
       <description>Sommaire </description>
     </item>
     
@@ -88,7 +93,7 @@ Methodes Ouverture d&amp;rsquo;un interpreteur Powershell  Rechercher le program
       <pubDate>Thu, 23 Jul 2020 22:59:43 +0200</pubDate>
       
       <guid>https://nikj-fr.github.io/cheatsheets/pwn/</guid>
-      <description>Pwn Buffer Overflow ELF-x86 Format String %x %s %n Ressources link = LiveOverflow</description>
+      <description>Buffer Overflow ELF-x86 Format String %x %s %n Ressources link = LiveOverflow</description>
     </item>
     
     <item>
@@ -97,7 +102,7 @@ Methodes Ouverture d&amp;rsquo;un interpreteur Powershell  Rechercher le program
       <pubDate>Thu, 23 Jul 2020 22:59:43 +0200</pubDate>
       
       <guid>https://nikj-fr.github.io/cheatsheets/web/</guid>
-      <description>Web </description>
+      <description>LFI RFI Git Vulnerabilities PHP Vulnerabilities SQL Injection </description>
     </item>
     
     <item>
@@ -111,12 +116,39 @@ Sommaire  Enoncé Familly Business 1 Familly Business 2 (Pas Flag) Retex  Enonc�
     </item>
     
     <item>
+      <title>Forensic</title>
+      <link>https://nikj-fr.github.io/cheatsheets/forensic/</link>
+      <pubDate>Tue, 21 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/cheatsheets/forensic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Google Dork</title>
+      <link>https://nikj-fr.github.io/cheatsheets/cheatsheet_google_dork/</link>
+      <pubDate>Tue, 21 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/cheatsheets/cheatsheet_google_dork/</guid>
+      <description>Filtres de recherches    Filtre Description Exemple     allintext Recherche les occurrences des mots-clefs dans un texte allintext: &amp;quot;keyword_1 keyword_2&amp;quot;   intext Recherche les occurences d&amp;rsquo;un mot-cléf dans un texte intext: &amp;ldquo;keyword&amp;rdquo;   inurl Recherche du mot clé dans l&amp;rsquo;URL d&amp;rsquo;un site inurl: &amp;ldquo;keyword&amp;rdquo;   allinurl Recherche d&amp;rsquo;une URL qui contient les mots-clefs allinurl: &amp;ldquo;keyword_1 keyword_2&amp;rdquo;   intitle Recherche dans le titre des pages webs le mot-clef intitle: &amp;ldquo;keyword&amp;rdquo;   allintitile Recherche dans le titre des pages webs les mots-clefs allintitle: &amp;ldquo;keyword_1 keyword_2&amp;rdquo;   site Liste tous les résultats pour un site site: &amp;ldquo;http://nikj-fr.</description>
+    </item>
+    
+    <item>
+      <title>Nmap</title>
+      <link>https://nikj-fr.github.io/cheatsheets/nmap/</link>
+      <pubDate>Tue, 21 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/cheatsheets/nmap/</guid>
+      <description>Types de scan    Parameters Description     - sA ACK scan   - sF FIN scan   **     Paramètres liés aux ports Scanner une IP nmap [IP] Scanner plusieurs IPs nmap [IP_1, IP_2] Scanner une liste d&amp;rsquo;IPs depuis un fichier .txt nmap -iL [liste.txt] Scanner un sous-réseau nmap [IP/Mask] </description>
+    </item>
+    
+    <item>
       <title>Nmap</title>
       <link>https://nikj-fr.github.io/walkthroughs/nmap/</link>
       <pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/walkthroughs/nmap/</guid>
-      <description>Sommaire Was is that NMAAAPE ? </description>
+      <description>Sommaire </description>
     </item>
     
     <item>
@@ -126,7 +158,7 @@ Sommaire  Enoncé Familly Business 1 Familly Business 2 (Pas Flag) Retex  Enonc�
       
       <guid>https://nikj-fr.github.io/about/</guid>
       <description>About nikj-fr.github.io Il s&amp;rsquo;agit d&amp;rsquo;un site personnel qui va référencer un ensemble de ressources qui me semble interessantes. J&amp;rsquo;y fais aussi mention des CTF auxquels j&amp;rsquo;ai participé et certains write-up de challenge quand j&amp;rsquo;ai le temps.
-About Me Etudiant en Cybersécurité dans une école Bretonne assez connu :p (Hello l&amp;rsquo;ENSIBS), je réalise mon alternance à Naval Group dans la direction Simulateur. J&amp;rsquo;adore l&amp;rsquo;investigation numérique, l&amp;rsquo;osint et je me découvre une passion pour le reverse.</description>
+About Me Etudiant en Cybersécurité dans une école Bretonne assez connu :p (Hello l&amp;rsquo;ENSIBS), je réalise mon alternance à Naval Group. J&amp;rsquo;adore l&amp;rsquo;investigation numérique, l&amp;rsquo;osint et je me découvre une passion pour le reverse.</description>
     </item>
     
   </channel>
