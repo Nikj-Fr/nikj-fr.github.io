@@ -22,14 +22,14 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Nmap"/>
-<meta name="twitter:description" content="Types de scan    Parameters Description     - sA ACK scan   - sF FIN scan   **     Paramètres liés aux ports Scanner une IP nmap [IP] Scanner plusieurs IPs nmap [IP_1, IP_2] Scanner une liste d&rsquo;IPs depuis un fichier .txt nmap -iL [liste.txt] Scanner un sous-réseau nmap [IP/Mask] "/>
+<meta name="twitter:description" content="Types de scan    Parameters Description     - sA ACK scan   - sF FIN scan     Paramètres liés aux ports Scanner une IP nmap [IP] Scanner plusieurs IPs nmap [IP_1, IP_2] Scanner une liste d&rsquo;IPs depuis un fichier .txt nmap -iL [liste.txt] Scanner un sous-réseau nmap [IP/Mask] "/>
 
 <meta property="og:title" content="Nmap" />
-<meta property="og:description" content="Types de scan    Parameters Description     - sA ACK scan   - sF FIN scan   **     Paramètres liés aux ports Scanner une IP nmap [IP] Scanner plusieurs IPs nmap [IP_1, IP_2] Scanner une liste d&rsquo;IPs depuis un fichier .txt nmap -iL [liste.txt] Scanner un sous-réseau nmap [IP/Mask] " />
+<meta property="og:description" content="Types de scan    Parameters Description     - sA ACK scan   - sF FIN scan     Paramètres liés aux ports Scanner une IP nmap [IP] Scanner plusieurs IPs nmap [IP_1, IP_2] Scanner une liste d&rsquo;IPs depuis un fichier .txt nmap -iL [liste.txt] Scanner un sous-réseau nmap [IP/Mask] " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nikj-fr.github.io/cheatsheets/nmap/" />
-<meta property="article:published_time" content="2020-07-21T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-07-21T00:00:00+00:00" /><meta property="og:site_name" content="Nikj | Personal Website" />
+<meta property="article:published_time" content="2020-12-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-12-21T00:00:00+00:00" /><meta property="og:site_name" content="Nikj | Personal Website" />
 
 
     
@@ -202,7 +202,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <div class="post__meta">
     
     
-      <i class="fas fa-calendar-alt"></i> Jul 21, 2020
+      <i class="fas fa-calendar-alt"></i> Dec 21, 2020
     
     
     
@@ -217,7 +217,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
   
   
   <div class="post">
-    <h3 id="types-de-scan">Types de scan</h3>
+    <h4 id="types-de-scan">Types de scan</h4>
 <table>
 <thead>
 <tr>
@@ -234,26 +234,32 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <td><strong>- sF</strong></td>
 <td>FIN scan</td>
 </tr>
-<tr>
-<td>**</td>
-<td></td>
-</tr>
 </tbody>
 </table>
-<h3 id="paramètres-liés-aux-ports">Paramètres liés aux ports</h3>
-<h3 id="scanner-une-ip">Scanner une IP</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap <span style="color:#f92672">[</span>IP<span style="color:#f92672">]</span>
-</code></pre></div><h3 id="scanner-plusieurs-ips">Scanner plusieurs IPs</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap <span style="color:#f92672">[</span>IP_1, IP_2<span style="color:#f92672">]</span>
-</code></pre></div><h3 id="scanner-une-liste-dips-depuis-un-fichier-txt">Scanner une liste d&rsquo;IPs depuis un fichier .txt</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -iL <span style="color:#f92672">[</span>liste.txt<span style="color:#f92672">]</span>
-</code></pre></div><h3 id="scanner-un-sous-réseau">Scanner un sous-réseau</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap <span style="color:#f92672">[</span>IP/Mask<span style="color:#f92672">]</span>
-</code></pre></div>
+<hr>
+<h4 id="paramètres-liés-aux-ports">Paramètres liés aux ports</h4>
+<h4 id="scanner-une-ip">Scanner une IP</h4>
+<pre><code>nmap [IP]
+</code></pre>
+<h4 id="scanner-plusieurs-ips">Scanner plusieurs IPs</h4>
+<pre><code>nmap [IP_1, IP_2]
+</code></pre>
+<h4 id="scanner-une-liste-dips-depuis-un-fichier-txt">Scanner une liste d&rsquo;IPs depuis un fichier .txt</h4>
+<pre><code>nmap -iL [liste.txt]
+</code></pre>
+<h4 id="scanner-un-sous-réseau">Scanner un sous-réseau</h4>
+<pre><code>nmap [IP/Mask]
+</code></pre>
+
   </div>
   
 
 <div class="navigation navigation-single">
+    
+    <a href="/cheatsheets/pwn/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">Pwn</span>
+    </a>
     
     
     <a href="/cheatsheets/cheatsheet_google_dork/" class="navigation-next">

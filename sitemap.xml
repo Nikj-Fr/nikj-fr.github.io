@@ -8,6 +8,21 @@
   </url>
   
   <url>
+    <loc>https://nikj-fr.github.io/cheatsheets/</loc>
+    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nikj-fr.github.io/cheatsheets/cheatsheet_google_dork/</loc>
+    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nikj-fr.github.io/cheatsheets/nmap/</loc>
+    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nikj-fr.github.io/walkthroughs/pma_lab3/</loc>
     <lastmod>2020-12-21T00:00:00+00:00</lastmod>
   </url>
@@ -58,11 +73,6 @@
   </url>
   
   <url>
-    <loc>https://nikj-fr.github.io/cheatsheets/</loc>
-    <lastmod>2020-07-23T22:59:43+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://nikj-fr.github.io/cheatsheets/pwn/</loc>
     <lastmod>2020-07-23T22:59:43+02:00</lastmod>
   </url>
@@ -79,16 +89,6 @@
   
   <url>
     <loc>https://nikj-fr.github.io/cheatsheets/forensic/</loc>
-    <lastmod>2020-07-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nikj-fr.github.io/cheatsheets/cheatsheet_google_dork/</loc>
-    <lastmod>2020-07-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nikj-fr.github.io/cheatsheets/nmap/</loc>
     <lastmod>2020-07-21T00:00:00+00:00</lastmod>
   </url>
   

@@ -8,6 +8,24 @@
     <language>fr</language>
     <lastBuildDate>Mon, 21 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Google Dork</title>
+      <link>https://nikj-fr.github.io/cheatsheets/cheatsheet_google_dork/</link>
+      <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/cheatsheets/cheatsheet_google_dork/</guid>
+      <description>Filtres de recherches    Filtre Description Exemple     allintext Recherche les occurrences des mots-clefs dans un texte allintext: &amp;quot;keyword_1 keyword_2&amp;quot;   intext Recherche les occurences d&amp;rsquo;un mot-cléf dans un texte intext: &amp;quot;keyword&amp;quot;   inurl Recherche du mot clé dans l&amp;rsquo;URL d&amp;rsquo;un site inurl: &amp;quot;keyword&amp;quot;   allinurl Recherche d&amp;rsquo;une URL qui contient les mots-clefs allinurl: &amp;quot;keyword_1 keyword_2&amp;quot;   intitle Recherche dans le titre des pages webs le mot-clef intitle: &amp;quot;keyword&amp;quot;   allintitile Recherche dans le titre des pages webs les mots-clefs allintitle: &amp;quot;keyword_1 keyword_2&amp;quot;   site Liste tous les résultats pour un site site: &amp;quot;http://nikj-fr.</description>
+    </item>
+    
+    <item>
+      <title>Nmap</title>
+      <link>https://nikj-fr.github.io/cheatsheets/nmap/</link>
+      <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/cheatsheets/nmap/</guid>
+      <description>Types de scan    Parameters Description     - sA ACK scan   - sF FIN scan     Paramètres liés aux ports Scanner une IP nmap [IP] Scanner plusieurs IPs nmap [IP_1, IP_2] Scanner une liste d&amp;rsquo;IPs depuis un fichier .txt nmap -iL [liste.txt] Scanner un sous-réseau nmap [IP/Mask] </description>
+    </item>
+    
+    <item>
       <title>Practical Malware Analysis - Lab 3</title>
       <link>https://nikj-fr.github.io/walkthroughs/pma_lab3/</link>
       <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
@@ -122,24 +140,6 @@ Sommaire  Enoncé Familly Business 1 Familly Business 2 (Pas Flag) Retex  Enonc�
       
       <guid>https://nikj-fr.github.io/cheatsheets/forensic/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Google Dork</title>
-      <link>https://nikj-fr.github.io/cheatsheets/cheatsheet_google_dork/</link>
-      <pubDate>Tue, 21 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nikj-fr.github.io/cheatsheets/cheatsheet_google_dork/</guid>
-      <description>Filtres de recherches    Filtre Description Exemple     allintext Recherche les occurrences des mots-clefs dans un texte allintext: &amp;quot;keyword_1 keyword_2&amp;quot;   intext Recherche les occurences d&amp;rsquo;un mot-cléf dans un texte intext: &amp;ldquo;keyword&amp;rdquo;   inurl Recherche du mot clé dans l&amp;rsquo;URL d&amp;rsquo;un site inurl: &amp;ldquo;keyword&amp;rdquo;   allinurl Recherche d&amp;rsquo;une URL qui contient les mots-clefs allinurl: &amp;ldquo;keyword_1 keyword_2&amp;rdquo;   intitle Recherche dans le titre des pages webs le mot-clef intitle: &amp;ldquo;keyword&amp;rdquo;   allintitile Recherche dans le titre des pages webs les mots-clefs allintitle: &amp;ldquo;keyword_1 keyword_2&amp;rdquo;   site Liste tous les résultats pour un site site: &amp;ldquo;http://nikj-fr.</description>
-    </item>
-    
-    <item>
-      <title>Nmap</title>
-      <link>https://nikj-fr.github.io/cheatsheets/nmap/</link>
-      <pubDate>Tue, 21 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nikj-fr.github.io/cheatsheets/nmap/</guid>
-      <description>Types de scan    Parameters Description     - sA ACK scan   - sF FIN scan   **     Paramètres liés aux ports Scanner une IP nmap [IP] Scanner plusieurs IPs nmap [IP_1, IP_2] Scanner une liste d&amp;rsquo;IPs depuis un fichier .txt nmap -iL [liste.txt] Scanner un sous-réseau nmap [IP/Mask] </description>
     </item>
     
     <item>
