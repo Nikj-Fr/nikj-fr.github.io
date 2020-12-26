@@ -6,7 +6,11 @@
     <description>Recent content in Cheatsheets on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Mon, 21 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/cheatsheets/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Dec 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nikj-fr.github.io/cheatsheets/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Google Dork</title>
       <link>https://nikj-fr.github.io/cheatsheets/cheatsheet_google_dork/</link>

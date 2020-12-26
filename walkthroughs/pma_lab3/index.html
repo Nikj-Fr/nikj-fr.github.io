@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.78.2" />
+<meta name="generator" content="Hugo 0.74.1" />
 
     
     
@@ -209,7 +209,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
     
     
     <br/>
-    <i class="fas fa-clock"></i> 1 min read
+    <i class="fas fa-clock"></i> 2 min read
 </div>
 
 
@@ -221,15 +221,32 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <h3 id="lab-3-1"><strong>Lab 3-1</strong></h3>
 <p>This lab use the file Lab03-01.exe</p>
 <h4 id="what-are-this-malwares-imports-and-strings-"><strong>What are this malware&rsquo;s imports and strings ?</strong></h4>
-<p>Dependencies Walker..</p>
+<p>We use PE Explorer to answer this question with the imports button at the top of the tool.</p>
+<p><img src="/images/walkthroughs/pma_lab3/lab-3-1_1_imports.png" alt="imports"></p>
+<p>There is only one DLL used and one function imported.
+We know that the malware isn&rsquo;t pack with <em>UPX</em>, <em>NsPack</em> or <em>Upack</em> because when you open the executable with PE Explorer, by default it try to unpack it with those 3 algorithms. None of them works</p>
+<p><img src="/images/walkthroughs/pma_lab3/lab-3-1_1_unpack.png" alt="unpack_peexplorer"></p>
+<p>Let&rsquo;s take a look at strings. We can deduce that the malware isn&rsquo;t packed because there are a lot of strings. We are going to analyse what we found in the next question.
+Figure 1
+<img src="/images/walkthroughs/pma_lab3/lab-3-1_1_strings.png" alt="strings_1"></p>
+<p>Figure 2
+<img src="/images/walkthroughs/pma_lab3/lab-3-1_1_strings_2.png" alt="strings_2"></p>
 <h4 id="what-are-the-malwares-host-based-indicators-"><strong>What are the malware&rsquo;s host-based indicators ?</strong></h4>
-<p>Strings</p>
+<p>In the <em>figure 1</em>, we can see that the executable contain another binary that should be drop by the first executable.</p>
+<p>In the <em>figure 2</em>, we can assume that the malware create a register key in <em>SOFTWARE\Microsoft\Windows\CurrentVersion\Run</em>. This key allow it to start at the same time as the computer boot. That is used for persistence on a system.</p>
+<p>After that we can&rsquo;t say more with the previous pictures, it would be guessing.<br>
+That&rsquo;s why we&rsquo;ll try to run the malware, and check with procmon what it does.</p>
+<p>We run the malware, but nothing happend, we can check it with the process tree of PE Explorer
+<img src="/images/walkthroughs/pma_lab3/3-1_2-process_tree.png" alt="process_tree"></p>
+<p>After some research I found that the malware only run on Windows XP. Sadly, I only have a Windows 10 VM. I&rsquo;ll make a Windows XP one and come back to this lab later..</p>
 <h4 id="are-there-any-usefull-network-based-signatures-for-this-malware--if-so-what-are-they-">**Are there any usefull network-based signatures for this malware ? If so, what are they ?</h4>
-<p>Strings</p>
+<p>In the <em>figure 1</em>, we can assume that the malware communicate with the url: <a href="http://www.practicalmalwareanalysis.com">www.practicalmalwareanalysis.com</a></p>
+<p>TODO: Windows XP VM and use a fake internet with proxy that can intercept traffic.</p>
 <h3 id="lab-3-2"><strong>Lab 3-2</strong></h3>
 <p>This lab use the file Lab03-02.dll</p>
+<p>TODO: Install Windows XP VM</p>
 <h4 id="how-can-you-get-this-malware-to-install-itself-"><strong>How can you get this malware to install itself ?</strong></h4>
-<p>Run32dll</p>
+<p>Rundll32</p>
 <h4 id="how-would-you-get-this-malware-to-run-after-installation-"><strong>How would you get this malware to run after installation ?</strong></h4>
 <h4 id="how-can-you-find-the-process-under-which-this-malware-is-running-"><strong>How can you find the process under which this malware is running ?</strong></h4>
 <p>Process Explorer</p>

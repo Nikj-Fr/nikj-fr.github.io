@@ -6,7 +6,11 @@
     <description>Recent content in Walkthroughs on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Mon, 21 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/walkthroughs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Dec 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nikj-fr.github.io/walkthroughs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Practical Malware Analysis - Lab 3</title>
       <link>https://nikj-fr.github.io/walkthroughs/pma_lab3/</link>
@@ -14,12 +18,8 @@
       
       <guid>https://nikj-fr.github.io/walkthroughs/pma_lab3/</guid>
       <description>Basic Dynamic Analysis Lab 3-1 This lab use the file Lab03-01.exe
-What are this malware&amp;rsquo;s imports and strings ? Dependencies Walker..
-What are the malware&amp;rsquo;s host-based indicators ? Strings
-**Are there any usefull network-based signatures for this malware ? If so, what are they ? Strings
-Lab 3-2 This lab use the file Lab03-02.dll
-How can you get this malware to install itself ? Run32dll
-How would you get this malware to run after installation ?</description>
+What are this malware&amp;rsquo;s imports and strings ? We use PE Explorer to answer this question with the imports button at the top of the tool.
+There is only one DLL used and one function imported. We know that the malware isn&amp;rsquo;t pack with UPX, NsPack or Upack because when you open the executable with PE Explorer, by default it try to unpack it with those 3 algorithms.</description>
     </item>
     
     <item>

@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.78.2" />
+<meta name="generator" content="Hugo 0.74.1" />
 
     
     
@@ -22,10 +22,10 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Google Dork"/>
-<meta name="twitter:description" content="Filtres de recherches    Filtre Description Exemple     allintext Recherche les occurrences des mots-clefs dans un texte allintext: &quot;keyword_1 keyword_2&quot;   intext Recherche les occurences d&rsquo;un mot-cléf dans un texte intext: &quot;keyword&quot;   inurl Recherche du mot clé dans l&rsquo;URL d&rsquo;un site inurl: &quot;keyword&quot;   allinurl Recherche d&rsquo;une URL qui contient les mots-clefs allinurl: &quot;keyword_1 keyword_2&quot;   intitle Recherche dans le titre des pages webs le mot-clef intitle: &quot;keyword&quot;   allintitile Recherche dans le titre des pages webs les mots-clefs allintitle: &quot;keyword_1 keyword_2&quot;   site Liste tous les résultats pour un site site: &quot;http://nikj-fr."/>
+<meta name="twitter:description" content="Aide mémoire sur Google Dork"/>
 
 <meta property="og:title" content="Google Dork" />
-<meta property="og:description" content="Filtres de recherches    Filtre Description Exemple     allintext Recherche les occurrences des mots-clefs dans un texte allintext: &quot;keyword_1 keyword_2&quot;   intext Recherche les occurences d&rsquo;un mot-cléf dans un texte intext: &quot;keyword&quot;   inurl Recherche du mot clé dans l&rsquo;URL d&rsquo;un site inurl: &quot;keyword&quot;   allinurl Recherche d&rsquo;une URL qui contient les mots-clefs allinurl: &quot;keyword_1 keyword_2&quot;   intitle Recherche dans le titre des pages webs le mot-clef intitle: &quot;keyword&quot;   allintitile Recherche dans le titre des pages webs les mots-clefs allintitle: &quot;keyword_1 keyword_2&quot;   site Liste tous les résultats pour un site site: &quot;http://nikj-fr." />
+<meta property="og:description" content="Aide mémoire sur Google Dork" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nikj-fr.github.io/cheatsheets/cheatsheet_google_dork/" />
 <meta property="article:published_time" content="2020-12-21T00:00:00+00:00" />
@@ -285,29 +285,22 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 </tbody>
 </table>
 <h3 id="opérateur-de-recherche">Opérateur de recherche</h3>
-<h4 id="ou">OU</h4>
+<h5 id="ou">OU</h5>
 <pre><code>site: root-me.fr | site: tryhackme.com
-</code></pre>
-<h4 id="et">ET</h4>
+</code></pre><h5 id="et">ET</h5>
 <pre><code>site: root-me.fr &amp; site: tryhackme.com
-</code></pre>
-<h4 id="combinaison">Combinaison</h4>
+</code></pre><h5 id="combinaison">Combinaison</h5>
 <pre><code>(site: root-me.fr | site: tryhackme.com ) &amp; intext: &quot;login&quot;
-</code></pre>
-<h4 id="include">Include</h4>
+</code></pre><h5 id="include">Include</h5>
 <p>Trie par ordre d&rsquo;occurences les résultats</p>
 <pre><code>-site: root-me.fr +site: root-me.*
-</code></pre>
-<h4 id="exclude">Exclude</h4>
+</code></pre><h5 id="exclude">Exclude</h5>
 <pre><code>site: root-me.* -site: root-me.fr
-</code></pre>
-<h4 id="synonyms">Synonyms</h4>
+</code></pre><h5 id="synonyms">Synonyms</h5>
 <pre><code>~&quot;word&quot;
-</code></pre>
-<h4 id="global-pattern">Global pattern</h4>
+</code></pre><h4 id="global-pattern">Global pattern</h4>
 <pre><code>site: *.fr
 </code></pre>
-
   </div>
   
 
