@@ -227,7 +227,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 We know that the malware isn&rsquo;t pack with <em>UPX</em>, <em>NsPack</em> or <em>Upack</em> because when you open the executable with PE Explorer, by default it try to unpack it with those 3 algorithms. None of them works</p>
 <p><img src="/images/walkthroughs/pma_lab3/lab-3-1_1_unpack.png" alt="unpack_peexplorer"></p>
 <p>Let&rsquo;s take a look at strings. We can deduce that the malware isn&rsquo;t packed because there are a lot of strings. We are going to analyse what we found in the next question.
-Figure 1
+Figure 1<br>
 <img src="/images/walkthroughs/pma_lab3/lab-3-1_1_strings.png" alt="strings_1"></p>
 <p>Figure 2
 <img src="/images/walkthroughs/pma_lab3/lab-3-1_1_strings_2.png" alt="strings_2"></p>
@@ -237,9 +237,9 @@ Figure 1
 <p>After that we can&rsquo;t say more with the previous pictures, it would be guessing.<br>
 That&rsquo;s why we&rsquo;ll try to run the malware, and check with procmon what it does.</p>
 <p>We run the malware, but nothing happend, we can check it with the process tree of PE Explorer
-<img src="/images/walkthroughs/pma_lab3/3-1_2-process_tree.png" alt="process_tree"></p>
+<img src="/images/walkthroughs/pma_lab3/lab-3-1_2_process_tree.png" alt="process_tree"></p>
 <p>After some research I found that the malware only run on Windows XP. Sadly, I only have a Windows 10 VM. I&rsquo;ll make a Windows XP one and come back to this lab later..</p>
-<h4 id="are-there-any-usefull-network-based-signatures-for-this-malware--if-so-what-are-they-">**Are there any usefull network-based signatures for this malware ? If so, what are they ?</h4>
+<h4 id="are-there-any-usefull-network-based-signatures-for-this-malware--if-so-what-are-they-"><strong>Are there any usefull network-based signatures for this malware ? If so, what are they ?</strong></h4>
 <p>In the <em>figure 1</em>, we can assume that the malware communicate with the url: <a href="http://www.practicalmalwareanalysis.com">www.practicalmalwareanalysis.com</a></p>
 <p>TODO: Windows XP VM and use a fake internet with proxy that can intercept traffic.</p>
 <h3 id="lab-3-2"><strong>Lab 3-2</strong></h3>
