@@ -243,10 +243,26 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-4_strings_dns.png" alt="strings"></p>
 <p>Then there is the operand <em>ADD</em> with the parameter <em>0Dh</em>. The parameter is an hexadecimal value. We convert it in base10 and see that this number is 13. In other words, 13 bytes will be added to the EAX pointer. The new string start from: &ldquo;<em>pics.practicalmalwareanalysis.com</em>&rdquo;. This is the real address that the domain will have to resolv.</p>
 <p>After that the EAX register is push on the stack to be used by the <em>gethostbyname</em> function in order to make the call.</p>
-<h4 id="how-many-local-variables-has-ida-pro-recognized-for-the-subroutine-at-0x1001656-"><strong>How many local variables has IDA Pro recognized for the subroutine at 0x1001656 ?</strong></h4>
+<h4 id="how-many-local-variables-has-ida-pro-recognized-for-the-subroutine-at-0x10001656-"><strong>How many local variables has IDA Pro recognized for the subroutine at 0x10001656 ?</strong></h4>
+<p>Let&rsquo;s jump to 0x10001656.
+Here we can see 23 local variables. There are created with a negative ptr indicate a variable. Otherwise,positive content mean a parameter of the function.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-5_variables.png" alt="local_variables"></p>
 <h4 id="how-many-parameters-has-ida-pro-recognized-for-the-subroutine-at-0x1001656-"><strong>How many parameters has IDA Pro recognized for the subroutine at 0x1001656 ?</strong></h4>
+<p>As we said previously, we can count only one positive value. There is only 1 parameter on this function.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-6_parameter.png" alt="parameter"></p>
 <h4 id="use-the-strings-windows-to-locate-the-string-cmdexe-in-the-disassembly-where-is-it-located-">*<strong>Use the Strings windows to locate the string &ldquo;cmd.exe&rdquo; in the disassembly. Where is it located ?</strong></h4>
+<p>View -&gt; Opensubviews -&gt; Strings</p>
+<p>The strings &ldquo;<em>cmd.exe</em>&rdquo; is located at 0x10095B34.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-7_cmd.png" alt="cmd"></p>
 <h4 id="what-is-happening-in-the-area-of-code-that-references-cmdexe-"><strong>What is happening in the area of code that references &ldquo;cmd.exe&rdquo; ?</strong></h4>
+<p>We follow the cross-reference to see where the string is use.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-8_cmd_use.png" alt="cmd_use"></p>
+<p>The string is pushed on top of the stack to be use by a command line function. This is used to open the terminal.</p>
+<p>If we go down a little bit we can see other strings like &ldquo;quit, exit, cd&rdquo;</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-8_strings2.png" alt="strings2"></p>
+<p>Then let&rsquo;s go back to the <em>text view</em> where we saw new strings.
+They looks like automatic &ldquo;welcome&rdquo; for the owner of the malware. Futhermore, we can read a &ldquo;<em>creating a reverse shell session</em>&rdquo;. This is probably how the attacker persist on the computer of his victim.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-8_strings2.png" alt="strings3"></p>
 <h4 id="in-the-same-area-at-0x100101c8-it-looks-like-dword_1008e5c4-is-a-global-variable-that-helps-decide-which-path-to-take-how-does-the-malware-set-dword_1008e5c4-"><strong>In the same area, at 0x100101C8, it looks like dword_1008E5C4 is a global variable that helps decide which path to take. How does the malware set dword_1008E5C4 ?</strong></h4>
 <h4 id="a-few-hundred-lines-into-the-subroutine-at-0x1000ff58-a-series-of-comparisons-use-memcmp-to-compare-strings-what-happens-if-the-string-comparison-to-robotwork-is-successfull-"><strong>A few hundred lines into the subroutine at 0x1000FF58, a series of comparisons use memcmp to compare strings. What happens if the string comparison to robotwork is successfull ?</strong></h4>
 <h4 id="what-does-the-export-pslist-do-"><strong>What does the export PSLIST do ?</strong></h4>
