@@ -6,10 +6,21 @@
     <description>Recent content in Walkthroughs on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Mon, 21 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nikj-fr.github.io/walkthroughs/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Practical Malware Analysis - Lab 3</title>
+      <link>https://nikj-fr.github.io/walkthroughs/pma_lab5/</link>
+      <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/walkthroughs/pma_lab5/</guid>
+      <description>Discover IDA Pro Lab 5 This lab use the file Lab05-01.dll. It has to be analyze only on IDA Pro. This is our first experience with this tool.
+What is the address of DllMain ? The address of DllMain can be find in the Functions Windows by default on the left side of your screen.It starts at 0x1000D02E.
+Also, you can visualize it on the Graph View by turning on Line Prefixes in the settings.</description>
+    </item>
     
     <item>
       <title>Practical Malware Analysis - Lab 3</title>
@@ -44,7 +55,10 @@ Signature of malware can be generated with WinMD5..</description>
       <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/walkthroughs/google_dork/</guid>
-      <description>Sommaire </description>
+      <description>Qu&amp;rsquo;est-ce que Google Dork ? Google Dork est un mécanisme de recherche efficace parmis les sites webs indexés par Google.
+Comment Google index-t&amp;rsquo;il les pages webs ? Des crawler
+utilisation de sitemaps
+Comment réguler l&amp;rsquo;indexation d&amp;rsquo;un site ? En utilisant le fichier robots.txt, on peut définir ce que le crawler a le droit d&amp;rsquo;indexer. Il est possible d&amp;rsquo;y mentionner un nom de dossier, un fichier, que ce soit uniquement les crawler de google qui puisse fonctionner sur votre site.</description>
     </item>
     
     <item>

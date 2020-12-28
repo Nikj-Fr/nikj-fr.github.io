@@ -226,10 +226,10 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p>There is only one DLL used and one function imported.
 We know that the malware isn&rsquo;t pack with <em>UPX</em>, <em>NsPack</em> or <em>Upack</em> because when you open the executable with PE Explorer, by default it try to unpack it with those 3 algorithms. None of them works</p>
 <p><img src="/images/walkthroughs/pma_lab3/lab-3-1_1_unpack.png" alt="unpack_peexplorer"></p>
-<p>Let&rsquo;s take a look at strings. We can deduce that the malware isn&rsquo;t packed because there are a lot of strings. We are going to analyse what we found in the next question.
-Figure 1<br>
+<p>Let&rsquo;s take a look at strings. We can deduce that the malware isn&rsquo;t packed because there are a lot of strings. We are going to analyse what we found in the next question.<br>
+<em>Figure 1</em>
 <img src="/images/walkthroughs/pma_lab3/lab-3-1_1_strings.png" alt="strings_1"></p>
-<p>Figure 2
+<p><em>Figure 2</em>
 <img src="/images/walkthroughs/pma_lab3/lab-3-1_1_strings_2.png" alt="strings_2"></p>
 <h4 id="what-are-the-malwares-host-based-indicators-"><strong>What are the malware&rsquo;s host-based indicators ?</strong></h4>
 <p>In the <em>figure 1</em>, we can see that the executable contain another binary that should be drop by the first executable.</p>
@@ -249,8 +249,9 @@ That&rsquo;s why we&rsquo;ll try to run the malware, and check with procmon what
 <p>Rundll32</p>
 <h4 id="how-would-you-get-this-malware-to-run-after-installation-"><strong>How would you get this malware to run after installation ?</strong></h4>
 <h4 id="how-can-you-find-the-process-under-which-this-malware-is-running-"><strong>How can you find the process under which this malware is running ?</strong></h4>
-<p>Process Explorer</p>
+<p>Process Explorer: Tree</p>
 <h4 id="which-filters-could-you-set-in-order-to-use-procmon-to-glean-information-"><strong>Which filters could you set in order to use procmon to glean information ?</strong></h4>
+<p>Name of the dll: Lab03-02.dll</p>
 <h4 id="what-are-the-malwares-host-based-indicators--1"><strong>What are the malware&rsquo;s host-based indicators ?</strong></h4>
 <h4 id="are-there-any-usefull-network-based-signatures-for-this-malware-"><strong>Are there any usefull network-based signatures for this malware ?</strong></h4>
 <h3 id="lab-3-3"><strong>Lab 3-3</strong></h3>
@@ -266,6 +267,11 @@ That&rsquo;s why we&rsquo;ll try to run the malware, and check with procmon what
       <span class="navigation-tittle">Practical Malware Analysis - Lab 1</span>
     </a>
     
+    
+    <a href="/walkthroughs/pma_lab5/" class="navigation-next">
+      <span class="navigation-tittle">Practical Malware Analysis - Lab 3</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
     
 </div>
 
