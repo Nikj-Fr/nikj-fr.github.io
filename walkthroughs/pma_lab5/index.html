@@ -17,14 +17,14 @@
     
     
 
-<title>Practical Malware Analysis - Lab 3 • </title>
+<title>Practical Malware Analysis - Lab 5 • </title>
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Practical Malware Analysis - Lab 3"/>
+<meta name="twitter:title" content="Practical Malware Analysis - Lab 5"/>
 <meta name="twitter:description" content="Troisième exercice pratique du livre Practical Malware Analysis"/>
 
-<meta property="og:title" content="Practical Malware Analysis - Lab 3" />
+<meta property="og:title" content="Practical Malware Analysis - Lab 5" />
 <meta property="og:description" content="Troisième exercice pratique du livre Practical Malware Analysis" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/pma_lab5/" />
@@ -196,7 +196,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
     
 <article>
   <header>
-    <h1>Practical Malware Analysis - Lab 3</h1>
+    <h1>Practical Malware Analysis - Lab 5</h1>
     
     
 <div class="post__meta">
@@ -232,7 +232,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <h4 id="how-many-functions-call-gethostbyname-"><strong>How many functions call <em>gethostbyname</em> ?</strong></h4>
 <p>In order to see where the <em>gethostbyname</em> functions is call we use Cross-reference. To open the all the cross-reference of this function, you have to use the shortcut <strong>CTRL + X</strong> once the name is highlighted.</p>
 <p>It should open this windows and list all the references.</p>
-<p><img src="/images/walkthroughs/pma_lab5/lab-5-3_xrefs.png" alt="xrefs"></p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-3_xref.png" alt="xrefs"></p>
 <p>There are 18 calls of this function made by 5 differents subroutines.</p>
 <h4 id="focusing-on-the-call-to-gethostbyname-located-at-0x10001757-can-you-figure-out-which-dns-request-will-be-made-"><strong>Focusing on the call to gethostbyname located at 0x10001757, can you figure out which DNS request will be made ?</strong></h4>
 <p>We jump to the address mentionned in the question with the <em>jump to address setting</em>.</p>
