@@ -209,7 +209,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
     
     
     <br/>
-    <i class="fas fa-clock"></i> 4 min read
+    <i class="fas fa-clock"></i> 7 min read
 </div>
 
 
@@ -261,11 +261,77 @@ Here we can see 23 local variables. There are created with a negative ptr indica
 <p>If we go down a little bit we can see other strings like &ldquo;quit, exit, cd&rdquo;</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-8_strings2.png" alt="strings2"></p>
 <p>Then let&rsquo;s go back to the <em>text view</em> where we saw new strings.
-They looks like automatic &ldquo;welcome&rdquo; for the owner of the malware. Futhermore, we can read a &ldquo;<em>creating a reverse shell session</em>&rdquo;. This is probably how the attacker persist on the computer of his victim.</p>
+They looks like automatic &ldquo;welcome&rdquo; for the owner of the malware. Futhermore, we can read a &ldquo;<em>reverse shell session</em>&rdquo;. This is probably how the attacker persist on the computer of his victim.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-8_strings3.png" alt="strings3"></p>
 <h4 id="in-the-same-area-at-0x100101c8-it-looks-like-dword_1008e5c4-is-a-global-variable-that-helps-decide-which-path-to-take-how-does-the-malware-set-dword_1008e5c4-"><strong>In the same area, at 0x100101C8, it looks like dword_1008E5C4 is a global variable that helps decide which path to take. How does the malware set dword_1008E5C4 ?</strong></h4>
+<p>At 0x100101C8 the dword_1008E5C4 is compare to the content of EBX register.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-9_dword_1008E5C4.png" alt="dword_1008E5C4"></p>
+<p>Currently, we don&rsquo;t know what is the value of this variable. We use cross-reference to see where it is initialize and what does it contain.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-9_xref_dword_1008E5C4.png" alt="xref_dword_1008E5C4"></p>
+<p>The EAX register is equal to the result of the function: <em>sub_1003695</em>. Following this one we can see that it tries to gather facts on the operating system like:</p>
+<ul>
+<li>major version</li>
+<li>minor version</li>
+<li>platform id</li>
+</ul>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-9_subroutine.png" alt="subroutine"></p>
+<p>The function <em>GetVersionExA</em> return the major version of your operating system. For example: <em>Windows 8.1</em>, <em>Windows 10</em>.
+It take a structure parameter call <em>lpVersionInformation</em>.
+that will receive the information.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-9_msdn_getversionex.png" alt="msdn_getversionex"></p>
+<p>Then there is a comparaison between the content of the <em>VersionInformation.dwPlatformId</em> and <em>2</em>.
+On the MSDN documentation, we can see that this function is use to <em>Identifies the operating system, or platform
+supported by an assembly</em>.</p>
+<p>Here are the value that the function can take:</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-9_msdn_platformid.png" alt="msdn_platformid"></p>
+<p>The compare value is <em>2</em>. The malware tries to define if the target run a Win32NT or later operating system.</p>
+<p>Finally, <em>1</em> is push on the top of the stack, so EAX=1 after the <em>pop eax</em> instruction.
+The <em>retn</em> allow us to resume the execution flow after the subroutine call.</p>
 <h4 id="a-few-hundred-lines-into-the-subroutine-at-0x1000ff58-a-series-of-comparisons-use-memcmp-to-compare-strings-what-happens-if-the-string-comparison-to-robotwork-is-successfull-"><strong>A few hundred lines into the subroutine at 0x1000FF58, a series of comparisons use memcmp to compare strings. What happens if the string comparison to robotwork is successfull ?</strong></h4>
+<p>At <strong>0x10010438</strong> there is a <em>jnz</em> instruction to <strong>0x10010444</strong> which is the entry of a routine containing the <em>robotwork</em> string.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-10_robotwork.png" alt="robotwork"></p>
+<p>EAX contain the return of the <em>memcmp</em> function.
+The question say that the string comparison to robotwork is succesfull. The return of <em>memcmp</em> is set to EAX. The return is succesfull, it mean that EAX = 0, so ZF = 1.<br>
+The <em>jnz</em> instruction only jump if ZF = 0. So, it will not take the <em>jnz</em> branch.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-10_jump_flag.png" alt="jump_flag"></p>
+<p>But it will jump to <strong>0x100052A2</strong></p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-10_robotwork_2.png" alt="robotwork_2"></p>
+<p>In this area the malware open the register key:
+<strong>SOFTWARE\Microsoft\Windows\CurrentVersion</strong></p>
+<p>If the register key was sucessfully opened then it return an ERROR_SUCCESS. Otherwise, it will return nonzero value.</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-regopenkeyexa">MSDN_GetOpenKeyExA</a></p>
+<p>Then there is a <em>jz</em> jump instruction to <strong>0x10005309</strong> if ZF = 1. To determine if ZF = 1 or 0, a test between eax and eax is made. If the register failed to open it will contain a nonzero value. So the <em>jz</em> instruction will only be execute if the open work.</p>
+<p>Here is the function starting at <strong>0x10005309</strong>
+<img src="/images/walkthroughs/pma_lab5/lab-5-10_robotwork_3.png" alt="robotwork_3"></p>
+<p>The content of the register key <em>WorkTime</em> will be gather.
+Then it will jump to <strong>0x10005379</strong> if the query wasn&rsquo;t achieve.</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-regqueryvalueexa">MSDN_RegQueryValueExA</a></p>
+<p>Here is the function starting at <strong>0x10005379</strong>
+<img src="/images/walkthroughs/pma_lab5/lab-5-10_robotwork_4.png" alt="robotwork_4">
+The content of the register key <em>WorkTimes</em> will be gather.</p>
+<p>Finally, we can see that the information is send over the network with the <em>s</em> parameter corresponding to the <em>socket</em> created.
+<img src="/images/walkthroughs/pma_lab5/lab-5-10_network_send.png" alt="robotwork_4"></p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-10_network_socket.png" alt="robotwork_4"></p>
 <h4 id="what-does-the-export-pslist-do-"><strong>What does the export PSLIST do ?</strong></h4>
+<p>View -&gt; Open subview -&gt; Export</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-11_pslist_export.png" alt="pslist_export"></p>
+<p>I find a very usefull shortcut. You can press <em>space</em> to switch from graph to text view and inversely.</p>
+<p>There is two possibilities depending on the result of the routine <strong>0x100036C3</strong>.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-11_two_possibilities.png" alt="two_possibilities"></p>
+<p>We already focus on the beginning of this function previously. Here is what it looks like:</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-11_major_version.png" alt="major_version"></p>
+<p>The <em>major version</em> is compare to <em>5</em> like the <em>platform id</em> with <em>2</em>.<br>
+With MSDN documentation, we see that <em>5</em> can correspond to several operating system.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-11_msdn_major_version.png" alt="msdn_os"></p>
+<p>Then, depending on the result it will go at <strong>0x10007046</strong> or <strong>0x1000704E</strong>.</p>
+<p>a) The subroutine <strong>10006518</strong></p>
+<p>It create a snapshot of a process. The EBX register is used to give the ID to be dump.
+<img src="/images/walkthroughs/pma_lab5/lab-5-11_snapshot_1.png" alt="snapshot_1"></p>
+<p>b) The subroutine <strong>100664C</strong>
+It perform the same call as the previous routine.
+The only difference is the snapshot that is send over the open socket.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-11_snapshot_2.png" alt="snapshot_2"></p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot">MSDN_CreateToolHelp32Snapshot</a></p>
 <h4 id="use-the-graph-mode-to-graph-the-cross-reference-from-sub_10004379-which-api-functions-could-be-called-by-entering-this-function--based-on-the-api-functions-alone-what-could-you-rename-this-function-"><strong>Use the graph mode to graph the cross-reference from sub_10004379. Which API functions could be called by entering this function ? Based on the API functions alone, what could you rename this function ?</strong></h4>
 <h4 id="how-many-windows-api-functions-does-dllmain-call-directly--how-many-at-a-depth-of-2-"><strong>How many Windows API functions does DllMain call directly ? How many at a depth of 2 ?</strong></h4>
 <h4 id="at-0x10001358-there-is-a-call-to-sleep-looking-backward-though-the-code-how-long-will-the-program-sleep-if-this-code-executes-"><strong>At 0x10001358, there is a call to Sleep. Looking backward though the code, how long will the program sleep if this code executes ?</strong></h4>
