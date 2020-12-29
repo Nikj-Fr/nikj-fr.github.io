@@ -209,7 +209,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
     
     
     <br/>
-    <i class="fas fa-clock"></i> 8 min read
+    <i class="fas fa-clock"></i> 9 min read
 </div>
 
 
@@ -359,7 +359,23 @@ Then we have to show the cross_reference graph. In order to achieve that you hav
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-14_eax_content.png" alt="offset"></p>
 <p>The program will sleep 30 seconds.</p>
 <h4 id="at-0x10001701-is-a-call-to-socket-what-are-the-three-parameters-"><strong>At 0x10001701 is a call to socket. What are the three parameters ?</strong></h4>
-<h4 id="using-the-msdn-page-for-socket-and-the-named-symbolic-constants-functionality-in-ida-pro-can-you-make88-what-do-you-find-"><strong>Using the MSDN page for socket and the named symbolic constants functionality in IDA Pro, can you make88. What do you find ?</strong></h4>
+<p>The three parameters are push on the stack then the <em>socket</em> function is call.
+On the MSDN, we can see the meaning of these numbers</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-socket">MSDN_Socket</a></p>
+<ul>
+<li>Protocol: 5 -&gt; TCP</li>
+<li>Type: 1 -&gt; SockStream</li>
+<li>AF: 2 -&gt; IPv4</li>
+</ul>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-15_parameters.png" alt="offset"></p>
+<h4 id="using-the-msdn-page-for-socket-and-the-named-symbolic-constants-functionality-in-ida-pro-can-you-make-the-parameter-more-meaningful-what-are-the-parameters-after-you-apply-the-changes-"><strong>Using the MSDN page for socket and the named symbolic constants functionality in IDA Pro, can you make the parameter more meaningful? What are the parameters after you apply the changes ?</strong></h4>
+<p>The question is partially answered previously. <br>
+To rename a parameter we have to right click on it, chose Symbolic constant and use standart symbolic constant. Then you can search whatever you want.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-16_tcp.png" alt="tcp"></p>
+<p>This is what it looks like when changes are done:</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-16_finish.png" alt="finish_rename"></p>
+<h4 id="search-for-usage-of-the-in-instruction-opcode-0xed-this-instruction-is-used-with-a-magic-string-vmxh-to-perform-vmware-detection-is-that-in-use-in-this-malware-using-the-cross-references-to-the-function-that-executes-the-in-instruction-is-there-further-evidence-of-vmware-detection-"><strong>Search for usage of the in instruction (opcode 0xED). This instruction is used with a magic string VMXh to perform VMware detection. Is that in use in this malware? Using the cross-references to the function that executes the in instruction, is there further evidence of VMware detection ?</strong></h4>
+<h4 id="jump-your-cursor-to-0x1001d988-what-do-you-find-"><strong>Jump your cursor to 0x1001D988. What do you find ?</strong></h4>
 <h4 id="if-you-have-the-ida-python-plug-in-installed-run-lab05-01py-an-ida-pro-python-script-provided-with-the-malware-for-this-book-what-happens-after-you-run-the-script-"><strong>If you have the IDA Python plug-in installed, run Lab05-01.py, an IDA Pro Python script provided with the malware for this book. What happens after you run the script ?</strong></h4>
 <h4 id="with-the-cursor-in-the-same-location-how-do-you-turn-this-data-into-a-single-ascii-string-"><strong>With the cursor in the same location, how do you turn this data into a single ASCII string ?</strong></h4>
 <h4 id="open-the-script-with-a-text-editor-how-does-it-work-"><strong>Open the script with a text editor. How does it work ?</strong></h4>
