@@ -347,7 +347,7 @@ Then we have to show the cross_reference graph. In order to achieve that you hav
 </ul>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-13_depth1.png" alt="depth1"></p>
 <p>With a depth of 2 the chart is unreadable, you have to zoom a lot. I don&rsquo;t count all the API functions but there are a lot.</p>
-<p><img src="/images/walkthroughs/pma_lab5/lab-5-13_depth1.png" alt="depth2"></p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-13_depth2.png" alt="depth2"></p>
 <h4 id="at-0x10001358-there-is-a-call-to-sleep-looking-backward-though-the-code-how-long-will-the-program-sleep-if-this-code-executes-"><strong>At 0x10001358, there is a call to Sleep. Looking backward though the code, how long will the program sleep if this code executes ?</strong></h4>
 <p>The sleep function take a milliseconds parameter that is store in EAX.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-14_sleep.png" alt="sleep"></p>
@@ -356,9 +356,9 @@ Then we have to show the cross_reference graph. In order to achieve that you hav
 <p>Then 0Dh (= 13) is add to the EAX pointer. In other word the pointer is move 13 bytes further. The new string is
 <em>30</em></p>
 <p>The <em>atoi</em> function convert the string in an integer. Finally, the number 30 is multiply by 1000. This is equal to 30 000 ms corresponding to 30 seconds.</p>
-<p><img src="/images/walkthroughs/pma_lab5/lab-5-14_offset.png" alt="offset"></p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-14_eax_content.png" alt="offset"></p>
 <p>The program will sleep 30 seconds.</p>
-<h4 id="at-0x10001701-is-a-call-to-socket-what-are-the-three-parameters-"><strong>At 0x10001701 is a call to socket. WHat are the three parameters ?</strong></h4>
+<h4 id="at-0x10001701-is-a-call-to-socket-what-are-the-three-parameters-"><strong>At 0x10001701 is a call to socket. What are the three parameters ?</strong></h4>
 <h4 id="using-the-msdn-page-for-socket-and-the-named-symbolic-constants-functionality-in-ida-pro-can-you-make88-what-do-you-find-"><strong>Using the MSDN page for socket and the named symbolic constants functionality in IDA Pro, can you make88. What do you find ?</strong></h4>
 <h4 id="if-you-have-the-ida-python-plug-in-installed-run-lab05-01py-an-ida-pro-python-script-provided-with-the-malware-for-this-book-what-happens-after-you-run-the-script-"><strong>If you have the IDA Python plug-in installed, run Lab05-01.py, an IDA Pro Python script provided with the malware for this book. What happens after you run the script ?</strong></h4>
 <h4 id="with-the-cursor-in-the-same-location-how-do-you-turn-this-data-into-a-single-ascii-string-"><strong>With the cursor in the same location, how do you turn this data into a single ASCII string ?</strong></h4>
