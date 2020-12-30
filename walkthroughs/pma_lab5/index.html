@@ -336,7 +336,7 @@ The only difference, is the snapshot that is send over the open socket.</p>
 <p>Let&rsquo;s use the jump command by pressing <strong>g</strong>.
 Then we have to show the cross_reference graph. In order to achieve that you have to go in View -&gt; Chart -&gt; Xref from and then a chart will pop up.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-12_xref_graph.png" alt="xref_chart"></p>
-<p>Based on all the functions name on this graph, we can assume that this routine can be call like <strong>SystemLanguageID_Send</strong></p>
+<p>Based on all the functions name on this graph, we can assume that this routine can be call like <strong>SystemLanguageID_Send</strong>.</p>
 <h4 id="how-many-windows-api-functions-does-dllmain-call-directly--how-many-at-a-depth-of-2-"><strong>How many Windows API functions does DllMain call directly ? How many at a depth of 2 ?</strong></h4>
 <p>There are 4 API Functions:</p>
 <ul>
@@ -351,16 +351,16 @@ Then we have to show the cross_reference graph. In order to achieve that you hav
 <h4 id="at-0x10001358-there-is-a-call-to-sleep-looking-backward-though-the-code-how-long-will-the-program-sleep-if-this-code-executes-"><strong>At 0x10001358, there is a call to Sleep. Looking backward though the code, how long will the program sleep if this code executes ?</strong></h4>
 <p>The sleep function take a milliseconds parameter that is store in EAX.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-14_sleep.png" alt="sleep"></p>
-<p>Following the offset at <strong>0x10001341</strong>, we can see that a string is store in EAX: <em>[This Is Cti]30</em></p>
+<p>Following the offset at <strong>0x10001341</strong>, we can see that a string is store in EAX: <em>[This Is Cti]30</em>.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-14_offset.png" alt="offset"></p>
 <p>Then 0Dh (= 13) is add to the EAX pointer. In other word the pointer is move 13 bytes further. The new string is
-<em>30</em></p>
+<em>30</em>.</p>
 <p>The <em>atoi</em> function convert the string in an integer. Finally, the number 30 is multiply by 1000. This is equal to 30 000 ms corresponding to 30 seconds.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-14_eax_content.png" alt="offset"></p>
 <p>The program will sleep 30 seconds.</p>
 <h4 id="at-0x10001701-is-a-call-to-socket-what-are-the-three-parameters-"><strong>At 0x10001701 is a call to socket. What are the three parameters ?</strong></h4>
 <p>The three parameters are push on the stack then the <em>socket</em> function is call.
-On the MSDN, we can see the meaning of these numbers</p>
+On the MSDN, we can see the meaning of these numbers.</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-socket">MSDN_Socket</a></p>
 <ul>
 <li>Protocol: 5 -&gt; TCP</li>
@@ -376,12 +376,12 @@ To rename a parameter we have to right click on it, chose Symbolic constant and 
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-16_finish.png" alt="finish_rename"></p>
 <h4 id="search-for-usage-of-the-in-instruction-opcode-0xed-this-instruction-is-used-with-a-magic-string-vmxh-to-perform-vmware-detection-is-that-in-use-in-this-malware-using-the-cross-references-to-the-function-that-executes-the-in-instruction-is-there-further-evidence-of-vmware-detection-"><strong>Search for usage of the in instruction (opcode 0xED). This instruction is used with a magic string VMXh to perform VMware detection. Is that in use in this malware? Using the cross-references to the function that executes the in instruction, is there further evidence of VMware detection ?</strong></h4>
 <p>Use the shortcut <strong>ALT + T</strong> to search for string ocurrence.
-For &ldquo;VMXh&rdquo; there aren&rsquo;t any outputs
+For &ldquo;VMXh&rdquo; there aren&rsquo;t any outputs.
 <img src="/images/walkthroughs/pma_lab5/lab-5-17_vmxh_search.png" alt="vmxh_search"></p>
 <p>With the shortcut <strong>ALT + B</strong> you can search for bytes sequences.. We search for the <strong>in</strong> instruction which is equivalent to <strong>0xED</strong>.<br>
 There is only one result with a <strong>in</strong> instruction.
 <img src="/images/walkthroughs/pma_lab5/lab-5-17_0xed_result.png" alt="0xed_result"></p>
-<p>Following the function (<strong>0x10006196</strong>), we can see a comparaison that is made. Decoding the hexadecimal value, we found the string <strong>VMHx</strong>
+<p>Following the function (<strong>0x10006196</strong>), we can see a comparaison that is made. Decoding the hexadecimal value, we found the string <strong>VMHx</strong>.
 <img src="/images/walkthroughs/pma_lab5/lab-5-17_vmxh_result.png" alt="vmxh_result"></p>
 <p>The malware implement an anti-vm instruction that can cancel the installation of the malware.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-17_anti-vm-graph.png" alt="anti_vm_graph"></p>
@@ -390,13 +390,13 @@ There is only one result with a <strong>in</strong> instruction.
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-18_dummy_strings.png" alt="dummies_strings"></p>
 <h4 id="if-you-have-the-ida-python-plug-in-installed-run-lab05-01py-an-ida-pro-python-script-provided-with-the-malware-for-this-book-what-happens-after-you-run-the-script-"><strong>If you have the IDA Python plug-in installed, run Lab05-01.py, an IDA Pro Python script provided with the malware for this book. What happens after you run the script ?</strong></h4>
 <p>I don&rsquo;t have IDA Python installed but when you open the script you can see that it XOR 0x50 (= 80 base 10) bytes with the 0x55 key.
-There are currently 80 encoded characters at <strong>0x1001D988</strong>
-We presume that the script decrypt the strings.</p>
+Futhermore, there are 80 encoded characters at <strong>0x1001D988</strong>.
+We assume that the script decrypt those characters.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-19_script.png" alt="script"></p>
 <h4 id="with-the-cursor-in-the-same-location-how-do-you-turn-this-data-into-a-single-ascii-string-"><strong>With the cursor in the same location, how do you turn this data into a single ASCII string ?</strong></h4>
 <p>Pressing <strong>A</strong> you can concatenate the bytes</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-20_concatenate_strings.png" alt="concatenate_strings"></p>
-<p>Then we can use an online tool to XOR like the script does.
+<p>Then we can use an online tool to XOR like the script does.<br>
 Here is the result:</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-20_result.png" alt="concatenate_strings"></p>
 
