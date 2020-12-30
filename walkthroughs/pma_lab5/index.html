@@ -230,7 +230,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p>The imports address of that function is <strong>0x100163CC</strong>.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-2_imports.png" alt="imports"></p>
 <h4 id="how-many-functions-call-gethostbyname-"><strong>How many functions call <em>gethostbyname</em> ?</strong></h4>
-<p>In order to see where the <em>gethostbyname</em> functions is call we use Cross-reference. To open the all the cross-reference of this function, you have to use the shortcut <strong>CTRL + X</strong> once the name is highlighted.</p>
+<p>In order to see where the <strong>gethostbyname</strong> functions is call we use Cross-reference. To open the all the cross-reference of this function, you have to use the shortcut <strong>CTRL + X</strong> once the name is highlighted.</p>
 <p>It should open this windows and list all the references.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-3_xref.png" alt="xrefs"></p>
 <p>There are 18 calls of this function made by 5 differents subroutines.</p>
@@ -239,13 +239,13 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-4_jump_dns.png" alt="jump"></p>
 <p>Here we are.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-4_dns.png" alt="jump"></p>
-<p>Before the execution of the function we can see that a strings is moved in the EAX register. The strings is: &ldquo;<em>[This is RDO]pics.practicalmalwareanalysis.com</em>&rdquo;. The comma with the &ldquo;0&rdquo; is here to indicate a NULL Byte. This byte is used by the system to know when the string end.</p>
+<p>Before the execution of the function we can see that a strings is moved in the EAX register. The strings is: &ldquo;<strong>[This is RDO]pics.practicalmalwareanalysis.com</strong>&rdquo;. The comma with the &ldquo;0&rdquo; is here to indicate a NULL Byte. This byte is used by the system to know when the string end.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-4_strings_dns.png" alt="strings"></p>
-<p>Then there is the operand <em>ADD</em> with the parameter <em>0Dh</em>. The parameter is an hexadecimal value. We convert it in base10 and see that this number is 13. In other words, 13 bytes will be added to the EAX pointer. The new string start from: &ldquo;<em>pics.practicalmalwareanalysis.com</em>&rdquo;. This is the real address that the domain will have to resolv.</p>
-<p>After that the EAX register is push on the stack to be used by the <em>gethostbyname</em> function in order to make the call.</p>
+<p>Then there is the operand <em>ADD</em> with the parameter <em>0Dh</em>. The parameter is an hexadecimal value. We convert it in base10 and see that this number is 13. In other words, 13 bytes will be added to the EAX pointer. The new string start from: &ldquo;<strong>pics.practicalmalwareanalysis.com</strong>&rdquo;. This is the real address that the domain will have to resolv.</p>
+<p>After that the EAX register is push on the stack to be used by the <strong>gethostbyname</strong> API function in order to make the call.</p>
 <h4 id="how-many-local-variables-has-ida-pro-recognized-for-the-subroutine-at-0x10001656-"><strong>How many local variables has IDA Pro recognized for the subroutine at 0x10001656 ?</strong></h4>
-<p>Let&rsquo;s jump to 0x10001656.
-Here we can see 23 local variables. There are created with a negative ptr indicate a variable. Otherwise,positive content mean a parameter of the function.</p>
+<p>Let&rsquo;s jump to <strong>0x10001656</strong>.
+Here we can see 23 locals variables. There are created with a negative ptr. Otherwise,positive content mean parameter of the function.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-5_variables.png" alt="local_variables"></p>
 <h4 id="how-many-parameters-has-ida-pro-recognized-for-the-subroutine-at-0x1001656-"><strong>How many parameters has IDA Pro recognized for the subroutine at 0x1001656 ?</strong></h4>
 <p>As we said previously, we can count only one positive value. There is only 1 parameter on this function.</p>
@@ -268,31 +268,31 @@ They looks like automatic &ldquo;welcome&rdquo; for the owner of the malware. Fu
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-9_dword_1008E5C4.png" alt="dword_1008E5C4"></p>
 <p>Currently, we don&rsquo;t know what is the value of this variable. We use cross-reference to see where it is initialize and what does it contain.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-9_xref_dword_1008E5C4.png" alt="xref_dword_1008E5C4"></p>
-<p>The EAX register is equal to the result of the function: <em>sub_1003695</em>. Following this one we can see that it tries to gather facts on the operating system like:</p>
+<p>The EAX register is equal to the result of the function: <strong>sub_1003695</strong>. Following this one we can see that it tries to gather facts on the operating system like:</p>
 <ul>
 <li>major version</li>
 <li>minor version</li>
 <li>platform id</li>
 </ul>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-9_subroutine.png" alt="subroutine"></p>
-<p>The function <em>GetVersionExA</em> return the major version of your operating system. For example: <em>Windows 8.1</em>, <em>Windows 10</em>.
-It take a structure parameter call <em>lpVersionInformation</em>.
+<p>The function <em>GetVersionExA</em> return the major version of your operating system. For example: <em><em>Windows 8.1</em>, <em>Windows 10</em></em>.
+It take a structure parameter call <strong>lpVersionInformation</strong>.
 that will receive the information.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-9_msdn_getversionex.png" alt="msdn_getversionex"></p>
-<p>Then there is a comparaison between the content of the <em>VersionInformation.dwPlatformId</em> and <em>2</em>.
+<p>Then there is a comparaison between the content of the <strong>VersionInformation.dwPlatformId</strong> and <strong>2</strong>.
 On the MSDN documentation, we can see that this function is use to <em>Identifies the operating system, or platform
 supported by an assembly</em>.</p>
 <p>Here are the value that the function can take:</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-9_msdn_platformid.png" alt="msdn_platformid"></p>
-<p>The compare value is <em>2</em>. The malware tries to define if the target run a Win32NT or later operating system.</p>
-<p>Finally, <em>1</em> is push on the top of the stack, so EAX=1 after the <em>pop eax</em> instruction.
-The <em>retn</em> allow us to resume the execution flow after the subroutine call.</p>
+<p>The compare value is <strong>2</strong>. The malware tries to define if the target run a Win32NT or later operating system.</p>
+<p>Finally, <strong>1</strong> is push on the top of the stack, so EAX=1 after the <strong>pop eax</strong> instruction.
+The <strong>retn</strong> allow us to resume the execution flow after the subroutine call.</p>
 <h4 id="a-few-hundred-lines-into-the-subroutine-at-0x1000ff58-a-series-of-comparisons-use-memcmp-to-compare-strings-what-happens-if-the-string-comparison-to-robotwork-is-successfull-"><strong>A few hundred lines into the subroutine at 0x1000FF58, a series of comparisons use memcmp to compare strings. What happens if the string comparison to robotwork is successfull ?</strong></h4>
 <p>At <strong>0x10010438</strong> there is a <em>jnz</em> instruction to <strong>0x10010444</strong> which is the entry of a routine containing the <em>robotwork</em> string.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-10_robotwork.png" alt="robotwork"></p>
-<p>EAX contain the return of the <em>memcmp</em> function.
-The question say that the string comparison to robotwork is succesfull. The return of <em>memcmp</em> is set to EAX. The return is succesfull, it mean that EAX = 0, so ZF = 1.<br>
-The <em>jnz</em> instruction only jump if ZF = 0. So, it will not take the <em>jnz</em> branch.</p>
+<p>EAX contain the return of the <strong>memcmp</strong> function.
+The question say that the string comparison to robotwork is succesfull. The return of <strong>memcmp</strong> is set to EAX. The return is succesfull, it mean that EAX = 0, so ZF = 1.<br>
+The <strong>jnz</strong> instruction only jump if <strong>ZF = 0</strong>. So, it will not take the <strong>jnz</strong> branch.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-10_jump_flag.png" alt="jump_flag"></p>
 <p>But it will jump to <strong>0x100052A2</strong></p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-10_robotwork_2.png" alt="robotwork_2"></p>
@@ -300,7 +300,8 @@ The <em>jnz</em> instruction only jump if ZF = 0. So, it will not take the <em>j
 <strong>SOFTWARE\Microsoft\Windows\CurrentVersion</strong></p>
 <p>If the register key was sucessfully opened then it return an ERROR_SUCCESS. Otherwise, it will return nonzero value.</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-regopenkeyexa">MSDN_GetOpenKeyExA</a></p>
-<p>Then there is a <em>jz</em> jump instruction to <strong>0x10005309</strong> if ZF = 1. To determine if ZF = 1 or 0, a test between eax and eax is made. If the register failed to open it will contain a nonzero value. So the <em>jz</em> instruction will only be execute if the open work.</p>
+<p>Then there is a <strong>jz</strong> jump instruction to <strong>0x10005309</strong> if <strong>ZF = 1</strong>.<br>
+To determine if ZF = 1 or 0, a test between EAX and itself is made. If the register failed to open it will contain a nonzero value. So the <strong>jz</strong> instruction will only be execute if the open work.</p>
 <p>Here is the function starting at <strong>0x10005309</strong>
 <img src="/images/walkthroughs/pma_lab5/lab-5-10_robotwork_3.png" alt="robotwork_3"></p>
 <p>The content of the register key <em>WorkTime</em> will be gather.
@@ -315,7 +316,7 @@ The content of the register key <em>WorkTimes</em> will be gather.</p>
 <h4 id="what-does-the-export-pslist-do-"><strong>What does the export PSLIST do ?</strong></h4>
 <p>View -&gt; Open subview -&gt; Export</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-11_pslist_export.png" alt="pslist_export"></p>
-<p>I find a very usefull shortcut. You can press <em>space</em> to switch from graph to text view and inversely.</p>
+<p>I find a very usefull shortcut. You can press <strong>space</strong> to switch from graph to text view and inversely.</p>
 <p>There is two possibilities depending on the result of the routine <strong>0x100036C3</strong>.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-11_two_possibilities.png" alt="two_possibilities"></p>
 <p>We already focus on the beginning of this function previously. Here is what it looks like:</p>
@@ -351,15 +352,14 @@ Then we have to show the cross_reference graph. In order to achieve that you hav
 <h4 id="at-0x10001358-there-is-a-call-to-sleep-looking-backward-though-the-code-how-long-will-the-program-sleep-if-this-code-executes-"><strong>At 0x10001358, there is a call to Sleep. Looking backward though the code, how long will the program sleep if this code executes ?</strong></h4>
 <p>The sleep function take a milliseconds parameter that is store in EAX.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-14_sleep.png" alt="sleep"></p>
-<p>Following the offset at <strong>0x10001341</strong>, we can see that a string is store in EAX: <em>[This Is Cti]30</em>.</p>
+<p>Following the offset at <strong>0x10001341</strong>, we can see that a string is store in EAX: <strong>[This Is Cti]30</strong>.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-14_offset.png" alt="offset"></p>
-<p>Then 0Dh (= 13) is add to the EAX pointer. In other word the pointer is move 13 bytes further. The new string is
-<em>30</em>.</p>
+<p>Then 0Dh (= 13) is add to the EAX pointer. In other word the pointer is move 13 bytes further. The new string is <strong>30</strong>.</p>
 <p>The <em>atoi</em> function convert the string in an integer. Finally, the number 30 is multiply by 1000. This is equal to 30 000 ms corresponding to 30 seconds.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-14_eax_content.png" alt="offset"></p>
 <p>The program will sleep 30 seconds.</p>
 <h4 id="at-0x10001701-is-a-call-to-socket-what-are-the-three-parameters-"><strong>At 0x10001701 is a call to socket. What are the three parameters ?</strong></h4>
-<p>The three parameters are push on the stack then the <em>socket</em> function is call.
+<p>The three parameters are push on the stack then the <strong>socket</strong> function is call.
 On the MSDN, we can see the meaning of these numbers.</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-socket">MSDN_Socket</a></p>
 <ul>
@@ -370,10 +370,10 @@ On the MSDN, we can see the meaning of these numbers.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-15_parameters.png" alt="offset"></p>
 <h4 id="using-the-msdn-page-for-socket-and-the-named-symbolic-constants-functionality-in-ida-pro-can-you-make-the-parameter-more-meaningful-what-are-the-parameters-after-you-apply-the-changes-"><strong>Using the MSDN page for socket and the named symbolic constants functionality in IDA Pro, can you make the parameter more meaningful? What are the parameters after you apply the changes ?</strong></h4>
 <p>The question is partially answered previously. <br>
-To rename a parameter we have to right click on it, chose Symbolic constant and use standart symbolic constant. Then you can search whatever you want.</p>
+To rename a parameter we have to right click on it, chose <strong>Symbolic constant</strong> and <strong>use standart symbolic constant</strong>. Then you can search whatever you want.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-16_tcp.png" alt="tcp"></p>
 <p>This is what it looks like when changes are done:</p>
-<p><img src="/images/walkthroughs/pma_lab5/lab-5-16_finish.png" alt="finish_rename"></p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-16_final.png" alt="finish_rename"></p>
 <h4 id="search-for-usage-of-the-in-instruction-opcode-0xed-this-instruction-is-used-with-a-magic-string-vmxh-to-perform-vmware-detection-is-that-in-use-in-this-malware-using-the-cross-references-to-the-function-that-executes-the-in-instruction-is-there-further-evidence-of-vmware-detection-"><strong>Search for usage of the in instruction (opcode 0xED). This instruction is used with a magic string VMXh to perform VMware detection. Is that in use in this malware? Using the cross-references to the function that executes the in instruction, is there further evidence of VMware detection ?</strong></h4>
 <p>Use the shortcut <strong>ALT + T</strong> to search for string ocurrence.
 For &ldquo;VMXh&rdquo; there aren&rsquo;t any outputs.
@@ -383,7 +383,7 @@ There is only one result with a <strong>in</strong> instruction.
 <img src="/images/walkthroughs/pma_lab5/lab-5-17_0xed_result.png" alt="0xed_result"></p>
 <p>Following the function (<strong>0x10006196</strong>), we can see a comparaison that is made. Decoding the hexadecimal value, we found the string <strong>VMHx</strong>.
 <img src="/images/walkthroughs/pma_lab5/lab-5-17_vmxh_result.png" alt="vmxh_result"></p>
-<p>The malware implement an anti-vm instruction that can cancel the installation of the malware.</p>
+<p>An anti-vm instruction is implement to cancel the installation of the malware on the target.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-17_anti-vm-graph.png" alt="anti_vm_graph"></p>
 <h4 id="jump-your-cursor-to-0x1001d988-what-do-you-find-"><strong>Jump your cursor to 0x1001D988. What do you find ?</strong></h4>
 <p>At <strong>0x1001D988</strong> we can find dummies strings..</p>
@@ -397,7 +397,7 @@ We assume that the script decrypt those characters.</p>
 <p>Pressing <strong>A</strong> you can concatenate the bytes</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-20_concatenate_strings.png" alt="concatenate_strings"></p>
 <p>Then we can use an online tool to XOR like the script does.<br>
-Here is the result:</p>
+Here is the result: <strong>xdoor is this backdoor, string decoded for actical malware analysis lab :)1234</strong></p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-20_result.png" alt="concatenate_strings"></p>
 
   </div>
