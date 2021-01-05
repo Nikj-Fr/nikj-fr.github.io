@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.74.1" />
+
+    
+    
+    
+
+<title>Practical Malware Analysis - Lab 6 • </title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Practical Malware Analysis - Lab 6"/>
+<meta name="twitter:description" content="Fourth exercice of the Practical Malware Analysis book. The goal of this labs is to help understand the overall functionality of a program by analyzing code constructs"/>
+
+<meta property="og:title" content="Practical Malware Analysis - Lab 6" />
+<meta property="og:description" content="Fourth exercice of the Practical Malware Analysis book. The goal of this labs is to help understand the overall functionality of a program by analyzing code constructs" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/pma_lab6/" />
+<meta property="article:published_time" content="2021-01-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-01-05T00:00:00+00:00" /><meta property="og:site_name" content="Nikj | Personal Website" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.d0c4ffb2e1828bd88212c4246b2911d84b93350f28f2d499f40bb11f1bd57e9a.css" integrity="sha256-0MT/suGCi9iCEsQkaykR2EuTNQ8o8tSZ9AuxHxvVfpo=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://nikj-fr.github.io/"></a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+         InfoSec Website | CTF WriteUp 
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle"></label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/walkthroughs/">
+						<span>Walkthroughs</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/writeup/">
+						<span>Write-Ups</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/cheatsheets/">
+						<span>Cheatsheets &amp; Ressources</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/articles/">
+						<span>Articles</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About-Me</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
+</div>
+
+        <section class="social">
+	
+	<a href="https://twitter.com/%3cusername%3e" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	<a href="https://github.com/Nikj-Fr" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	<a href="https://gitlab.com/Nikj-Fr" rel="me"><i class="fab fa-gitlab fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+	
+	<a href="https://www.root-me.org/Nikj"><div class="root-me"></div></a>
+	
+	
+	<a href="https://www.tryhackme.com/"><div class="tryhackme"></div></a>
+	
+	
+	<a href="https://www.hackthebox.eu/"><div class="hackthebox"></div></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+<div class="copyright">
+  &copy; 2019 - 2021 htr3n
+  
+    <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  
+</div>
+
+
+<div class="builtwith">
+Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+</div>
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    
+<article>
+  <header>
+    <h1>Practical Malware Analysis - Lab 6</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Jan 5, 2021
+    
+    
+    
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 2 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="post">
+    <h2 id="recognizing-c-code-constructs"><strong>Recognizing C Code Constructs</strong></h2>
+<h3 id="lab-6"><strong>Lab 6</strong></h3>
+<p>The goal of this labs is to help understand the overall functionality of a program bu a,alyzing code constructs.</p>
+<h3 id="lab-6-1"><strong>Lab 6-1</strong></h3>
+<h4 id="what-is-the-major-code-construct-found-in-the-only-subroutine-called-by-main-"><strong>What is the major code construct found in the only subroutine called by main ?</strong></h4>
+<h4 id="what-is-the-subroutine-located-at-0x40105f-"><strong>What is the subroutine located at 0x40105F ?</strong></h4>
+<h4 id="what-is-the-purpose-of-this-program-"><strong>What is the purpose of this program ?</strong></h4>
+<h3 id="lab-6-2"><strong>Lab 6-2</strong></h3>
+<h4 id="what-operation-does-the-first-subroutine-called-by-main-perform-"><strong>What operation does the first subroutine called by main perform ?</strong></h4>
+<h4 id="what-is-the-subroutine-located-at-0x40117f-"><strong>What is the subroutine located at 0x40117F ?</strong></h4>
+<h4 id="what-does-the-second-subourtine-called-by-main-do-"><strong>What does the second subourtine called by main do ?</strong></h4>
+<h4 id="what-type-of-code-construct-is-used-in-this-subroutine-"><strong>What type of code construct is used in this subroutine ?</strong></h4>
+<h4 id="are-there-any-network-based-indicators-for-this-program-"><strong>Are there any network-based indicators for this program ?</strong></h4>
+<h4 id="what-is-the-purpose-of-this-malware-"><strong>What is the purpose of this malware ?</strong></h4>
+<h3 id="lab-6-3"><strong>Lab 6-3</strong></h3>
+<h4 id="compare-the-calls-in-main-to-lab6-2s-main-method-what-is-the-new-function-called-from-main-"><strong>Compare the calls in main to Lab6-2&rsquo;s main method. What is the new function called from main ?</strong></h4>
+<h4 id="what-parameters-does-this-new-function-take-"><strong>What parameters does this new function take ?</strong></h4>
+<h4 id="what-major-code-construct-does-this-function-contain-"><strong>What major code construct does this function contain ?</strong></h4>
+<h4 id="what-can-this-function-do-"><strong>What can this function do ?</strong></h4>
+<h4 id="are-there-any-host-based-indicators-for-this-malware-"><strong>Are there any host-based indicators for this malware ?</strong></h4>
+<h4 id="what-is-the-purpose-of-this-malware--1"><strong>What is the purpose of this malware ?</strong></h4>
+<h3 id="lab-6-4"><strong>Lab 6-4</strong></h3>
+<h4 id="what-is-the-difference-between-the-calls-made-from-the-main-method-in-lab6-3-and-6-4-"><strong>What is the difference between the calls made from the main method in Lab6-3 and 6-4 ?</strong></h4>
+<h4 id="what-new-code-construct-has-been-added-to-main-"><strong>What new code construct has been added to main ?</strong></h4>
+<h4 id="what-is-the-difference-between-this-labs-parse-html-function-and-those-of-the-previous-labs-"><strong>What is the difference between this lab&rsquo;s parse HTML function and those of the previous labs ?</strong></h4>
+<h4 id="how-long-will-this-program-run-assume-that-it-is-connected-to-the-internet"><strong>How long will this program run ?(Assume that it is connected to the Internet)</strong></h4>
+<h4 id="are-there-any-new-network-based-indicators-for-this-malware-"><strong>Are there any new network-based indicators for this malware ?</strong></h4>
+<h4 id="what-is-the-purpose-of-this-malware--2"><strong>What is the purpose of this malware ?</strong></h4>
+
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/walkthroughs/pma_lab5/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">Practical Malware Analysis - Lab 5</span>
+    </a>
+    
+    
+</div>
+
+
+  
+
+  
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'your-google-analytics-id', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" integrity="sha384-b3ua1l97aVGAPEIe48b4TC60WUQbQaGi2jqAWM90y0OZXZeyaTCWtBTKtjW2GXG1" crossorigin="anonymous"></script>
+
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+    
+
+
+
+    </body>
+</html>
