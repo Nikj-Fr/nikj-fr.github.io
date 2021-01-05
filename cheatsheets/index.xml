@@ -30,24 +30,6 @@
     </item>
     
     <item>
-      <title>Pwn</title>
-      <link>https://nikj-fr.github.io/cheatsheets/pwn/</link>
-      <pubDate>Thu, 23 Jul 2020 22:59:43 +0200</pubDate>
-      
-      <guid>https://nikj-fr.github.io/cheatsheets/pwn/</guid>
-      <description>Buffer Overflow ELF-x86 Format String %x %s %n Ressources link = LiveOverflow</description>
-    </item>
-    
-    <item>
-      <title>Web</title>
-      <link>https://nikj-fr.github.io/cheatsheets/web/</link>
-      <pubDate>Thu, 23 Jul 2020 22:59:43 +0200</pubDate>
-      
-      <guid>https://nikj-fr.github.io/cheatsheets/web/</guid>
-      <description>LFI RFI Git Vulnerabilities PHP Vulnerabilities SQL Injection </description>
-    </item>
-    
-    <item>
       <title>Forensic</title>
       <link>https://nikj-fr.github.io/cheatsheets/forensic/</link>
       <pubDate>Tue, 21 Jul 2020 00:00:00 +0000</pubDate>
