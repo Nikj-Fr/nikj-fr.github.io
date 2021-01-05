@@ -22,12 +22,10 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Suppression des applications préinstallées sous Windows 10"/>
-<meta name="twitter:description" content="Introduction Cet article fait suite à une envie de nettoyage de mon pc. Je vais vous partager la méthode que j&rsquo;ai utilisé pour supprimer les applications pré-installées sous Windows 10. Malheuresement, quelques applications parviennent à survivre à la méthode (Hello Cortana).
-Methodes Ouverture d&rsquo;un interpreteur Powershell  Rechercher le programme Powershell dans votre menu démarrer puis lancer le en tant qu&rsquo;administrateur.  Lister l&rsquo;ensemble des applications installées  Dans la fenêtre qui vient de s&rsquo;ouvrir, rentrer la commande suivante:  Get-AppxPackage | Select Name, PackageFullName Selection du package à supprimer  Lancer la commande suivante en remplaçant le nom du package à supprimer à la place de YourPackageName  Get-AppxPackage YourPackageName | Remove-AppxPackage Liste de toutes les applications possibles de supprimer Important:"/>
+<meta name="twitter:description" content="Cet article fait suite à une envie de nettoyage de mon pc. Je vais vous partager la méthode que j&#39;ai utilisé pour supprimer les applications pré-installées sous Windows 10. Malheuresement, quelques applications parviennent à survivre à la méthode (Hello Cortana)."/>
 
 <meta property="og:title" content="Suppression des applications préinstallées sous Windows 10" />
-<meta property="og:description" content="Introduction Cet article fait suite à une envie de nettoyage de mon pc. Je vais vous partager la méthode que j&rsquo;ai utilisé pour supprimer les applications pré-installées sous Windows 10. Malheuresement, quelques applications parviennent à survivre à la méthode (Hello Cortana).
-Methodes Ouverture d&rsquo;un interpreteur Powershell  Rechercher le programme Powershell dans votre menu démarrer puis lancer le en tant qu&rsquo;administrateur.  Lister l&rsquo;ensemble des applications installées  Dans la fenêtre qui vient de s&rsquo;ouvrir, rentrer la commande suivante:  Get-AppxPackage | Select Name, PackageFullName Selection du package à supprimer  Lancer la commande suivante en remplaçant le nom du package à supprimer à la place de YourPackageName  Get-AppxPackage YourPackageName | Remove-AppxPackage Liste de toutes les applications possibles de supprimer Important:" />
+<meta property="og:description" content="Cet article fait suite à une envie de nettoyage de mon pc. Je vais vous partager la méthode que j&#39;ai utilisé pour supprimer les applications pré-installées sous Windows 10. Malheuresement, quelques applications parviennent à survivre à la méthode (Hello Cortana)." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nikj-fr.github.io/articles/suppression_built_in_apps_windows/" />
 <meta property="article:published_time" content="2020-10-22T00:00:00+00:00" />
@@ -35,6 +33,9 @@ Methodes Ouverture d&rsquo;un interpreteur Powershell  Rechercher le programme P
 
 
     
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
 
 
 
@@ -164,13 +165,13 @@ Methodes Ouverture d&rsquo;un interpreteur Powershell  Rechercher le programme P
 	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
 	
 	
-	<a href="https://www.root-me.org/Nikj"></a><div class="root-me"></div></a>
+	<a href="https://www.root-me.org/Nikj"><div class="root-me"></div></a>
 	
 	
-	<a href="https://www.tryhackme.com/"></a><div class="tryhackme"></div></a>
+	<a href="https://www.tryhackme.com/"><div class="tryhackme"></div></a>
 	
 	
-	<a href="https://www.hackthebox.eu/"></a><div class="hackthebox"></div></a>
+	<a href="https://www.hackthebox.eu/"><div class="hackthebox"></div></a>
 	
 </section>
 
@@ -370,7 +371,7 @@ get-appxpackage *xbox* | remove-appxpackage
     
     
     <a href="/articles/analyze_bokbot/" class="navigation-next">
-      <span class="navigation-tittle">[Malware]-Analyse de Bokbot / IcedID</span>
+      <span class="navigation-tittle">Malware - Analyse de Bokbot / IcedID</span>
       <i aria-hidden="true" class="fa fa-chevron-right"></i>
     </a>
     
@@ -406,6 +407,15 @@ if (!doNotTrack) {
 
 <script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" integrity="sha384-b3ua1l97aVGAPEIe48b4TC60WUQbQaGi2jqAWM90y0OZXZeyaTCWtBTKtjW2GXG1" crossorigin="anonymous"></script>
 
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
 
 
 

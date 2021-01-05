@@ -6,10 +6,20 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 05 Jan 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Practical Malware Analysis - Lab 6</title>
+      <link>https://nikj-fr.github.io/walkthroughs/pma_lab6-/</link>
+      <pubDate>Tue, 05 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/walkthroughs/pma_lab6-/</guid>
+      <description>Recognizing C Code Constructs Lab 6 The goal of this labs is to help understand the overall functionality of a program bu a,alyzing code constructs.
+Lab 6-1 What is the major code construct found in the only subroutine called by main ? What is the subroutine located at 0x40105F ? What is the purpose of this program ? Lab 6-2 What operation does the first subroutine called by main perform ?</description>
+    </item>
     
     <item>
       <title>Practical Malware Analysis - Lab 5</title>
@@ -68,15 +78,6 @@ Signature of malware can be generated with WinMD5..</description>
     </item>
     
     <item>
-      <title>[Malware]-Analyse de Bokbot / IcedID</title>
-      <link>https://nikj-fr.github.io/articles/analyze_bokbot/</link>
-      <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nikj-fr.github.io/articles/analyze_bokbot/</guid>
-      <description>Introduction Todo</description>
-    </item>
-    
-    <item>
       <title>Google Dork</title>
       <link>https://nikj-fr.github.io/walkthroughs/google_dork/</link>
       <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
@@ -86,6 +87,15 @@ Signature of malware can be generated with WinMD5..</description>
 Comment Google index-t&amp;rsquo;il les pages webs ? Des crawler
 utilisation de sitemaps
 Comment réguler l&amp;rsquo;indexation d&amp;rsquo;un site ? En utilisant le fichier robots.txt, on peut définir ce que le crawler a le droit d&amp;rsquo;indexer. Il est possible d&amp;rsquo;y mentionner un nom de dossier, un fichier, que ce soit uniquement les crawler de google qui puisse fonctionner sur votre site.</description>
+    </item>
+    
+    <item>
+      <title>Malware - Analyse de Bokbot / IcedID</title>
+      <link>https://nikj-fr.github.io/articles/analyze_bokbot/</link>
+      <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/articles/analyze_bokbot/</guid>
+      <description>Introduction Todo</description>
     </item>
     
     <item>
