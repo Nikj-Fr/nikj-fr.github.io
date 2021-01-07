@@ -17,8 +17,9 @@
       <pubDate>Tue, 05 Jan 2021 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/walkthroughs/pma_lab6/</guid>
-      <description>Recognizing C Code Constructs Lab 6 The goal of this labs is to help understand the overall functionality of a program bu a,alyzing code constructs.
-Lab 6-1 What is the major code construct found in the only subroutine called by main ? What is the subroutine located at 0x40105F ? What is the purpose of this program ? Lab 6-2 What operation does the first subroutine called by main perform ?</description>
+      <description>Recognizing C Code Constructs Lab 6 The goal of this labs is to help understand the overall functionality of a program by analyzing code constructs.
+Lab 6-1 What is the major code construct found in the only subroutine called by main ? The subroutine called by the main is located at 0x401000.
+In this function we can see a jz statement. The choice of the path to follow depend on the result of the comparaison that his made with EAX.</description>
     </item>
     
     <item>

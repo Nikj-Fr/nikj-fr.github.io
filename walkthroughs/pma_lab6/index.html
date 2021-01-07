@@ -212,7 +212,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
     
     
     <br/>
-    <i class="fas fa-clock"></i> 2 min read
+    <i class="fas fa-clock"></i> 4 min read
 </div>
 
 
@@ -222,18 +222,63 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
   <div class="post">
     <h2 id="recognizing-c-code-constructs"><strong>Recognizing C Code Constructs</strong></h2>
 <h3 id="lab-6"><strong>Lab 6</strong></h3>
-<p>The goal of this labs is to help understand the overall functionality of a program bu a,alyzing code constructs.</p>
+<p>The goal of this labs is to help understand the overall functionality of a program by analyzing code constructs.</p>
 <h3 id="lab-6-1"><strong>Lab 6-1</strong></h3>
 <h4 id="what-is-the-major-code-construct-found-in-the-only-subroutine-called-by-main-"><strong>What is the major code construct found in the only subroutine called by main ?</strong></h4>
+<p>The subroutine called by the main is located at 0x401000.</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-1_call_sub_401000.png" alt="call_sub_401000"></p>
+<p>In this function we can see a <strong>jz</strong> statement. The choice of the path to follow depend on the result of the comparaison that his made with EAX. This indicate a <strong>if</strong> code construct.</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-1_if_condition.png" alt="if_condition"></p>
+<p>Following the msdn page of the API call to <strong>InternetGetConnectedState</strong>, the function return <strong>True</strong> if there is Internet and <strong>False</strong> if the target hasn&rsquo;t got one.</p>
+<p><a href="google_dork.mdhttps://docs.microsoft.com/en-us/windows/win32/api/wininet/nf-wininet-internetgetconnectedstate">MSDN_InternetGetConnectedState</a></p>
+<p>If the API call work, EAX = 1, otherwise EAX = 0.
+When EAX = 0, ZF = 1 and we follow the function at 0x40102B.</p>
 <h4 id="what-is-the-subroutine-located-at-0x40105f-"><strong>What is the subroutine located at 0x40105F ?</strong></h4>
+<p>This subroutine is call wheter the API call is a success or a failure.
+Strings are pushed on the stack depending on the result of the API call.
+I assume that the following subroutine is used to print the value that was push on the top of the stack.<br>
+We can check this by starting the malware..</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-1_malware_6-1_start.png" alt="malware_6-1_start"></p>
 <h4 id="what-is-the-purpose-of-this-program-"><strong>What is the purpose of this program ?</strong></h4>
+<p>This program is used to check if you are connected to internet and print the corresponding message depending on the state.</p>
 <h3 id="lab-6-2"><strong>Lab 6-2</strong></h3>
 <h4 id="what-operation-does-the-first-subroutine-called-by-main-perform-"><strong>What operation does the first subroutine called by main perform ?</strong></h4>
+<p>The answer are the same as Lab6-1-1.
+The first subroutine call is sub_401000
+<img src="/images/walkthroughs/pma_lab6/lab-6-2_call_sub_401000.png" alt="call_sub_401000"></p>
+<p>The operation is a <strong>if</strong> statement
+<img src="/images/walkthroughs/pma_lab6/lab-6-1_if_condition.png" alt="if_condition"></p>
 <h4 id="what-is-the-subroutine-located-at-0x40117f-"><strong>What is the subroutine located at 0x40117F ?</strong></h4>
-<h4 id="what-does-the-second-subourtine-called-by-main-do-"><strong>What does the second subourtine called by main do ?</strong></h4>
+<p>Before this subroutine, a string is pushed on the top of the stack.
+We assume that the function is used to print this string in the terminal of the victim, after malware execution.</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-2_call_sub_40117F.png" alt="call_sub_40117F"></p>
+<h4 id="what-does-the-second-subroutine-called-by-main-do-"><strong>What does the second subroutine called by main do ?</strong></h4>
+<p>The second subroutine is located at 0x401040
+<img src="/images/walkthroughs/pma_lab6/lab-6-2_call_sub_401040.png" alt="call_sub_401040"></p>
+<p>Firstly, there is an API call <strong>InternetOpenA</strong> which is used to open a web browser. Next, we see the string <em>Internet Explorer</em>. We assume that the malware try to open the IE browser.</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-2_internet_open.png" alt="internet_open"></p>
+<p>Secondly, <strong>InternetOpenUrlA</strong> is used to open a specific URL in the IE browser. The URL load in this function is <em>practicalmalwareanalysis.com/cc.htm</em></p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-2_url_open.png" alt="url_open"></p>
+<p>Thirdly, <strong>InternetReadFile</strong> is used to read the 0x200 (512) bytes of the cc.htm file.</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-2_read_file.png" alt="read_file"></p>
 <h4 id="what-type-of-code-construct-is-used-in-this-subroutine-"><strong>What type of code construct is used in this subroutine ?</strong></h4>
+<p>Under the read of the file, there are 2 paths:</p>
+<ul>
+<li>one where the file was read. Then it check if the file is well construct with bytes comparaison.</li>
+<li>second where the file wasn&rsquo;t read.</li>
+</ul>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-2_code_construct.png" alt="code_construct"></p>
+<p>We can switch the compare value (in Hex) to ascii. It create an html symbol: <strong>&lt;!&ndash;</strong>. This represent a comment.</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-2_comment.png" alt="comment"></p>
 <h4 id="are-there-any-network-based-indicators-for-this-program-"><strong>Are there any network-based indicators for this program ?</strong></h4>
+<p>There are two network indicators:</p>
+<ul>
+<li>URL: &ldquo;<a href="http://practicalmalwareanalysis.com/cc.htm%22">http://practicalmalwareanalysis.com/cc.htm&quot;</a></li>
+<li>User-Agent : &ldquo;Internet Explorer 7.5 /pma&rdquo;</li>
+</ul>
 <h4 id="what-is-the-purpose-of-this-malware-"><strong>What is the purpose of this malware ?</strong></h4>
+<p>The goal of this malware is to check if you are connected to Internet. Then it will open your IE browser and search for <em><a href="http://practicalmalwareanalysis.com/cc.htm">http://practicalmalwareanalysis.com/cc.htm</a></em> url with the user-agent <em>Internet Explorer 7.5 /pma</em>.<br>
+The file construct is checked to see if it is well form. If it&rsquo;s the case it will print the first 512 bytes of the file.</p>
 <h3 id="lab-6-3"><strong>Lab 6-3</strong></h3>
 <h4 id="compare-the-calls-in-main-to-lab6-2s-main-method-what-is-the-new-function-called-from-main-"><strong>Compare the calls in main to Lab6-2&rsquo;s main method. What is the new function called from main ?</strong></h4>
 <h4 id="what-parameters-does-this-new-function-take-"><strong>What parameters does this new function take ?</strong></h4>
