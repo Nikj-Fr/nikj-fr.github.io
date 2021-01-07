@@ -230,7 +230,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p>In this function we can see a <strong>jz</strong> statement. The choice of the path to follow depend on the result of the comparaison that his made with EAX. This indicate a <strong>if</strong> code construct.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-1_if_condition.png" alt="if_condition"></p>
 <p>Following the msdn page of the API call to <strong>InternetGetConnectedState</strong>, the function return <strong>True</strong> if there is Internet and <strong>False</strong> if the target hasn&rsquo;t got one.</p>
-<p><a href="google_dork.mdhttps://docs.microsoft.com/en-us/windows/win32/api/wininet/nf-wininet-internetgetconnectedstate">MSDN_InternetGetConnectedState</a></p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/wininet/nf-wininet-internetgetconnectedstate">MSDN_InternetGetConnectedState</a></p>
 <p>If the API call work, EAX = 1, otherwise EAX = 0.
 When EAX = 0, ZF = 1 and we follow the function at 0x40102B.</p>
 <h4 id="what-is-the-subroutine-located-at-0x40105f-"><strong>What is the subroutine located at 0x40105F ?</strong></h4>
@@ -281,7 +281,21 @@ We assume that the function is used to print this string in the terminal of the 
 The file construct is checked to see if it is well form. If it&rsquo;s the case it will print the first 512 bytes of the file.</p>
 <h3 id="lab-6-3"><strong>Lab 6-3</strong></h3>
 <h4 id="compare-the-calls-in-main-to-lab6-2s-main-method-what-is-the-new-function-called-from-main-"><strong>Compare the calls in main to Lab6-2&rsquo;s main method. What is the new function called from main ?</strong></h4>
+<p>The new function called from main is located at 0x401130</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-3_call_sub_401130.png" alt="call_sub_401130"></p>
 <h4 id="what-parameters-does-this-new-function-take-"><strong>What parameters does this new function take ?</strong></h4>
+<p>It take two parameters:</p>
+<ul>
+<li>Argv = LpExistingFileName = Pointer to the name of the program</li>
+<li>Var_8 = char</li>
+</ul>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-3_parameters_401130_2.png" alt="parameters"></p>
+<p>Following the routine, at the top, IDA confirm what we said.</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-3_parameters_401130.png" alt="parameters_2"></p>
+<p>We are going to find the value of Var_8.<br>
+At 0x40122D var_8 is equal to al. AL is the first 8 bits of the EAX register. And the content of EAX is the result of the function at 0x401040 which is the symbol <strong>&lt;!&ndash;</strong> that we saw in the previous lab.
+8 bits is equivalent to 1 byte = 1 character. In our case the last character is <strong>-</strong>. Var_8 = &ldquo;-&rdquo;</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-3_parameters_al.png" alt="parameters_al"></p>
 <h4 id="what-major-code-construct-does-this-function-contain-"><strong>What major code construct does this function contain ?</strong></h4>
 <h4 id="what-can-this-function-do-"><strong>What can this function do ?</strong></h4>
 <h4 id="are-there-any-host-based-indicators-for-this-malware-"><strong>Are there any host-based indicators for this malware ?</strong></h4>
