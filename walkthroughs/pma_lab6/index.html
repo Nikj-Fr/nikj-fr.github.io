@@ -305,28 +305,28 @@ Therefore the letter &lsquo;a&rsquo; is substract from ECX.
 There are 5 possibilities:</p>
 <ul>
 <li>
-<p>ECX = &lsquo;a&rsquo;, the sub will be &lsquo;a&rsquo; - &lsquo;a&rsquo; = 0 (it substract both hexadecimal value -&gt; 0x61 - 0x61 = 0)
+<p>ECX = &lsquo;a&rsquo;, the sub will be &lsquo;a&rsquo; - &lsquo;a&rsquo; = 0 (it substract both hexadecimal value -&gt; 0x61 - 0x61 = 0)<br>
 The program create a folder call C:\Temp.
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_0.png" alt="switch_0"></p>
 </li>
 <li>
-<p>ECX = &lsquo;b&rsquo;, the sub will be &lsquo;b&rsquo; - &lsquo;a&rsquo; = 1
+<p>ECX = &lsquo;b&rsquo;, the sub will be &lsquo;b&rsquo; - &lsquo;a&rsquo; = 1<br>
 The program copy the malware at C:\Temp, and name it cc.exe.
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_1.png" alt="switch_1"></p>
 </li>
 <li>
-<p>ECX = &lsquo;c&rsquo;, the sub will be &lsquo;c&rsquo; - &lsquo;a&rsquo; = 2
+<p>ECX = &lsquo;c&rsquo;, the sub will be &lsquo;c&rsquo; - &lsquo;a&rsquo; = 2<br>
 The program delete the copy of the malware name cc.exe in the Temp folder.
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_2.png" alt="switch_2"></p>
 </li>
 <li>
-<p>ECX = &lsquo;c&rsquo;, the sub will be &rsquo;d&rsquo; - &lsquo;a&rsquo; = 3
-The program create a register key at Software\Microsoft\Windows\CurrentVersion\Run to persist on the system. The key is call &ldquo;malware&rdquo; and link to C:\Temp\cc.exe
+<p>ECX = &lsquo;c&rsquo;, the sub will be &rsquo;d&rsquo; - &lsquo;a&rsquo; = 3<br>
+The program create a register key at Software\Microsoft\Windows\CurrentVersion\Run to persist on the system. The key is call &ldquo;malware&rdquo; and link to C:\Temp\cc.exe.
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_3.png" alt="switch_3"></p>
 </li>
 <li>
 <p>ECX = &rsquo;d&rsquo;, the sub will be &lsquo;e&rsquo; - &lsquo;a&rsquo; = 4
-The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes
+The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_4.png" alt="switch_4"></p>
 </li>
 </ul>
