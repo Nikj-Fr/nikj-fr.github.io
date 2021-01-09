@@ -351,8 +351,8 @@ The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.<br>
 <li>sub_4012B5 = switch construct with a jumptable to control actions.</li>
 <li>sub_401150 = print the string push on top of the stack (see previously on 6-3)</li>
 </ul>
-<p>The rest of the program call same subroutine as 6-3.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-4_differ_main.png" alt="difference_main"></p>
+<p>The rest of the program call same subroutine as 6-3.</p>
 <h4 id="what-new-code-construct-has-been-added-to-main-"><strong>What new code construct has been added to main ?</strong></h4>
 <p>There is a <strong>For</strong> loop that have been added. It check if a variable is greater or equal to 5A0h = 1440. If not, it does things and increment the variable compared by 1. Otherwise the program quit.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-4_loop_construct.png" alt="difference_main"></p>
@@ -365,10 +365,10 @@ The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.<br>
 <h4 id="how-long-will-this-program-run-assume-that-it-is-connected-to-the-internet"><strong>How long will this program run ?(Assume that it is connected to the Internet)</strong></h4>
 <p>The program sleep 60 000ms every time it loop. It can loop 1440 times.
 So:</p>
-<pre><code>60 0000 * 1440 = 86 400 000 ms
-86 400 000 / 60 = 1 440 000 ms
-1 440s / 60 = 24h
-</code></pre><p>The program can sleep 24 hours.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">60</span> <span style="color:#ae81ff">0000</span> * 1440 <span style="color:#f92672">=</span> <span style="color:#ae81ff">86</span> <span style="color:#ae81ff">400</span> <span style="color:#ae81ff">000</span> ms
+<span style="color:#ae81ff">86</span> <span style="color:#ae81ff">400</span> <span style="color:#ae81ff">000</span> / 60 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">440</span> <span style="color:#ae81ff">000</span> ms
+<span style="color:#ae81ff">1</span> 440s / 60 <span style="color:#f92672">=</span> 24h
+</code></pre></div><p>The program can sleep 24 hours.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-4_sleep.png" alt="sleep"></p>
 <h4 id="are-there-any-new-network-based-indicators-for-this-malware-"><strong>Are there any new network-based indicators for this malware ?</strong></h4>
 <ul>
