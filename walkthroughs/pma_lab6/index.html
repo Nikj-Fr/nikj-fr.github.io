@@ -212,7 +212,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
     
     
     <br/>
-    <i class="fas fa-clock"></i> 6 min read
+    <i class="fas fa-clock"></i> 7 min read
 </div>
 
 
@@ -326,7 +326,7 @@ The program create a register key at Software\Microsoft\Windows\CurrentVersion\R
 </li>
 <li>
 <p>ECX = &rsquo;d&rsquo;, the sub will be &lsquo;e&rsquo; - &lsquo;a&rsquo; = 4
-The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.
+The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.<br>
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_4.png" alt="switch_4"></p>
 </li>
 </ul>
@@ -346,11 +346,40 @@ The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.
 </ul>
 <h3 id="lab-6-4"><strong>Lab 6-4</strong></h3>
 <h4 id="what-is-the-difference-between-the-calls-made-from-the-main-method-in-lab6-3-and-6-4-"><strong>What is the difference between the calls made from the main method in Lab6-3 and 6-4 ?</strong></h4>
+<p>The main function of the Lab6-4.exe contain two new calls:</p>
+<ul>
+<li>sub_4012B5 = switch construct with a jumptable to control actions.</li>
+<li>sub_401150 = print the string push on top of the stack (see previously on 6-3)</li>
+</ul>
+<p>The rest of the program call same subroutine as 6-3.</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-4_differ_main.png.png" alt="difference_main"></p>
 <h4 id="what-new-code-construct-has-been-added-to-main-"><strong>What new code construct has been added to main ?</strong></h4>
+<p>There is a <strong>For</strong> loop that have been added. It check if a variable is greater or equal to 5A0h = 1440. If not, it does things and increment the variable compared by 1. Otherwise the program quit.</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-4_loop_construct.png" alt="difference_main"></p>
 <h4 id="what-is-the-difference-between-this-labs-parse-html-function-and-those-of-the-previous-labs-"><strong>What is the difference between this lab&rsquo;s parse HTML function and those of the previous labs ?</strong></h4>
+<p>The difference is the use of a new variable (<em>szAgent</em>) and a new parameter (arg_0).</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-4_variable_parameter.png" alt="variable_parameter"></p>
+<p>The variable szAgent take the value of the string *Internet Explorer 7.50/pma%d&rdquo;. %d is a format string to print a digit. It take the number of loop the program did in main.</p>
+<p>Indeed we see in the main function that ECX is push before the call of sub_401040.</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-4_digit_push.png" alt="digit_push"></p>
 <h4 id="how-long-will-this-program-run-assume-that-it-is-connected-to-the-internet"><strong>How long will this program run ?(Assume that it is connected to the Internet)</strong></h4>
+<p>The program sleep 60 000ms every time it loop. It can loop 1440 times.
+So:</p>
+<pre><code>60 0000 * 1440 = 86 400 000 ms
+86 400 000 / 60 = 1 440 000 ms
+1 440s / 60 = 24h
+</code></pre><p>The program can sleep 24 hours.</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-4_sleep.png" alt="sleep"></p>
 <h4 id="are-there-any-new-network-based-indicators-for-this-malware-"><strong>Are there any new network-based indicators for this malware ?</strong></h4>
+<ul>
+<li>User-Agent: *Internet Explorer 7.50/pma%d&rdquo;</li>
+</ul>
 <h4 id="what-is-the-purpose-of-this-malware--2"><strong>What is the purpose of this malware ?</strong></h4>
+<p>The malware does the same things as 6-3. But there are 2 new components:</p>
+<ul>
+<li>Work 24 hours before terminating</li>
+<li>User-Agent is a variable instead of a constant</li>
+</ul>
 
   </div>
   
