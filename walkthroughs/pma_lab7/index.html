@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.74.1" />
+
+    
+    
+    
+
+<title>Practical Malware Analysis - Lab 7 • </title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Practical Malware Analysis - Lab 7"/>
+<meta name="twitter:description" content="Fifth exercice of the Practical Malware Analysis book. The goal of this labs is to help understand how a malware interact with the operating system"/>
+
+<meta property="og:title" content="Practical Malware Analysis - Lab 7" />
+<meta property="og:description" content="Fifth exercice of the Practical Malware Analysis book. The goal of this labs is to help understand how a malware interact with the operating system" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/pma_lab7/" />
+<meta property="article:published_time" content="2021-01-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-01-12T00:00:00+00:00" /><meta property="og:site_name" content="Nikj | Personal Website" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.d0c4ffb2e1828bd88212c4246b2911d84b93350f28f2d499f40bb11f1bd57e9a.css" integrity="sha256-0MT/suGCi9iCEsQkaykR2EuTNQ8o8tSZ9AuxHxvVfpo=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://nikj-fr.github.io/"></a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+         InfoSec Website | CTF WriteUp 
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle"></label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/walkthroughs/">
+						<span>Walkthroughs</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/writeup/">
+						<span>Write-Ups</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/cheatsheets/">
+						<span>Cheatsheets &amp; Ressources</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/articles/">
+						<span>Articles</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About-Me</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
+</div>
+
+        <section class="social">
+	
+	<a href="https://twitter.com/%3cusername%3e" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	<a href="https://github.com/Nikj-Fr" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	<a href="https://gitlab.com/Nikj-Fr" rel="me"><i class="fab fa-gitlab fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+	
+	<a href="https://www.root-me.org/Nikj"><img src="/images/root_me.png" height="40" weight="40" aria-hidden="true"/></a>
+	
+	
+	<a href="https://tryhackme.com/p/Nikj"><img src="/images/try_hack_me.png" height="20" weight="20" aria-hidden="true"/></a>
+	
+	
+	<a href="https://www.hackthebox.eu/home/users/profile/330809"><div class="hackthebox"></div></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+<div class="copyright">
+  &copy; 2019 - 2021 htr3n
+  
+    <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  
+</div>
+
+
+<div class="builtwith">
+Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+</div>
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    
+<article>
+  <header>
+    <h1>Practical Malware Analysis - Lab 7</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Jan 12, 2021
+    
+    
+    
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 2 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="post">
+    <h2 id="analyzing-malicious-windows-program"><strong>Analyzing Malicious Windows Program</strong></h2>
+<h3 id="lab-7"><strong>Lab 7</strong></h3>
+<p>The goal of this lab is to help understand how a malware interact with the operating system.</p>
+<h3 id="lab-7-1"><strong>Lab 7-1</strong></h3>
+<h4 id="how-does-this-program-ensure-that-it-continues-running-achieves-persistence-when-the-computer-is-restarted-"><strong>How does this program ensure that it continues running (achieves persistence) when the computer is restarted ?</strong></h4>
+<p>In the main function, there is a <em>StartServiceCtrlDispatcher</em> API call which allow to connect the thread of a service process to the service control manager.</p>
+<p>The name of the service is &ldquo;MalService&rdquo;</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-startservicectrldispatchera">MSDN_StartServiceCtrlDispatcher</a></p>
+<p>Futhermore, a subroutine is call at 0x401040</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-1_call_sub_401040.png" alt="call_sub_401040"></p>
+<p>Within this routine the function starting at 0x401064 show the creation of a service to persist on the system.</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-1_call_sub_401040.png" alt="create_service"></p>
+<p>There is also a call to OpenSCManager that is used to open the service control manager.</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-1_open_sc_manager.png" alt="open_sc_manager"></p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-openscmanagera">MSDN_OpenSCManager</a></p>
+<p>Finally the &ldquo;MalService&rdquo; object will be added to the control manager database with CreateServiceA.</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-createservicea">MSDN_CreateServiceA</a></p>
+<h4 id="why-does-this-program-use-a-mutex-"><strong>Why does this program use a mutex ?</strong></h4>
+<p>Mutex are used to be sure that only one instance of a program is running at the same time.</p>
+<p>So Mutex are really usefull for malware writers because you can see if you have already infected a victim.</p>
+<p>In this example, the malware try to open a mutex call &ldquo;HGL345&rdquo;.<br>
+If he can it means that there is already a mutex &ldquo;HGL345&rdquo; on the target system, otherwise it goes to 0x401064 and create the Mutex.</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-1_mutex.png" alt="mutex"></p>
+<h4 id="what-is-a-good-host-based-signature-to-use-for-detecting-this-program-"><strong>What is a good host-based signature to use for detecting this program ?</strong></h4>
+<h4 id="what-is-a-good-network-based-signature-for-detecting-this-malware-"><strong>What is a good network-based signature for detecting this malware ?</strong></h4>
+<h4 id="what-is-the-purpose-of-this-program-"><strong>What is the purpose of this program ?</strong></h4>
+<h4 id="when-will-this-program-finish-executing-"><strong>When will this program finish executing ?</strong></h4>
+<h3 id="lab-7-2"><strong>Lab 7-2</strong></h3>
+<h4 id="how-does-this-program-achieve-persistence-"><strong>How does this program achieve persistence ?</strong></h4>
+<h4 id="what-is-the-purpose-of-this-program--1"><strong>What is the purpose of this program ?</strong></h4>
+<h4 id="when-will-this-program-finish-executing--1"><strong>When will this program finish executing ?</strong></h4>
+<h3 id="lab-7-3">Lab 7-3</h3>
+<p>For this lab, we obtained the malicious executable Lab07-03.exe and DLL Lab07-04.dll prior to executing. This is important to note because the malware might change once it runs. Both files were found in the same directory on the victim machine.
+<strong>Warning: This lab may cause considerable damage to your computer and may be difficult to remove. Do not run this file without a virtual machine with a snapshot taken prior to execution.</strong></p>
+<h4 id="how-does-this-program-achieve-persistence-to-ensure-that-it-continues-running-when-the-computer-is-restarted-"><strong>How does this program achieve persistence to ensure that it continues running when the computer is restarted ?</strong></h4>
+<h4 id="what-are-two-good-host-based-signatures-for-this-malware-"><strong>What are two good host-based signatures for this malware ?</strong></h4>
+<h4 id="what-is-the-purpose-of-this-program--2"><strong>What is the purpose of this program ?</strong></h4>
+<h4 id="how-could-you-remove-this-malware-once-it-is-installed-"><strong>How could you remove this malware once it is installed ?</strong></h4>
+
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/walkthroughs/pma_lab6/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">Practical Malware Analysis - Lab 6</span>
+    </a>
+    
+    
+</div>
+
+
+  
+
+  
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'your-google-analytics-id', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" integrity="sha384-b3ua1l97aVGAPEIe48b4TC60WUQbQaGi2jqAWM90y0OZXZeyaTCWtBTKtjW2GXG1" crossorigin="anonymous"></script>
+
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+    
+
+
+
+    </body>
+</html>
