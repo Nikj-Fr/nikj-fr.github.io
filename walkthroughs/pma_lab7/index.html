@@ -230,13 +230,13 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-startservicectrldispatchera">MSDN_StartServiceCtrlDispatcher</a></p>
 <p>Futhermore, a subroutine is call at 0x401040</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_call_sub_401040.png" alt="call_sub_401040"></p>
-<p>Within this routine the function starting at 0x401064 show the creation of a service persisting on the system.</p>
+<p>Within this routine the function starting at 0x401064 show the creation of a service persisting on the system.
+The &ldquo;MalService&rdquo; object will be added to the control manager database with CreateServiceA.
+<a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-createservicea">MSDN_CreateServiceA</a></p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_create_service.png" alt="create_service"></p>
 <p>There is also a call to OpenSCManager that is used to open the service control manager.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_open_sc_manager.png" alt="open_sc_manager"></p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-openscmanagera">MSDN_OpenSCManager</a></p>
-<p>Finally the &ldquo;MalService&rdquo; object will be added to the control manager database with CreateServiceA.</p>
-<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-createservicea">MSDN_CreateServiceA</a></p>
 <h4 id="why-does-this-program-use-a-mutex-"><strong>Why does this program use a mutex ?</strong></h4>
 <p>Mutex are used to be sure that only one instance of a program is running at the same time.</p>
 <p>So Mutex are really usefull for malware writers because you can see if you have already infected a victim.</p>
