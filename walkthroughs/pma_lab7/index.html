@@ -212,7 +212,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
     
     
     <br/>
-    <i class="fas fa-clock"></i> 3 min read
+    <i class="fas fa-clock"></i> 4 min read
 </div>
 
 
@@ -257,17 +257,26 @@ Next, the malware call the URL <strong><a href="http://www.malwareanalysisbook.c
 <p>The malware persist on the system by creating a process call <strong>MalService</strong> if an instance of the program isn&rsquo;t already working. This is accomplished with the use of a mutex call <strong>HLG435</strong>.
 Then it create a timer that wait the year 2100 before going to <em>StartAdress</em>.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_timer.png" alt="timer"></p>
-<p>It open a browser with the user-agent <strong>Internet Explorer 8.0</strong> and start an infinite loop by communicating with <strong><a href="http://www.malwareanalysisbook.com">http://www.malwareanalysisbook.com</a></strong>. We can presume that if a lot of computers start this program, the 1st january <strong>2100</strong> the website will be DDOS (or unexpect huge traffic).</p>
+<p>It open a browser with the user-agent <strong>Internet Explorer 8.0</strong> and start an infinite loop by communicating with <strong><a href="http://www.malwareanalysisbook.com">http://www.malwareanalysisbook.com</a></strong>. We can presume that if a lot of computers start this program, the 1st january <strong>2100</strong> the website will be DDOS (or attend unexpected huge traffic).</p>
 <h4 id="when-will-this-program-finish-executing-"><strong>When will this program finish executing ?</strong></h4>
 <p>Obviously this program never end. There aren&rsquo;t any jump out of this function:
 <img src="/images/walkthroughs/pma_lab7/lab-7-1_sleep.png" alt="sleep"></p>
 <h3 id="lab-7-2"><strong>Lab 7-2</strong></h3>
 <h4 id="how-does-this-program-achieve-persistence-"><strong>How does this program achieve persistence ?</strong></h4>
+<p>I don&rsquo;t see anything that could say the program achieve persistence. What we can presume is that the program use COM Objects (Component Object Model) to do his job. The obvious <strong>OleInitialize</strong> is a pattern to start using those objects.</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/ole2/nf-ole2-oleinitialize">MSDN_OleInitialize</a></p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-2_ole_initialize.png" alt="ole_initialize"></p>
 <h4 id="what-is-the-purpose-of-this-program--1"><strong>What is the purpose of this program ?</strong></h4>
+<p>This malware initialize a COM library in the first part of the program. Then it create an object with <strong>CoCreateInstance</strong>. A copy of the string <strong><a href="http://malwareanalysisbook.com/ad.html">http://malwareanalysisbook.com/ad.html</a></strong> is made with <strong>SysAllocString</strong> that will probably be used by COM.
+To sum up, the malware use COM object to bring the user to an advertisement web page.</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstance">MSDN_CoCreateInstance</a>
+<a href="https://docs.microsoft.com/en-us/windows/win32/api/oleauto/nf-oleauto-sysallocstring">MSDN_SysAllocString</a></p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-2_behaviour.png" alt="behaviour"></p>
 <h4 id="when-will-this-program-finish-executing--1"><strong>When will this program finish executing ?</strong></h4>
+<p>This program ends when the advertisement is open. There aren&rsquo;t any other way to terminate the malware.</p>
 <h3 id="lab-7-3">Lab 7-3</h3>
 <p>For this lab, we obtained the malicious executable Lab07-03.exe and DLL Lab07-04.dll prior to executing. This is important to note because the malware might change once it runs. Both files were found in the same directory on the victim machine.
-<strong>Warning: This lab may cause considerable damage to your computer and may be difficult to remove. Do not run this file without a virtual machine with a snapshot taken prior to execution.</strong></p>
+<strong>Warningg: This lab may cause considerable damage to your computer and may be difficult to remove. Do not run this file without a virtual machine with a snapshot taken prior to execution.</strong></p>
 <h4 id="how-does-this-program-achieve-persistence-to-ensure-that-it-continues-running-when-the-computer-is-restarted-"><strong>How does this program achieve persistence to ensure that it continues running when the computer is restarted ?</strong></h4>
 <h4 id="what-are-two-good-host-based-signatures-for-this-malware-"><strong>What are two good host-based signatures for this malware ?</strong></h4>
 <h4 id="what-is-the-purpose-of-this-program--2"><strong>What is the purpose of this program ?</strong></h4>
