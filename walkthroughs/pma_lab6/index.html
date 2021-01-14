@@ -225,7 +225,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p>The goal of this labs is to help understand the overall functionality of a program by analyzing code constructs.</p>
 <h3 id="lab-6-1"><strong>Lab 6-1</strong></h3>
 <h4 id="what-is-the-major-code-construct-found-in-the-only-subroutine-called-by-main-"><strong>What is the major code construct found in the only subroutine called by main ?</strong></h4>
-<p>The subroutine called by the main is located at 0x401000.</p>
+<p>The subroutine called by the main is located at <em>0x401000</em>.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-1_call_sub_401000.png" alt="call_sub_401000"></p>
 <p>In this function we can see a <strong>jz</strong> statement. The choice of the path to follow depend on the result of the comparaison that his made with EAX. This indicate a <strong>if</strong> code construct.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-1_if_condition.png" alt="if_condition"></p>
@@ -244,7 +244,7 @@ We can check this by starting the malware..</p>
 <h3 id="lab-6-2"><strong>Lab 6-2</strong></h3>
 <h4 id="what-operation-does-the-first-subroutine-called-by-main-perform-"><strong>What operation does the first subroutine called by main perform ?</strong></h4>
 <p>The answer are the same as Lab6-1-1.
-The first subroutine call is sub_401000
+The first subroutine call is <em>sub_401000</em>
 <img src="/images/walkthroughs/pma_lab6/lab-6-2_call_sub_401000.png" alt="call_sub_401000"></p>
 <p>The operation is a <strong>if</strong> statement
 <img src="/images/walkthroughs/pma_lab6/lab-6-1_if_condition.png" alt="if_condition"></p>
@@ -253,7 +253,7 @@ The first subroutine call is sub_401000
 We assume that the function is used to print this string in the terminal of the victim, after malware execution.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-2_call_sub_40117F.png" alt="call_sub_40117F"></p>
 <h4 id="what-does-the-second-subroutine-called-by-main-do-"><strong>What does the second subroutine called by main do ?</strong></h4>
-<p>The second subroutine is located at 0x401040
+<p>The second subroutine is located at <em>0x401040</em>
 <img src="/images/walkthroughs/pma_lab6/lab-6-2_call_sub_401040.png" alt="call_sub_401040"></p>
 <p>Firstly, there is an API call <strong>InternetOpenA</strong> which is used to open a web browser. Next, we see the string <em>Internet Explorer</em>. We assume that the malware try to open the IE browser.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-2_internet_open.png" alt="internet_open"></p>
@@ -293,7 +293,7 @@ The file construct is checked to see if it is well form. If it&rsquo;s the case 
 <p>Following the routine, at the top, IDA confirm what we said.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-3_parameters_401130.png" alt="parameters_2"></p>
 <p>We are going to find the value of Var_8.<br>
-At 0x40122D var_8 is equal to al. AL is the first 8 bits of the EAX register. And the content of EAX is the result of the function at 0x401040 which is the symbol <strong>&lt;!&ndash;</strong> that we saw in the previous lab.
+At <em>0x40122D</em> var_8 is equal to al. AL is the first 8 bits of the EAX register. And the content of EAX is the result of the function at <em>0x401040</em> which is the symbol <strong>&lt;!&ndash;</strong> that we saw in the previous lab.
 8 bits is equivalent to 1 byte = 1 character. In our case the last character is <strong>-</strong>. Var_8 = &ldquo;-&rdquo;</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-3_parameters_al.png" alt="parameters_al"></p>
 <h4 id="what-major-code-construct-does-this-function-contain-"><strong>What major code construct does this function contain ?</strong></h4>

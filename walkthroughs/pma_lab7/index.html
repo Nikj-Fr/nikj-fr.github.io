@@ -227,9 +227,9 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <h4 id="how-does-this-program-ensure-that-it-continues-running-achieves-persistence-when-the-computer-is-restarted-"><strong>How does this program ensure that it continues running (achieves persistence) when the computer is restarted ?</strong></h4>
 <p>In the main function, there is a <strong>StartServiceCtrlDispatcher</strong> API call which allow to connect the thread of a service process to the service control manager. The name of the service is <strong>MalService</strong></p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-startservicectrldispatchera">MSDN_StartServiceCtrlDispatcher</a></p>
-<p>Futhermore, a subroutine is call at 0x401040.</p>
+<p>Futhermore, a subroutine is call at <em>0x401040</em>.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_call_sub_401040.png" alt="call_sub_401040"></p>
-<p>Within this routine the function starting at 0x401064 show the creation of a service persisting on the system. The <strong>OpenSCManager</strong> call is used to open the service control manager.
+<p>Within this routine the function starting at <em>0x401064</em> show the creation of a service persisting on the system. The <strong>OpenSCManager</strong> call is used to open the service control manager.
 <img src="/images/walkthroughs/pma_lab7/lab-7-1_open_sc_manager.png" alt="open_sc_manager"></p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-openscmanagera">MSDN_OpenSCManager</a></p>
 <p>Then <strong>MalService</strong> object will be added to this control manager with <strong>CreateServiceA</strong>.</p>
@@ -238,8 +238,8 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <h4 id="why-does-this-program-use-a-mutex-"><strong>Why does this program use a mutex ?</strong></h4>
 <p>Mutex are used to be sure that only one instance of a program is running at the same time.</p>
 <p>So Mutex are really usefull for malware writers because you can see if you have already infected a victim.</p>
-<p>In this example, the malware try to open a mutex call <em>HGL345</em>.<br>
-If he can it means that there is already a mutex <em>HGL345</em> on the target system, otherwise it goes to <em>0x401064</em> and create the Mutex.</p>
+<p>In this example, the malware try to open a mutex call <strong>HGL345</strong>.<br>
+If he can it means that there is already a mutex <strong>HGL345</strong> on the target system, otherwise it goes to <em>0x401064</em> and create the Mutex.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_mutex.png" alt="mutex"></p>
 <h4 id="what-is-a-good-host-based-signature-to-use-for-detecting-this-program-"><strong>What is a good host-based signature to use for detecting this program ?</strong></h4>
 <ul>
