@@ -225,44 +225,42 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p>The goal of this lab is to help understand how a malware interact with the operating system.</p>
 <h3 id="lab-7-1"><strong>Lab 7-1</strong></h3>
 <h4 id="how-does-this-program-ensure-that-it-continues-running-achieves-persistence-when-the-computer-is-restarted-"><strong>How does this program ensure that it continues running (achieves persistence) when the computer is restarted ?</strong></h4>
-<p>In the main function, there is a <em>StartServiceCtrlDispatcher</em> API call which allow to connect the thread of a service process to the service control manager.</p>
-<p>The name of the service is <em>MalService</em></p>
+<p>In the main function, there is a <strong>StartServiceCtrlDispatcher</strong> API call which allow to connect the thread of a service process to the service control manager. The name of the service is <strong>MalService</strong></p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-startservicectrldispatchera">MSDN_StartServiceCtrlDispatcher</a></p>
-<p>Futhermore, a subroutine is call at <strong>0x401040</strong></p>
+<p>Futhermore, a subroutine is call at 0x401040.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_call_sub_401040.png" alt="call_sub_401040"></p>
-<p>Within this routine the function starting at <strong>0x401064</strong> show the creation of a service persisting on the system.<br>
-The <em>OpenSCManager</em> call is used to open the service control manager.
+<p>Within this routine the function starting at 0x401064 show the creation of a service persisting on the system. The <strong>OpenSCManager</strong> call is used to open the service control manager.
 <img src="/images/walkthroughs/pma_lab7/lab-7-1_open_sc_manager.png" alt="open_sc_manager"></p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-openscmanagera">MSDN_OpenSCManager</a></p>
-<p>Then <em>MalService</em> object will be added to this control manager with <em>CreateServiceA</em>.</p>
+<p>Then <strong>MalService</strong> object will be added to this control manager with <strong>CreateServiceA</strong>.</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-createservicea">MSDN_CreateServiceA</a></p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_create_service.png" alt="create_service"></p>
 <h4 id="why-does-this-program-use-a-mutex-"><strong>Why does this program use a mutex ?</strong></h4>
 <p>Mutex are used to be sure that only one instance of a program is running at the same time.</p>
 <p>So Mutex are really usefull for malware writers because you can see if you have already infected a victim.</p>
 <p>In this example, the malware try to open a mutex call <em>HGL345</em>.<br>
-If he can it means that there is already a mutex <em>HGL345</em> on the target system, otherwise it goes to <strong>0x401064</strong> and create the Mutex.</p>
+If he can it means that there is already a mutex <em>HGL345</em> on the target system, otherwise it goes to <em>0x401064</em> and create the Mutex.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_mutex.png" alt="mutex"></p>
 <h4 id="what-is-a-good-host-based-signature-to-use-for-detecting-this-program-"><strong>What is a good host-based signature to use for detecting this program ?</strong></h4>
 <ul>
-<li>The mutex <em>HLG435</em></li>
-<li>The service call <em>MalService</em></li>
+<li>The mutex <strong>HLG435</strong></li>
+<li>The service call <strong>MalService</strong></li>
 </ul>
 <h4 id="what-is-a-good-network-based-signature-for-detecting-this-malware-"><strong>What is a good network-based signature for detecting this malware ?</strong></h4>
-<p>At <strong>0x40112C</strong> the function <em>StartAdress</em> is call before creating a thread.</p>
+<p>At <em>0x40112C</em> the function <em>StartAdress</em> is call before creating a thread.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_network_signature.png" alt="network_signature1"></p>
-<p>Within this function we can see that the user-agent: <em>Internet Explorer 8.0</em> is used to open a browser.
-Next, the malware call the URL <em><a href="http://www.malwareanalysisbook.com">http://www.malwareanalysisbook.com</a></em></p>
+<p>Within this function we can see that the user-agent: <strong>Internet Explorer 8.0</strong> is used to open a browser.
+Next, the malware call the URL <strong><a href="http://www.malwareanalysisbook.com">http://www.malwareanalysisbook.com</a></strong></p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_network_signature2.png" alt="network_signature2"></p>
-<p>At <strong>0x40116D</strong> it looks like an infinite loop that try to access to the URL over of here (there is no jump out of here).</p>
+<p>At <em>0x40116D</em> it looks like an infinite loop that try to access to the URL (there is no jump out of here).</p>
 <h4 id="what-is-the-purpose-of-this-program-"><strong>What is the purpose of this program ?</strong></h4>
-<p>The malware persist on the system by creating a process call &ldquo;MalService&rdquo; if an instance of the program isn&rsquo;t already working. This is accomplished with the use of a mutex call &ldquo;HLG345&rdquo;.
-Then it create a timer that wait the year 2100 before going to <strong>StartAdress</strong>.</p>
+<p>The malware persist on the system by creating a process call <strong>MalService</strong> if an instance of the program isn&rsquo;t already working. This is accomplished with the use of a mutex call <strong>HLG435</strong>.
+Then it create a timer that wait the year 2100 before going to <em>StartAdress</em>.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_timer.png" alt="timer"></p>
-<p>It open a browser with the user-agent <em>Internet Explorer 8.0</em> and start an infinite loop by communicating with <em><a href="http://www.malwareanalysisbook.com">http://www.malwareanalysisbook.com</a></em>. We can presume that if a lot of computers start this program, the 1st january 2100 the website will be DDOS (or unexpect huge traffic).</p>
+<p>It open a browser with the user-agent <strong>Internet Explorer 8.0</strong> and start an infinite loop by communicating with <strong><a href="http://www.malwareanalysisbook.com">http://www.malwareanalysisbook.com</a></strong>. We can presume that if a lot of computers start this program, the 1st january <strong>2100</strong> the website will be DDOS (or unexpect huge traffic).</p>
 <h4 id="when-will-this-program-finish-executing-"><strong>When will this program finish executing ?</strong></h4>
 <p>Obviously this program never end. There aren&rsquo;t any jump out of this function:
-<img src="/images/walkthroughs/pma_lab7/lab-7-1_sleep.png.png" alt="sleep"></p>
+<img src="/images/walkthroughs/pma_lab7/lab-7-1_sleep.png" alt="sleep"></p>
 <h3 id="lab-7-2"><strong>Lab 7-2</strong></h3>
 <h4 id="how-does-this-program-achieve-persistence-"><strong>How does this program achieve persistence ?</strong></h4>
 <h4 id="what-is-the-purpose-of-this-program--1"><strong>What is the purpose of this program ?</strong></h4>

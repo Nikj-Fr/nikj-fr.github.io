@@ -18,8 +18,7 @@
       
       <guid>https://nikj-fr.github.io/walkthroughs/pma_lab7/</guid>
       <description>Analyzing Malicious Windows Program Lab 7 The goal of this lab is to help understand how a malware interact with the operating system.
-Lab 7-1 How does this program ensure that it continues running (achieves persistence) when the computer is restarted ? In the main function, there is a StartServiceCtrlDispatcher API call which allow to connect the thread of a service process to the service control manager.
-The name of the service is MalService</description>
+Lab 7-1 How does this program ensure that it continues running (achieves persistence) when the computer is restarted ? In the main function, there is a StartServiceCtrlDispatcher API call which allow to connect the thread of a service process to the service control manager. The name of the service is MalService</description>
     </item>
     
     <item>
