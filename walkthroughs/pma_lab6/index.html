@@ -165,13 +165,7 @@
 	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
 	
 	
-	<a href="https://www.root-me.org/Nikj"><img src="/images/root_me.png" height="40" weight="40" aria-hidden="true"/></a>
 	
-	
-	<a href="https://tryhackme.com/p/Nikj"><img src="/images/try_hack_me.png" height="20" weight="20" aria-hidden="true"/></a>
-	
-	
-	<a href="https://www.hackthebox.eu/home/users/profile/330809"><div class="hackthebox"></div></a>
 	
 </section>
 
@@ -227,7 +221,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <h4 id="what-is-the-major-code-construct-found-in-the-only-subroutine-called-by-main-"><strong>What is the major code construct found in the only subroutine called by main ?</strong></h4>
 <p>The subroutine called by the main is located at <em>0x401000</em>.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-1_call_sub_401000.png" alt="call_sub_401000"></p>
-<p>In this function we can see a <strong>jz</strong> statement. The choice of the path to follow depend on the result of the comparaison that his made with EAX. This indicate a <strong>if</strong> code construct.</p>
+<p>In this function we can see a <strong>jz</strong> statement. The choice of the path to follow depend on the result of the comparison that his made with EAX. This indicate a <strong>if</strong> code construct.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-1_if_condition.png" alt="if_condition"></p>
 <p>Following the msdn page of the API call to <strong>InternetGetConnectedState</strong>, the function return <strong>True</strong> if there is Internet and <strong>False</strong> if the target hasn&rsquo;t got one.</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/wininet/nf-wininet-internetgetconnectedstate">MSDN_InternetGetConnectedState</a></p>
@@ -264,7 +258,7 @@ We assume that the function is used to print this string in the terminal of the 
 <h4 id="what-type-of-code-construct-is-used-in-this-subroutine-"><strong>What type of code construct is used in this subroutine ?</strong></h4>
 <p>Under the read of the file, there are 2 paths:</p>
 <ul>
-<li>one where the file was read. Then it check if the file is well construct with bytes comparaison.</li>
+<li>one where the file was read. Then it check if the file is well construct with bytes comparison.</li>
 <li>second where the file wasn&rsquo;t read.</li>
 </ul>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-2_code_construct.png" alt="code_construct"></p>

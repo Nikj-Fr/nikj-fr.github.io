@@ -165,13 +165,7 @@
 	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
 	
 	
-	<a href="https://www.root-me.org/Nikj"><img src="/images/root_me.png" height="40" weight="40" aria-hidden="true"/></a>
 	
-	
-	<a href="https://tryhackme.com/p/Nikj"><img src="/images/try_hack_me.png" height="20" weight="20" aria-hidden="true"/></a>
-	
-	
-	<a href="https://www.hackthebox.eu/home/users/profile/330809"><div class="hackthebox"></div></a>
 	
 </section>
 
@@ -282,7 +276,7 @@ They looks like automatic &ldquo;welcome&rdquo; for the owner of the malware. Fu
 It take a structure parameter call <strong>lpVersionInformation</strong>.
 that will receive the information.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-9_msdn_getversionex.png" alt="msdn_getversionex"></p>
-<p>Then there is a comparaison between the content of the <strong>VersionInformation.dwPlatformId</strong> and <strong>2</strong>.
+<p>Then there is a comparison between the content of the <strong>VersionInformation.dwPlatformId</strong> and <strong>2</strong>.
 On the MSDN documentation, we can see that this function is use to <em>Identifies the operating system, or platform
 supported by an assembly</em>.</p>
 <p>Here are the value that the function can take:</p>
@@ -384,7 +378,7 @@ For &ldquo;VMXh&rdquo; there aren&rsquo;t any outputs.
 <p>With the shortcut <strong>ALT + B</strong> you can search for bytes sequences.. We search for the <strong>in</strong> instruction which is equivalent to <strong>0xED</strong>.<br>
 There is only one result with a <strong>in</strong> instruction.
 <img src="/images/walkthroughs/pma_lab5/lab-5-17_0xed_result.png" alt="0xed_result"></p>
-<p>Following the function (<em>0x10006196</em>), we can see a comparaison that is made. Decoding the hexadecimal value, we found the string <strong>VMHx</strong>.
+<p>Following the function (<em>0x10006196</em>), we can see a comparison that is made. Decoding the hexadecimal value, we found the string <strong>VMHx</strong>.
 <img src="/images/walkthroughs/pma_lab5/lab-5-17_vmxh_result.png" alt="vmxh_result"></p>
 <p>An anti-vm instruction is implement to cancel the installation of the malware on the target.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-17_anti-vm-graph.png" alt="anti_vm_graph"></p>

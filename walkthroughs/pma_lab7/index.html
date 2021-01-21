@@ -165,13 +165,7 @@
 	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
 	
 	
-	<a href="https://www.root-me.org/Nikj"><img src="/images/root_me.png" height="40" weight="40" aria-hidden="true"/></a>
 	
-	
-	<a href="https://tryhackme.com/p/Nikj"><img src="/images/try_hack_me.png" height="20" weight="20" aria-hidden="true"/></a>
-	
-	
-	<a href="https://www.hackthebox.eu/home/users/profile/330809"><div class="hackthebox"></div></a>
 	
 </section>
 
@@ -212,7 +206,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
     
     
     <br/>
-    <i class="fas fa-clock"></i> 4 min read
+    <i class="fas fa-clock"></i> 6 min read
 </div>
 
 
@@ -275,12 +269,73 @@ To sum up, the malware use COM object to bring the user to an advertisement web 
 <h4 id="when-will-this-program-finish-executing--1"><strong>When will this program finish executing ?</strong></h4>
 <p>This program ends when the advertisement is open. There aren&rsquo;t any other way to terminate the malware.</p>
 <h3 id="lab-7-3">Lab 7-3</h3>
-<p>For this lab, we obtained the malicious executable Lab07-03.exe and DLL Lab07-04.dll prior to executing. This is important to note because the malware might change once it runs. Both files were found in the same directory on the victim machine.
-<strong>Warningg: This lab may cause considerable damage to your computer and may be difficult to remove. Do not run this file without a virtual machine with a snapshot taken prior to execution.</strong></p>
+<p>For this lab, we obtained the malicious executable Lab07-03.exe and DLL Lab07-03.dll prior to executing. This is important to note because the malware might change once it runs. Both files were found in the same directory on the victim machine.
+<strong>Warning: This lab may cause considerable damage to your computer and may be difficult to remove. Do not run this file without a virtual machine with a snapshot taken prior to execution.</strong></p>
 <h4 id="how-does-this-program-achieve-persistence-to-ensure-that-it-continues-running-when-the-computer-is-restarted-"><strong>How does this program achieve persistence to ensure that it continues running when the computer is restarted ?</strong></h4>
+<p>Within the main function there is reference to a native Windows DLL:
+<strong>Kernel32.dll</strong>. The program create the DLL in *C:\Windows\System32*</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_kernel32.png" alt="kernel32"></p>
+<p>Then it create another DLL: <strong>Lab07-03.dl</strong>. The executable and the DLL was found in the same directory on the victim machine.</p>
+<p>Deeper in the function, we can see a copy of the Lab07-03.dll into  <strong>C:\Windows\system32\Kerne132.dll</strong> (notice the 1 instead of l).</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_copy_dll.png" alt="copy"></p>
+<p>At 0x4011E0, there is a call to a function taking a strange parameter: <strong>C:\*</strong>.</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_c_directory.png" alt="c_directory"></p>
+<p>The program try to search a file in the path given by the parameter.
+<img src="/images/walkthroughs/pma_lab7/lab-7-3_arg.png" alt="argv_4"></p>
+<p>It can travel from directory to directory with <em>&rdquo;.&quot;</em> and <em>&rdquo;..&quot;</em> that are usefull for the system.</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_directory_travel1.png" alt="directory_travel_1"></p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_directory_travel2.png" alt="directory_travel_2"></p>
+<p>Then there is a comparison with the extension <em>&quot;.exe&rdquo;</em>. We presume that the program search for executables before doing things with them.
+<img src="/images/walkthroughs/pma_lab7/lab-7-3_exe.png" alt="executable_extension"></p>
+<p>Here is the comparison that is made to see if the file discover in directories are executables or not. If it does it will call a function at <em>0x4010A0</em>.
+<img src="/images/walkthroughs/pma_lab7/lab-7-3_comparison.png" alt="comparison"></p>
+<p>Inside the routine, we can see that the program call 3 API:</p>
+<ul>
+<li>CreateFileA</li>
+<li>CreateFileMappingA</li>
+<li>MapViewOfFile</li>
+</ul>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_api.png" alt="api"></p>
+<p>Based on this we can infer that if an executable file is located, it is mapped into memory then modified. Futrher in the program we can see <strong>IsBadReadPtr</strong> API call which is used to check if the program read a specified range memory. Previously we saw that every executables are map into memory, now we know that is used to browse inside their memories.</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-isbadreadptr">MSDN_IsBadReadPtr</a>)</p>
+<p>Next we can see the program comparing the strings <em>&ldquo;kernel32.dll&rdquo;</em> with the output of <strong>IsBadReadPtr</strong>. The program try to find the string inside the memory of executables.</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_compare_kernel32.png" alt="compare_kernel32"></p>
+<p>I wasn&rsquo;t able to determine easily what was done next by the malware. I used some ressources on the Internet to found that at <em>0x40118C</em> there was an ASCII strings that was &ldquo;obfuscated&rdquo; with hexadecimal values. By pressing A on this string you can convert it. The result is: <strong>kerne132.dll</strong>.</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_modification_kerne132.png" alt="modification_kerne132"></p>
+<p>At the end of the function we can see a loop. The program compare every executable that he founds in the C:\ directory, then it check if the executable use <strong>kernel32.dll</strong> and change it to <strong>kerne132.dll</strong> to persist on the system.</p>
+<p>Now let&rsquo;s deep analyze the DLL. The DLL is used to create a mutex <strong>SADFHUHF</strong> in order to see if the victim is already infected. If it can open the DLL it jump directly to the end of the program.</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_dll_mutex.png" alt="dll_mutex"></p>
+<p>Otherwise, it create a mutex
+<img src="/images/walkthroughs/pma_lab7/lab-7-3_dll_mutex_create.png" alt="create_mutex"></p>
+<p>Then the program prepare call <strong>WSAStartup</strong>. This function prepare the system to create a socket.
+If the function success it jump to 0x1000108C.
+<img src="/images/walkthroughs/pma_lab7/lab-7-3_prepare_socket.png" alt="prepare_socket"></p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-wsastartup">MSDN</a></p>
+<p>The socket is create to communicate with the C2 (<strong>127.26.152.13</strong>).
+<img src="/images/walkthroughs/pma_lab7/lab-7-3_socket_communication.png" alt="socket_communication"></p>
+<p>The malware send <strong>Hello</strong> to the server, if no errors occurs during the send, the malware wait for a response. Then it sleep and loop again until a response. Alternatively, if the send fail the program close the socket and end.</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_socket_communication2.png" alt="socket_communication2"></p>
+<p>Commands send from the C2 are compared to a string. Depending on matches the malware does things. It can:</p>
+<ul>
+<li>sleep</li>
+<li>exec a command</li>
+</ul>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_compare_command_c2.png" alt="compare_c2_commands"></p>
 <h4 id="what-are-two-good-host-based-signatures-for-this-malware-"><strong>What are two good host-based signatures for this malware ?</strong></h4>
+<ul>
+<li>Directory: C:\</li>
+<li>Search for .exe in the above directory</li>
+<li>DLL: kerne132.dll (in the PE)</li>
+<li>Mutex: SADFHUHF</li>
+</ul>
+<p>Network signature (Not ask):</p>
+<ul>
+<li>C2: 127.26.152.13</li>
+</ul>
 <h4 id="what-is-the-purpose-of-this-program--2"><strong>What is the purpose of this program ?</strong></h4>
+<p>This program is able to persist on the system by hijacking the native kernel32 dll with a fake one kerne132. With this new dll the malware can sleep or execute command directly from the C2.</p>
 <h4 id="how-could-you-remove-this-malware-once-it-is-installed-"><strong>How could you remove this malware once it is installed ?</strong></h4>
+<p>This program will be very difficult to remove because it infect every executables in your C:\ directory. A solution could be to reverse the process used by the malware and replace every fake kernel32.dll with the native one.</p>
 
   </div>
   
