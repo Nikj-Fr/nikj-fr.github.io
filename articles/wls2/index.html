@@ -203,7 +203,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
     
     
     <br/>
-    <i class="fas fa-clock"></i> 6 min read
+    <i class="fas fa-clock"></i> 7 min read
 </div>
 
 
@@ -232,13 +232,13 @@ Dans les tests de performance, les performances de WSL1 sont souvent proches des
 <h2 id="wsl2">WSL2</h2>
 <p>Bien que WSL (dans cette conception initiale) soit beaucoup plus rapide et sans doute beaucoup plus populaire que les autres solutions permettant d&rsquo;utiliser Linux sur Windows, les ingénieurs du noyau Windows ont eu du mal à augmenter les performances de WSL et la compatibilité des appels systèmes en essayant de remodeler le noyau NT existant pour qu&rsquo;il reconnaisse et fonctionnent correctement sur l&rsquo;API de Linux. Lors d&rsquo;une conférence Microsoft Ignite en 2018, les ingénieurs Microsoft ont donné un aperçu d&rsquo;une nouvelle technologie &ldquo;légère&rdquo; de machine virtuelle Hyper-V pour la conteneurisation dans laquelle un “vrai” noyau Linux virtualisé pouvait utiliser directement les primitives NT sur l&rsquo;hôte. En 2019, Microsoft a annoncé une architecture WSL2 entièrement repensée, utilisant cette technologie VM légère hébergeant des images de noyau Linux réelles (personnalisées), revendiquant ainsi une compatibilité complète.</p>
 <p>Voici une image comparant les deux versions de l&rsquo;outil:
-<!-- raw HTML omitted --></p>
+<img src="/images/articles/wsl2/comparaison_wsl1_wsl2.png" alt="comparaison_wsl1_wsl2"></p>
 <p>Microsoft a opté pour la virtualisation via un sous-ensemble optimisé de fonctionnalités Hyper-V, afin d&rsquo;exécuter le noyau fourni et les distributions sous-jacentes, offrant des performances équivalentes à WSL1. La compatibilité avec les versions antérieures est prévue, les développeurs n’ont donc pas besoin de changer quoi que ce soit dans leurs distributions publiées.
 L&rsquo;installation de la distribution s&rsquo;effectue sur un système de fichiers au format ext4 dans un disque virtuel. Le système de fichiers hôte est accessible de manière transparente via le protocole 9P.</p>
 <h1 id="les-limites-de-wsl2">Les limites de WSL2</h1>
 <p>WSL2 permet de travailler sur un Linux natif.
 Tous les outils fonctionnant sur Linux fonctionnent également sur WSL:<br>
-<!-- raw HTML omitted --></p>
+<img src="/images/articles/wsl2/compatibilite.png" alt="compatibilite"></p>
 <p>Cependant, il existe des limites à cet outil notamment au niveau de la prise en charge des cartes graphiques.
 En effet, WSL n’a pas un accès direct au Hardware et ne peut faire fonctionner CUDA (Compute Unified Device Architecture) ni OpenCL à ce jour.
 Voici un exemple d&rsquo;outils classés dans un tableau dans lequel il est mentionné si celui-ci est pris en charge ou non par WSL2.</p>
@@ -284,6 +284,17 @@ Voici un exemple d&rsquo;outils classés dans un tableau dans lequel il est ment
 <p>Microsoft s&rsquo;inspire de plus en plus de ce qui fait l&rsquo;intérêt et la force des grandes distributions Linux. Microsoft permet maintenant l&rsquo;utilisation des systèmes Linux sans jamais avoir à quitter le système d&rsquo;exploitation Microsoft.
 Leur objectif est de faire de Windows 10, l&rsquo;OS qui permettra aux développeurs de tout avoir sur une même machine.
 Le nouveau terminal Windows en est un exemple. Il offre la possibilité de changer de langage à un autre: MS-Dos, Powershell et maintenant Bash en restant sur la même fenêtre.</p>
+<h1 id="ressources">Ressources</h1>
+<p>[1] [n.d.]. Go on WSL. <a href="https://www.youtube.com/watch?v=WOLZ3sb3McA&amp;list=PLwFSk464RMxnZkvZ1HKrlNyj-s6Zq4fWe&amp;index=13">https://www.youtube.com/watch?v=WOLZ3sb3McA&amp;list=PLwFSk464RMxnZkvZ1HKrlNyj-s6Zq4fWe&amp;index=13</a><br>
+[2] [n.d.]. New GPU and GUI features announced for WSL at Build. <a href="https://ubuntu.com/blog/new-gpu-and-gui-features-announced-forwsl-at-build">https://ubuntu.com/blog/new-gpu-and-gui-features-announced-forwsl-at-build</a> Library Catalog: ubuntu.com.<br>
+[3] [n.d.]. r/bashonubuntuonwindows - How WSL works? <a href="https://www.reddit.com/r/bashonubuntuonwindows/comments/8o96na/how_">https://www.reddit.com/r/bashonubuntuonwindows/comments/8o96na/how_</a>
+wsl_works/ Library Catalog: <a href="http://www.reddit.com">www.reddit.com</a>.<br>
+[4] 2020. Windows Subsystem for Linux. <a href="https://en.wikipedia.org/w/index.php?title=Windows_Subsystem_for_Linux&amp;oldid=959680818">https://en.wikipedia.org/w/index.php?title=Windows_Subsystem_for_Linux&amp;oldid=959680818</a>
+Page Version ID: 959680818.<br>
+[5] craigloewen msft. [n.d.]. An overview on the the Windows Subsystem for Linux. <a href="https://docs.microsoft.com/en-us/windows/wsl/compareversions">https://docs.microsoft.com/en-us/windows/wsl/compareversions</a> Library Catalog: docs.microsoft.com.<br>
+[6] Athul Mithran. 2020. What is Windows Subsystem for Linux (WSL and WSL2)? – Linux in Windows. <a href="https://fossbytes.com/what-iswindows-subsystem-for-linux-wsl/">https://fossbytes.com/what-iswindows-subsystem-for-linux-wsl/</a> Library Catalog: fossbytes.com.<br>
+[7] Shivam Raj. 2016. How Linux Bash Shell Works in Windows 10. <a href="https://beebom.com/how-linux-bash-shell-works-windows-10/">https://beebom.com/how-linux-bash-shell-works-windows-10/</a> Library
+Catalog: beebom.com Section: Windows</p>
 
   </div>
   

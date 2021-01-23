@@ -226,12 +226,14 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <li>Dans la fenêtre qui vient de s&rsquo;ouvrir, rentrer la commande suivante:</li>
 </ul>
 <pre><code>Get-AppxPackage | Select Name, PackageFullName
-</code></pre><h4 id="selection-du-package-à-supprimer"><strong>Selection du package à supprimer</strong></h4>
+</code></pre><p><img src="/images/articles/suppression_application_preinstalle_windows10/liste_applications.png" alt="liste_applications"></p>
+<h4 id="selection-du-package-à-supprimer"><strong>Selection du package à supprimer</strong></h4>
 <ul>
 <li>Lancer la commande suivante en remplaçant le nom du package à supprimer à la place de <em>YourPackageName</em></li>
 </ul>
 <pre><code>Get-AppxPackage YourPackageName | Remove-AppxPackage
-</code></pre><h4 id="liste-de-toutes-les-applications-possibles-de-supprimer"><strong>Liste de toutes les applications possibles de supprimer</strong></h4>
+</code></pre><p><img src="/images/articles/suppression_application_preinstalle_windows10/desinstallation_application.png" alt="desinstallation_application"></p>
+<h4 id="liste-de-toutes-les-applications-possibles-de-supprimer"><strong>Liste de toutes les applications possibles de supprimer</strong></h4>
 <p><strong>Important:</strong><br>
 Je vous conseille de ne pas supprimer le <em>Windows Store</em> afin de pouvoir récupérer les applications que vous allez supprimer.</p>
 <pre><code>To uninstall 3D Builder:
