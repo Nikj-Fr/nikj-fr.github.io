@@ -8,7 +8,6 @@
     <link href="https://gmpg.org/xfn/11" rel="profile">
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <meta name="generator" content="Hugo 0.74.1" />
@@ -17,19 +16,19 @@
     
     
 
-<title>Practical Malware Analysis - Lab 3 • </title>
+<title>Practical Malware Analysis - Lab 3 • Nikj • </title>
 
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Practical Malware Analysis - Lab 3"/>
-<meta name="twitter:description" content="Second practical exercice of the Practical Malware Analysis book. The purpose of this lab is to train on basic dynamic analysis taught in the chapter 3"/>
+<meta name="twitter:description" content="Second practical exercice of the Practical Malware Analysis book. The purpose of this lab is to train on basic dynamic analysis taught in the chapter 3 "/>
 
 <meta property="og:title" content="Practical Malware Analysis - Lab 3" />
-<meta property="og:description" content="Second practical exercice of the Practical Malware Analysis book. The purpose of this lab is to train on basic dynamic analysis taught in the chapter 3" />
+<meta property="og:description" content="Second practical exercice of the Practical Malware Analysis book. The purpose of this lab is to train on basic dynamic analysis taught in the chapter 3 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/pma_lab3/" />
 <meta property="article:published_time" content="2020-12-21T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-12-21T00:00:00+00:00" /><meta property="og:site_name" content="Nikj | Personal Website" />
+<meta property="article:modified_time" content="2020-12-21T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
 
 
     
@@ -44,7 +43,7 @@
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.d0c4ffb2e1828bd88212c4246b2911d84b93350f28f2d499f40bb11f1bd57e9a.css" integrity="sha256-0MT/suGCi9iCEsQkaykR2EuTNQ8o8tSZ9AuxHxvVfpo=">
+<link rel="stylesheet" href="/scss/hyde-hyde.7607cf2bc2eb2cb9f7611afe1f814025416b193e2786307b9247d028b5476745.css" integrity="sha256-dgfPK8LrLLn3YRr&#43;H4FAJUFrGT4nhjB7kkfQKLVHZ0U=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -71,20 +70,24 @@
   <div class="container ">
     <div class="sidebar-about">
       <span class="site__title">
-        <a href="https://nikj-fr.github.io/"></a>
+        <a href="https://nikj-fr.github.io/">
+        
+          
+        
+        </a>
       </span>
       
         
         
         
         <div class="author-image">
-          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+          <a href="http://nikj-fr.github.io"><img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center"></a>
         </div>
         
       
       
       <p class="site__description">
-         InfoSec Website | CTF WriteUp 
+        <a href="http://nikj-fr.github.io"> Infosec Website | CTF Write Up </a>
       </p>
     </div>
     <div class="collapsible-menu">
@@ -105,7 +108,7 @@
 		 
 			 
 				<li>
-					<a href="/writeup/">
+					<a href="/write-ups/">
 						<span>Write-Ups</span>
 					</a>
 				</li>
@@ -144,6 +147,7 @@
 	
 	
 	
+	
 	<a href="https://github.com/Nikj-Fr" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
 	
 	
@@ -162,7 +166,9 @@
 	
 	
 	
+	
 	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
 	
 	
 	
@@ -216,43 +222,25 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
   <div class="post">
     <h2 id="basic-dynamic-analysis"><strong>Basic Dynamic Analysis</strong></h2>
 <h3 id="lab-3-1"><strong>Lab 3-1</strong></h3>
-<p>This lab use the file Lab03-01.exe</p>
-<h4 id="what-are-this-malwares-imports-and-strings-"><strong>What are this malware&rsquo;s imports and strings ?</strong></h4>
+<p>This lab uses the files Lab03-01.exe.</p>
+<h4 id="what-are-this-malwares-import-and-strings-"><strong>What are this malware&rsquo;s import and strings ?</strong></h4>
 <p>We use PE Explorer to answer this question with the imports button at the top of the tool.</p>
 <p><img src="/images/walkthroughs/pma_lab3/lab-3-1_1_imports.png" alt="imports"></p>
-<p>There is only one DLL used and one function imported.
-We know that the malware isn&rsquo;t pack with <em>UPX</em>, <em>NsPack</em> or <em>Upack</em> because when you open the executable with PE Explorer, by default it try to unpack it with those 3 algorithms. None of them works</p>
+<p>There is only one DLL used and one function imported. We know that the malware isn’t pack with UPX, NsPack or Upack because when you open the executable with PE Explorer, by default it try to unpack it with those 3 algorithms. None of them works</p>
 <p><img src="/images/walkthroughs/pma_lab3/lab-3-1_1_unpack.png" alt="unpack_peexplorer"></p>
-<p>Let&rsquo;s take a look at strings. We can deduce that the malware isn&rsquo;t packed because there are a lot of strings. We are going to analyse what we found in the next question.<br>
-<em>Figure 1</em>
+<p>Let’s take a look at strings. We can deduce that the malware isn’t packed because there are a lot of strings. We are going to analyse what we found in the next question.</p>
+<p>Figure 1
 <img src="/images/walkthroughs/pma_lab3/lab-3-1_1_strings.png" alt="strings_1"></p>
-<p><em>Figure 2</em>
+<p>Figure 2
 <img src="/images/walkthroughs/pma_lab3/lab-3-1_1_strings_2.png" alt="strings_2"></p>
 <h4 id="what-are-the-malwares-host-based-indicators-"><strong>What are the malware&rsquo;s host-based indicators ?</strong></h4>
-<p>In the <em>figure 1</em>, we can see that the executable contain another binary that should be drop by the first executable.</p>
-<p>In the <em>figure 2</em>, we can assume that the malware create a register key in <em>SOFTWARE\Microsoft\Windows\CurrentVersion\Run</em>. This key allow it to start at the same time as the computer boot. That is used for persistence on a system.</p>
-<p>After that we can&rsquo;t say more with the previous pictures, it would be guessing.<br>
-That&rsquo;s why we&rsquo;ll try to run the malware, and check with procmon what it does.</p>
-<p>We run the malware, but nothing happend, we can check it with the process tree of PE Explorer
-<img src="/images/walkthroughs/pma_lab3/lab-3-1_2_process_tree.png" alt="process_tree"></p>
-<p>After some research I found that the malware only run on Windows XP. Sadly, I only have a Windows 10 VM. I&rsquo;ll make a Windows XP one and come back to this lab later..</p>
-<h4 id="are-there-any-usefull-network-based-signatures-for-this-malware--if-so-what-are-they-"><strong>Are there any usefull network-based signatures for this malware ? If so, what are they ?</strong></h4>
-<p>In the <em>figure 1</em>, we can assume that the malware communicate with the url: <a href="http://www.practicalmalwareanalysis.com">www.practicalmalwareanalysis.com</a></p>
-<p>TODO: Windows XP VM and use a fake internet with proxy that can intercept traffic.</p>
-<h3 id="lab-3-2"><strong>Lab 3-2</strong></h3>
-<p>This lab use the file Lab03-02.dll</p>
-<p>TODO: Install Windows XP VM</p>
-<h4 id="how-can-you-get-this-malware-to-install-itself-"><strong>How can you get this malware to install itself ?</strong></h4>
-<p>Rundll32</p>
-<h4 id="how-would-you-get-this-malware-to-run-after-installation-"><strong>How would you get this malware to run after installation ?</strong></h4>
-<h4 id="how-can-you-find-the-process-under-which-this-malware-is-running-"><strong>How can you find the process under which this malware is running ?</strong></h4>
-<p>Process Explorer: Tree</p>
-<h4 id="which-filters-could-you-set-in-order-to-use-procmon-to-glean-information-"><strong>Which filters could you set in order to use procmon to glean information ?</strong></h4>
-<p>Name of the dll: Lab03-02.dll</p>
-<h4 id="what-are-the-malwares-host-based-indicators--1"><strong>What are the malware&rsquo;s host-based indicators ?</strong></h4>
-<h4 id="are-there-any-usefull-network-based-signatures-for-this-malware-"><strong>Are there any usefull network-based signatures for this malware ?</strong></h4>
-<h3 id="lab-3-3"><strong>Lab 3-3</strong></h3>
-<p>TODO</p>
+<p>In the figure 1, we can see that the executable contain another binary that should be drop by the first executable.</p>
+<p>In the figure 2, we can assume that the malware create a register key in SOFTWARE\Microsoft\Windows\CurrentVersion\Run. This key allow it to start at the same time as the computer boot. That is used for persistence on a system.</p>
+<p>After that we can’t say more with the previous pictures, it would be guessing.
+That’s why we’ll try to run the malware, and check with procmon what it does.</p>
+<p>We run the malware, but nothing happend, we can check it with the process tree of PE Explorer</p>
+<p><img src="/images/walkthroughs/pma_lab3/lab-3-1_2_process_tree.png" alt="process_tree"></p>
+<p>After some research I found that the malware only run on Windows XP. Sadly, I only have a Windows 10 VM. I’ll make a Windows XP one and come back to this lab later..</p>
 
   </div>
   
@@ -286,21 +274,7 @@ That&rsquo;s why we&rsquo;ll try to run the malware, and check with procmon what
         
     
 
-  
-  
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'your-google-analytics-id', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-<script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" integrity="sha384-b3ua1l97aVGAPEIe48b4TC60WUQbQaGi2jqAWM90y0OZXZeyaTCWtBTKtjW2GXG1" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" integrity="sha384-ZbbbT1gw3joYkKRqh0kWyRp32UAvdqkpbLedQJSlnI8iLQcFVxaGyrOgOJiDQTTR" crossorigin="anonymous"></script>
 
 
     

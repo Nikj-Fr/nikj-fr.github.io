@@ -4,16 +4,26 @@
   
   <url>
     <loc>https://nikj-fr.github.io/</loc>
-    <lastmod>2021-01-12T00:00:00+00:00</lastmod>
+    <lastmod>2021-03-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://nikj-fr.github.io/walkthroughs/pma_lab7/</loc>
-    <lastmod>2021-01-12T00:00:00+00:00</lastmod>
+    <loc>https://nikj-fr.github.io/walkthroughs/prr_ex2/</loc>
+    <lastmod>2021-03-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://nikj-fr.github.io/walkthroughs/</loc>
+    <lastmod>2021-03-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nikj-fr.github.io/walkthroughs/prr_ex1/</loc>
+    <lastmod>2021-03-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nikj-fr.github.io/walkthroughs/pma_lab7/</loc>
     <lastmod>2021-01-12T00:00:00+00:00</lastmod>
   </url>
   
@@ -33,7 +43,7 @@
   </url>
   
   <url>
-    <loc>https://nikj-fr.github.io/cheatsheets/cheatsheet_google_dork/</loc>
+    <loc>https://nikj-fr.github.io/cheatsheets/google_dork/</loc>
     <lastmod>2020-12-21T00:00:00+00:00</lastmod>
   </url>
   
@@ -53,53 +63,33 @@
   </url>
   
   <url>
-    <loc>https://nikj-fr.github.io/articles/</loc>
-    <lastmod>2020-11-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://nikj-fr.github.io/walkthroughs/google_dork/</loc>
     <lastmod>2020-11-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://nikj-fr.github.io/articles/analyze_bokbot/</loc>
-    <lastmod>2020-11-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nikj-fr.github.io/writeup/ecw_osint_2020/</loc>
+    <loc>https://nikj-fr.github.io/write-ups/ecw_osint_2020/</loc>
     <lastmod>2020-11-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://nikj-fr.github.io/writeup/</loc>
+    <loc>https://nikj-fr.github.io/write-ups/</loc>
     <lastmod>2020-11-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://nikj-fr.github.io/articles/suppression_built_in_apps_windows/</loc>
+    <loc>https://nikj-fr.github.io/articles/</loc>
     <lastmod>2020-10-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://nikj-fr.github.io/articles/wls2/</loc>
+    <loc>https://nikj-fr.github.io/articles/suppression_application_preinstalle_windows10.md/</loc>
+    <lastmod>2020-10-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nikj-fr.github.io/articles/wsl2/</loc>
     <lastmod>2020-10-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nikj-fr.github.io/writeup/norzhctf_osint_2020/</loc>
-    <lastmod>2020-07-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nikj-fr.github.io/cheatsheets/forensic/</loc>
-    <lastmod>2020-07-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nikj-fr.github.io/walkthroughs/nmap/</loc>
-    <lastmod>2020-07-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>

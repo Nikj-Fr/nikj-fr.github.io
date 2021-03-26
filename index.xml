@@ -6,10 +6,31 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Tue, 12 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Practical Reverse Engineering - Ex 2</title>
+      <link>https://nikj-fr.github.io/walkthroughs/prr_ex2/</link>
+      <pubDate>Fri, 26 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/walkthroughs/prr_ex2/</guid>
+      <description>1)a) Given what you learned about CALL and RET, explain how you would read the value of EIP ?
+EIP is used to save the return address after a CALL or a RET for example. In this way, the program will resume correctly and it can continue the execution flow.
+I&amp;rsquo;ll use a CALL to a function to modify EIP. Inside this function, we have to save the value of EIP inside a register.</description>
+    </item>
+    
+    <item>
+      <title>Practical Reverse Engineering - Ex 1</title>
+      <link>https://nikj-fr.github.io/walkthroughs/prr_ex1/</link>
+      <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/walkthroughs/prr_ex1/</guid>
+      <description>Question This function uses a combination SCAS and STOS to do its work. First, explain what is the type of the [EBP+8] and [EBP+C] in line 1 and 8 respectively. Next explain what this snippet does.
+01: 8B 7D 08 mov edi, [ebp+8] 02: 8B D7 mov edx, edi 03: 33 C0 xor eax, eax 04: 83 C9 FF or ecx, 0FFFFFFFFh 05: F2 AE repne scasb 06: 83 C1 02 add ecx, 2 07: F7 D9 neg ecx 08: 8A 45 0C mov al, [ebp+0Ch] 09: 8B AA mov edi, edx 10: F3 AA rep stosb 11: 8B C2 mov eax, edx Analysis EBP is a pointer referencing the bottom of the stack.</description>
+    </item>
     
     <item>
       <title>Practical Malware Analysis - Lab 7</title>
@@ -18,7 +39,7 @@
       
       <guid>https://nikj-fr.github.io/walkthroughs/pma_lab7/</guid>
       <description>Analyzing Malicious Windows Program Lab 7 The goal of this lab is to help understand how a malware interact with the operating system.
-Lab 7-1 How does this program ensure that it continues running (achieves persistence) when the computer is restarted ? In the main function, there is a StartServiceCtrlDispatcher API call which allow to connect the thread of a service process to the service control manager. The name of the service is MalService</description>
+Lab 7-1 How does this program ensure that it continues running (achieves persistence) when the computer is restarted ? In the main function, there is a StartServiceCtrlDispatcher API call which allow to connect the thread of a service process to the service control manager. The name of the service is MalService.</description>
     </item>
     
     <item>
@@ -38,18 +59,18 @@ In this function we can see a jz statement. The choice of the path to follow dep
       <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/walkthroughs/pma_lab5/</guid>
-      <description>Discover IDA Pro Lab 5 This lab use the file Lab05-01.dll. It has to be analyze only on IDA Pro. This is our first experience with this tool.
+      <description>Discovering IDA Pro Lab 5 This lab use the file Lab05-01.dll. It has to be analyze only on IDA Pro. This is our first experience with this tool.
 What is the address of DllMain ? The address of DllMain can be find in the Functions Windows by default on the left side of your screen.It starts at 0x1000D02E.
 Also, you can visualize it on the Graph View by turning on Line Prefixes in the settings.</description>
     </item>
     
     <item>
       <title>Google Dork</title>
-      <link>https://nikj-fr.github.io/cheatsheets/cheatsheet_google_dork/</link>
+      <link>https://nikj-fr.github.io/cheatsheets/google_dork/</link>
       <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://nikj-fr.github.io/cheatsheets/cheatsheet_google_dork/</guid>
-      <description>Filtres de recherches    Filtre Description Exemple     allintext Recherche les occurrences des mots-clefs dans un texte allintext: &amp;quot;keyword_1 keyword_2&amp;quot;   intext Recherche les occurences d&amp;rsquo;un mot-cléf dans un texte intext: &amp;quot;keyword&amp;quot;   inurl Recherche du mot clé dans l&amp;rsquo;URL d&amp;rsquo;un site inurl: &amp;quot;keyword&amp;quot;   allinurl Recherche d&amp;rsquo;une URL qui contient les mots-clefs allinurl: &amp;quot;keyword_1 keyword_2&amp;quot;   intitle Recherche dans le titre des pages webs le mot-clef intitle: &amp;quot;keyword&amp;quot;   allintitile Recherche dans le titre des pages webs les mots-clefs allintitle: &amp;quot;keyword_1 keyword_2&amp;quot;   site Liste tous les résultats pour un site site: &amp;quot;http://nikj-fr.</description>
+      <guid>https://nikj-fr.github.io/cheatsheets/google_dork/</guid>
+      <description>Filtres de recherches    Filtre Description Exemple     allintext Recherche les occurrences des mots-clefs dans un texte allintext: &amp;ldquo;keyword_1 keyword_2&amp;rdquo;   intext Recherche les occurences d’un mot-cléf dans un texte intext: &amp;ldquo;keyword&amp;rdquo;   inurl Recherche du mot clé dans l’URL d’un site inurl: &amp;ldquo;keyword&amp;rdquo;   allinurl Recherche d’une URL qui contient les mots-clefs allinurl: &amp;ldquo;keyword_1 keyword_2&amp;rdquo;   intitle Recherche dans le titre des pages webs le mot-clef intitle: &amp;ldquo;keyword&amp;rdquo;   allintitile Recherche dans le titre des pages webs les mots-clefs allintitle: &amp;ldquo;keyword_1 keyword_2&amp;rdquo;   site Liste tous les résultats pour un site site: &amp;ldquo;http://nikj-fr.</description>
     </item>
     
     <item>
@@ -58,7 +79,11 @@ Also, you can visualize it on the Graph View by turning on Line Prefixes in the 
       <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/cheatsheets/nmap/</guid>
-      <description>Types de scan    Parameters Description     - sA ACK scan   - sF FIN scan     Paramètres liés aux ports Scanner une IP nmap [IP] Scanner plusieurs IPs nmap [IP_1, IP_2] Scanner une liste d&amp;rsquo;IPs depuis un fichier .txt nmap -iL [liste.txt] Scanner un sous-réseau nmap [IP/Mask] </description>
+      <description>Types de scan    Parameters Description     sA ACK scan   sF FIN scan    Scanner une IP
+nmap [IP]Scanner plusieurs IPs
+nmap [IP_1, IP_2]Scanner une liste d’IPs depuis un fichier .txt
+nmap -iL [liste.txt]Scanner un sous-réseau
+nmap [IP/Mask]</description>
     </item>
     
     <item>
@@ -67,9 +92,9 @@ Also, you can visualize it on the Graph View by turning on Line Prefixes in the 
       <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/walkthroughs/pma_lab3/</guid>
-      <description>Basic Dynamic Analysis Lab 3-1 This lab use the file Lab03-01.exe
-What are this malware&amp;rsquo;s imports and strings ? We use PE Explorer to answer this question with the imports button at the top of the tool.
-There is only one DLL used and one function imported. We know that the malware isn&amp;rsquo;t pack with UPX, NsPack or Upack because when you open the executable with PE Explorer, by default it try to unpack it with those 3 algorithms.</description>
+      <description>Basic Dynamic Analysis Lab 3-1 This lab uses the files Lab03-01.exe.
+What are this malware&amp;rsquo;s import and strings ? We use PE Explorer to answer this question with the imports button at the top of the tool.
+There is only one DLL used and one function imported. We know that the malware isn’t pack with UPX, NsPack or Upack because when you open the executable with PE Explorer, by default it try to unpack it with those 3 algorithms.</description>
     </item>
     
     <item>
@@ -79,11 +104,9 @@ There is only one DLL used and one function imported. We know that the malware i
       
       <guid>https://nikj-fr.github.io/walkthroughs/pma_lab1/</guid>
       <description>Basic Static Analysis Lab 1-1 This lab uses the files Lab01-01.exe and Lab01-01.dll.
-Upload the files to http://wwww.VirusTotal.com/ and view the reports. Does either file match any existing antivirus signature ? a) Lab01-01.exe
-Virus Total detected a potential Trojan. The signature (MD5) of the malware is bb7425b82141a1c0f7d60e5106676bb1
+Upload the files to http://wwww.VirusTotal.com/ and view the reports. Does either file match any existing antivirus signature ? a) Lab01-01.exe Virus Total detected a potential Trojan. The signature (MD5) of the malware is bb7425b82141a1c0f7d60e5106676bb1
 50/70 positifs antivirus
-b) Lab01-01.dll
-The signature of the malware is 290934c61de9176ad682ffdd65f0a669
+b) Lab01-01.dll The signature of the malware is 290934c61de9176ad682ffdd65f0a669
 42/67 positifs antivirus
 Signature of malware can be generated with WinMD5..</description>
     </item>
@@ -94,79 +117,41 @@ Signature of malware can be generated with WinMD5..</description>
       <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/walkthroughs/google_dork/</guid>
-      <description>Qu&amp;rsquo;est-ce que Google Dork ? Google Dork est un mécanisme de recherche efficace parmis les sites webs indexés par Google.
-Comment Google index-t&amp;rsquo;il les pages webs ? Des crawler
+      <description>Qu’est-ce que Google Dork ? Google Dork est un mécanisme de recherche efficace parmis les sites webs indexés par Google.
+Comment Google index-t’il les pages webs ? Des crawler
 utilisation de sitemaps
-Comment réguler l&amp;rsquo;indexation d&amp;rsquo;un site ? En utilisant le fichier robots.txt, on peut définir ce que le crawler a le droit d&amp;rsquo;indexer. Il est possible d&amp;rsquo;y mentionner un nom de dossier, un fichier, que ce soit uniquement les crawler de google qui puisse fonctionner sur votre site.</description>
-    </item>
-    
-    <item>
-      <title>Malware - Analyse de Bokbot / IcedID</title>
-      <link>https://nikj-fr.github.io/articles/analyze_bokbot/</link>
-      <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nikj-fr.github.io/articles/analyze_bokbot/</guid>
-      <description>Introduction Todo</description>
+Comment réguler l’indexation d’un site ? En utilisant le fichier robots.txt, on peut définir ce que le crawler a le droit d’indexer. Il est possible d’y mentionner un nom de dossier, un fichier, que ce soit uniquement les crawler de google qui puisse fonctionner sur votre site.</description>
     </item>
     
     <item>
       <title>ECW 2020 - OSINT - Sneakers</title>
-      <link>https://nikj-fr.github.io/writeup/ecw_osint_2020/</link>
+      <link>https://nikj-fr.github.io/write-ups/ecw_osint_2020/</link>
       <pubDate>Tue, 17 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://nikj-fr.github.io/writeup/ecw_osint_2020/</guid>
+      <guid>https://nikj-fr.github.io/write-ups/ecw_osint_2020/</guid>
       <description>L’ECW 2020 est un challenge Jeopardy français organisé par le Pôle d’Excellence Cyber en partenariat avec la Région Bretagne, Airbus et Thalès.
-Sneakers est un challenge d&amp;rsquo;OSINT maritime où l&amp;rsquo;on devait récupérer un ensemble d&amp;rsquo;informations à partir d&amp;rsquo;une photographie.
+Sneakers est un challenge d’OSINT maritime où l’on devait récupérer un ensemble d’informations à partir d’une photographie.
 Sommaire  Sneakers 1/4 Sneakers 2/4 Sneakers 3/4 Sneakers 4/4 Retex  Sneakers 1/4 What is the name of the shipping company operating the boat in the photo below ?
 Pour les non anglophones, il faut simplement récupérer le nom de la compagnie détenant le bateau.</description>
     </item>
     
     <item>
-      <title>Suppression des applications préinstallées sous Windows 10</title>
-      <link>https://nikj-fr.github.io/articles/suppression_built_in_apps_windows/</link>
+      <title>Suppression des application préinstallées sous Windows 10</title>
+      <link>https://nikj-fr.github.io/articles/suppression_application_preinstalle_windows10.md/</link>
       <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://nikj-fr.github.io/articles/suppression_built_in_apps_windows/</guid>
-      <description>Introduction Cet article fait suite à une envie de nettoyage de mon pc. Je vais vous partager la méthode que j&amp;rsquo;ai utilisé pour supprimer les applications pré-installées sous Windows 10. Malheuresement, quelques applications parviennent à survivre à la méthode (Hello Cortana).
-Methodes Ouverture d&amp;rsquo;un interpreteur Powershell  Rechercher le programme Powershell dans votre menu démarrer puis lancer le en tant qu&amp;rsquo;administrateur.  Lister l&amp;rsquo;ensemble des applications installées  Dans la fenêtre qui vient de s&amp;rsquo;ouvrir, rentrer la commande suivante:  Get-AppxPackage | Select Name, PackageFullName Selection du package à supprimer  Lancer la commande suivante en remplaçant le nom du package à supprimer à la place de YourPackageName  Get-AppxPackage YourPackageName | Remove-AppxPackage Liste de toutes les applications possibles de supprimer Important:</description>
+      <guid>https://nikj-fr.github.io/articles/suppression_application_preinstalle_windows10.md/</guid>
+      <description>Introduction Cet article fait suite à une envie de nettoyage de mon pc. Je vais vous partager la méthode que j’ai utilisé pour supprimer les applications pré-installées sous Windows 10. Malheuresement, quelques applications parviennent à survivre à la méthode (Hello Cortana). Methodes
+Ouverture d’un interpreteur Powershell  Rechercher le programme Powershell dans votre menu démarrer puis lancer le en tant qu’administrateur.  Lister l’ensemble des applications installées  Dans la fenêtre qui vient de s’ouvrir, rentrer la commande suivante:  Get-AppxPackage | Select Name, PackageFullNameSelection du package à supprimer  Lancer la commande suivante en remplaçant le nom du package à supprimer à la place de YourPackageName  Get-AppxPackage YourPackageName | Remove-AppxPackageListe de toutes les applications possibles de supprimer Important: Je vous conseil de ne pas supprimer le Windows Store afin de pouvoir récupérer les applications que vous allez supprimer.</description>
     </item>
     
     <item>
       <title>WSL</title>
-      <link>https://nikj-fr.github.io/articles/wls2/</link>
+      <link>https://nikj-fr.github.io/articles/wsl2/</link>
       <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://nikj-fr.github.io/articles/wls2/</guid>
-      <description>-&amp;gt;&amp;lt;-
-Abstract Depuis quelques années, Microsoft s&amp;rsquo;est tourné vers l&amp;rsquo;Open Source en témoigne le rachat de Github. Ce type de licence est très apprécié de la communauté qui à la possibilité d&amp;rsquo;accéder aux codes sources et d&amp;rsquo;y effectuer des améliorations mais également par les développeurs car la communauté peut également remonter des bugs. Le seul moyen pour Microsoft d&amp;rsquo;intégrer les outils du monde Linux dans son système est de passer par la virtualisation.</description>
-    </item>
-    
-    <item>
-      <title>NorzhCTF 2020 - OSINT - Familly Business</title>
-      <link>https://nikj-fr.github.io/writeup/norzhctf_osint_2020/</link>
-      <pubDate>Thu, 23 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nikj-fr.github.io/writeup/norzhctf_osint_2020/</guid>
-      <description>Le NorzhCTF est un CTF organisé par l&amp;rsquo;ENSIBS. Cet article traite de la résolution partielle de &amp;ldquo;Familly Business&amp;rdquo;.
-Sommaire  Enoncé Familly Business 1 Familly Business 2 (Pas Flag) Retex  Enoncé Nous avons des doutes sur le fait que M. Lukas DUMMAS, l&amp;rsquo;ancien RSSI de Norzh Nuclea ait vendu des informations protégées de l’entreprise à un membre de sa famille et représentant d’une puissance étrangère. Nous vous demandons de mener l’enquête !</description>
-    </item>
-    
-    <item>
-      <title>Forensic</title>
-      <link>https://nikj-fr.github.io/cheatsheets/forensic/</link>
-      <pubDate>Tue, 21 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nikj-fr.github.io/cheatsheets/forensic/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Nmap</title>
-      <link>https://nikj-fr.github.io/walkthroughs/nmap/</link>
-      <pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nikj-fr.github.io/walkthroughs/nmap/</guid>
-      <description>Sommaire </description>
+      <guid>https://nikj-fr.github.io/articles/wsl2/</guid>
+      <description>Abstract Depuis quelques années, Microsoft s’est tourné vers l’Open Source en témoigne le rachat de Github. Ce type de licence est très apprécié de la communauté qui à la possibilité d’accéder aux codes sources et d’y effectuer des améliorations mais également par les développeurs car la communauté peut également remonter des bugs. Le seul moyen pour Microsoft d’intégrer les outils du monde Linux dans son système est de passer par la virtualisation.</description>
     </item>
     
     <item>
@@ -175,8 +160,8 @@ Sommaire  Enoncé Familly Business 1 Familly Business 2 (Pas Flag) Retex  Enonc�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/about/</guid>
-      <description>About nikj-fr.github.io Il s&amp;rsquo;agit d&amp;rsquo;un site personnel qui va référencer un ensemble de ressources qui me semble interessantes. J&amp;rsquo;y fais aussi mention des CTF auxquels j&amp;rsquo;ai participé et certains write-up de challenge quand j&amp;rsquo;ai le temps.
-About Me Etudiant en Cybersécurité dans une école Bretonne assez connu :p (Hello l&amp;rsquo;ENSIBS), je réalise mon alternance à Naval Group. J&amp;rsquo;adore l&amp;rsquo;investigation numérique, l&amp;rsquo;osint et je me découvre une passion pour le reverse.</description>
+      <description>About nikj-fr.github.io Il s’agit d’un site personnel qui va référencer un ensemble de ressources qui me semble interessantes. J’y fais aussi mention des CTF auxquels j’ai participé et certains write-up de challenge quand j’ai le temps.
+About Me Etudiant en Cybersécurité dans une école Bretonne assez connu :p (Hello l’ENSIBS), je réalise mon alternance à Naval Group. J’adore l’investigation numérique, l’osint et je me découvre une passion pour le reverse.</description>
     </item>
     
   </channel>

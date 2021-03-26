@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.74.1" />
+
+    
+    
+    
+
+<title>WSL • Nikj • </title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="WSL"/>
+<meta name="twitter:description" content="Abstract Depuis quelques années, Microsoft s’est tourné vers l’Open Source en témoigne le rachat de Github. Ce type de licence est très apprécié de la communauté qui à la possibilité d’accéder aux codes sources et d’y effectuer des améliorations mais également par les développeurs car la communauté peut également remonter des bugs. Le seul moyen pour Microsoft d’intégrer les outils du monde Linux dans son système est de passer par la virtualisation."/>
+
+<meta property="og:title" content="WSL" />
+<meta property="og:description" content="Abstract Depuis quelques années, Microsoft s’est tourné vers l’Open Source en témoigne le rachat de Github. Ce type de licence est très apprécié de la communauté qui à la possibilité d’accéder aux codes sources et d’y effectuer des améliorations mais également par les développeurs car la communauté peut également remonter des bugs. Le seul moyen pour Microsoft d’intégrer les outils du monde Linux dans son système est de passer par la virtualisation." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nikj-fr.github.io/articles/wsl2/" />
+<meta property="article:published_time" content="2020-10-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-03T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.7607cf2bc2eb2cb9f7611afe1f814025416b193e2786307b9247d028b5476745.css" integrity="sha256-dgfPK8LrLLn3YRr&#43;H4FAJUFrGT4nhjB7kkfQKLVHZ0U=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://nikj-fr.github.io/">
+        
+          
+        
+        </a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <a href="http://nikj-fr.github.io"><img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center"></a>
+        </div>
+        
+      
+      
+      <p class="site__description">
+        <a href="http://nikj-fr.github.io"> Infosec Website | CTF Write Up </a>
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle"></label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/walkthroughs/">
+						<span>Walkthroughs</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/write-ups/">
+						<span>Write-Ups</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/cheatsheets/">
+						<span>Cheatsheets &amp; Ressources</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/articles/">
+						<span>Articles</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About-Me</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
+</div>
+
+        <section class="social">
+	
+	<a href="https://twitter.com/%3cusername%3e" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	<a href="https://github.com/Nikj-Fr" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	<a href="https://gitlab.com/Nikj-Fr" rel="me"><i class="fab fa-gitlab fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+</section>
+
+      </div>
+    </div>
+    
+<div class="copyright">
+  &copy; 2019 - 2021 htr3n
+  
+    <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  
+</div>
+
+
+<div class="builtwith">
+Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+</div>
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    
+<article>
+  <header>
+    <h1>WSL</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Oct 3, 2020
+    
+    
+    
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 7 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="post">
+    <h1 id="abstract">Abstract</h1>
+<p>Depuis quelques années, Microsoft s’est tourné vers l’Open Source en témoigne le rachat de Github. Ce type de licence est très apprécié de la communauté qui à la possibilité d’accéder aux codes sources et d’y effectuer des améliorations mais également par les développeurs car la communauté peut également remonter des bugs. Le seul moyen pour Microsoft d’intégrer les outils du monde Linux dans son système est de passer par la virtualisation. La virtualisation permet de lancer des applications qui ne sont pas compatible nativement sur un système d’exploitation. Microsoft s’est penché sur le sujet en développant un outil basé sur l’hyperviseur de type 1 Hyper-V appelé Windows Subsystem for Linux (WSL).
+Ce projet permet d’utiliser Windows pour réaliser des tâches qui ne sont possible que sur un système UNIX ou sur un dérivé. Le souhait des concepteurs est de faire devenir Windows l’outil préféré des développeurs. Cet article va présenter le concept ainsi que les limites actuelles de l’outil.</p>
+<h1 id="introduction">Introduction</h1>
+<p>L’Open-source est un modèle économique permettant à une communauté d’accéder au code source d’une application, l’accès y est complètement gratuit et il est possible de modifier le contenu à sa guise. De plus, il est souvent possible de remonter des bugs d’implémentation. Ce modèle est très apprécié par la communauté en témoigne la monté en puissance du système UNIX et de ses dérivés depuis plusieurs années. Microsoft a décidé de se lancer pleinement dans l’Open Source depuis le rachat de Github le 4 juin 2018 pour 7,5 milliard de dollars. Ensuite, en 2018, Microsoft lance un nouveau projet en partenariat avec les développeurs de la communauté Linux appelé Windows Subsystem for Linux (WSL). WSL est une couche de compatibilité permettant d’exécuter des binaires Linux (au format ELF) de manière native sur Windows 10 et Windows server 2019. Microsoft a introduit la deuxième version de ce projet lors d’une conférence Microsoft Build avant juin 2019. Cette nouvelle version comporte d’important changement, notamment avec l’intégration d’une véritable couche de virtualisation basée sur l’hyperviseur de type 1 Hyper-V. Cette couche a permis d’ajouter un véritable noyau Linux à coté de celui de Windows (kernel). Cette version de WSL est compatible sur toutes les éditions de Windows 10. Le but est de ramener dans un même environnement le meilleur des deux mondes Windows et Linux.</p>
+<h1 id="présentation-générale">Présentation générale</h1>
+<p>La technologie à l’origine de WSL est issue du projet non publié Astoria, qui permettait à certaines applications Android de s’exécuter sur Windows 10 Mobile Microsoft présente WSL comme un outil pour les développeurs - en particulier les développeurs Web et ceux qui travaillent sur ou avec des projets open source&quot;16. WSL utilise moins de ressources qu’une machine virtuelle classique (avant WSL, une machine virtuelle était le moyen le plus direct pour exécuter un logiciel Linux dans un environnement Windows), tout en permettant aux utilisateurs d’utiliser des applications Windows et des outils Linux sur le même ensemble de fichiers.
+Fonctionnement</p>
+<p>Alors que les projets précédents de Microsoft et de Cygwin s’étaient concentrés sur la création de leurs propres environnements de type Unix basés sur le standard POSIX, WSL vise la compatibilité native avec Linux. Au lieu d’encapsuler les fonctionnalités non natives dans les appels système Win32, la conception initiale de WSL (WSL1) exploitait l’exécutif du noyau NT pour servir les programmes Linux en tant que processus minimaux isolés et uniques (appelés “pico processus”) liés au mode noyau “pico providers” en tant que gestionnaires d’appels système et d’exceptions dédiés, distincts de ceux d’un processus NT classique, en choisissant de réutiliser les implémentations NT existantes dans la mesure du possible.</p>
+<h1 id="wsl1">WSL1</h1>
+<p>WSL1 ne peut pas exécuter tous les logiciels Linux, notamment les fichiers binaires 32bits, ou ceux nécessitant des services spécifiques du noyau Linux non implémentés dans WSL. En raison de l’absence de “vrai” noyau Linux dans WSL1, les modules du noyau, tels que les pilotes de périphérique, ne peuvent pas être exécutés. WSL2, quant à lui, utilise des instances de noyau Linux virtualisées pour pallier ce problème. Il est possible d’exécuter certaines applications graphiques (comme Mozilla Firefox) en installant un serveur X11 dans l’environnement Windows (hôte) (Xming par exemple). Cependant, l’audio ou l’accélération matérielle ne sont pas pris en charge (ce qui entraîne de mauvaises performances graphiques). La prise en charge d’OpenCL et de CUDA n’est pas non plus mise en œuvre actuellement, bien que celle-ci soit prévue pour les versions futures de WSL2.</p>
+<p>Microsoft a déclaré que WSL1 était destiné principalement au développement d’applications et non pas à l’exécution d’environnement de bureau ou de serveurs de production. Pour ce type d’usage, Microsoft recommande l’utilisation de machines virtuelles (Hyper-V), Kubernetes et Azure. Dans les tests de performance, les performances de WSL1 sont souvent proches des distributions Linux natives Ubuntu, Debian, Intel Clear Linux ou autres. Cependant, les performances observées sur les I/O sont très mauvaises pour WSL. Selon Microsoft, les modifications apportées à WSL sont censées offrir une vitesse multipliée par vingt sur certaines opérations par rapport à celle de WSL1</p>
+<h1 id="wsl2">WSL2</h1>
+<p>Bien que WSL (dans cette conception initiale) soit beaucoup plus rapide et sans doute beaucoup plus populaire que les autres solutions permettant d’utiliser Linux sur Windows, les ingénieurs du noyau Windows ont eu du mal à augmenter les performances de WSL et la compatibilité des appels systèmes en essayant de remodeler le noyau NT existant pour qu’il reconnaisse et fonctionnent correctement sur l’API de Linux. Lors d’une conférence Microsoft Ignite en 2018, les ingénieurs Microsoft ont donné un aperçu d’une nouvelle technologie “légère” de machine virtuelle Hyper-V pour la conteneurisation dans laquelle un “vrai” noyau Linux virtualisé pouvait utiliser directement les primitives NT sur l’hôte. En 2019, Microsoft a annoncé une architecture WSL2 entièrement repensée, utilisant cette technologie VM légère hébergeant des images de noyau Linux réelles (personnalisées), revendiquant ainsi une compatibilité complète.</p>
+<p>Voici une image comparant les deux versions de l’outil: 
+<img src="/images/articles/wsl2/comparaison_wsl1_wsl2.png" alt="image_peid"></p>
+<p>Microsoft a opté pour la virtualisation via un sous-ensemble optimisé de fonctionnalités Hyper-V, afin d’exécuter le noyau fourni et les distributions sous-jacentes, offrant des performances équivalentes à WSL1. La compatibilité avec les versions antérieures est prévue, les développeurs n’ont donc pas besoin de changer quoi que ce soit dans leurs distributions publiées. L’installation de la distribution s’effectue sur un système de fichiers au format ext4 dans un disque virtuel. Le système de fichiers hôte est accessible de manière transparente via le protocole 9P.</p>
+<h1 id="les-limites-de-wsl2">Les limites de WSL2</h1>
+<p>WSL2 permet de travailler sur un Linux natif. Tous les outils fonctionnant sur Linux fonctionnent également sur WSL:</p>
+<p><img src="/images/articles/wsl2/compatibile.png" alt="image_peid"></p>
+<p>Cependant, il existe des limites à cet outil notamment au niveau de la prise en charge des cartes graphiques. En effet, WSL n’a pas un accès direct au Hardware et ne peut faire fonctionner CUDA (Compute Unified Device Architecture) ni OpenCL à ce jour. Voici un exemple d’outils classés dans un tableau dans lequel il est mentionné si celui-ci est pris en charge ou non par WSL2.</p>
+<table>
+<thead>
+<tr>
+<th>Nom</th>
+<th>Prise en charge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td>Podman</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td>Cuda</td>
+<td>Non</td>
+</tr>
+<tr>
+<td>OpenCl</td>
+<td>Non</td>
+</tr>
+<tr>
+<td>Ansible</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td>Ubuntu/Debian/Fedora</td>
+<td>Oui</td>
+</tr>
+</tbody>
+</table>
+<h1 id="conclusion">Conclusion</h1>
+<p>Microsoft s’inspire de plus en plus de ce qui fait l’intérêt et la force des grandes distributions Linux. Microsoft permet maintenant l’utilisation des systèmes Linux sans jamais avoir à quitter le système d’exploitation Microsoft. Leur objectif est de faire de Windows 10, l’OS qui permettra aux développeurs de tout avoir sur une même machine. Le nouveau terminal Windows en est un exemple. Il offre la possibilité de changer de langage à un autre: MS-Dos, Powershell et maintenant Bash en restant sur la même fenêtre.
+Ressources</p>
+<p>[1] [n.d.]. Go on WSL. <a href="https://www.youtube.com/watch?v=WOLZ3sb3McA&amp;list=PLwFSk464RMxnZkvZ1HKrlNyj-s6Zq4fWe&amp;index=13">https://www.youtube.com/watch?v=WOLZ3sb3McA&amp;list=PLwFSk464RMxnZkvZ1HKrlNyj-s6Zq4fWe&amp;index=13</a>
+[2] [n.d.]. New GPU and GUI features announced for WSL at Build. <a href="https://ubuntu.com/blog/new-gpu-and-gui-features-announced-forwsl-at-build">https://ubuntu.com/blog/new-gpu-and-gui-features-announced-forwsl-at-build</a> Library Catalog: ubuntu.com.
+[3] [n.d.]. r/bashonubuntuonwindows - How WSL works? <a href="https://www.reddit.com/r/bashonubuntuonwindows/comments/8o96na/how_">https://www.reddit.com/r/bashonubuntuonwindows/comments/8o96na/how_</a> wsl_works/ Library Catalog: <a href="http://www.reddit.com">www.reddit.com</a>.
+[4] 2020. Windows Subsystem for Linux. <a href="https://en.wikipedia.org/w/index.php?title=Windows_Subsystem_for_Linux&amp;oldid=959680818">https://en.wikipedia.org/w/index.php?title=Windows_Subsystem_for_Linux&amp;oldid=959680818</a> Page Version ID: 959680818.
+[5] craigloewen msft. [n.d.]. An overview on the the Windows Subsystem for Linux. <a href="https://docs.microsoft.com/en-us/windows/wsl/compareversions">https://docs.microsoft.com/en-us/windows/wsl/compareversions</a> Library Catalog: docs.microsoft.com.
+[6] Athul Mithran. 2020. What is Windows Subsystem for Linux (WSL and WSL2)? – Linux in Windows. <a href="https://fossbytes.com/what-iswindows-subsystem-for-linux-wsl/">https://fossbytes.com/what-iswindows-subsystem-for-linux-wsl/</a> Library Catalog: fossbytes.com.
+[7] Shivam Raj. 2016. How Linux Bash Shell Works in Windows 10. <a href="https://beebom.com/how-linux-bash-shell-works-windows-10/">https://beebom.com/how-linux-bash-shell-works-windows-10/</a> Library Catalog: beebom.com Section: Windows</p>
+
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    
+    <a href="/articles/suppression_application_preinstalle_windows10.md/" class="navigation-next">
+      <span class="navigation-tittle">Suppression des application préinstallées sous Windows 10</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+  
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+
+<script defer src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" integrity="sha384-ZbbbT1gw3joYkKRqh0kWyRp32UAvdqkpbLedQJSlnI8iLQcFVxaGyrOgOJiDQTTR" crossorigin="anonymous"></script>
+
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+    
+
+
+
+    </body>
+</html>

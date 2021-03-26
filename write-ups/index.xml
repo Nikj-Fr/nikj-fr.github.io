@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Write-ups on </title>
+    <link>https://nikj-fr.github.io/write-ups/</link>
+    <description>Recent content in Write-ups on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Tue, 17 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nikj-fr.github.io/write-ups/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ECW 2020 - OSINT - Sneakers</title>
+      <link>https://nikj-fr.github.io/write-ups/ecw_osint_2020/</link>
+      <pubDate>Tue, 17 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/write-ups/ecw_osint_2020/</guid>
+      <description>L’ECW 2020 est un challenge Jeopardy français organisé par le Pôle d’Excellence Cyber en partenariat avec la Région Bretagne, Airbus et Thalès.
+Sneakers est un challenge d’OSINT maritime où l’on devait récupérer un ensemble d’informations à partir d’une photographie.
+Sommaire  Sneakers 1/4 Sneakers 2/4 Sneakers 3/4 Sneakers 4/4 Retex  Sneakers 1/4 What is the name of the shipping company operating the boat in the photo below ?
+Pour les non anglophones, il faut simplement récupérer le nom de la compagnie détenant le bateau.</description>
+    </item>
+    
+  </channel>
+</rss>

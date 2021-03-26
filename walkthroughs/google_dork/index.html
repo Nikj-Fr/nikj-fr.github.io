@@ -8,7 +8,6 @@
     <link href="https://gmpg.org/xfn/11" rel="profile">
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <meta name="generator" content="Hugo 0.74.1" />
@@ -17,31 +16,34 @@
     
     
 
-<title>Google Dork • </title>
+<title>Google Dork • Nikj • </title>
 
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Google Dork"/>
-<meta name="twitter:description" content="Google Dork est un mécanisme de recherche efficace parmis les sites webs indexés par Google"/>
+<meta name="twitter:description" content="Découverte des dorks Google"/>
 
 <meta property="og:title" content="Google Dork" />
-<meta property="og:description" content="Google Dork est un mécanisme de recherche efficace parmis les sites webs indexés par Google" />
+<meta property="og:description" content="Découverte des dorks Google" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/google_dork/" />
 <meta property="article:published_time" content="2020-11-19T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-11-19T00:00:00+00:00" /><meta property="og:site_name" content="Nikj | Personal Website" />
+<meta property="article:modified_time" content="2020-11-19T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
 
 
     
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
 
 
 
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.d0c4ffb2e1828bd88212c4246b2911d84b93350f28f2d499f40bb11f1bd57e9a.css" integrity="sha256-0MT/suGCi9iCEsQkaykR2EuTNQ8o8tSZ9AuxHxvVfpo=">
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.7607cf2bc2eb2cb9f7611afe1f814025416b193e2786307b9247d028b5476745.css" integrity="sha256-dgfPK8LrLLn3YRr&#43;H4FAJUFrGT4nhjB7kkfQKLVHZ0U=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -68,20 +70,24 @@
   <div class="container ">
     <div class="sidebar-about">
       <span class="site__title">
-        <a href="https://nikj-fr.github.io/"></a>
+        <a href="https://nikj-fr.github.io/">
+        
+          
+        
+        </a>
       </span>
       
         
         
         
         <div class="author-image">
-          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+          <a href="http://nikj-fr.github.io"><img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center"></a>
         </div>
         
       
       
       <p class="site__description">
-         InfoSec Website | CTF WriteUp 
+        <a href="http://nikj-fr.github.io"> Infosec Website | CTF Write Up </a>
       </p>
     </div>
     <div class="collapsible-menu">
@@ -102,7 +108,7 @@
 		 
 			 
 				<li>
-					<a href="/writeup/">
+					<a href="/write-ups/">
 						<span>Write-Ups</span>
 					</a>
 				</li>
@@ -141,6 +147,7 @@
 	
 	
 	
+	
 	<a href="https://github.com/Nikj-Fr" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
 	
 	
@@ -159,7 +166,9 @@
 	
 	
 	
+	
 	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
 	
 	
 	
@@ -211,15 +220,14 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
   
   
   <div class="post">
-    <h3 id="quest-ce-que-google-dork-">Qu&rsquo;est-ce que <em>Google Dork</em> ?</h3>
+    <h3 id="quest-ce-que-google-dork-">Qu’est-ce que Google Dork ?</h3>
 <p>Google Dork est un mécanisme de recherche efficace parmis les sites webs indexés par Google.</p>
-<h3 id="comment-google-index-til-les-pages-webs-">Comment Google index-t&rsquo;il les pages webs ?</h3>
+<h3 id="comment-google-index-til-les-pages-webs-">Comment Google index-t’il les pages webs ?</h3>
 <p>Des crawler</p>
 <p>utilisation de sitemaps</p>
-<h3 id="comment-réguler-lindexation-dun-site-">Comment réguler l&rsquo;indexation d&rsquo;un site ?</h3>
-<p>En utilisant le fichier robots.txt, on peut définir ce que le crawler a le droit d&rsquo;indexer.
-Il est possible d&rsquo;y mentionner un nom de dossier, un fichier, que ce soit uniquement les crawler de google qui puisse fonctionner sur votre site.</p>
-<p>Contenu basique d&rsquo;un robots.txt:</p>
+<h3 id="comment-réguler-lindexation-dun-site-">Comment réguler l’indexation d’un site ?</h3>
+<p>En utilisant le fichier robots.txt, on peut définir ce que le crawler a le droit d’indexer. Il est possible d’y mentionner un nom de dossier, un fichier, que ce soit uniquement les crawler de google qui puisse fonctionner sur votre site.</p>
+<p>Contenu basique d’un robots.txt:</p>
 <p>image</p>
 <table>
 <thead>
@@ -250,7 +258,7 @@ Il est possible d&rsquo;y mentionner un nom de dossier, un fichier, que ce soit 
 <p>Interprétation</p>
 <ul>
 <li>Tous les crawler peuvent indexer le site</li>
-<li>Il est possible d&rsquo;indexer le site en entier</li>
+<li>Il est possible d’indexer le site en entier</li>
 <li>Le fichier sitemap est situé dans <a href="http://mywebsite.com/sitemap.xml">http://mywebsite.com/sitemap.xml</a></li>
 </ul>
 <h3 id="utilisation-de-google-dork">Utilisation de Google Dork</h3>
@@ -260,20 +268,14 @@ Il est possible d&rsquo;y mentionner un nom de dossier, un fichier, que ce soit 
 <li>Quel est le terme clé pour définir ce que fait un crawler ?</li>
 <li>Où se situe le fichier robots.txt sur le site: awebsite.com ?</li>
 <li>Comment faire pour autoriser seulement le crawler de bing sur son site ?</li>
-<li>Comment empêcher le dossier /dontindexme/ d&rsquo;être indexé ?</li>
+<li>Comment empêcher le dossier /dontindexme/ d’être indexé ?</li>
 <li>Quel terme peut-on utiliser pour chercher des pages de login ?</li>
 </ul>
-<p>What term can we use to look for login pages?</p>
 
   </div>
   
 
 <div class="navigation navigation-single">
-    
-    <a href="/walkthroughs/nmap/" class="navigation-prev">
-      <i aria-hidden="true" class="fa fa-chevron-left"></i>
-      <span class="navigation-tittle">Nmap</span>
-    </a>
     
     
     <a href="/walkthroughs/pma_lab1/" class="navigation-next">
@@ -297,22 +299,17 @@ Il est possible d&rsquo;y mentionner un nom de dossier, un fichier, que ce soit 
         
     
 
-  
-  
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'your-google-analytics-id', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script defer src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" integrity="sha384-ZbbbT1gw3joYkKRqh0kWyRp32UAvdqkpbLedQJSlnI8iLQcFVxaGyrOgOJiDQTTR" crossorigin="anonymous"></script>
 
 
-<script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" integrity="sha384-b3ua1l97aVGAPEIe48b4TC60WUQbQaGi2jqAWM90y0OZXZeyaTCWtBTKtjW2GXG1" crossorigin="anonymous"></script>
-
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
 
 
 

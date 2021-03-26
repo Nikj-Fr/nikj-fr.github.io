@@ -8,7 +8,6 @@
     <link href="https://gmpg.org/xfn/11" rel="profile">
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <meta name="generator" content="Hugo 0.74.1" />
@@ -17,7 +16,7 @@
     
     
 
-<title>Practical Malware Analysis - Lab 7 • </title>
+<title>Practical Malware Analysis - Lab 7 • Nikj • </title>
 
 
 <meta name="twitter:card" content="summary"/>
@@ -29,7 +28,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/pma_lab7/" />
 <meta property="article:published_time" content="2021-01-12T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-01-12T00:00:00+00:00" /><meta property="og:site_name" content="Nikj | Personal Website" />
+<meta property="article:modified_time" content="2021-01-12T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
 
 
     
@@ -44,7 +43,7 @@
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.d0c4ffb2e1828bd88212c4246b2911d84b93350f28f2d499f40bb11f1bd57e9a.css" integrity="sha256-0MT/suGCi9iCEsQkaykR2EuTNQ8o8tSZ9AuxHxvVfpo=">
+<link rel="stylesheet" href="/scss/hyde-hyde.7607cf2bc2eb2cb9f7611afe1f814025416b193e2786307b9247d028b5476745.css" integrity="sha256-dgfPK8LrLLn3YRr&#43;H4FAJUFrGT4nhjB7kkfQKLVHZ0U=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -71,20 +70,24 @@
   <div class="container ">
     <div class="sidebar-about">
       <span class="site__title">
-        <a href="https://nikj-fr.github.io/"></a>
+        <a href="https://nikj-fr.github.io/">
+        
+          
+        
+        </a>
       </span>
       
         
         
         
         <div class="author-image">
-          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+          <a href="http://nikj-fr.github.io"><img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center"></a>
         </div>
         
       
       
       <p class="site__description">
-         InfoSec Website | CTF WriteUp 
+        <a href="http://nikj-fr.github.io"> Infosec Website | CTF Write Up </a>
       </p>
     </div>
     <div class="collapsible-menu">
@@ -105,7 +108,7 @@
 		 
 			 
 				<li>
-					<a href="/writeup/">
+					<a href="/write-ups/">
 						<span>Write-Ups</span>
 					</a>
 				</li>
@@ -144,6 +147,7 @@
 	
 	
 	
+	
 	<a href="https://github.com/Nikj-Fr" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
 	
 	
@@ -162,7 +166,9 @@
 	
 	
 	
+	
 	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
 	
 	
 	
@@ -219,20 +225,20 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p>The goal of this lab is to help understand how a malware interact with the operating system.</p>
 <h3 id="lab-7-1"><strong>Lab 7-1</strong></h3>
 <h4 id="how-does-this-program-ensure-that-it-continues-running-achieves-persistence-when-the-computer-is-restarted-"><strong>How does this program ensure that it continues running (achieves persistence) when the computer is restarted ?</strong></h4>
-<p>In the main function, there is a <strong>StartServiceCtrlDispatcher</strong> API call which allow to connect the thread of a service process to the service control manager. The name of the service is <strong>MalService</strong></p>
+<p>In the main function, there is a <strong>StartServiceCtrlDispatcher</strong> API call which allow to connect the thread of a service process to the service control manager. The name of the service is <strong>MalService</strong>.</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-startservicectrldispatchera">MSDN_StartServiceCtrlDispatcher</a></p>
 <p>Futhermore, a subroutine is call at <em>0x401040</em>.</p>
-<p><img src="/images/walkthroughs/pma_lab7/lab-7-1_call_sub_401040.png" alt="call_sub_401040"></p>
-<p>Within this routine the function starting at <em>0x401064</em> show the creation of a service persisting on the system. The <strong>OpenSCManager</strong> call is used to open the service control manager.
-<img src="/images/walkthroughs/pma_lab7/lab-7-1_open_sc_manager.png" alt="open_sc_manager"></p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-1_call_sub_401040.png" alt="call_sub_401000"></p>
+<p>Within this routine the function starting at <em>0x401064</em> show the creation of a service persisting on the system. The <strong>OpenSCManager</strong> call is used to open the service control manager.</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-1_open_sc_manager.png" alt="open_sc_manager"></p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-openscmanagera">MSDN_OpenSCManager</a></p>
 <p>Then <strong>MalService</strong> object will be added to this control manager with <strong>CreateServiceA</strong>.</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-createservicea">MSDN_CreateServiceA</a></p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_create_service.png" alt="create_service"></p>
 <h4 id="why-does-this-program-use-a-mutex-"><strong>Why does this program use a mutex ?</strong></h4>
-<p>Mutex are used to be sure that only one instance of a program is running at the same time.</p>
-<p>So Mutex are really usefull for malware writers because you can see if you have already infected a victim.</p>
-<p>In this example, the malware try to open a mutex call <strong>HGL345</strong>.<br>
+<p>Mutex are used to be sure that only one instance of a program is running at the same time.<br>
+So Mutex are really usefull for malware writers because you can see if you have already infected a victim.<br>
+In this example, the malware try to open a mutex call <strong>HGL345</strong>.
 If he can it means that there is already a mutex <strong>HGL345</strong> on the target system, otherwise it goes to <em>0x401064</em> and create the Mutex.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_mutex.png" alt="mutex"></p>
 <h4 id="what-is-a-good-host-based-signature-to-use-for-detecting-this-program-"><strong>What is a good host-based signature to use for detecting this program ?</strong></h4>
@@ -243,52 +249,47 @@ If he can it means that there is already a mutex <strong>HGL345</strong> on the 
 <h4 id="what-is-a-good-network-based-signature-for-detecting-this-malware-"><strong>What is a good network-based signature for detecting this malware ?</strong></h4>
 <p>At <em>0x40112C</em> the function <em>StartAdress</em> is call before creating a thread.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_network_signature.png" alt="network_signature1"></p>
-<p>Within this function we can see that the user-agent: <strong>Internet Explorer 8.0</strong> is used to open a browser.
-Next, the malware call the URL <strong><a href="http://www.malwareanalysisbook.com">http://www.malwareanalysisbook.com</a></strong></p>
+<p>Within this function we can see that the user-agent: <strong>Internet Explorer 8.0</strong> is used to open a browser. Next, the malware call the URL <a href="http://www.malwareanalysisbook.com">http://www.malwareanalysisbook.com</a></p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_network_signature2.png" alt="network_signature2"></p>
-<p>At <em>0x40116D</em> it looks like an infinite loop that try to access to the URL (there is no jump out of here).</p>
+<p>At <em>0x40116D</em>, it looks like an infinite loop that try to access to the URL (there is no jump out of here).</p>
 <h4 id="what-is-the-purpose-of-this-program-"><strong>What is the purpose of this program ?</strong></h4>
-<p>The malware persist on the system by creating a process call <strong>MalService</strong> if an instance of the program isn&rsquo;t already working. This is accomplished with the use of a mutex call <strong>HLG435</strong>.
-Then it create a timer that wait the year 2100 before going to <em>StartAdress</em>.</p>
+<p>The malware persist on the system by creating a process call <strong>MalService</strong> if an instance of the program isn’t already working. This is accomplished with the use of a mutex call <strong>HLG435</strong>. Then it create a timer that wait the year 2100 before going to StartAdress.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_timer.png" alt="timer"></p>
-<p>It open a browser with the user-agent <strong>Internet Explorer 8.0</strong> and start an infinite loop by communicating with <strong><a href="http://www.malwareanalysisbook.com">http://www.malwareanalysisbook.com</a></strong>. We can presume that if a lot of computers start this program, the 1st january <strong>2100</strong> the website will be DDOS (or attend unexpected huge traffic).</p>
+<p>It open a browser with the user-agent <strong>Internet Explorer 8.0</strong> and start an infinite loop by communicating with <a href="http://www.malwareanalysisbook.com">http://www.malwareanalysisbook.com</a>. We can presume that if a lot of computers start this program, the <strong>1st january 2100</strong> the website will be DDOS (or attend unexpected huge traffic).</p>
 <h4 id="when-will-this-program-finish-executing-"><strong>When will this program finish executing ?</strong></h4>
-<p>Obviously this program never end. There aren&rsquo;t any jump out of this function:
-<img src="/images/walkthroughs/pma_lab7/lab-7-1_sleep.png" alt="sleep"></p>
+<p>Obviously this program never end. There aren’t any jump out of this function: sleep</p>
 <h3 id="lab-7-2"><strong>Lab 7-2</strong></h3>
 <h4 id="how-does-this-program-achieve-persistence-"><strong>How does this program achieve persistence ?</strong></h4>
-<p>I don&rsquo;t see anything that could say the program achieve persistence. What we can presume is that the program use COM Objects (Component Object Model) to do his job. The obvious <strong>OleInitialize</strong> is a pattern to start using those objects.</p>
+<p>I don’t see anything that could say the program achieve persistence. What we can presume is that the program use COM Objects (Component Object Model) to do his job. The obvious <strong>OleInitialize</strong> is a pattern to start using those objects.</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/ole2/nf-ole2-oleinitialize">MSDN_OleInitialize</a></p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-2_ole_initialize.png" alt="ole_initialize"></p>
 <h4 id="what-is-the-purpose-of-this-program--1"><strong>What is the purpose of this program ?</strong></h4>
-<p>This malware initialize a COM library in the first part of the program. Then it create an object with <strong>CoCreateInstance</strong>. A copy of the string <strong><a href="http://malwareanalysisbook.com/ad.html">http://malwareanalysisbook.com/ad.html</a></strong> is made with <strong>SysAllocString</strong> that will probably be used by COM.
-To sum up, the malware use COM object to bring the user to an advertisement web page.</p>
-<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstance">MSDN_CoCreateInstance</a>
+<p>This malware initialize a COM library in the first part of the program. Then it create an object with <strong>CoCreateInstance</strong>. A copy of the string <a href="http://malwareanalysisbook.com/ad.html">http://malwareanalysisbook.com/ad.html</a> is made with SysAllocString that will probably be used by COM. To sum up, the malware use COM object to bring the user to an advertisement web page.</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstance">MSDN_CoCreateInstance</a><br>
 <a href="https://docs.microsoft.com/en-us/windows/win32/api/oleauto/nf-oleauto-sysallocstring">MSDN_SysAllocString</a></p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-2_behaviour.png" alt="behaviour"></p>
 <h4 id="when-will-this-program-finish-executing--1"><strong>When will this program finish executing ?</strong></h4>
-<p>This program ends when the advertisement is open. There aren&rsquo;t any other way to terminate the malware.</p>
-<h3 id="lab-7-3">Lab 7-3</h3>
-<p>For this lab, we obtained the malicious executable Lab07-03.exe and DLL Lab07-03.dll prior to executing. This is important to note because the malware might change once it runs. Both files were found in the same directory on the victim machine.<br>
+<p>This program ends when the advertisement is open. There aren’t any other way to terminate the malware.</p>
+<h3 id="lab-7-3"><strong>Lab 7-3</strong></h3>
+<p>For this lab, we obtained the malicious executable Lab07-03.exe and DLL Lab07-03.dll prior to executing. This is important to note because the malware might change once it runs. Both files were found in the same directory on the victim machine.
 <strong>Warning: This lab may cause considerable damage to your computer and may be difficult to remove. Do not run this file without a virtual machine with a snapshot taken prior to execution.</strong></p>
 <h4 id="how-does-this-program-achieve-persistence-to-ensure-that-it-continues-running-when-the-computer-is-restarted-"><strong>How does this program achieve persistence to ensure that it continues running when the computer is restarted ?</strong></h4>
-<p>Within the main function there is reference to a native Windows DLL:
-<strong>Kernel32.dll</strong>. The program create the DLL in <em>C:\Windows\System32\</em></p>
+<p>Within the main function there is reference to a native Windows DLL: <strong>Kernel32.dll</strong>. The program create the DLL in C:\Windows\System32\</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-3_kernel32.png" alt="kernel32"></p>
-<p>Then it create another one: <strong>Lab07-03.dll</strong>. The executable and the DLL was found in the same directory on the victim machine.</p>
-<p>Deeper in the function, we can see a copy of the Lab07-03.dll into  <strong>C:\Windows\system32\Kerne132.dll</strong> (notice the 1 instead of l).</p>
+<p>Then it create another one: <strong>Lab07-03.dll</strong>. Don&rsquo;t forget, the executable and the DLL were found in the same directory on the victim machine.</p>
+<p>Deeper in the function, we can see a copy of the Lab07-03.dll into <strong>C:\Windows\system32\Kerne132.dll</strong> (notice the 1 instead of l).</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-3_copy_dll.png" alt="copy"></p>
-<p>At 0x4011E0, there is a call to a function taking a strange parameter: <strong>C:\</strong>.</p>
+<p>At <em>0x4011E0</em>, there is a call to a function taking a strange parameter: <strong>C:.</strong></p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-3_c_directory.png" alt="c_directory"></p>
-<p>The program try to search a file in the path given in  parameter.
-<img src="/images/walkthroughs/pma_lab7/lab-7-3_arg.png" alt="argv_4"></p>
-<p>It can travel from directory to directory with <em>&rdquo;.&quot;</em> and <em>&rdquo;..&quot;</em> that are usefull for the system.</p>
+<p>The program try to search a file in the path given in parameter.</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_arg.png" alt="argv_4"></p>
+<p>It can travel from directory to directory with ”.&rdquo; and ”..&rdquo; that are usefull for the system.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-3_directory_travel1.png" alt="directory_travel_1"></p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-3_directory_travel2.png" alt="directory_travel_2"></p>
-<p>Then there is a comparison with the extension <em>&quot;.exe&rdquo;</em>. We presume that the program search for executables before doing things with them.
-<img src="/images/walkthroughs/pma_lab7/lab-7-3_exe.png" alt="executable_extension"></p>
-<p>Here is the comparison that is made to see if the file discover in directories executables. If it does it will call a function at <em>0x4010A0</em>.
-<img src="/images/walkthroughs/pma_lab7/lab-7-3_comparison.png" alt="comparison"></p>
+<p>Then there is a comparison with the extension &ldquo;.exe”. We presume that the program search for executables before doing things with them.</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_exe.png" alt="executable_extension"></p>
+<p>Here is the comparison that is made to see if the file discover in directories executables. If it does it will call a function at <em>0x4010A0</em>.</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_comparison.png" alt="comparison"></p>
 <p>Inside the routine, we can see that the program call 3 API:</p>
 <ul>
 <li>CreateFileA</li>
@@ -298,21 +299,19 @@ To sum up, the malware use COM object to bring the user to an advertisement web 
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-3_api.png" alt="api"></p>
 <p>Based on this we can infer that if an executable file is located, it is mapped into memory then modified. Further in the program we can see <strong>IsBadReadPtr</strong> API call which is used to check if the program read a specified range memory. Previously we saw that every executables are map into memory, now we know that is used to browse inside their memories.</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-isbadreadptr">MSDN_IsBadReadPtr</a></p>
-<p>Next we can see the program comparing the strings <em>&ldquo;kernel32.dll&rdquo;</em> with the output of <strong>IsBadReadPtr</strong>. The program try to find the string inside the memory of executables.</p>
+<p>Next we can see the program comparing the strings “kernel32.dll” with the output of <strong>IsBadReadPtr</strong>. The program try to find the string inside the memory of executables.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-3_compare_kernel32.png" alt="compare_kernel32"></p>
-<p>I wasn&rsquo;t able to determine easily what was done next by the malware. I used some ressources on the Internet to found that at <em>0x40118C</em>, there was an ASCII strings that was &ldquo;obfuscated&rdquo; with hexadecimal values. By pressing A on this string you can convert it. The result is: <strong>kerne132.dll</strong>.</p>
+<p>I wasn’t able to determine easily what was done next by the malware. I used some ressources on the Internet to found that at <em>0x40118C</em>, there was an ASCII strings that was “obfuscated” with hexadecimal values. By pressing A on this string you can convert it. The result is: <strong>kerne132.dll</strong>.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-3_modification_kerne132.png" alt="modification_kerne132"></p>
-<p>At the end of the function we can see a loop. The program compare every executable that he founds in the C:\ directory, then it check if the executable use <strong>kernel32.dll</strong> and change it to <strong>kerne132.dll</strong> to persist on the system.</p>
-<p>Now let&rsquo;s deep analyze the DLL. The DLL is used to create a mutex <strong>SADFHUHF</strong> in order to see if the victim is already infected. If it can open the DLL it jump directly to the end of the program.</p>
+<p>In the end of the function, we can see a loop. The program compare every executable that he founds in the <strong>C:\</strong> directory, then it check if the executable use <strong>kernel32.dll</strong> and change it to <strong>kerne132.dll</strong> to persist on the system.</p>
+<p>Now let’s deep analyze the DLL. The DLL is used to create the mutex <strong>SADFHUHF</strong> in order to see if the victim is already infected. If it can open the DLL it jump directly to the end of the program.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-3_dll_mutex.png" alt="dll_mutex"></p>
-<p>Otherwise, it create a mutex
-<img src="/images/walkthroughs/pma_lab7/lab-7-3_dll_mutex_create.png" alt="create_mutex"></p>
-<p>Then the program call <strong>WSAStartup</strong>. This function prepare the system to create a socket.
-If the function success, it jump to 0x1000108C.
-<img src="/images/walkthroughs/pma_lab7/lab-7-3_prepare_socket.png" alt="prepare_socket"></p>
+<p>Otherwise, it create a mutex</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_dll_mutex_create.png" alt="dll_mutex_create"></p>
+<p>Then the program call <strong>WSAStartup</strong>. This function prepare the system to create a socket. If the function success, it jump to <em>0x1000108C</em>. prepare_socket</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-wsastartup">MSDN_WSAStartup</a></p>
-<p>The socket is create to communicate with the C2 (<strong>127.26.152.13</strong>).
-<img src="/images/walkthroughs/pma_lab7/lab-7-3_socket_communication.png" alt="socket_communication"></p>
+<p>The socket is create to communicate with the C2 (<strong>127.26.152.13</strong>).</p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_socket_communication.png" alt="socket_communication"></p>
 <p>The malware send <strong>Hello</strong> to the server, if no errors occurs during the send, the malware wait for a response. Then it sleep and loop again until a response. Alternatively, if the send fail, the program close the socket and end.</p>
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-3_socket_communication2.png" alt="socket_communication2"></p>
 <p>Commands send from the C2 are compared to a string. Depending on matches the malware does things like:</p>
@@ -320,7 +319,7 @@ If the function success, it jump to 0x1000108C.
 <li>sleep</li>
 <li>exec a command</li>
 </ul>
-<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_compare_commands_c2.png" alt="compare_c2_commands"></p>
+<p><img src="/images/walkthroughs/pma_lab7/lab-7-3_compare_commands_c2.png" alt="compare_commands_c2"></p>
 <h4 id="what-are-two-good-host-based-signatures-for-this-malware-"><strong>What are two good host-based signatures for this malware ?</strong></h4>
 <ul>
 <li>Directory: C:\</li>
@@ -348,6 +347,11 @@ If the function success, it jump to 0x1000108C.
     </a>
     
     
+    <a href="/walkthroughs/prr_ex1/" class="navigation-next">
+      <span class="navigation-tittle">Practical Reverse Engineering - Ex 1</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
 </div>
 
 
@@ -364,21 +368,7 @@ If the function success, it jump to 0x1000108C.
         
     
 
-  
-  
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'your-google-analytics-id', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-<script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" integrity="sha384-b3ua1l97aVGAPEIe48b4TC60WUQbQaGi2jqAWM90y0OZXZeyaTCWtBTKtjW2GXG1" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" integrity="sha384-ZbbbT1gw3joYkKRqh0kWyRp32UAvdqkpbLedQJSlnI8iLQcFVxaGyrOgOJiDQTTR" crossorigin="anonymous"></script>
 
 
     

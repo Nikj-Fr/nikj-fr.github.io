@@ -8,7 +8,6 @@
     <link href="https://gmpg.org/xfn/11" rel="profile">
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <meta name="generator" content="Hugo 0.74.1" />
@@ -17,7 +16,7 @@
     
     
 
-<title>Practical Malware Analysis - Lab 5 • </title>
+<title>Practical Malware Analysis - Lab 5 • Nikj • </title>
 
 
 <meta name="twitter:card" content="summary"/>
@@ -29,7 +28,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/pma_lab5/" />
 <meta property="article:published_time" content="2020-12-28T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-12-28T00:00:00+00:00" /><meta property="og:site_name" content="Nikj | Personal Website" />
+<meta property="article:modified_time" content="2020-12-28T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
 
 
     
@@ -44,7 +43,7 @@
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.d0c4ffb2e1828bd88212c4246b2911d84b93350f28f2d499f40bb11f1bd57e9a.css" integrity="sha256-0MT/suGCi9iCEsQkaykR2EuTNQ8o8tSZ9AuxHxvVfpo=">
+<link rel="stylesheet" href="/scss/hyde-hyde.7607cf2bc2eb2cb9f7611afe1f814025416b193e2786307b9247d028b5476745.css" integrity="sha256-dgfPK8LrLLn3YRr&#43;H4FAJUFrGT4nhjB7kkfQKLVHZ0U=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -71,20 +70,24 @@
   <div class="container ">
     <div class="sidebar-about">
       <span class="site__title">
-        <a href="https://nikj-fr.github.io/"></a>
+        <a href="https://nikj-fr.github.io/">
+        
+          
+        
+        </a>
       </span>
       
         
         
         
         <div class="author-image">
-          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+          <a href="http://nikj-fr.github.io"><img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center"></a>
         </div>
         
       
       
       <p class="site__description">
-         InfoSec Website | CTF WriteUp 
+        <a href="http://nikj-fr.github.io"> Infosec Website | CTF Write Up </a>
       </p>
     </div>
     <div class="collapsible-menu">
@@ -105,7 +108,7 @@
 		 
 			 
 				<li>
-					<a href="/writeup/">
+					<a href="/write-ups/">
 						<span>Write-Ups</span>
 					</a>
 				</li>
@@ -144,6 +147,7 @@
 	
 	
 	
+	
 	<a href="https://github.com/Nikj-Fr" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
 	
 	
@@ -162,7 +166,9 @@
 	
 	
 	
+	
 	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
 	
 	
 	
@@ -214,56 +220,56 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
   
   
   <div class="post">
-    <h2 id="discover-ida-pro"><strong>Discover IDA Pro</strong></h2>
+    <h2 id="discovering-ida-pro"><strong>Discovering IDA Pro</strong></h2>
 <h3 id="lab-5"><strong>Lab 5</strong></h3>
 <p>This lab use the file Lab05-01.dll. It has to be analyze only on IDA Pro. This is our first experience with this tool.</p>
 <h4 id="what-is-the-address-of-dllmain-"><strong>What is the address of DllMain ?</strong></h4>
-<p>The address of DllMain can be find in the <em>Functions Windows</em> by default on the left side of your screen.It starts at <em>0x1000D02E</em>.</p>
+<p>The address of DllMain can be find in the Functions Windows by default on the left side of your screen.It starts at <em>0x1000D02E</em>.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-1_start_address.png" alt="start_address"></p>
 <p>Also, you can visualize it on the Graph View by turning on <em>Line Prefixes</em> in the settings. For me it was already checked.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-1_start_address2.png" alt="start_address2"></p>
-<h4 id="use-the-imports-window-to-browse-to-gethostbyname-where-is-the-import-located-"><strong>Use the Imports window to browse to <em>gethostbyname</em>. Where is the Import located ?</strong></h4>
-<p>If the <em>Import Windows</em> isn&rsquo;t enable by default. You can show it by clicking on View -&gt; Opensubviews -&gt; Imports</p>
+<p>Use the <em>Imports</em> window to browse to gethostbyname.</p>
+<h4 id="where-is-the-import-located-"><strong>Where is the Import located ?</strong></h4>
+<p>If the <em>Import Windows</em> isn’t enable by default. You can show it by clicking on:<br>
+<strong>View -&gt; Opensubviews -&gt; Imports</strong></p>
 <p>The imports address of that function is <em>0x100163CC</em>.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-2_imports.png" alt="imports"></p>
-<h4 id="how-many-functions-call-gethostbyname-"><strong>How many functions call <em>gethostbyname</em> ?</strong></h4>
+<h4 id="how-many-functions-call-gethostbyname-"><strong>How many functions call gethostbyname ?</strong></h4>
 <p>In order to see where the <strong>gethostbyname</strong> functions is call we use Cross-reference. To open the all the cross-reference of this function, you have to use the shortcut <strong>CTRL + X</strong> once the name is highlighted.</p>
 <p>It should open this windows and list all the references.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-3_xref.png" alt="xrefs"></p>
 <p>There are 18 calls of this function made by 5 differents subroutines.</p>
 <h4 id="focusing-on-the-call-to-gethostbyname-located-at-0x10001757-can-you-figure-out-which-dns-request-will-be-made-"><strong>Focusing on the call to gethostbyname located at 0x10001757, can you figure out which DNS request will be made ?</strong></h4>
 <p>We jump to the address mentionned in the question with the <em>jump to address setting</em>.</p>
-<p><img src="/images/walkthroughs/pma_lab5/lab-5-4_jump_dns.png" alt="jump"></p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-4_jump_dns.png" alt="jump_dns"></p>
 <p>Here we are.</p>
-<p><img src="/images/walkthroughs/pma_lab5/lab-5-4_dns.png" alt="jump"></p>
-<p>Before the execution of the function we can see that a strings is moved in the EAX register. The strings is: &ldquo;<strong>[This is RDO]pics.practicalmalwareanalysis.com</strong>&rdquo;. The comma with the &ldquo;0&rdquo; is here to indicate a NULL Byte. This byte is used by the system to know when the string end.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-4_dns.png" alt="dns"></p>
+<p>Before the execution of the function we can see that a strings is moved in the EAX register. The strings is: “<strong>[This is RDO]pics.practicalmalwareanalysis.com</strong>”. The comma with the “0” is here to indicate a NULL Byte. This byte is used by the system to know when the string end.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-4_strings_dns.png" alt="strings"></p>
-<p>Then there is the operand <em>ADD</em> with the parameter <em>0Dh</em>. The parameter is an hexadecimal value. We convert it in base10 and see that this number is 13. In other words, 13 bytes will be added to the EAX pointer. The new string start from: &ldquo;<strong>pics.practicalmalwareanalysis.com</strong>&rdquo;. This is the real address that the domain will have to resolv.</p>
+<p>Then there is the operand ADD with the parameter 0Dh. The parameter is an hexadecimal value. We convert it in base10 and see that this number is 13. In other words, 13 bytes will be added to the EAX pointer. The new string start from: “<strong>pics.practicalmalwareanalysis.com</strong>”. This is the real address that the domain will have to resolv.</p>
 <p>After that the EAX register is push on the stack to be used by the <strong>gethostbyname</strong> API function in order to make the call.</p>
 <h4 id="how-many-local-variables-has-ida-pro-recognized-for-the-subroutine-at-0x10001656-"><strong>How many local variables has IDA Pro recognized for the subroutine at 0x10001656 ?</strong></h4>
-<p>Let&rsquo;s jump to <em>0x10001656</em>.
-Here we can see 23 locals variables. There are created with a negative ptr. Otherwise,positive content mean parameter of the function.</p>
+<p>Let’s jump to <em>0x10001656</em>. Here we can see 23 locals variables. There are created with a negative ptr. Otherwise,positive content mean parameter of the function.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-5_variables.png" alt="local_variables"></p>
 <h4 id="how-many-parameters-has-ida-pro-recognized-for-the-subroutine-at-0x1001656-"><strong>How many parameters has IDA Pro recognized for the subroutine at 0x1001656 ?</strong></h4>
 <p>As we said previously, we can count only one positive value. There is only 1 parameter on this function.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-6_parameter.png" alt="parameter"></p>
-<h4 id="use-the-strings-windows-to-locate-the-string-cmdexe-in-the-disassembly-where-is-it-located-">*<strong>Use the Strings windows to locate the string &ldquo;cmd.exe&rdquo; in the disassembly. Where is it located ?</strong></h4>
+<h4 id="use-the-strings-windows-to-locate-the-string-cmdexe-in-the-disassembly-where-is-it-located-"><strong>Use the Strings windows to locate the string “cmd.exe” in the disassembly. Where is it located ?</strong></h4>
 <p>View -&gt; Opensubviews -&gt; Strings</p>
-<p>The strings &ldquo;<em>cmd.exe</em>&rdquo; is located at <em>0x10095B34</em>.</p>
+<p>The strings “cmd.exe” is located at 0x10095B34.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-7_cmd.png" alt="cmd"></p>
-<h4 id="what-is-happening-in-the-area-of-code-that-references-cmdexe-"><strong>What is happening in the area of code that references &ldquo;cmd.exe&rdquo; ?</strong></h4>
+<h4 id="what-is-happening-in-the-area-of-code-that-references-cmdexe-"><strong>What is happening in the area of code that references “cmd.exe” ?</strong></h4>
 <p>We follow the cross-reference to see where the string is use.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-8_cmd_use.png" alt="cmd_use"></p>
 <p>The string is pushed on top of the stack to be use by a command line function. This is used to open the terminal.</p>
-<p>If we go down a little bit we can see other strings like &ldquo;quit, exit, cd&rdquo;</p>
+<p>If we go down a little bit we can see other strings like “quit, exit, cd”</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-8_strings2.png" alt="strings2"></p>
-<p>Then let&rsquo;s go back to the <em>text view</em> where we saw new strings.
-They looks like automatic &ldquo;welcome&rdquo; for the owner of the malware. Futhermore, we can read a &ldquo;<em>reverse shell session</em>&rdquo;. This is probably how the attacker persist on the computer of his victim.</p>
+<p>Then let’s go back to the text view where we saw new strings. They looks like automatic “welcome” for the owner of the malware. Futhermore, we can read a “reverse shell session”. This is probably how the attacker persist on the computer of his victim.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-8_strings3.png" alt="strings3"></p>
-<h4 id="in-the-same-area-at-0x100101c8-it-looks-like-dword_1008e5c4-is-a-global-variable-that-helps-decide-which-path-to-take-how-does-the-malware-set-dword_1008e5c4-"><strong>In the same area, at 0x100101C8, it looks like dword_1008E5C4 is a global variable that helps decide which path to take. How does the malware set dword_1008E5C4 ?</strong></h4>
-<p>At 0x100101C8 the dword_1008E5C4 is compare to the content of EBX register.</p>
+<h3 id="in-the-same-area-at-0x100101c8-it-looks-like-dword_1008e5c4-is-a-global-variable-that-helps-decide-which-path-to-take-how-does-the-malware-set-dword_1008e5c4-"><strong>In the same area, at 0x100101C8, it looks like dword_1008E5C4 is a global variable that helps decide which path to take. How does the malware set dword_1008E5C4 ?</strong></h3>
+<p>At <em>0x100101C8</em> the dword_1008E5C4 is compare to the content of EBX register.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-9_dword_1008E5C4.png" alt="dword_1008E5C4"></p>
-<p>Currently, we don&rsquo;t know what is the value of this variable. We use cross-reference to see where it is initialize and what does it contain.</p>
+<p>Currently, we don’t know what is the value of this variable. We use cross-reference to see where it is initialize and what does it contain.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-9_xref_dword_1008E5C4.png" alt="xref_dword_1008E5C4"></p>
 <p>The EAX register is equal to the result of the function: <em>sub_1003695</em>. Following this one we can see that it tries to gather facts on the operating system like:</p>
 <ul>
@@ -272,45 +278,37 @@ They looks like automatic &ldquo;welcome&rdquo; for the owner of the malware. Fu
 <li>platform id</li>
 </ul>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-9_subroutine.png" alt="subroutine"></p>
-<p>The function <em>GetVersionExA</em> return the major version of your operating system. For example: <em><em>Windows 8.1</em>, <em>Windows 10</em></em>.
-It take a structure parameter call <strong>lpVersionInformation</strong>.
-that will receive the information.</p>
-<p><img src="/images/walkthroughs/pma_lab5/lab-5-9_msdn_getversionex.png" alt="msdn_getversionex"></p>
-<p>Then there is a comparison between the content of the <strong>VersionInformation.dwPlatformId</strong> and <strong>2</strong>.
-On the MSDN documentation, we can see that this function is use to <em>Identifies the operating system, or platform
-supported by an assembly</em>.</p>
+<p>The function GetVersionExA return the major version of your operating system. For example: Windows 8.1, Windows 10. It take a structure parameter call <strong>lpVersionInformation</strong> that will receive the information.</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getversionexa">MSDN_GetVersionExA</a></p>
+<p>Then there is a comparison between the content of the <strong>VersionInformation.dwPlatformId</strong> and 2. On the MSDN documentation, we can see that this function is use to Identifies the operating system, or platform supported by an assembly.</p>
 <p>Here are the value that the function can take:</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-9_msdn_platformid.png" alt="msdn_platformid"></p>
 <p>The compare value is <strong>2</strong>. The malware tries to define if the target run a Win32NT or later operating system.</p>
-<p>Finally, <strong>1</strong> is push on the top of the stack, so EAX=1 after the <strong>pop eax</strong> instruction.
-The <strong>retn</strong> allow us to resume the execution flow after the subroutine call.</p>
+<p>Finally, <strong>1</strong> is push on the top of the stack, so EAX=1 after the <strong>pop eax</strong> instruction. The <strong>retn</strong> allow us to resume the execution flow after the subroutine call.</p>
 <h4 id="a-few-hundred-lines-into-the-subroutine-at-0x1000ff58-a-series-of-comparisons-use-memcmp-to-compare-strings-what-happens-if-the-string-comparison-to-robotwork-is-successfull-"><strong>A few hundred lines into the subroutine at 0x1000FF58, a series of comparisons use memcmp to compare strings. What happens if the string comparison to robotwork is successfull ?</strong></h4>
-<p>At <em>0x10010438</em> there is a <strong>jnz</strong> instruction to <em>0x10010444</em> which is the entry of a routine containing the <strong>robotwork</strong> string.</p>
+<p>At 0x10010438 there is a <strong>jnz</strong> instruction to 0x10010444 which is the entry of a routine containing the <strong>robotwork</strong> string.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-10_robotwork.png" alt="robotwork"></p>
-<p>EAX contain the return of the <strong>memcmp</strong> function.
-The question say that the string comparison to robotwork is succesfull. The return of <strong>memcmp</strong> is set to EAX. The return is succesfull, it mean that EAX = 0, so ZF = 1.<br>
+<p>EAX contain the return of the <strong>memcmp</strong> function. The question say that the string comparison to robotwork is succesfull. The return of <strong>memcmp</strong> is set to EAX. The return is succesfull, it mean that EAX = 0, so ZF = 1.
 The <strong>jnz</strong> instruction only jump if <strong>ZF = 0</strong>. So, it will not take the <strong>jnz</strong> branch.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-10_jump_flag.png" alt="jump_flag"></p>
 <p>But it will jump to <em>0x100052A2</em></p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-10_robotwork_2.png" alt="robotwork_2"></p>
-<p>In this area the malware open the register key:
-<strong>SOFTWARE\Microsoft\Windows\CurrentVersion</strong></p>
+<p>In this area the malware open the register key: <strong>SOFTWARE\Microsoft\Windows\CurrentVersion</strong></p>
 <p>If the register key was sucessfully opened then it return an ERROR_SUCCESS. Otherwise, it will return nonzero value.</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-regopenkeyexa">MSDN_GetOpenKeyExA</a></p>
 <p>Then there is a <strong>jz</strong> jump instruction to <em>0x10005309</em> if <strong>ZF = 1</strong>.<br>
 To determine if ZF = 1 or 0, a test between EAX and itself is made. If the register failed to open it will contain a nonzero value. So the <strong>jz</strong> instruction will only be execute if the open work.</p>
-<p>Here is the function starting at <em>0x10005309</em>
+<p>Here is the function starting at 0x10005309
 <img src="/images/walkthroughs/pma_lab5/lab-5-10_robotwork_3.png" alt="robotwork_3"></p>
-<p>The content of the register key <em>WorkTime</em> will be gather.
-Then it will jump to <em>0x10005379</em> if the query wasn&rsquo;t achieve.</p>
+<p>The content of the register key <em>WorkTime</em> will be gather. Then it will jump to <em>0x10005379</em> if the query wasn’t achieve.</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-regqueryvalueexa">MSDN_RegQueryValueExA</a></p>
-<p>Here is the function starting at <em>0x10005379</em>
-<img src="/images/walkthroughs/pma_lab5/lab-5-10_robotwork_4.png" alt="robotwork_4">
-The content of the register key <em>WorkTimes</em> will be gather.</p>
-<p>Finally, we can see that the information is send over the network with the <em>s</em> parameter corresponding to the <em>socket</em> created.
-<img src="/images/walkthroughs/pma_lab5/lab-5-10_network_send.png" alt="robotwork_4"></p>
-<p><img src="/images/walkthroughs/pma_lab5/lab-5-10_network_socket.png" alt="robotwork_4"></p>
-<h4 id="what-does-the-export-pslist-do-"><strong>What does the export PSLIST do ?</strong></h4>
+<p>Here is the function starting at <em>0x10005379</em></p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-10_robotwork_4.png" alt="robotwork_4"></p>
+<p>The content of the register key WorkTimes will be gather.</p>
+<p>Finally, we can see that the information is send over the network with the s parameter corresponding to the socket created.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-10_network_send.png" alt="network_send"></p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-10_network_socket.png" alt="network_socket"></p>
+<h3 id="what-does-the-export-pslist-do-"><strong>What does the export PSLIST do ?</strong></h3>
 <p>View -&gt; Open subview -&gt; Export</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-11_pslist_export.png" alt="pslist_export"></p>
 <p>I find a very usefull shortcut. You can press <strong>space</strong> to switch from graph to text view and inversely.</p>
@@ -318,23 +316,21 @@ The content of the register key <em>WorkTimes</em> will be gather.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-11_two_possibilities.png" alt="two_possibilities"></p>
 <p>We already focus on the beginning of this function previously. Here is what it looks like:</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-11_major_version.png" alt="major_version"></p>
-<p>The <em>major version</em> is compare to <em>5</em> like the <em>platform id</em> with <em>2</em>.<br>
-With MSDN documentation, we see that <em>5</em> can correspond to several operating system.</p>
+<p>The <em>major version</em> is compare to 5 like the <em>platform id</em> with 2.<br>
+With MSDN documentation, we see that 5 can correspond to several operating system.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-11_msdn_major_version.png" alt="msdn_os"></p>
 <p>Then, depending on the result it will go at <em>0x10007046</em> or <em>0x1000704E</em>.</p>
-<p>a) The subroutine <em>10006518</em></p>
-<p>It create a snapshot of a process. The EBX register is used to give the ID to be dump.
-<img src="/images/walkthroughs/pma_lab5/lab-5-11_snapshot_1.png" alt="snapshot_1"></p>
-<p>b) The subroutine <em>100664C</em><br>
-It perform the same call as the previous routine.
-The only difference, is the snapshot that is send over the open socket.</p>
+<p>a) The subroutine 10006518</p>
+<p>It create a snapshot of a process. The EBX register is used to give the ID to be dump.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-11_snapshot_1.png" alt="snapshot_1"></p>
+<p>b) The subroutine 100664C
+It perform the same call as the previous routine. The only difference, is the snapshot that is send over the open socket.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-11_snapshot_2.png" alt="snapshot_2"></p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot">MSDN_CreateToolHelp32Snapshot</a></p>
-<h4 id="use-the-graph-mode-to-graph-the-cross-reference-from-sub_10004e79-which-api-functions-could-be-called-by-entering-this-function--based-on-the-api-functions-alone-what-could-you-rename-this-function-"><strong>Use the graph mode to graph the cross-reference from sub_10004E79. Which API functions could be called by entering this function ? Based on the API functions alone, what could you rename this function ?</strong></h4>
-<p>Let&rsquo;s use the jump command by pressing <strong>g</strong>.
-Then we have to show the cross_reference graph. In order to achieve that you have to go in View -&gt; Chart -&gt; Xref from and then a chart will pop up.</p>
+<h3 id="use-the-graph-mode-to-graph-the-cross-reference-from-sub_10004e79-which-api-functions-could-be-called-by-entering-this-function--based-on-the-api-functions-alone-what-could-you-rename-this-function-"><strong>Use the graph mode to graph the cross-reference from sub_10004E79. Which API functions could be called by entering this function ? Based on the API functions alone, what could you rename this function ?</strong></h3>
+<p>Let’s use the jump command by pressing <strong>g</strong>. Then we have to show the cross_reference graph. In order to achieve that you have to go in View -&gt; Chart -&gt; Xref from and then a chart will pop up.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-12_xref_graph.png" alt="xref_chart"></p>
-<p>Based on all the functions name on this graph, we can assume that this routine can be call like <strong>SystemLanguageID_Send</strong>.</p>
+<p>Based on all the functions name on this graph, we can assume that this routine can be call like <strong>SystemLanguageID_Send.</strong></p>
 <h4 id="how-many-windows-api-functions-does-dllmain-call-directly--how-many-at-a-depth-of-2-"><strong>How many Windows API functions does DllMain call directly ? How many at a depth of 2 ?</strong></h4>
 <p>There are 4 API Functions:</p>
 <ul>
@@ -344,58 +340,55 @@ Then we have to show the cross_reference graph. In order to achieve that you hav
 <li>StrCmp</li>
 </ul>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-13_depth1.png" alt="depth1"></p>
-<p>With a depth of 2 the chart is unreadable, you have to zoom a lot. I don&rsquo;t count all the API functions but there are a lot.</p>
+<p>With a depth of 2 the chart is unreadable, you have to zoom a lot. I don’t count all the API functions but there are a lot.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-13_depth2.png" alt="depth2"></p>
-<h4 id="at-0x10001358-there-is-a-call-to-sleep-looking-backward-though-the-code-how-long-will-the-program-sleep-if-this-code-executes-"><strong>At 0x10001358, there is a call to Sleep. Looking backward though the code, how long will the program sleep if this code executes ?</strong></h4>
+<h3 id="at-0x10001358-there-is-a-call-to-sleep-looking-backward-though-the-code-how-long-will-the-program-sleep-if-this-code-executes-"><strong>At 0x10001358, there is a call to Sleep. Looking backward though the code, how long will the program sleep if this code executes ?</strong></h3>
 <p>The sleep function take a milliseconds parameter that is store in EAX.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-14_sleep.png" alt="sleep"></p>
-<p>Following the offset at <em>0x10001341</em>, we can see that a string is store in EAX: <strong>[This Is Cti]30</strong>.</p>
+<p>Following the offset at 0x10001341, we can see that a string is store in EAX: <strong>[This Is Cti]30.</strong></p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-14_offset.png" alt="offset"></p>
 <p>Then 0Dh (= 13) is add to the EAX pointer. In other word the pointer is move 13 bytes further. The new string is <strong>30</strong>.</p>
 <p>The <em>atoi</em> function convert the string in an integer. Finally, the number 30 is multiply by 1000. This is equal to 30 000 ms corresponding to 30 seconds.</p>
-<p><img src="/images/walkthroughs/pma_lab5/lab-5-14_eax_content.png" alt="offset"></p>
-<p>The program will sleep 30 seconds.</p>
-<h4 id="at-0x10001701-is-a-call-to-socket-what-are-the-three-parameters-"><strong>At 0x10001701 is a call to socket. What are the three parameters ?</strong></h4>
-<p>The three parameters are push on the stack then the <strong>socket</strong> function is call.
-On the MSDN, we can see the meaning of these numbers.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-14_eax_content.png" alt="eax content"></p>
+<p>The program will sleep <strong>30 seconds</strong>.</p>
+<h3 id="at-0x10001701-is-a-call-to-socket-what-are-the-three-parameters-"><strong>At 0x10001701 is a call to socket. What are the three parameters ?</strong></h3>
+<p>The three parameters are push on the stack then the <strong>socket</strong> function is call. On the MSDN, we can see the meaning of these numbers.</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-socket">MSDN_Socket</a></p>
 <ul>
 <li>Protocol: 5 -&gt; TCP</li>
 <li>Type: 1 -&gt; SockStream</li>
 <li>AF: 2 -&gt; AF_INET</li>
 </ul>
-<p><img src="/images/walkthroughs/pma_lab5/lab-5-15_parameters.png" alt="offset"></p>
-<h4 id="using-the-msdn-page-for-socket-and-the-named-symbolic-constants-functionality-in-ida-pro-can-you-make-the-parameter-more-meaningful-what-are-the-parameters-after-you-apply-the-changes-"><strong>Using the MSDN page for socket and the named symbolic constants functionality in IDA Pro, can you make the parameter more meaningful? What are the parameters after you apply the changes ?</strong></h4>
-<p>The question is partially answered previously. <br>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-15_parameters.png" alt="parameters"></p>
+<h3 id="using-the-msdn-page-for-socket-and-the-named-symbolic-constants-functionality-in-ida-pro-can-you-make-the-parameter-more-meaningful-what-are-the-parameters-after-you-apply-the-changes-"><strong>Using the MSDN page for socket and the named symbolic constants functionality in IDA Pro, can you make the parameter more meaningful? What are the parameters after you apply the changes ?</strong></h3>
+<p>The question is partially answered previously.
 To rename a parameter we have to right click on it, chose <strong>Symbolic constant</strong> and <strong>use standart symbolic constant</strong>. Then you can search whatever you want.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-16_tcp.png" alt="tcp"></p>
 <p>This is what it looks like when changes are done:</p>
-<p><img src="/images/walkthroughs/pma_lab5/lab-5-16_final.png" alt="finish_rename"></p>
-<h4 id="search-for-usage-of-the-in-instruction-opcode-0xed-this-instruction-is-used-with-a-magic-string-vmxh-to-perform-vmware-detection-is-that-in-use-in-this-malware-using-the-cross-references-to-the-function-that-executes-the-in-instruction-is-there-further-evidence-of-vmware-detection-"><strong>Search for usage of the in instruction (opcode 0xED). This instruction is used with a magic string VMXh to perform VMware detection. Is that in use in this malware? Using the cross-references to the function that executes the in instruction, is there further evidence of VMware detection ?</strong></h4>
-<p>Use the shortcut <strong>ALT + T</strong> to search for string ocurrence.
-For &ldquo;VMXh&rdquo; there aren&rsquo;t any outputs.
-<img src="/images/walkthroughs/pma_lab5/lab-5-17_vmxh_search.png" alt="vmxh_search"></p>
-<p>With the shortcut <strong>ALT + B</strong> you can search for bytes sequences.. We search for the <strong>in</strong> instruction which is equivalent to <strong>0xED</strong>.<br>
-There is only one result with a <strong>in</strong> instruction.
-<img src="/images/walkthroughs/pma_lab5/lab-5-17_0xed_result.png" alt="0xed_result"></p>
-<p>Following the function (<em>0x10006196</em>), we can see a comparison that is made. Decoding the hexadecimal value, we found the string <strong>VMHx</strong>.
-<img src="/images/walkthroughs/pma_lab5/lab-5-17_vmxh_result.png" alt="vmxh_result"></p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-16_final.png" alt="final"></p>
+<h3 id="search-for-usage-of-the-in-instruction-opcode-0xed-this-instruction-is-used-with-a-magic-string-vmxh-to-perform-vmware-detection-is-that-in-use-in-this-malware-using-the-cross-references-to-the-function-that-executes-the-in-instruction-is-there-further-evidence-of-vmware-detection-"><strong>Search for usage of the in instruction (opcode 0xED). This instruction is used with a magic string VMXh to perform VMware detection. Is that in use in this malware? Using the cross-references to the function that executes the in instruction, is there further evidence of VMware detection ?</strong></h3>
+<p>Use the shortcut <strong>ALT + T</strong> to search for string ocurrence. For “VMXh” there aren’t any outputs.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-17_vmxh_search.png" alt="vmxh_search"></p>
+<p>With the shortcut <strong>ALT + B</strong> you can search for bytes sequences.. We search for the <strong>in</strong> instruction which is equivalent to <strong>0xED</strong>.
+There is only one result with a in instruction.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-17_0xed_result.png" alt="0xed_result"></p>
+<p>Following the function (<em>0x10006196</em>), we can see a comparison that is made. Decoding the hexadecimal value, we found the string <strong>VMHx</strong>.</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-17_vmxh_result.png" alt="vmxh_result"></p>
 <p>An anti-vm instruction is implement to cancel the installation of the malware on the target.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-17_anti-vm-graph.png" alt="anti_vm_graph"></p>
-<h4 id="jump-your-cursor-to-0x1001d988-what-do-you-find-"><strong>Jump your cursor to 0x1001D988. What do you find ?</strong></h4>
-<p>At <strong>0x1001D988</strong> we can find dummies strings..</p>
-<p><img src="/images/walkthroughs/pma_lab5/lab-5-18_dummy_strings.png" alt="dummies_strings"></p>
-<h4 id="if-you-have-the-ida-python-plug-in-installed-run-lab05-01py-an-ida-pro-python-script-provided-with-the-malware-for-this-book-what-happens-after-you-run-the-script-"><strong>If you have the IDA Python plug-in installed, run Lab05-01.py, an IDA Pro Python script provided with the malware for this book. What happens after you run the script ?</strong></h4>
-<p>I don&rsquo;t have IDA Python installed but when you open the script you can see that it XOR 0x50 (= 80 base 10) bytes with the 0x55 key.
-Futhermore, there are 80 encoded characters at <em>0x1001D988</em>.
-We assume that the script decrypt those characters.</p>
+<h3 id="jump-your-cursor-to-0x1001d988-what-do-you-find-"><strong>Jump your cursor to 0x1001D988. What do you find ?</strong></h3>
+<p>At <em>0x1001D988</em> we can find dummies strings..</p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-18_dummy_strings.png" alt="dummy_strings"></p>
+<h3 id="if-you-have-the-ida-python-plug-in-installed-run-lab05-01py-an-ida-pro-python-script-provided-with-the-malware-for-this-book-what-happens-after-you-run-the-script-"><strong>If you have the IDA Python plug-in installed, run Lab05-01.py, an IDA Pro Python script provided with the malware for this book. What happens after you run the script ?</strong></h3>
+<p>I don’t have IDA Python installed but when you open the script you can see that it XOR 0x50 (= 80 base 10) bytes with the 0x55 key. Futhermore, there are 80 encoded characters at <em>0x1001D988</em>. We assume that the script decrypt those characters.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-19_script.png" alt="script"></p>
-<h4 id="with-the-cursor-in-the-same-location-how-do-you-turn-this-data-into-a-single-ascii-string-"><strong>With the cursor in the same location, how do you turn this data into a single ASCII string ?</strong></h4>
+<h3 id="with-the-cursor-in-the-same-location-how-do-you-turn-this-data-into-a-single-ascii-string-"><strong>With the cursor in the same location, how do you turn this data into a single ASCII string ?</strong></h3>
 <p>Pressing <strong>A</strong> you can concatenate the bytes</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-20_concatenate_strings.png" alt="concatenate_strings"></p>
-<p>Then we can use an online tool to XOR like the script does.<br>
-Here is the result: <strong>xdoor is this backdoor, string decoded for actical malware analysis lab :)1234</strong></p>
-<p><img src="/images/walkthroughs/pma_lab5/lab-5-20_result.png" alt="concatenate_strings"></p>
+<p>Then we can use an online tool to XOR like the script does.
+Here is the result:<br>
+<strong>xdoor is this backdoor, string decoded for actical malware analysis lab :)1234</strong></p>
+<p><img src="/images/walkthroughs/pma_lab5/lab-5-20_result.png" alt="result"></p>
 
   </div>
   
@@ -429,21 +422,7 @@ Here is the result: <strong>xdoor is this backdoor, string decoded for actical m
         
     
 
-  
-  
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'your-google-analytics-id', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-<script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" integrity="sha384-b3ua1l97aVGAPEIe48b4TC60WUQbQaGi2jqAWM90y0OZXZeyaTCWtBTKtjW2GXG1" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" integrity="sha384-ZbbbT1gw3joYkKRqh0kWyRp32UAvdqkpbLedQJSlnI8iLQcFVxaGyrOgOJiDQTTR" crossorigin="anonymous"></script>
 
 
     

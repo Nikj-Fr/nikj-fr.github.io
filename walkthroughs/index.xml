@@ -6,10 +6,31 @@
     <description>Recent content in Walkthroughs on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Tue, 12 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nikj-fr.github.io/walkthroughs/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Practical Reverse Engineering - Ex 2</title>
+      <link>https://nikj-fr.github.io/walkthroughs/prr_ex2/</link>
+      <pubDate>Fri, 26 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/walkthroughs/prr_ex2/</guid>
+      <description>1)a) Given what you learned about CALL and RET, explain how you would read the value of EIP ?
+EIP is used to save the return address after a CALL or a RET for example. In this way, the program will resume correctly and it can continue the execution flow.
+I&amp;rsquo;ll use a CALL to a function to modify EIP. Inside this function, we have to save the value of EIP inside a register.</description>
+    </item>
+    
+    <item>
+      <title>Practical Reverse Engineering - Ex 1</title>
+      <link>https://nikj-fr.github.io/walkthroughs/prr_ex1/</link>
+      <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/walkthroughs/prr_ex1/</guid>
+      <description>Question This function uses a combination SCAS and STOS to do its work. First, explain what is the type of the [EBP+8] and [EBP+C] in line 1 and 8 respectively. Next explain what this snippet does.
+01: 8B 7D 08 mov edi, [ebp+8] 02: 8B D7 mov edx, edi 03: 33 C0 xor eax, eax 04: 83 C9 FF or ecx, 0FFFFFFFFh 05: F2 AE repne scasb 06: 83 C1 02 add ecx, 2 07: F7 D9 neg ecx 08: 8A 45 0C mov al, [ebp+0Ch] 09: 8B AA mov edi, edx 10: F3 AA rep stosb 11: 8B C2 mov eax, edx Analysis EBP is a pointer referencing the bottom of the stack.</description>
+    </item>
     
     <item>
       <title>Practical Malware Analysis - Lab 7</title>
@@ -18,7 +39,7 @@
       
       <guid>https://nikj-fr.github.io/walkthroughs/pma_lab7/</guid>
       <description>Analyzing Malicious Windows Program Lab 7 The goal of this lab is to help understand how a malware interact with the operating system.
-Lab 7-1 How does this program ensure that it continues running (achieves persistence) when the computer is restarted ? In the main function, there is a StartServiceCtrlDispatcher API call which allow to connect the thread of a service process to the service control manager. The name of the service is MalService</description>
+Lab 7-1 How does this program ensure that it continues running (achieves persistence) when the computer is restarted ? In the main function, there is a StartServiceCtrlDispatcher API call which allow to connect the thread of a service process to the service control manager. The name of the service is MalService.</description>
     </item>
     
     <item>
@@ -38,7 +59,7 @@ In this function we can see a jz statement. The choice of the path to follow dep
       <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/walkthroughs/pma_lab5/</guid>
-      <description>Discover IDA Pro Lab 5 This lab use the file Lab05-01.dll. It has to be analyze only on IDA Pro. This is our first experience with this tool.
+      <description>Discovering IDA Pro Lab 5 This lab use the file Lab05-01.dll. It has to be analyze only on IDA Pro. This is our first experience with this tool.
 What is the address of DllMain ? The address of DllMain can be find in the Functions Windows by default on the left side of your screen.It starts at 0x1000D02E.
 Also, you can visualize it on the Graph View by turning on Line Prefixes in the settings.</description>
     </item>
@@ -49,9 +70,9 @@ Also, you can visualize it on the Graph View by turning on Line Prefixes in the 
       <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/walkthroughs/pma_lab3/</guid>
-      <description>Basic Dynamic Analysis Lab 3-1 This lab use the file Lab03-01.exe
-What are this malware&amp;rsquo;s imports and strings ? We use PE Explorer to answer this question with the imports button at the top of the tool.
-There is only one DLL used and one function imported. We know that the malware isn&amp;rsquo;t pack with UPX, NsPack or Upack because when you open the executable with PE Explorer, by default it try to unpack it with those 3 algorithms.</description>
+      <description>Basic Dynamic Analysis Lab 3-1 This lab uses the files Lab03-01.exe.
+What are this malware&amp;rsquo;s import and strings ? We use PE Explorer to answer this question with the imports button at the top of the tool.
+There is only one DLL used and one function imported. We know that the malware isn’t pack with UPX, NsPack or Upack because when you open the executable with PE Explorer, by default it try to unpack it with those 3 algorithms.</description>
     </item>
     
     <item>
@@ -61,11 +82,9 @@ There is only one DLL used and one function imported. We know that the malware i
       
       <guid>https://nikj-fr.github.io/walkthroughs/pma_lab1/</guid>
       <description>Basic Static Analysis Lab 1-1 This lab uses the files Lab01-01.exe and Lab01-01.dll.
-Upload the files to http://wwww.VirusTotal.com/ and view the reports. Does either file match any existing antivirus signature ? a) Lab01-01.exe
-Virus Total detected a potential Trojan. The signature (MD5) of the malware is bb7425b82141a1c0f7d60e5106676bb1
+Upload the files to http://wwww.VirusTotal.com/ and view the reports. Does either file match any existing antivirus signature ? a) Lab01-01.exe Virus Total detected a potential Trojan. The signature (MD5) of the malware is bb7425b82141a1c0f7d60e5106676bb1
 50/70 positifs antivirus
-b) Lab01-01.dll
-The signature of the malware is 290934c61de9176ad682ffdd65f0a669
+b) Lab01-01.dll The signature of the malware is 290934c61de9176ad682ffdd65f0a669
 42/67 positifs antivirus
 Signature of malware can be generated with WinMD5..</description>
     </item>
@@ -76,19 +95,10 @@ Signature of malware can be generated with WinMD5..</description>
       <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/walkthroughs/google_dork/</guid>
-      <description>Qu&amp;rsquo;est-ce que Google Dork ? Google Dork est un mécanisme de recherche efficace parmis les sites webs indexés par Google.
-Comment Google index-t&amp;rsquo;il les pages webs ? Des crawler
+      <description>Qu’est-ce que Google Dork ? Google Dork est un mécanisme de recherche efficace parmis les sites webs indexés par Google.
+Comment Google index-t’il les pages webs ? Des crawler
 utilisation de sitemaps
-Comment réguler l&amp;rsquo;indexation d&amp;rsquo;un site ? En utilisant le fichier robots.txt, on peut définir ce que le crawler a le droit d&amp;rsquo;indexer. Il est possible d&amp;rsquo;y mentionner un nom de dossier, un fichier, que ce soit uniquement les crawler de google qui puisse fonctionner sur votre site.</description>
-    </item>
-    
-    <item>
-      <title>Nmap</title>
-      <link>https://nikj-fr.github.io/walkthroughs/nmap/</link>
-      <pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nikj-fr.github.io/walkthroughs/nmap/</guid>
-      <description>Sommaire </description>
+Comment réguler l’indexation d’un site ? En utilisant le fichier robots.txt, on peut définir ce que le crawler a le droit d’indexer. Il est possible d’y mentionner un nom de dossier, un fichier, que ce soit uniquement les crawler de google qui puisse fonctionner sur votre site.</description>
     </item>
     
   </channel>

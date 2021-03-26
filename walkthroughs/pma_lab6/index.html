@@ -8,7 +8,6 @@
     <link href="https://gmpg.org/xfn/11" rel="profile">
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <meta name="generator" content="Hugo 0.74.1" />
@@ -17,7 +16,7 @@
     
     
 
-<title>Practical Malware Analysis - Lab 6 • </title>
+<title>Practical Malware Analysis - Lab 6 • Nikj • </title>
 
 
 <meta name="twitter:card" content="summary"/>
@@ -29,7 +28,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/pma_lab6/" />
 <meta property="article:published_time" content="2021-01-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-01-05T00:00:00+00:00" /><meta property="og:site_name" content="Nikj | Personal Website" />
+<meta property="article:modified_time" content="2021-01-05T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
 
 
     
@@ -44,7 +43,7 @@
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.d0c4ffb2e1828bd88212c4246b2911d84b93350f28f2d499f40bb11f1bd57e9a.css" integrity="sha256-0MT/suGCi9iCEsQkaykR2EuTNQ8o8tSZ9AuxHxvVfpo=">
+<link rel="stylesheet" href="/scss/hyde-hyde.7607cf2bc2eb2cb9f7611afe1f814025416b193e2786307b9247d028b5476745.css" integrity="sha256-dgfPK8LrLLn3YRr&#43;H4FAJUFrGT4nhjB7kkfQKLVHZ0U=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -71,20 +70,24 @@
   <div class="container ">
     <div class="sidebar-about">
       <span class="site__title">
-        <a href="https://nikj-fr.github.io/"></a>
+        <a href="https://nikj-fr.github.io/">
+        
+          
+        
+        </a>
       </span>
       
         
         
         
         <div class="author-image">
-          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+          <a href="http://nikj-fr.github.io"><img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center"></a>
         </div>
         
       
       
       <p class="site__description">
-         InfoSec Website | CTF WriteUp 
+        <a href="http://nikj-fr.github.io"> Infosec Website | CTF Write Up </a>
       </p>
     </div>
     <div class="collapsible-menu">
@@ -105,7 +108,7 @@
 		 
 			 
 				<li>
-					<a href="/writeup/">
+					<a href="/write-ups/">
 						<span>Write-Ups</span>
 					</a>
 				</li>
@@ -144,6 +147,7 @@
 	
 	
 	
+	
 	<a href="https://github.com/Nikj-Fr" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
 	
 	
@@ -162,7 +166,9 @@
 	
 	
 	
+	
 	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
 	
 	
 	
@@ -223,59 +229,54 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-1_call_sub_401000.png" alt="call_sub_401000"></p>
 <p>In this function we can see a <strong>jz</strong> statement. The choice of the path to follow depend on the result of the comparison that his made with EAX. This indicate a <strong>if</strong> code construct.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-1_if_condition.png" alt="if_condition"></p>
-<p>Following the msdn page of the API call to <strong>InternetGetConnectedState</strong>, the function return <strong>True</strong> if there is Internet and <strong>False</strong> if the target hasn&rsquo;t got one.</p>
+<p>Following the msdn page of the API call to <strong>InternetGetConnectedState</strong>, the function return <strong>True</strong> if there is Internet and <strong>False</strong> if the target hasn’t got one.</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/wininet/nf-wininet-internetgetconnectedstate">MSDN_InternetGetConnectedState</a></p>
-<p>If the API call work, EAX = 1, otherwise EAX = 0.
-When EAX = 0, ZF = 1 and we follow the function at 0x40102B.</p>
+<p>If the API call work, EAX = 1, otherwise EAX = 0. When EAX = 0, ZF = 1 and we follow the function at 0x40102B.</p>
 <h4 id="what-is-the-subroutine-located-at-0x40105f-"><strong>What is the subroutine located at 0x40105F ?</strong></h4>
-<p>This subroutine is call wheter the API call is a success or a failure.
-Strings are pushed on the stack depending on the result of the API call.
-I assume that the following subroutine is used to print the value that was push on the top of the stack.<br>
+<p>This subroutine is call wheter the API call is a success or a failure. Strings are pushed on the stack depending on the result of the API call. I assume that the following subroutine is used to print the value that was push on the top of the stack.
 We can check this by starting the malware..</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-1_malware_6-1_start.png" alt="malware_6-1_start"></p>
 <h4 id="what-is-the-purpose-of-this-program-"><strong>What is the purpose of this program ?</strong></h4>
 <p>This program is used to check if you are connected to internet and print the corresponding message depending on the state.</p>
 <h3 id="lab-6-2"><strong>Lab 6-2</strong></h3>
 <h4 id="what-operation-does-the-first-subroutine-called-by-main-perform-"><strong>What operation does the first subroutine called by main perform ?</strong></h4>
-<p>The answer are the same as Lab6-1-1.
-The first subroutine call is <em>sub_401000</em>
-<img src="/images/walkthroughs/pma_lab6/lab-6-2_call_sub_401000.png" alt="call_sub_401000"></p>
-<p>The operation is a <strong>if</strong> statement
-<img src="/images/walkthroughs/pma_lab6/lab-6-1_if_condition.png" alt="if_condition"></p>
+<p>The answer are the same as Lab6-1-1. The first subroutine call is <em>sub_401000</em></p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-2_call_sub_401000.png" alt="call_sub_401000"></p>
+<p>The operation is a <strong>if</strong> statement</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-1_if_condition.png" alt="if_condition"></p>
 <h4 id="what-is-the-subroutine-located-at-0x40117f-"><strong>What is the subroutine located at 0x40117F ?</strong></h4>
-<p>Before this subroutine, a string is pushed on the top of the stack.
-We assume that the function is used to print this string in the terminal of the victim, after malware execution.</p>
+<p>Before this subroutine, a string is pushed on the top of the stack. We assume that the function is used to print this string in the terminal of the victim, after malware execution.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-2_call_sub_40117F.png" alt="call_sub_40117F"></p>
 <h4 id="what-does-the-second-subroutine-called-by-main-do-"><strong>What does the second subroutine called by main do ?</strong></h4>
-<p>The second subroutine is located at <em>0x401040</em>
-<img src="/images/walkthroughs/pma_lab6/lab-6-2_call_sub_401040.png" alt="call_sub_401040"></p>
-<p>Firstly, there is an API call <strong>InternetOpenA</strong> which is used to open a web browser. Next, we see the string <em>Internet Explorer</em>. We assume that the malware try to open the IE browser.</p>
+<p>The second subroutine is located at <em>0x401040</em></p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-2_call_sub_401040.png" alt="call_sub_401040"></p>
+<p>Firstly, there is an API call <strong>InternetOpenA</strong> which is used to open a web browser. Next, we see the string Internet Explorer. We assume that the malware try to open the IE browser.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-2_internet_open.png" alt="internet_open"></p>
-<p>Secondly, <strong>InternetOpenUrlA</strong> is used to open a specific URL in the IE browser. The URL load in this function is <em>practicalmalwareanalysis.com/cc.htm</em></p>
+<p>Secondly, <strong>InternetOpenUrlA</strong> is used to open a specific URL in the IE browser. The URL load in this function is practicalmalwareanalysis.com/cc.htm</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-2_url_open.png" alt="url_open"></p>
 <p>Thirdly, <strong>InternetReadFile</strong> is used to read the 0x200 (512) bytes of the cc.htm file.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-2_read_file.png" alt="read_file"></p>
 <h4 id="what-type-of-code-construct-is-used-in-this-subroutine-"><strong>What type of code construct is used in this subroutine ?</strong></h4>
-<p>Under the read of the file, there are 2 paths:</p>
+<p>There are two different paths in this subroutine:</p>
 <ul>
-<li>one where the file was read. Then it check if the file is well construct with bytes comparison.</li>
-<li>second where the file wasn&rsquo;t read.</li>
+<li>The program read the file and check if it is well construct by comparing some bytes.</li>
+<li>The file can&rsquo;t be read.</li>
 </ul>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-2_code_construct.png" alt="code_construct"></p>
-<p>We can switch the compare value (in Hex) to ascii. It create an html symbol: <strong>&lt;!&ndash;</strong>. This represent a comment.</p>
+<p>We can switch the compare value (in Hex) to ascii. It create an html symbol: <strong>&lt;!–</strong>. It represents a comment.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-2_comment.png" alt="comment"></p>
 <h4 id="are-there-any-network-based-indicators-for-this-program-"><strong>Are there any network-based indicators for this program ?</strong></h4>
 <p>There are two network indicators:</p>
 <ul>
-<li>URL: &ldquo;<a href="http://practicalmalwareanalysis.com/cc.htm%22">http://practicalmalwareanalysis.com/cc.htm&quot;</a></li>
-<li>User-Agent : &ldquo;Internet Explorer 7.5 /pma&rdquo;</li>
+<li>URL: “http://practicalmalwareanalysis.com/cc.htm&rdquo;</li>
+<li>User-Agent : “Internet Explorer 7.5 /pma”</li>
 </ul>
 <h4 id="what-is-the-purpose-of-this-malware-"><strong>What is the purpose of this malware ?</strong></h4>
-<p>The goal of this malware is to check if you are connected to Internet. Then it will open your IE browser and search for <em><a href="http://practicalmalwareanalysis.com/cc.htm">http://practicalmalwareanalysis.com/cc.htm</a></em> url with the user-agent <em>Internet Explorer 7.5 /pma</em>.<br>
-The file construct is checked to see if it is well form. If it&rsquo;s the case it will print the first 512 bytes of the file.</p>
+<p>The goal of this malware is to check if you are connected to Internet. Then it will open your IE browser and search for <a href="http://practicalmalwareanalysis.com/cc.htm">http://practicalmalwareanalysis.com/cc.htm</a> url with the user-agent Internet Explorer 7.5 /pma.
+The file construct is checked to see if it is well form. If it’s the case it will print the first 512 bytes of the file.</p>
 <h3 id="lab-6-3"><strong>Lab 6-3</strong></h3>
-<h4 id="compare-the-calls-in-main-to-lab6-2s-main-method-what-is-the-new-function-called-from-main-"><strong>Compare the calls in main to Lab6-2&rsquo;s main method. What is the new function called from main ?</strong></h4>
-<p>The new function called from main is located at 0x401130</p>
+<h4 id="compare-the-calls-in-main-to-lab6-2s-main-method-what-is-the-new-function-called-from-main-"><strong>Compare the calls in main to Lab6-2’s main method. What is the new function called from main ?</strong></h4>
+<p>The new function called from main is located at <em>0x401130</em></p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-3_call_sub_401130.png" alt="call_sub_401130"></p>
 <h4 id="what-parameters-does-this-new-function-take-"><strong>What parameters does this new function take ?</strong></h4>
 <p>It take two parameters:</p>
@@ -283,60 +284,58 @@ The file construct is checked to see if it is well form. If it&rsquo;s the case 
 <li>Argv = LpExistingFileName = Pointer to the name of the program</li>
 <li>Var_8 = char</li>
 </ul>
-<p><img src="/images/walkthroughs/pma_lab6/lab-6-3_parameters_401130_2.png" alt="parameters"></p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-3_parameters_401130.png" alt="parameters"></p>
 <p>Following the routine, at the top, IDA confirm what we said.</p>
-<p><img src="/images/walkthroughs/pma_lab6/lab-6-3_parameters_401130.png" alt="parameters_2"></p>
-<p>We are going to find the value of Var_8.<br>
-At <em>0x40122D</em> var_8 is equal to al. AL is the first 8 bits of the EAX register. And the content of EAX is the result of the function at <em>0x401040</em> which is the symbol <strong>&lt;!&ndash;</strong> that we saw in the previous lab.
-8 bits is equivalent to 1 byte = 1 character. In our case the last character is <strong>-</strong>. Var_8 = &ldquo;-&rdquo;</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-3_parameters_401130_2.png" alt="parameters_2"></p>
+<p>We are going to find the value of Var_8.
+At 0x40122D, var_8 is equal to al. AL is the first 8 bits of the EAX register. And the content of EAX is the result of the function at <em>0x401040</em> which is the symbol <strong>&lt;!–</strong> that we saw in the previous lab. 8 bits is equivalent to 1 byte = 1 character. In our case the last character is <strong>-</strong>.<br>
+<strong>Var_8 = “-”</strong></p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-3_parameters_al.png" alt="parameters_al"></p>
 <h4 id="what-major-code-construct-does-this-function-contain-"><strong>What major code construct does this function contain ?</strong></h4>
 <p>This function contain a <strong>switch case</strong>. It can take 5 values, each of them have different action. The program use a Jump Table where it reference all the addresses it could jump to.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_construct.png" alt="switch_construct"></p>
 <h4 id="what-can-this-function-do-"><strong>What can this function do ?</strong></h4>
-<p>This function can take 5 values depending on the character after the &ldquo;&lt;!-&rdquo; symbol that was check on the previous routine. The result is store in EAX. Then EAX is move to ECX.
-Therefore the letter &lsquo;a&rsquo; is substract from ECX.
-There are 5 possibilities:</p>
+<p>This function can take 5 values depending on the character after the “&lt;!-” symbol that was check on the previous routine. The result is store in EAX. Then EAX is move to ECX. Therefore the letter ‘a’ is substract from ECX. There are 5 possibilities:</p>
 <ul>
 <li>
-<p>ECX = &lsquo;a&rsquo;, the sub will be &lsquo;a&rsquo; - &lsquo;a&rsquo; = 0 (it substract both hexadecimal value -&gt; 0x61 - 0x61 = 0)<br>
+<p>ECX = ‘a’, the sub will be <strong>‘a’ - ‘a’ = 0</strong> (it substract both hexadecimal value -&gt; <strong>0x61 - 0x61 = 0</strong>)
 The program create a folder call C:\Temp.
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_0.png" alt="switch_0"></p>
 </li>
 <li>
-<p>ECX = &lsquo;b&rsquo;, the sub will be &lsquo;b&rsquo; - &lsquo;a&rsquo; = 1<br>
+<p>ECX = ‘b’, the sub will be <strong>‘b’ - ‘a’ = 1</strong> (0x62 - 0x61)
 The program copy the malware at C:\Temp, and name it cc.exe.
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_1.png" alt="switch_1"></p>
 </li>
 <li>
-<p>ECX = &lsquo;c&rsquo;, the sub will be &lsquo;c&rsquo; - &lsquo;a&rsquo; = 2<br>
+<p>ECX = ‘c’, the sub will be <strong>‘c’ - ‘a’ = 2</strong> (0x63 - 0x61)
 The program delete the copy of the malware name cc.exe in the Temp folder.
-<img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_2.png" alt="switch_2"></p>
+<img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_1.png" alt="switch_2"></p>
 </li>
 <li>
-<p>ECX = &lsquo;c&rsquo;, the sub will be &rsquo;d&rsquo; - &lsquo;a&rsquo; = 3<br>
-The program create a register key at Software\Microsoft\Windows\CurrentVersion\Run to persist on the system. The key is call &ldquo;malware&rdquo; and link to C:\Temp\cc.exe.
+<p>ECX = ‘c’, the sub will be <strong>’d’ - ‘a’ = 3</strong> (0x64 - 0x61)
+The program create a register key at Software\Microsoft\Windows\CurrentVersion\Run to persist on the system. The key is call “malware” and link to C:\Temp\cc.exe.
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_3.png" alt="switch_3"></p>
 </li>
 <li>
-<p>ECX = &rsquo;d&rsquo;, the sub will be &lsquo;e&rsquo; - &lsquo;a&rsquo; = 4
-The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.<br>
+<p>ECX = ’d’, the sub will be <strong>‘e’ - ‘a’ = 4</strong> (0x65 - 0x61)
+The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_4.png" alt="switch_4"></p>
 </li>
 </ul>
 <h4 id="are-there-any-host-based-indicators-for-this-malware-"><strong>Are there any host-based indicators for this malware ?</strong></h4>
 <ul>
 <li>The malware copy himself to C:\Temp\cc.exe</li>
-<li>Add a register key to Software\Microsoft\Windows\CurrentVersion\Run name &ldquo;malware&rdquo;</li>
+<li>Add a register key to Software\Microsoft\Windows\CurrentVersion\Run name “malware”</li>
 </ul>
 <h4 id="what-is-the-purpose-of-this-malware--1"><strong>What is the purpose of this malware ?</strong></h4>
-<p>This malware check if the target have internet. Then it use Internet Explorer to download an htm page (<a href="http://practicalmalwareanalysis.com/cc.htm)">http://practicalmalwareanalysis.com/cc.htm)</a>. It parse the beginning of the program (512 bytes), the result of first bytes must be <em>&lt;!-</em> otherwise it fail. Finally, the character after <em>&lt;!-</em> indicate the state, it could be one of the 5 letters:</p>
+<p>This malware check if the target have internet. Then it use Internet Explorer to download an htm page (<a href="http://practicalmalwareanalysis.com/cc.htm)">http://practicalmalwareanalysis.com/cc.htm)</a>. It parse the beginning of the program (512 bytes), the result of first bytes must be &lt;!- otherwise it fail. Finally, the character after &lt;!- indicate the state, it could be one of the 5 letters:</p>
 <ul>
-<li>&lsquo;a&rsquo; (case &lsquo;0&rsquo;) = Create the C:\Temp folder</li>
-<li>&lsquo;b&rsquo; (case &lsquo;1&rsquo;) = Copy the malware to C:\Temp and call it cc.exe</li>
-<li>&lsquo;c&rsquo; (case &lsquo;2&rsquo;) = Delete cc.exe</li>
-<li>&rsquo;d&rsquo; (case &lsquo;3&rsquo;) = Create the register key to Software\Microsoft\Windows\CurrentVersion\Run and name it &ldquo;malware&rdquo;</li>
-<li>&lsquo;e&rsquo; (case &lsquo;4&rsquo;) = The program sleep for 1.40 minutes</li>
+<li>&lsquo;a&rsquo; (case ‘0’) = Create the C:\Temp folder</li>
+<li>&lsquo;b&rsquo; (case ‘1’) = Copy the malware to C:\Temp and call it cc.exe</li>
+<li>&lsquo;c&rsquo; (case ‘2’) = Delete cc.exe</li>
+<li>&rsquo;d&rsquo; (case ‘3’) = Create the register key to Software\Microsoft\Windows\CurrentVersion\Run and name it “malware”</li>
+<li>&lsquo;e&rsquo; (case ‘4’) = The program sleep for 1.40 minutes</li>
 </ul>
 <h3 id="lab-6-4"><strong>Lab 6-4</strong></h3>
 <h4 id="what-is-the-difference-between-the-calls-made-from-the-main-method-in-lab6-3-and-6-4-"><strong>What is the difference between the calls made from the main method in Lab6-3 and 6-4 ?</strong></h4>
@@ -349,24 +348,23 @@ The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.<br>
 <p>The rest of the program call same subroutine as 6-3.</p>
 <h4 id="what-new-code-construct-has-been-added-to-main-"><strong>What new code construct has been added to main ?</strong></h4>
 <p>There is a <strong>For</strong> loop that have been added. It check if a variable is greater or equal to 5A0h = 1440. If not, it does things and increment the variable compared by 1. Otherwise the program quit.</p>
-<p><img src="/images/walkthroughs/pma_lab6/lab-6-4_loop_construct.png" alt="difference_main"></p>
-<h4 id="what-is-the-difference-between-this-labs-parse-html-function-and-those-of-the-previous-labs-"><strong>What is the difference between this lab&rsquo;s parse HTML function and those of the previous labs ?</strong></h4>
-<p>The difference is the use of a new variable (<em>szAgent</em>) and a new parameter (arg_0).</p>
+<p><img src="/images/walkthroughs/pma_lab6/lab-6-4_loop_construct.png" alt="loop_construct"></p>
+<h4 id="what-is-the-difference-between-this-labs-parse-html-function-and-those-of-the-previous-labs-"><strong>What is the difference between this lab’s parse HTML function and those of the previous labs ?</strong></h4>
+<p>The difference is the use of a new variable (szAgent) and a new parameter (arg_0).</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-4_variable_parameter.png" alt="variable_parameter"></p>
-<p>The variable szAgent take the value of the string *Internet Explorer 7.50/pma%d&rdquo;. %d is a format string to print a digit. It take the number of loop the program did in main.</p>
+<p>The variable szAgent take the value of the string *Internet Explorer 7.50/pma%d”. %d is a format string to print a digit. It take the number of loop the program did in main.</p>
 <p>Indeed we see in the main function that ECX is push before the call of sub_401040.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-4_digit_push.png" alt="digit_push"></p>
 <h4 id="how-long-will-this-program-run-assume-that-it-is-connected-to-the-internet"><strong>How long will this program run ?(Assume that it is connected to the Internet)</strong></h4>
-<p>The program sleep 60 000ms every time it loop. It can loop 1440 times.
-So:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">60</span> <span style="color:#ae81ff">0000</span> * 1440 <span style="color:#f92672">=</span> <span style="color:#ae81ff">86</span> <span style="color:#ae81ff">400</span> <span style="color:#ae81ff">000</span> ms
-<span style="color:#ae81ff">86</span> <span style="color:#ae81ff">400</span> <span style="color:#ae81ff">000</span> / 60 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">440</span> <span style="color:#ae81ff">000</span> ms
-<span style="color:#ae81ff">1</span> 440s / 60 <span style="color:#f92672">=</span> 24h
-</code></pre></div><p>The program can sleep 24 hours.</p>
+<p>The program sleep 60 000ms every time it loop. It can loop 1440 times. So:</p>
+<p>60 0000 * 1440 = 86 400 000 ms
+86 400 000 / 60 = 1 440 000 ms
+1 440s / 60 = 24h</p>
+<p>The program can sleep 24 hours.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-4_sleep.png" alt="sleep"></p>
 <h4 id="are-there-any-new-network-based-indicators-for-this-malware-"><strong>Are there any new network-based indicators for this malware ?</strong></h4>
 <ul>
-<li>User-Agent: *Internet Explorer 7.50/pma%d&rdquo;</li>
+<li>User-Agent: *Internet Explorer 7.50/pma%d”</li>
 </ul>
 <h4 id="what-is-the-purpose-of-this-malware--2"><strong>What is the purpose of this malware ?</strong></h4>
 <p>The malware does the same things as 6-3. But there are 2 new components:</p>
@@ -407,21 +405,7 @@ So:</p>
         
     
 
-  
-  
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'your-google-analytics-id', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-<script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" integrity="sha384-b3ua1l97aVGAPEIe48b4TC60WUQbQaGi2jqAWM90y0OZXZeyaTCWtBTKtjW2GXG1" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" integrity="sha384-ZbbbT1gw3joYkKRqh0kWyRp32UAvdqkpbLedQJSlnI8iLQcFVxaGyrOgOJiDQTTR" crossorigin="anonymous"></script>
 
 
     

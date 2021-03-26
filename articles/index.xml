@@ -6,38 +6,28 @@
     <description>Recent content in Articles on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Thu, 19 Nov 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nikj-fr.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Malware - Analyse de Bokbot / IcedID</title>
-      <link>https://nikj-fr.github.io/articles/analyze_bokbot/</link>
-      <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nikj-fr.github.io/articles/analyze_bokbot/</guid>
-      <description>Introduction Todo</description>
-    </item>
-    
-    <item>
-      <title>Suppression des applications préinstallées sous Windows 10</title>
-      <link>https://nikj-fr.github.io/articles/suppression_built_in_apps_windows/</link>
+      <title>Suppression des application préinstallées sous Windows 10</title>
+      <link>https://nikj-fr.github.io/articles/suppression_application_preinstalle_windows10.md/</link>
       <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://nikj-fr.github.io/articles/suppression_built_in_apps_windows/</guid>
-      <description>Introduction Cet article fait suite à une envie de nettoyage de mon pc. Je vais vous partager la méthode que j&amp;rsquo;ai utilisé pour supprimer les applications pré-installées sous Windows 10. Malheuresement, quelques applications parviennent à survivre à la méthode (Hello Cortana).
-Methodes Ouverture d&amp;rsquo;un interpreteur Powershell  Rechercher le programme Powershell dans votre menu démarrer puis lancer le en tant qu&amp;rsquo;administrateur.  Lister l&amp;rsquo;ensemble des applications installées  Dans la fenêtre qui vient de s&amp;rsquo;ouvrir, rentrer la commande suivante:  Get-AppxPackage | Select Name, PackageFullName Selection du package à supprimer  Lancer la commande suivante en remplaçant le nom du package à supprimer à la place de YourPackageName  Get-AppxPackage YourPackageName | Remove-AppxPackage Liste de toutes les applications possibles de supprimer Important:</description>
+      <guid>https://nikj-fr.github.io/articles/suppression_application_preinstalle_windows10.md/</guid>
+      <description>Introduction Cet article fait suite à une envie de nettoyage de mon pc. Je vais vous partager la méthode que j’ai utilisé pour supprimer les applications pré-installées sous Windows 10. Malheuresement, quelques applications parviennent à survivre à la méthode (Hello Cortana). Methodes
+Ouverture d’un interpreteur Powershell  Rechercher le programme Powershell dans votre menu démarrer puis lancer le en tant qu’administrateur.  Lister l’ensemble des applications installées  Dans la fenêtre qui vient de s’ouvrir, rentrer la commande suivante:  Get-AppxPackage | Select Name, PackageFullNameSelection du package à supprimer  Lancer la commande suivante en remplaçant le nom du package à supprimer à la place de YourPackageName  Get-AppxPackage YourPackageName | Remove-AppxPackageListe de toutes les applications possibles de supprimer Important: Je vous conseil de ne pas supprimer le Windows Store afin de pouvoir récupérer les applications que vous allez supprimer.</description>
     </item>
     
     <item>
       <title>WSL</title>
-      <link>https://nikj-fr.github.io/articles/wls2/</link>
+      <link>https://nikj-fr.github.io/articles/wsl2/</link>
       <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://nikj-fr.github.io/articles/wls2/</guid>
-      <description>-&amp;gt;&amp;lt;-
-Abstract Depuis quelques années, Microsoft s&amp;rsquo;est tourné vers l&amp;rsquo;Open Source en témoigne le rachat de Github. Ce type de licence est très apprécié de la communauté qui à la possibilité d&amp;rsquo;accéder aux codes sources et d&amp;rsquo;y effectuer des améliorations mais également par les développeurs car la communauté peut également remonter des bugs. Le seul moyen pour Microsoft d&amp;rsquo;intégrer les outils du monde Linux dans son système est de passer par la virtualisation.</description>
+      <guid>https://nikj-fr.github.io/articles/wsl2/</guid>
+      <description>Abstract Depuis quelques années, Microsoft s’est tourné vers l’Open Source en témoigne le rachat de Github. Ce type de licence est très apprécié de la communauté qui à la possibilité d’accéder aux codes sources et d’y effectuer des améliorations mais également par les développeurs car la communauté peut également remonter des bugs. Le seul moyen pour Microsoft d’intégrer les outils du monde Linux dans son système est de passer par la virtualisation.</description>
     </item>
     
   </channel>
