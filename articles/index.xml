@@ -6,10 +6,15 @@
     <description>Recent content in Articles on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Thu, 22 Oct 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://nikj-fr.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sat, 05 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tutorial - Unpack Self Injection Packer</title>
+      <link>https://nikj-fr.github.io/articles/self_injection/</link>
+      <pubDate>Sat, 05 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/articles/self_injection/</guid>
+      <description>Table of content  Introduction Overview How to detect the technique ? Unpack Princess Locker  Introduction Malware authors try to hide themselves from antivirus and make analysis harder for analysist. One technique they use is call packing, it means to make the code more obfuscated and unreable. In this post, we&amp;rsquo;ll look at one specific kind of unpacking technique that you can use to finally start the analysis of the real payload.</description>
+    </item>
     
     <item>
       <title>Suppression des application préinstallées sous Windows 10</title>

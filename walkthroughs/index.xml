@@ -6,11 +6,7 @@
     <description>Recent content in Walkthroughs on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://nikj-fr.github.io/walkthroughs/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/walkthroughs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Practical Reverse Engineering - Ex 2</title>
       <link>https://nikj-fr.github.io/walkthroughs/prr_ex2/</link>

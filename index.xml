@@ -6,11 +6,7 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Practical Reverse Engineering - Ex 2</title>
       <link>https://nikj-fr.github.io/walkthroughs/prr_ex2/</link>
@@ -109,6 +105,15 @@ Upload the files to http://wwww.VirusTotal.com/ and view the reports. Does eithe
 b) Lab01-01.dll The signature of the malware is 290934c61de9176ad682ffdd65f0a669
 42/67 positifs antivirus
 Signature of malware can be generated with WinMD5..</description>
+    </item>
+    
+    <item>
+      <title>Tutorial - Unpack Self Injection Packer</title>
+      <link>https://nikj-fr.github.io/articles/self_injection/</link>
+      <pubDate>Sat, 05 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/articles/self_injection/</guid>
+      <description>Table of content  Introduction Overview How to detect the technique ? Unpack Princess Locker  Introduction Malware authors try to hide themselves from antivirus and make analysis harder for analysist. One technique they use is call packing, it means to make the code more obfuscated and unreable. In this post, we&amp;rsquo;ll look at one specific kind of unpacking technique that you can use to finally start the analysis of the real payload.</description>
     </item>
     
     <item>

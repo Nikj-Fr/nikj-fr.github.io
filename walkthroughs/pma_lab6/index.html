@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.74.1" />
+<meta name="generator" content="Hugo 0.78.2" />
 
     
     
@@ -268,7 +268,7 @@ We can check this by starting the malware..</p>
 <h4 id="are-there-any-network-based-indicators-for-this-program-"><strong>Are there any network-based indicators for this program ?</strong></h4>
 <p>There are two network indicators:</p>
 <ul>
-<li>URL: “http://practicalmalwareanalysis.com/cc.htm&rdquo;</li>
+<li>URL: “http://practicalmalwareanalysis.com/cc.htm&quot;</li>
 <li>User-Agent : “Internet Explorer 7.5 /pma”</li>
 </ul>
 <h4 id="what-is-the-purpose-of-this-malware-"><strong>What is the purpose of this malware ?</strong></h4>
@@ -334,7 +334,7 @@ The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.
 <li>&lsquo;a&rsquo; (case ‘0’) = Create the C:\Temp folder</li>
 <li>&lsquo;b&rsquo; (case ‘1’) = Copy the malware to C:\Temp and call it cc.exe</li>
 <li>&lsquo;c&rsquo; (case ‘2’) = Delete cc.exe</li>
-<li>&rsquo;d&rsquo; (case ‘3’) = Create the register key to Software\Microsoft\Windows\CurrentVersion\Run and name it “malware”</li>
+<li>&rsquo;d' (case ‘3’) = Create the register key to Software\Microsoft\Windows\CurrentVersion\Run and name it “malware”</li>
 <li>&lsquo;e&rsquo; (case ‘4’) = The program sleep for 1.40 minutes</li>
 </ul>
 <h3 id="lab-6-4"><strong>Lab 6-4</strong></h3>

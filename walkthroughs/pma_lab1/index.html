@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.74.1" />
+<meta name="generator" content="Hugo 0.78.2" />
 
     
     
@@ -249,12 +249,33 @@ We start PEiD to see if files are packed or obfuscated. The tool detect that the
 </ul>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-1_3_dll.png" alt="image_dll"></p>
 <p>c) PEView</p>
-<p>PEView allow us to analyze each section of a PE. If the virtual size is close to the disk size then the malware isn’t packed. Nevertheless, if the virtual size is greater than disk size, the malware is packed.
-Section   | 	Virtual Size  | Size of raw data
-&mdash;&mdash;&mdash;-|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
-.text     |       1000 	      |       970
-.rdata 	  |        2B2 	      |      1000
-.data 	  |         FC        |      1000</p>
+<p>PEView allow us to analyze each section of a PE. If the virtual size is close to the disk size then the malware isn’t packed. Nevertheless, if the virtual size is greater than disk size, the malware is packed.</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Virtual Size</th>
+<th>Size of raw data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.text</td>
+<td>1000</td>
+<td>970</td>
+</tr>
+<tr>
+<td>.rdata</td>
+<td>2B2</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>.data</td>
+<td>FC</td>
+<td>1000</td>
+</tr>
+</tbody>
+</table>
 <p>The memory size isn’t greater than the disk size. To conclude the malware isn’t packed</p>
 <h4 id="do-any-imports-hint-at-what-this-malware-does--if-so-which-imports-are-they-"><strong>Do any imports hint at what this malware does ? If so, which imports are they ?</strong></h4>
 <p>We use Dependencies Walker to list all the imported functions. Some of them can be usefull for a malware:</p>

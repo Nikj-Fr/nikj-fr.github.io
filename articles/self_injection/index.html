@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.78.2" />
+
+    
+    
+    
+
+<title>Tutorial - Unpack Self Injection Packer • Nikj • </title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Tutorial - Unpack Self Injection Packer"/>
+<meta name="twitter:description" content="Malware authors try to hide themselves from antivirus and make analysis harder for analysist. One technique they use is call packing, it means to make the code more obfuscated and unreable. In this post, we&#39;ll look at one specific kind of unpacking technique that you can use to finally start the analysis of the real payload. This technique is call Self-Injection."/>
+
+<meta property="og:title" content="Tutorial - Unpack Self Injection Packer" />
+<meta property="og:description" content="Malware authors try to hide themselves from antivirus and make analysis harder for analysist. One technique they use is call packing, it means to make the code more obfuscated and unreable. In this post, we&#39;ll look at one specific kind of unpacking technique that you can use to finally start the analysis of the real payload. This technique is call Self-Injection." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nikj-fr.github.io/articles/self_injection/" />
+<meta property="article:published_time" content="2020-12-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-12-05T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.7607cf2bc2eb2cb9f7611afe1f814025416b193e2786307b9247d028b5476745.css" integrity="sha256-dgfPK8LrLLn3YRr&#43;H4FAJUFrGT4nhjB7kkfQKLVHZ0U=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://nikj-fr.github.io/">
+        
+          
+        
+        </a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <a href="http://nikj-fr.github.io"><img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center"></a>
+        </div>
+        
+      
+      
+      <p class="site__description">
+        <a href="http://nikj-fr.github.io"> Infosec Website | CTF Write Up </a>
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle"></label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/walkthroughs/">
+						<span>Walkthroughs</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/write-ups/">
+						<span>Write-Ups</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/cheatsheets/">
+						<span>Cheatsheets &amp; Ressources</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/articles/">
+						<span>Articles</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About-Me</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
+</div>
+
+        <section class="social">
+	
+	<a href="https://twitter.com/%3cusername%3e" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	<a href="https://github.com/Nikj-Fr" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	<a href="https://gitlab.com/Nikj-Fr" rel="me"><i class="fab fa-gitlab fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+</section>
+
+      </div>
+    </div>
+    
+<div class="copyright">
+  &copy; 2019 - 2021 htr3n
+  
+    <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  
+</div>
+
+
+<div class="builtwith">
+Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+</div>
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    
+<article>
+  <header>
+    <h1>Tutorial - Unpack Self Injection Packer</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Dec 5, 2020
+    
+    
+    
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 4 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="post">
+    <h3 id="table-of-content"><strong>Table of content</strong></h3>
+<ul>
+<li>Introduction</li>
+<li>Overview</li>
+<li>How to detect the technique ?</li>
+<li>Unpack Princess Locker</li>
+</ul>
+<h3 id="introduction"><strong>Introduction</strong></h3>
+<p>Malware authors try to hide themselves from antivirus and make analysis harder for analysist. One technique they use is call <em>packing</em>, it means to make the code more obfuscated and unreable. In this post, we&rsquo;ll look at one specific kind of unpacking technique that you can use to finally start the analysis of the real payload. This technique is called <em>Self-Injection</em>.</p>
+<p>Self-Injection is the term to define that the malware will unpack himself inside the same process as the packed binary. It will overwrite binary sections in memory, then it will transfer execution to the overwritten section of the PE file.</p>
+<p>In this tutorial, I&rsquo;ll explain how this work and how to unpack Princess Locker sample.</p>
+<h3 id="overview"><strong>Overview</strong></h3>
+<p>The techniques is split into 4 parts:</p>
+<ul>
+<li>Allocate Memory</li>
+<li>Write PE inside the memory allocated</li>
+<li>Setup the memory section to be executable (if it was not the case)</li>
+<li>Execution of the PE file in memory</li>
+</ul>
+<p><img src="/images/articles/tuto_self_injection_unpack/self_injection_overview.png" alt="self_injection_overview"></p>
+<h3 id="how-to-detect-this-technique-"><strong>How to detect this technique ?</strong></h3>
+<p>Put the packed malware into a sandbox like <a href="https://www.hybrid-analysis.com/">Hybrid-Analysis</a>.</p>
+<p>In the process analysis section, if you see that there aren&rsquo;t subprocesses. The malware must use self injection.</p>
+<p><img src="/images/articles/tuto_self_injection_unpack/detection.png" alt="detection"></p>
+<h3 id="practice-time"><strong>Practice time</strong></h3>
+<p>As an example we will unpack <strong>Princess Locker</strong> malware</p>
+<p><strong>Sha256</strong>: dc7ab2e7ed26554a11da51a184e95b01e685b1a2f99c7fc77d54d5966530bf60<br>
+<strong>Link</strong>: <a href="https://malshare.com/sample.php?action=detail&amp;hash=93cb0053e883fb262f9f795f327152f8">https://malshare.com/sample.php?action=detail&amp;hash=93cb0053e883fb262f9f795f327152f8</a><br>
+<strong>Environment</strong>: Win7_x86</p>
+<p>In order to dump the new PE file that will be write into memory we put 2 breakpoints:</p>
+<ul>
+<li><strong>VirtualAlloc</strong><br>
+The breakpoint is put on <em>ret</em> because EAX will contain the base address of the new memory segment that was allocated. <strong>Be carefull you must but the breakpoint on the kernelbase.dll not on kernel32.dll</strong>. This API function isn&rsquo;t in kernel32 anymore. It&rsquo;s just a redirect to kernelbase.<br>
+<a href="https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc">MSDN_VirtualAlloc</a></li>
+</ul>
+<p><img src="/images/articles/tuto_self_injection_unpack/search_virtualalloc.png" alt="search_virtualalloc">
+<img src="/images/articles/tuto_self_injection_unpack/jump_virtualalloc.png" alt="jump_virtualalloc">
+<img src="/images/articles/tuto_self_injection_unpack/breakpoint_virtualalloc.png" alt="breakpoint_virtualalloc"></p>
+<p>Once we hit the breakpoint, we can see EAX with 0x640000<br>
+<img src="/images/articles/tuto_self_injection_unpack/eax_base_address.png" alt="eax_base_address"><br>
+When we show the content at this address, there is nothing but null bytes.
+<img src="/images/articles/tuto_self_injection_unpack/hexa_virtual_alloc.png" alt="hexa_virtual_alloc">
+We&rsquo;ll keep execute the binary. After several break we finally find something that looks like a PE file at 0x640000
+<img src="/images/articles/tuto_self_injection_unpack/pefile_virtual_alloc.png" alt="pefile_virtual_alloc">
+We can see the section table (.text, .rdata, .data). Indeed above this section table there isn&rsquo;t the header of a PE file (magic byte &ldquo;MZ&rdquo;). It&rsquo;s a particularity of this malware. We aren&rsquo;t going to cover this part in this tutorial.</p>
+<p>Now we&rsquo;ll put an execution breakpoints on this memory section. When ever the PE file is executed we can grab the content of the file.</p>
+<ul>
+<li>Execute breakpoints<br>
+Firstly we&rsquo;ll follow in memory map
+<img src="/images/articles/tuto_self_injection_unpack/follow_memory_map.png" alt="follow_memory_map">
+Then we put the breakpoint.
+<img src="/images/articles/tuto_self_injection_unpack/breakpoint_execute_memory.png" alt="breakpoint_execute_memory"></li>
+</ul>
+<p>After several hits of VirtualAlloc return breakpoint, the memory segment at 0x400000 is executed.</p>
+<p><img src="/images/articles/tuto_self_injection_unpack/breakpoint_execute_memory_hit.png" alt="breakpoint_execute_memory_hit"></p>
+<p>Let&rsquo;s dump the PE file which was executed in memory.</p>
+<p><img src="/images/articles/tuto_self_injection_unpack/payload_dump.png" alt="payload_dump"></p>
+<p>Open the PE file in hex editor like <a href="https://mh-nexus.de/en/hxd/">HXD</a></p>
+<p><img src="/images/articles/tuto_self_injection_unpack/final_payload.png" alt="final_payload"></p>
+<p>The unpack is over, we congrat to unpack a malware that use self injection packer.<br>
+The dumped payload header is not well form. The next step to completely unpack <strong>Princess Locker</strong> is to fix the header and unmap the binary. Unmap is a word to define the translation between disk address and memory address (virtual)</p>
+<h4 id="patch-header"><strong>Patch header</strong></h4>
+<p>Firstly, you have to run a hex editor. The patch will be easy, we have to copy the bytes from the Optional Header because they can&rsquo;t be modify by packers. According to this <a href="https://github.com/corkami/pics/blob/master/binary/pe101/pe101.pdf">PE poster</a>, we&rsquo;ll use the machine magic byte <em>4C 01</em>.<br>
+To sum up we&rsquo;ll copy the bytes before <em>4C 01</em> from the original packed malware and copy them in the unpack one</p>
+<p><img src="/images/articles/tuto_self_injection_unpack/original_pe_header.png" alt="original_pe_header"></p>
+<p>And paste it in the unpack PE file:
+<img src="/images/articles/tuto_self_injection_unpack/unpack_pe_header_paste.png" alt="unpack_pe_header_paste"></p>
+<p>Finally, you can save the file. The last step is to unmap the binary. Indeed when you dump a file in memory, there are shifts between location on disk and location in memory. We have to line up both to recover a working PE file.</p>
+<p>Open the modified file in PE Bear</p>
+<p><img src="/images/articles/tuto_self_injection_unpack/pe_bear_open_file.png" alt="PE_Bear_open_file"></p>
+<p>Here are the differents modification, you must do:</p>
+<ul>
+<li>
+<p>Raw Addr must equal Virtual Addr
+<img src="/images/articles/tuto_self_injection_unpack/raw_addr_modification.png" alt="raw_addr_modification"></p>
+</li>
+<li>
+<p>Raw Size must equal to the difference between start of next section minus end of the previous section. Ex: 3100 - 1000 = 3000
+<img src="/images/articles/tuto_self_injection_unpack/raw_size_modification.png" alt="raw_size_modification">
+Because we are unmaping a PE file, we don&rsquo;t need relocation table. It only exist on disk. Disk and memory data must be the same.</p>
+</li>
+<li>
+<p>Virtual Size must equal the Raw Size
+<img src="/images/articles/tuto_self_injection_unpack/virtual_size_modification.png" alt="virtual_size_modification"></p>
+</li>
+<li>
+<p>Save the new file</p>
+</li>
+</ul>
+<p>We can see that there are still red highlight on the PE Bear tool. This show us there is a problem with section alignment. What we do now is check section alignment with Hex Editor.</p>
+<p>Between header and section, it&rsquo;s fill of null bytes. .text section start at 0x1000. So it must have null bytes until the beginning of the section.</p>
+<p><img src="/images/articles/tuto_self_injection_unpack/alignment_patch.png" alt="alignment_patch"></p>
+<p>As you can see this isn&rsquo;t the case. We have to shift this data 33 bytes (16 * 2 + 1) lower to make <em>E8</em> start at 0x1000.</p>
+<p><img src="/images/articles/tuto_self_injection_unpack/insert_bytes.png" alt="insert_bytes"></p>
+<p><img src="/images/articles/tuto_self_injection_unpack/final_patch.png" alt="final_patch"></p>
+<p>Dump the patch file and open again PEBear. Red highlights are gone, there aren&rsquo;t problems anymore !</p>
+<p><img src="/images/articles/tuto_self_injection_unpack/final_alignment.png" alt="final_alignment"></p>
+<p>Now you could import the final unpack file in IDA to start analyse the malware !</p>
+<p><img src="/images/articles/tuto_self_injection_unpack/ida_view.png" alt="ida_view"></p>
+
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/articles/suppression_application_preinstalle_windows10.md/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">Suppression des application préinstallées sous Windows 10</span>
+    </a>
+    
+    
+</div>
+
+
+  
+
+  
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+
+<script defer src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" integrity="sha384-ZbbbT1gw3joYkKRqh0kWyRp32UAvdqkpbLedQJSlnI8iLQcFVxaGyrOgOJiDQTTR" crossorigin="anonymous"></script>
+
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+    
+
+
+
+    </body>
+</html>
