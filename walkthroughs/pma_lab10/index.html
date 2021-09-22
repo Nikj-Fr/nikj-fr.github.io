@@ -16,19 +16,19 @@
     
     
 
-<title>Practical Reverse Engineering - Ex 2 • Nikj • </title>
+<title>Practical Malware Analysis - Lab 10 • Nikj • </title>
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Practical Reverse Engineering - Ex 2"/>
-<meta name="twitter:description" content="Second exercice of the Practical Reverse Engineering book"/>
+<meta name="twitter:title" content="Practical Malware Analysis - Lab 10"/>
+<meta name="twitter:description" content="Eight exercice of the Practical Malware Analysis book. This chapter explore ways to use WinDbg for kernel debugging and rootkit analysis"/>
 
-<meta property="og:title" content="Practical Reverse Engineering - Ex 2" />
-<meta property="og:description" content="Second exercice of the Practical Reverse Engineering book" />
+<meta property="og:title" content="Practical Malware Analysis - Lab 10" />
+<meta property="og:description" content="Eight exercice of the Practical Malware Analysis book. This chapter explore ways to use WinDbg for kernel debugging and rootkit analysis" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/prr_ex2/" />
-<meta property="article:published_time" content="2021-03-26T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-03-26T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
+<meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/pma_lab10/" />
+<meta property="article:published_time" content="2021-09-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-09-22T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
 
 
     
@@ -199,20 +199,20 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
     
 <article>
   <header>
-    <h1>Practical Reverse Engineering - Ex 2</h1>
+    <h1>Practical Malware Analysis - Lab 10</h1>
     
     
 <div class="post__meta">
     
     
-      <i class="fas fa-calendar-alt"></i> Mar 26, 2021
+      <i class="fas fa-calendar-alt"></i> Sep 22, 2021
     
     
     
     
     
     <br/>
-    <i class="fas fa-clock"></i> 2 min read
+    <i class="fas fa-clock"></i> 1 min read
 </div>
 
 
@@ -220,72 +220,32 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
   
   
   <div class="post">
-    <p><strong>1 - A) Given what you learned about CALL and RET, explain how you would read the value of EIP ?</strong></p>
-<p>EIP is used to save the return address after a CALL or a RET for example. In this way, the program will resume correctly and it can continue the execution flow.</p>
-<p>I&rsquo;ll use a CALL to a function to modify EIP. Inside this function, we have to save the value of EIP inside a register. Next, we print the content of this register.</p>
-<p>Code:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#a6e22e">SECTION</span>  <span style="color:#66d9ef">.text</span>
-<span style="color:#a6e22e">GLOBAL</span> <span style="color:#66d9ef">_start</span>
-_start: 
-    <span style="color:#a6e22e">call</span> <span style="color:#66d9ef">store_eip</span>
-    <span style="color:#a6e22e">mov</span>  <span style="color:#66d9ef">ebx</span>,<span style="color:#ae81ff">0</span>         
-    <span style="color:#66d9ef">mov</span>  <span style="color:#66d9ef">eax</span>,<span style="color:#ae81ff">1</span>         
-    <span style="color:#66d9ef">int</span> <span style="color:#ae81ff">080</span><span style="color:#66d9ef">h</span>         
-
-<span style="color:#66d9ef">store_eip</span>:
-    <span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">eax</span>, [<span style="color:#66d9ef">esp</span>]
-    <span style="color:#a6e22e">ret</span>
-</code></pre></div><p>Code Explaination:</p>
-<ul>
-<li><strong>.text</strong> section is used for the program code (while .data is used for constants)</li>
-<li><strong>GLOBAL _start</strong> is used to declare the symbol</li>
-<li>Call the function <strong>store_eip</strong></li>
-<li>We set eax to the value pointed by esp
-Don&rsquo;t forget: when a function is call without arguments, ESP point to the bottom of the stack which contain the value of the return address function (EIP)</li>
-<li>We use int 080h to use syscall. In our case, EAX = 0 so the syscall will be <strong>exit()</strong></li>
-</ul>
-<p>We put a breakpoint on the <code>ret</code>.
-We start the program and read EIP:</p>
-<p>image_todo</p>
-<p>Then we read the content of EAX:</p>
-<p>image_todo</p>
-<p>They are both equal</p>
-<p><strong>1 - B) Why can&rsquo;t you just do mov EAX, EIP ?</strong></p>
-<p>TODO</p>
-<p><strong>2) Come up with at least two code sequencies to set EIP to 0xAABBCCDD ?</strong></p>
-<p>Version A:</p>
-<pre><code>SECTION .data
-SECTION .text
-GLOBAL _start
-_start:
-    mov eax, AABBCCDDh
-    call eax
-</code></pre><p>Version B:</p>
-<pre><code>SECTION .data
-SECTION .text
-GLOBAL _start
-_start:
-    jmp AABBCCDDh
-</code></pre><p><strong>3) In the example function ADDME, what would happen if the stack pointer were not properly restored before executing RET ?</strong></p>
-<p>TODO</p>
-<p><strong>4) In all of the calling conventions explained, the return value is stored in a 32-bit register (EAX). What happens when the return values does not fit in a 32-bit register ? Write a program to experiment and evaluate your answer. Does the mechanism change from compiler to compiler ?</strong></p>
-<p>TODO</p>
+    <h2 id="kernel-debugging-with-windbg"><strong>Kernel Debugging with WinDbg</strong></h2>
+<h3 id="lab-10"><strong>Lab 10</strong></h3>
+<p>This chapter explore ways to use WinDbg for kernel debugging and rootkit analysis.</p>
+<h3 id="lab-10-1"><strong>Lab 10-1</strong></h3>
+<h4 id="does-this-program-make-any-direct-changes-to-the-registry-"><strong>Does this program make any direct changes to the registry ?</strong></h4>
+<h4 id="the-user-space-program-calls-the-controlservice-function-can-you-set-a-breakpoint-with-windbg-to-see-what-is-executed-in-the-kernel-as-a-result-of-th-ecall-to-controlservice-"><strong>The user-space program calls the ControlService function. Can you set a breakpoint with WinDbg to see what is executed in the kernel as a result of th ecall to ControlService ?</strong></h4>
+<h4 id="what-does-this-program-do-"><strong>What does this program do ?</strong></h4>
+<h3 id="lab-10-2"><strong>Lab 10-2</strong></h3>
+<h4 id="does-this-program-create-any-files--if-so-what-are-they--">**Does this program create any files ? If so, what are they ? **</h4>
+<h4 id="does-this-program-have-a-kernel-component-"><strong>Does this program have a kernel component ?</strong></h4>
+<h4 id="what-does-this-program-do--1"><strong>What does this program do ?</strong></h4>
+<h3 id="lab-10-3"><strong>Lab 10-3</strong></h3>
+<h4 id="what-does-this-program-do--2"><strong>What does this program do ?</strong></h4>
+<h4 id="once-this-program-is-running-how-do-you-stop-it-"><strong>Once this program is running, how do you stop it ?</strong></h4>
+<h4 id="what-does-the-kernel-component-do-"><strong>What does the kernel component do ?</strong></h4>
 
   </div>
   
 
 <div class="navigation navigation-single">
     
-    <a href="/walkthroughs/prr_ex1/" class="navigation-prev">
+    <a href="/walkthroughs/pma_lab9/" class="navigation-prev">
       <i aria-hidden="true" class="fa fa-chevron-left"></i>
-      <span class="navigation-tittle">Practical Reverse Engineering - Ex 1</span>
-    </a>
-    
-    
-    <a href="/walkthroughs/pma_lab9/" class="navigation-next">
       <span class="navigation-tittle">Practical Malware Analysis - Lab 9</span>
-      <i aria-hidden="true" class="fa fa-chevron-right"></i>
     </a>
+    
     
 </div>
 

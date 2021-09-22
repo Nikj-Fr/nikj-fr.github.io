@@ -6,7 +6,17 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Wed, 15 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Practical Malware Analysis - Lab 10</title>
+      <link>https://nikj-fr.github.io/walkthroughs/pma_lab10/</link>
+      <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/walkthroughs/pma_lab10/</guid>
+      <description>Kernel Debugging with WinDbg Lab 10 This chapter explore ways to use WinDbg for kernel debugging and rootkit analysis.
+Lab 10-1 Does this program make any direct changes to the registry ? The user-space program calls the ControlService function. Can you set a breakpoint with WinDbg to see what is executed in the kernel as a result of th ecall to ControlService ? What does this program do ? Lab 10-2 **Does this program create any files ?</description>
+    </item>
+    
     <item>
       <title>Practical Malware Analysis - Lab 9</title>
       <link>https://nikj-fr.github.io/walkthroughs/pma_lab9/</link>
@@ -16,16 +26,6 @@
       <description>OllyDBG Lab 9 I choose x64DBG instead of OllyDBG because I found the HMI better, and I feel more familiar with the tool.
 Lab 9-1 How can you get this malware to install itself ? Firstly, let&amp;rsquo;s put the malware in the debugger. The program is immediately pauses once it hits the entrypoint.
 At 0x402AFD, the number of argument is compared to 1. I didn&amp;rsquo;t set any parameters when starting the debug.</description>
-    </item>
-    
-    <item>
-      <title>Practical Malware Analysis - Lab 10</title>
-      <link>https://nikj-fr.github.io/walkthroughs/pma_lab10/</link>
-      <pubDate>Sun, 13 Jun 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://nikj-fr.github.io/walkthroughs/pma_lab10/</guid>
-      <description>Kernel Debugging with WinDbg Lab 10 This chapter explore ways to use WinDbg for kernel debugging and rootkit analysis.
-Lab 10-1 Does this program make any direct changes to the registry ? The user-space program calls the ControlService function. Can you set a breakpoint with WinDbg to see what is executed in the kernel as a result of th ecall to ControlService ? What does this program do ? Lab 10-2 **Does this program create any files ?</description>
     </item>
     
     <item>
