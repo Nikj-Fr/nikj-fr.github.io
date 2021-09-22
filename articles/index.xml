@@ -6,24 +6,24 @@
     <description>Recent content in Articles on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Sat, 05 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tutorial - Unpack Self Injection Packer</title>
       <link>https://nikj-fr.github.io/articles/self_injection/</link>
-      <pubDate>Sat, 05 Dec 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://nikj-fr.github.io/articles/self_injection/</guid>
-      <description>Table of content  Introduction Overview How to detect the technique ? Unpack Princess Locker  Introduction Malware authors try to hide themselves from antivirus and make analysis harder for analysist. One technique they use is call packing, it means to make the code more obfuscated and unreable. In this post, we&amp;rsquo;ll look at one specific kind of unpacking technique that you can use to finally start the analysis of the real payload.</description>
+      <description>Table of content  Introduction Overview How to detect the technique ? Unpack Princess Locker  Introduction Malware authors try to hide themselves from antivirus and make analysis harder. One of technique is called &amp;ldquo;packing&amp;rdquo;, it means to make the code obfuscated and unreable. In this post, we&amp;rsquo;ll look at one specific kind of unpacking technique that you can use to finally start the analysis of the real payload. This technique is called Self-Injection.</description>
     </item>
     
     <item>
       <title>Suppression des application préinstallées sous Windows 10</title>
-      <link>https://nikj-fr.github.io/articles/suppression_application_preinstalle_windows10.md/</link>
+      <link>https://nikj-fr.github.io/articles/suppression_application_preinstalle_windows10/</link>
       <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://nikj-fr.github.io/articles/suppression_application_preinstalle_windows10.md/</guid>
-      <description>Introduction Cet article fait suite à une envie de nettoyage de mon pc. Je vais vous partager la méthode que j’ai utilisé pour supprimer les applications pré-installées sous Windows 10. Malheuresement, quelques applications parviennent à survivre à la méthode (Hello Cortana). Methodes
-Ouverture d’un interpreteur Powershell  Rechercher le programme Powershell dans votre menu démarrer puis lancer le en tant qu’administrateur.  Lister l’ensemble des applications installées  Dans la fenêtre qui vient de s’ouvrir, rentrer la commande suivante:  Get-AppxPackage | Select Name, PackageFullNameSelection du package à supprimer  Lancer la commande suivante en remplaçant le nom du package à supprimer à la place de YourPackageName  Get-AppxPackage YourPackageName | Remove-AppxPackageListe de toutes les applications possibles de supprimer Important: Je vous conseil de ne pas supprimer le Windows Store afin de pouvoir récupérer les applications que vous allez supprimer.</description>
+      <guid>https://nikj-fr.github.io/articles/suppression_application_preinstalle_windows10/</guid>
+      <description>Introduction Cet article fait suite à une envie de nettoyage de mon pc. Je vais vous partager la méthode que j’ai utilisé pour supprimer les applications pré-installées sous Windows 10. Malheureusement, quelques applications parviennent à survivre à la méthode (Hello Cortana).
+Ouverture d’un interpreteur Powershell  Rechercher le programme Powershell dans votre menu démarrer puis lancer le en tant qu’administrateur.  Lister l’ensemble des applications installées  Dans la fenêtre qui vient de s’ouvrir, utiliser la commande suivante:  Get-AppxPackage | Select Name, PackageFullName Selection du package à supprimer  Lancer la commande suivante en remplaçant le nom du package à supprimer à la place de YourPackageName  Get-AppxPackage YourPackageName | Remove-AppxPackage Liste de toutes les applications possibles de supprimer Important: Je vous conseil de ne pas supprimer le Windows Store afin de pouvoir récupérer les applications que vous allez supprimer.</description>
     </item>
     
     <item>

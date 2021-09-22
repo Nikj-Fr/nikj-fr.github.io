@@ -8,7 +8,6 @@
     <link href="https://gmpg.org/xfn/11" rel="profile">
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <meta name="generator" content="Hugo 0.78.2" />
@@ -17,19 +16,19 @@
     
     
 
-<title>Practical Malware Analysis - Lab 9 • </title>
+<title>Practical Malware Analysis - Lab 9 • Nikj • </title>
 
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Practical Malware Analysis - Lab 9"/>
-<meta name="twitter:description" content="Sixth exercice of the Practical Malware Analysis book. This lab focuses on OllyDbg developed by Oleh Yuschuk."/>
+<meta name="twitter:description" content="Sixth exercice of the Practical Malware Analysis book. The goal of this labs is to focus on OllyDBG, an x86 debugger developped by Oleh Yushuk."/>
 
 <meta property="og:title" content="Practical Malware Analysis - Lab 9" />
-<meta property="og:description" content="Sixth exercice of the Practical Malware Analysis book. This lab focuses on OllyDbg developed by Oleh Yuschuk." />
+<meta property="og:description" content="Sixth exercice of the Practical Malware Analysis book. The goal of this labs is to focus on OllyDBG, an x86 debugger developped by Oleh Yushuk." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/pma_lab9/" />
-<meta property="article:published_time" content="2021-01-12T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-01-12T00:00:00+00:00" /><meta property="og:site_name" content="Nikj | Personal Website" />
+<meta property="article:published_time" content="2021-09-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-09-15T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
 
 
     
@@ -44,7 +43,7 @@
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.d0c4ffb2e1828bd88212c4246b2911d84b93350f28f2d499f40bb11f1bd57e9a.css" integrity="sha256-0MT/suGCi9iCEsQkaykR2EuTNQ8o8tSZ9AuxHxvVfpo=">
+<link rel="stylesheet" href="/scss/hyde-hyde.7607cf2bc2eb2cb9f7611afe1f814025416b193e2786307b9247d028b5476745.css" integrity="sha256-dgfPK8LrLLn3YRr&#43;H4FAJUFrGT4nhjB7kkfQKLVHZ0U=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -71,20 +70,24 @@
   <div class="container ">
     <div class="sidebar-about">
       <span class="site__title">
-        <a href="https://nikj-fr.github.io/"></a>
+        <a href="https://nikj-fr.github.io/">
+        
+          
+        
+        </a>
       </span>
       
         
         
         
         <div class="author-image">
-          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+          <a href="http://nikj-fr.github.io"><img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center"></a>
         </div>
         
       
       
       <p class="site__description">
-         InfoSec Website | CTF WriteUp 
+        <a href="http://nikj-fr.github.io"> Infosec Website | CTF Write Up </a>
       </p>
     </div>
     <div class="collapsible-menu">
@@ -105,7 +108,7 @@
 		 
 			 
 				<li>
-					<a href="/writeup/">
+					<a href="/write-ups/">
 						<span>Write-Ups</span>
 					</a>
 				</li>
@@ -144,6 +147,7 @@
 	
 	
 	
+	
 	<a href="https://github.com/Nikj-Fr" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
 	
 	
@@ -162,7 +166,9 @@
 	
 	
 	
-	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+	<a href="mailto:nikj@protonmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
 	
 	
 	
@@ -199,14 +205,14 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <div class="post__meta">
     
     
-      <i class="fas fa-calendar-alt"></i> Jan 12, 2021
+      <i class="fas fa-calendar-alt"></i> Sep 15, 2021
     
     
     
     
     
     <br/>
-    <i class="fas fa-clock"></i> 2 min read
+    <i class="fas fa-clock"></i> 8 min read
 </div>
 
 
@@ -216,50 +222,214 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
   <div class="post">
     <h2 id="ollydbg"><strong>OllyDBG</strong></h2>
 <h3 id="lab-9"><strong>Lab 9</strong></h3>
-<p>This lab focuses on OllyDbg developed by Oleh Yuschuk. OllyDbg provides the ability to analyze malware while it is running. The tool is free, it has many plugins that extend it&rsquo;s capabilities</p>
+<p>I choose <strong>x64DBG</strong> instead of OllyDBG because I found the HMI better, and I feel more familiar with the tool.</p>
 <h3 id="lab-9-1"><strong>Lab 9-1</strong></h3>
 <h4 id="how-can-you-get-this-malware-to-install-itself-"><strong>How can you get this malware to install itself ?</strong></h4>
+<p>Firstly, let&rsquo;s put the malware in the debugger.
+The program is immediately pauses once it hits the entrypoint.</p>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-1_initial_breakpoint.png" alt="initial_breakpoint"></p>
+<p>At <em>0x402AFD</em>, the number of argument is compared to <strong>1</strong>. I didn&rsquo;t set any parameters when starting the debug.</p>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-1_402AFD_breakpoint.png" alt="402AFD_breakpoint"></p>
+<p>We&rsquo;ll take the JNE path<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-1_jne_path.png" alt="jne_path"></p>
+<p>Inside the function at 0x401000, we try to open the registry key: <strong>HKLM:\SOFTWARE\Microsoft\XPS</strong>.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-1_open_registry_key_xps.png" alt="open_registry_key_xps"></p>
+<p>The program couldn&rsquo;t open the registry Key, because it doesn&rsquo;t exist on my computer.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-1_registry_key_xps_doesnt_exist.png" alt="registry_key_xps_doesnt_exist"></p>
+<p>Then the program delete himself, and terminate..</p>
+<p>We could see in the debugger that the parameter &ldquo;<strong>-in</strong>&rdquo; is hardcoded.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-1_parameter.png" alt="parameter"></p>
+<p>In order to set this parameter, we have to change the command line executed by the debugger.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-1_change_command_line.png" alt="change_command_line"></p>
+<p>Now, we restart the program, and we can see that the comparaison with the number of argument (<strong>1</strong>) is done.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-1_good_path.png" alt="good_path"></p>
+<p>Let&rsquo;s dig deeper in the program..<br>
+Further, we see that the malware compare the length of the data after the parameter we enter with <strong>4</strong>. We assume the length of the password is <strong>4</strong>.<br>
+Then we can see 4 <strong>cmp</strong> instruction:</p>
+<ul>
+<li>&ldquo;<strong>a</strong>&rdquo; (0x61)</li>
+<li>&ldquo;<strong>b</strong>&rdquo; (0x62 - 0x61 = 0x1) -&gt; cmp ecx, 1</li>
+<li>&ldquo;<strong>c</strong>&rdquo; (0x61 + 0x02)</li>
+<li>&ldquo;<strong>d</strong>&rdquo; (0x61 + 0x03)</li>
+</ul>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-1_error_cmp_password.png" alt="error_cmp_password"></p>
+<p>Again, change the command line executed, and restart the program.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-1_new_command_line.png" alt="new_command_line"></p>
+<p>The comparaison of the parameter length and the first parameter work great.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-1_two_first_cmp.png" alt="two_first_cmp"></p>
+<p>Let&rsquo;s continue the execution. All the comparaison went well, EAX is set to 1, we can continue the execution of the malware. The password to install the malware is <strong>abcd</strong>.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-1_after_cmp_eax.png" alt="after_cmp_eax"></p>
+<p>In the function at <em>0x4025B0</em>, the program obtain the path where he is executed (this is store in EDX).<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-1_executable_path.png" alt="executable_path"></p>
+<p>Then from 0x402B90, the Service Control Manager create a service with the name <strong>Lab09-01</strong>.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-1_path_service.png" alt="path_service"></p>
+<p>Afterwards, it copy the executed to <strong>%SYSTEMROOT%\system32\Lab09-01.exe</strong><br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-1_copy_file.png" alt="copy_file"></p>
+<p>Otherwise, it open the service and change his configuration.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-1_open_service.png" alt="open_service"></p>
+<p>Once the program is copied to <strong>%SYSTEMROOT%\system32</strong>, we assume that the program is installed on the target.</p>
 <h4 id="what-are-the-command-line-options-for-this-program--what-is-the-password-requirements-"><strong>What are the command-line options for this program ? What is the password requirements ?</strong></h4>
+<p>As we saw previously, the password is: *<em>abcd</em></p>
+<p>There are 4 possible command-line options:</p>
+<ul>
+<li>-in</li>
+<li>-re</li>
+<li>-c</li>
+<li>-cc</li>
+</ul>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-1_list_parameters.png" alt="list_parameters"></p>
 <h4 id="how-can-you-use-ollydbg-to-permanently-patch-this-malware-so-that-it-doesnt-require-the-special-command-line-password-"><strong>How can you use OllyDbg to permanently patch this malware, so that it doesn&rsquo;t require the special command-line password ?</strong></h4>
+<p>The password is check from <em>0x402510</em>. In the end of this function, there is a <strong>mov EAX, 1</strong> when all the comparaison went well. Indeed, we&rsquo;ll set EAX to 1 before <strong>ret</strong>. Press <strong>CTRL+E</strong> to modify the mnemonic. First we&rsquo;ll mov eax, 1 (B8: mov; 01: 1), then we return from the function (C3: ret).</p>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-1_patch_eax.png" alt="patch_eax"></p>
+<p>To dump the new patch file, press <strong>CTRL + P</strong>, select all, then file patch.</p>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-1_patch_file.png" alt="patch_file"></p>
+<p>Finally, open the new dump file, jump to <em>0x402510</em> with <strong>CTRL + G</strong>. You should see your modification successfully saved.</p>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-1_successfull_patch.png" alt="successfull_patch"></p>
 <h4 id="what-are-the-host-based-indicators-of-this-malware-"><strong>What are the host-based indicators of this malware ?</strong></h4>
+<ul>
+<li>Registry keyy: <strong>HKLM\SOFTWARE\Microsoft \XPS</strong></li>
+<li>Presence of a binary at: <strong>%SYSTEMROOT%\Windows\System32</strong></li>
+<li>The service created with the name: <strong>Lab09-01</strong></li>
+</ul>
 <h4 id="what-are-the-different-actions-this-malware-can-be-instructed-to-take-via-the-network-"><strong>What are the different actions this malware can be instructed to take via the network ?</strong></h4>
+<p>If there aren&rsquo;t any arguments provided, the function starting at 0x402020 show us that the malware can receive information like:</p>
+<ul>
+<li><strong>sleep</strong> (wait)</li>
+<li><strong>upload</strong> (upload a file from the disk to the C2)</li>
+<li><strong>download</strong> (download a file from the C2 to the disk)</li>
+<li>start <strong>cmd.exe</strong> (execute a command, and send the stdout to the C2)</li>
+<li><strong>do nothing</strong> (continue)</li>
+</ul>
+<p><img src="/images/walkthroughs/pma_lab9/actions_malware.png" alt="actions_malware"></p>
+<p>Also the socket is setup with <strong>WSAStartup</strong></p>
 <h4 id="are-there-any-useful-network-based-signatures-for-this-malware-"><strong>Are there any useful network-based signatures for this malware ?</strong></h4>
-<h3 id="lab-92"><strong>Lab-9.2</strong></h3>
+<ul>
+<li>We assume that the C2 is: <strong><a href="http://www.practicalmalwareanalysis">http://www.practicalmalwareanalysis</a>[.]com</strong></li>
+</ul>
+<p>There aren&rsquo;t any user-agent specify. I didn&rsquo;t found any additional network information like a file that could be download.</p>
+<h3 id="lab-9-2"><strong>Lab 9-2</strong></h3>
 <h4 id="what-strings-do-you-see-statically-in-the-binary-"><strong>What strings do you see statically in the binary ?</strong></h4>
+<p>Strings View on IDA show us that there aren&rsquo;t any clues regarding the behavior of the malware.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-2_strings.png" alt="strings"></p>
 <h4 id="what-happens-when-you-run-this-binary-"><strong>What happens when you run this binary ?</strong></h4>
+<p>The malware stop instantly without showing anything on the screen.</p>
 <h4 id="how-can-you-get-this-sample-to-run-its-malicious-payload-"><strong>How can you get this sample to run its malicious payload ?</strong></h4>
-<h4 id="what-is-happening-at-0x00401133-"><strong>What is happening at 0x00401133 ?</strong></h4>
-<h4 id="what-arguments-are-being-passed-to-subroutine-0x004401089-"><strong>What arguments are being passed to subroutine 0x004401089 ?</strong></h4>
+<p>At 0x401206, we can see a comparaison between two strings. Let&rsquo;s put a breakpoint on x64dbg to figure out what are the content of these two strings.<br>
+The first one, is the name of our binary (Lab09-02.exe) and the other one is <strong>ocl.exe</strong>.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-2_cmp_ocl.png" alt="cmp_ocl"></p>
+<p>We assume that our binary must be rename <strong>ocl.exe</strong> to continue the execution flow.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-2_ocl_open.png" alt="ocl_open"></p>
+<p>Restarting the program, we succesfully pass through the check of the binary name.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-2_succesfull_check_name.png" alt="succesfull_check_name"></p>
+<h4 id="what-is-happening-at-0x401133-"><strong>What is happening at 0x401133 ?</strong></h4>
+<p>At 0x401133, there are obfuscated strings. Indeed, character are passed one by one through the stack. As a result, we couldn&rsquo;t see those strings with the Strings View.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-2_obfuscate_strings.png" alt="obfuscate_strings"></p>
+<p>We identify two strings:</p>
+<ul>
+<li><strong>1qaz2wsx3edc</strong></li>
+<li><strong>ocl.exe</strong></li>
+</ul>
+<h4 id="what-arguments-are-being-passed-to-subroutine-0x401089-"><strong>What arguments are being passed to subroutine 0x401089 ?</strong></h4>
+<p>Setting a breakpoint at <em>0x401089</em>, we can see that two registers are pushed.<br>
+ECX = 0x12FD58<br>
+EDX = &ldquo;1qaz2wsx3edc&rdquo;<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-2_arguments_401089.png" alt="arguments_401089"></p>
 <h4 id="what-domain-name-does-this-malware-use-"><strong>What domain name does this malware use ?</strong></h4>
+<p>The domain name is <strong><a href="http://www.practicalmalwareanalysis.com">www.practicalmalwareanalysis.com</a></strong>, it is created in the subroutine at <em>0x401089</em>.</p>
 <h4 id="what-encoding-routine-is-being-used-to-obfuscate-the-domain-name-"><strong>What encoding routine is being used to obfuscate the domain name ?</strong></h4>
-<h4 id="what-is-the-significance-of-the-createprocessa-call-at-0x0040106e-"><strong>What is the significance of the CreateProcessA call at 0x0040106E ?</strong></h4>
-<h3 id="lab-93"><strong>Lab-9.3</strong></h3>
-<p>This malware loads three included DLLs that are all built to request the same memory load location. Therefore, when viewing these DLLs in OllyDbg versus IDA Pro, code may appear at different memory locations.</p>
+<p>Here is the routine that is used to create the domain name.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-2_routine_domain_name.png" alt="routine_domain_name"></p>
+<p>We put a breakpoint at <strong>xor ecx, edx</strong> to see what are the characters being xored.</p>
+<p>The first character of the string &ldquo;1qaz2wsx3edc&rdquo; (&ldquo;1&rdquo;) is being xored with the letter &ldquo;F&rdquo; which result in the &ldquo;w&rdquo; letter.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-2_routine_domain_name_xor_1.png" alt="routine_domain_name_xor_1"></p>
+<p>After several loops, we finally constructed the entire domain string: <strong><a href="http://www.practicalmalwareanalysis.com">www.practicalmalwareanalysis.com</a></strong>.
+The length of the string is 32 bytes long like the cmp it makes at <em>0x4010E3</em>.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-2_domain_string.png" alt="domain_string"></p>
+<h4 id="what-is-the-significance-of-the-createprocessa-call-at-0x40106e-"><strong>What is the significance of the CreateProcessA call at 0x40106E ?</strong></h4>
+<p>The CreateProcessA, create a new cmd.exe process. With the parameter <strong>Show Window</strong> to 0, we know that the window will not be shown to the user. It will run in background.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-2_create_process_cmd.png" alt="create_process_cmd"></p>
+<h3 id="lab-9-3"><strong>Lab 9-3</strong></h3>
 <h4 id="what-dlls-are-imported-by-lab09-03exe-"><strong>What DLLs are imported by Lab09-03.exe ?</strong></h4>
+<p>The DLLs imported statically are:</p>
+<ul>
+<li>DLL1</li>
+<li>DLL2</li>
+<li>KERNEL32.dll</li>
+<li>NETAPI32.dll</li>
+</ul>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-3_dlls_imported.png" alt="dlls_imported"></p>
+<p>Futhermore, 2 DLLs are imported dynamically with the API call LoadLibraryA:</p>
+<ul>
+<li>USER32.dll<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-3_dlls_imported_2.png" alt="dlls_imported_2"></li>
+<li>DLL3<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-3_dlls_imported_3.png" alt="dlls_imported_3"></li>
+</ul>
 <h4 id="what-is-the-base-address-requested-by-dll1dll-dll2dll-dll3dll-"><strong>What is the base address requested by DLL1.dll, DLL2.dll, DLL3.dll ?</strong></h4>
-<h4 id="when-you-use-ollydbg-to-debug-lab09-03exe-what-is-the-assigned-based-address-for-dll1dll-dll2dll-and-dll3dll-"><strong>When you use OllyDbg to debug Lab09-03.exe, what is the assigned based address for: DLL1.dll, DLL2.dll, and DLL3.dll ?</strong></h4>
-<h4 id="when-lab0-03exe-calls-an-import-function-from-dll1dll-what-does-this-function-do-"><strong>When Lab0&quot;-03.exe calls an import function from DLL1.dll, what does this function do ?</strong></h4>
-<h4 id="when-lab09-03exe-calls-writefile-whats-is-the-filename-it-writes-to-"><strong>When Lab09-03.exe calls WriteFile, whats is the filename it writes to ?</strong></h4>
+<p>Let&rsquo;s use the IDA python API to return the result. Open the first DLL and write in the python area:</p>
+<pre><code>base_address = idaapi.get_imagebase()
+print(hex(base_address))
+</code></pre><p>Do it for all the DLLs..<br>
+They are all loaded at <strong>0x10000000</strong></p>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-3_base_address.png" alt="base_address"></p>
+<h4 id="when-you-use-ollydbg-to-debug-lab09-03exe-what-is-the-assigned-based-address-for-dll1dll-dll2dll-and-dll3dll-"><strong>When you use OllyDbg to debug Lab09-03.exe, what is the assigned based address for DLL1.dll, DLL2.dll and DLL3.dll ?</strong></h4>
+<ul>
+<li>DLL1: <strong>0x10000000</strong><br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-3_dll1_imported_address.png" alt="dll1_imported_address"></li>
+<li>DLL2: <strong>0x490000</strong><br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-3_dll2_imported_address.png" alt="dll2_imported_address"></li>
+<li>DLL3: ****
+Set a breakpoint at <em>0x401041</em>, then step over. The DLL is now loaded into memory. Then check in memory section the address assigned. Otherwise, you could check the content of EAX which contain the base address where the DLL was loaded in memory.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-3_dll3_imported_address.png" alt="dll3_imported_address"></li>
+</ul>
+<h4 id="when-lab09-03exe-calls-an-import-function-from-dll1dll-what-does-this-import-function-do-"><strong>When Lab09-03.exe calls an import function from DLL1.dll, what does this import function do ?</strong></h4>
+<p>Once the program import the function print from DLL1.dll it print on output a number.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-3_import_dll1_print.png" alt="import_dll1_print"></p>
+<p>Let&rsquo;s analyse DLL1.dll to find what this number is.
+DLL1.dll retrieve the process ID in which he has been loaded.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-3_dll1_content.png" alt="dll1_content"></p>
+<h4 id="when-lab09-03exe-calls-writefile-what-is-the-filename-it-writes-to"><strong>When Lab09-03.exe calls WriteFile, what is the filename it writes to?</strong></h4>
+<p>If we set a breakpoint on <em>CreateFile</em>, we can&rsquo;t see any filename. Indeed, the function take the handler of the file that will be created.<br>
+We have to analyse DLL2.dll to find the name of the file. Opening the dll in IDA, we can see the name <strong>temp.txt</strong>.<br>
+<img src="/images/walkthroughs/pma_lab9/lab-9-3_dll2_content.png" alt="dll2_content"></p>
 <h4 id="when-lab09-03exe-creates-a-job-using-netschedulejobadd-where-does-it-get-the-data-for-the-second-parameter-"><strong>When Lab09-03.exe creates a job using <em>NetScheduleJobAdd</em>, where does it get the data for the second parameter ?</strong></h4>
-<h4 id="while-running-or-debugging-the-program-you-will-see-that-it-prints-out-three-pieces-of-mystery-data-what-are-the-following-dll-1-mystery-data-1-dmm2-mystery-2-and-dll-3-mystery-data-3-"><strong>While running or debugging the program, you will see that it prints out three pieces of mystery data. What are the following: DLL 1 mystery data 1, DMM2 mystery 2, and DLL, 3 mystery data 3 ?</strong></h4>
-<h4 id="how-can-you-load-dll2dll-into-ida-pro-so-that-it-matches-the-load-address-used-by-ollydbg-"><strong>How can you load DLL2.dll into IDA Pro so that it matches the load address used by OllyDbg ?</strong></h4>
-<p><img src="/images/walkthroughs/pma_lab7/lab-7-1_call_sub_401040.png" alt="call_sub_401040"></p>
+<ul>
+<li>1st parameter: 0 (servername)</li>
+<li>2nd parameter: &ldquo;Buffer&rdquo; in <em>edx</em></li>
+<li>3rd parameter: &ldquo;JobID&rdquo; in <em>eax</em></li>
+</ul>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-3_netjobscheduled_parameters.png" alt="netjobscheduled_parameters"></p>
+<p>The buffer is gather from the DLL3.dll. Indeed after the call of the dll (<strong>call ebp + var_10</strong>), we can see two variable assignement (<em>JobID</em> to eax and <em>Buffer</em> to ecx).<br>
+Let&rsquo;s check what is the content of the buffer in DLL3.dll.</p>
+<p>In the MSDN of <em>NetScheduleJobAdd</em>, the buffer is a pointer to a structure call <strong>AT_INFO</strong>.
+We can add this structure in IDA to make the code more readable. Press <strong>SHIFT + F2</strong> to open the structure view, then <strong>right click</strong>, <strong>add a struct</strong>, <strong>add strandard structure</strong>.</p>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-3_at_info_create.png" alt="at_info_create"></p>
+<p>To apply to <strong>dword_1000B0A0</strong>, press <strong>ALT + Q</strong> and choose <strong>AT_INFO</strong>. The code is now readable (btw, it didn&rsquo;t work on the graph view, I had to switch to hex view).</p>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-3_netjobschedule_info.png" alt="netjobschedule_info">
+Based on this, we assume that it will <strong>ping www.malwareanalysisbook[.]com</strong> every day at 1am (<strong>3600000 ms</strong> (60 min) past midnight).</p>
+<h4 id="while-running-or-debugging-the-program-you-will-see-that-it-prints-out-three-pieces-of-mystery-data-what-are-the-following-dll1-mystery-data-dll2-mystery-data-and-dll3-mystera-data-"><strong>While running or debugging the program, you will see that it prints out three pieces of mystery data. What are the following: DLL1 mystery data, DLL2 mystery data and DLL3 mystera data ?</strong></h4>
+<ul>
+<li>DLL1 mystery data: <strong>Process ID</strong> from where the dll is executed</li>
+<li>DLL2 mystery data: <strong>Handle ID</strong> of temp.txt file</li>
+<li>DLL3 mystery data: Memory location where is store the <strong>Buffer for &ldquo;ping wwww.malwareanalysisbook[.]com&rdquo;</strong></li>
+</ul>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-3_mystery_data.png" alt="mystery_data"></p>
+<h4 id="how-can-you-load-dll2dll-into-ida-pro-so-that-it-matches-the-load-address-used-by-ollydbg-"><strong>How can you load DLL2.dll into IDA Pro so that it matches the load address used by OllyDbg ??</strong></h4>
+<p>In IDA Pro you can redefine the base adress of your program. Firstly, check what is the address when loaded into x64Dbg (Go to <strong>Memory Section</strong> and check the raw with the program name inside).</p>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-3_loaded_address_x64dbg.png" alt="loaded_address_x64dbg"></p>
+<p>Switch to IDA Pro, click on <strong>Edit</strong>, <strong>Segments</strong>, <strong>Rebase Program</strong>. Change the value to <strong>0x10000000</strong></p>
+<p><img src="/images/walkthroughs/pma_lab9/lab-9-3_rebase_program.png" alt="rebase_program"></p>
 
   </div>
   
 
 <div class="navigation navigation-single">
     
-    <a href="/walkthroughs/pma_lab6/" class="navigation-prev">
+    <a href="/walkthroughs/pma_lab10/" class="navigation-prev">
       <i aria-hidden="true" class="fa fa-chevron-left"></i>
-      <span class="navigation-tittle">Practical Malware Analysis - Lab 6</span>
+      <span class="navigation-tittle">Practical Malware Analysis - Lab 10</span>
     </a>
     
-    
-    <a href="/walkthroughs/pma_lab7/" class="navigation-next">
-      <span class="navigation-tittle">Practical Malware Analysis - Lab 7</span>
-      <i aria-hidden="true" class="fa fa-chevron-right"></i>
-    </a>
     
 </div>
 
@@ -277,21 +447,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
         
     
 
-  
-  
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'your-google-analytics-id', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-<script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" integrity="sha384-b3ua1l97aVGAPEIe48b4TC60WUQbQaGi2jqAWM90y0OZXZeyaTCWtBTKtjW2GXG1" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" integrity="sha384-ZbbbT1gw3joYkKRqh0kWyRp32UAvdqkpbLedQJSlnI8iLQcFVxaGyrOgOJiDQTTR" crossorigin="anonymous"></script>
 
 
     

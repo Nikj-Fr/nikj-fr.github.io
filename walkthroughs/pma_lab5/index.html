@@ -167,7 +167,7 @@
 	
 	
 	
-	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	<a href="mailto:nikj@protonmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
 	
 	
 	
@@ -222,9 +222,9 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
   <div class="post">
     <h2 id="discovering-ida-pro"><strong>Discovering IDA Pro</strong></h2>
 <h3 id="lab-5"><strong>Lab 5</strong></h3>
-<p>This lab use the file Lab05-01.dll. It has to be analyze only on IDA Pro. This is our first experience with this tool.</p>
+<p>This lab use the file Lab05-01.dll. It has to be analyze only on IDA Pro. This is my first experience with this tool.</p>
 <h4 id="what-is-the-address-of-dllmain-"><strong>What is the address of DllMain ?</strong></h4>
-<p>The address of DllMain can be find in the Functions Windows by default on the left side of your screen.It starts at <em>0x1000D02E</em>.</p>
+<p>The address of DllMain can be find in the Functions Windows by default on the left side of your screen. It starts at <em>0x1000D02E</em>.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-1_start_address.png" alt="start_address"></p>
 <p>Also, you can visualize it on the Graph View by turning on <em>Line Prefixes</em> in the settings. For me it was already checked.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-1_start_address2.png" alt="start_address2"></p>
@@ -323,8 +323,8 @@ With MSDN documentation, we see that 5 can correspond to several operating syste
 <p>a) The subroutine 10006518</p>
 <p>It create a snapshot of a process. The EBX register is used to give the ID to be dump.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-11_snapshot_1.png" alt="snapshot_1"></p>
-<p>b) The subroutine 100664C
-It perform the same call as the previous routine. The only difference, is the snapshot that is send over the open socket.</p>
+<p>b) The subroutine 100664C</p>
+<p>It perform the same call as the previous routine. The only difference, is the snapshot that is send over the open socket.</p>
 <p><img src="/images/walkthroughs/pma_lab5/lab-5-11_snapshot_2.png" alt="snapshot_2"></p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot">MSDN_CreateToolHelp32Snapshot</a></p>
 <h3 id="use-the-graph-mode-to-graph-the-cross-reference-from-sub_10004e79-which-api-functions-could-be-called-by-entering-this-function--based-on-the-api-functions-alone-what-could-you-rename-this-function-"><strong>Use the graph mode to graph the cross-reference from sub_10004E79. Which API functions could be called by entering this function ? Based on the API functions alone, what could you rename this function ?</strong></h3>

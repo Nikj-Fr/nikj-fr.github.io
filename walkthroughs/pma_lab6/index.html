@@ -167,7 +167,7 @@
 	
 	
 	
-	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	<a href="mailto:nikj@protonmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
 	
 	
 	
@@ -229,9 +229,9 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-1_call_sub_401000.png" alt="call_sub_401000"></p>
 <p>In this function we can see a <strong>jz</strong> statement. The choice of the path to follow depend on the result of the comparison that his made with EAX. This indicate a <strong>if</strong> code construct.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-1_if_condition.png" alt="if_condition"></p>
-<p>Following the msdn page of the API call to <strong>InternetGetConnectedState</strong>, the function return <strong>True</strong> if there is Internet and <strong>False</strong> if the target hasn’t got one.</p>
+<p>Following the MSDN page of the API call to <strong>InternetGetConnectedState</strong>, the function return <strong>True</strong> if there is Internet and <strong>False</strong> if the target hasn’t got one.</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/wininet/nf-wininet-internetgetconnectedstate">MSDN_InternetGetConnectedState</a></p>
-<p>If the API call work, EAX = 1, otherwise EAX = 0. When EAX = 0, ZF = 1 and we follow the function at 0x40102B.</p>
+<p>If the API call work, EAX = 1, otherwise EAX = 0. When EAX = 0, ZF = 1 and we follow the function at <em>0x40102B</em>.</p>
 <h4 id="what-is-the-subroutine-located-at-0x40105f-"><strong>What is the subroutine located at 0x40105F ?</strong></h4>
 <p>This subroutine is call wheter the API call is a success or a failure. Strings are pushed on the stack depending on the result of the API call. I assume that the following subroutine is used to print the value that was push on the top of the stack.
 We can check this by starting the malware..</p>
@@ -310,26 +310,26 @@ The program copy the malware at C:\Temp, and name it cc.exe.
 <li>
 <p>ECX = ‘c’, the sub will be <strong>‘c’ - ‘a’ = 2</strong> (0x63 - 0x61)
 The program delete the copy of the malware name cc.exe in the Temp folder.
-<img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_1.png" alt="switch_2"></p>
+<img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_2.png" alt="switch_2"></p>
 </li>
 <li>
-<p>ECX = ‘c’, the sub will be <strong>’d’ - ‘a’ = 3</strong> (0x64 - 0x61)
+<p>ECX = ‘d’, the sub will be <strong>’d’ - ‘a’ = 3</strong> (0x64 - 0x61)
 The program create a register key at Software\Microsoft\Windows\CurrentVersion\Run to persist on the system. The key is call “malware” and link to C:\Temp\cc.exe.
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_3.png" alt="switch_3"></p>
 </li>
 <li>
-<p>ECX = ’d’, the sub will be <strong>‘e’ - ‘a’ = 4</strong> (0x65 - 0x61)
+<p>ECX = ’e’, the sub will be <strong>‘e’ - ‘a’ = 4</strong> (0x65 - 0x61)
 The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_4.png" alt="switch_4"></p>
 </li>
 </ul>
 <h4 id="are-there-any-host-based-indicators-for-this-malware-"><strong>Are there any host-based indicators for this malware ?</strong></h4>
 <ul>
-<li>The malware copy himself to C:\Temp\cc.exe</li>
-<li>Add a register key to Software\Microsoft\Windows\CurrentVersion\Run name “malware”</li>
+<li>The malware copy himself to <strong>C:\Temp\cc.exe</strong></li>
+<li>Add a register key to <strong>Software\Microsoft\Windows\CurrentVersion\Run</strong> name <strong>“malware”</strong></li>
 </ul>
 <h4 id="what-is-the-purpose-of-this-malware--1"><strong>What is the purpose of this malware ?</strong></h4>
-<p>This malware check if the target have internet. Then it use Internet Explorer to download an htm page (<a href="http://practicalmalwareanalysis.com/cc.htm)">http://practicalmalwareanalysis.com/cc.htm)</a>. It parse the beginning of the program (512 bytes), the result of first bytes must be &lt;!- otherwise it fail. Finally, the character after &lt;!- indicate the state, it could be one of the 5 letters:</p>
+<p>This malware check if the target <strong>have internet</strong>. Then it use Internet Explorer to download an html page (<strong><a href="http://practicalmalwareanalysis.com/cc.html">http://practicalmalwareanalysis.com/cc.html</a></strong>). It parse the beginning of the program (512 bytes), the result of first bytes must be <strong>&lt;!-</strong> otherwise it fail. Finally, the character after &lt;!- indicate the state, it could be one of the 5 letters:</p>
 <ul>
 <li>&lsquo;a&rsquo; (case ‘0’) = Create the C:\Temp folder</li>
 <li>&lsquo;b&rsquo; (case ‘1’) = Copy the malware to C:\Temp and call it cc.exe</li>
@@ -341,8 +341,8 @@ The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.
 <h4 id="what-is-the-difference-between-the-calls-made-from-the-main-method-in-lab6-3-and-6-4-"><strong>What is the difference between the calls made from the main method in Lab6-3 and 6-4 ?</strong></h4>
 <p>The main function of the Lab6-4.exe contain two new calls:</p>
 <ul>
-<li>sub_4012B5 = switch construct with a jumptable to control actions.</li>
-<li>sub_401150 = print the string push on top of the stack (see previously on 6-3)</li>
+<li><em>sub_4012B5</em> = switch construct with a jumptable to control actions.</li>
+<li><em>sub_401150</em> = print the string push on top of the stack (see previously on 6-3)</li>
 </ul>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-4_differ_main.png" alt="difference_main"></p>
 <p>The rest of the program call same subroutine as 6-3.</p>
@@ -352,19 +352,19 @@ The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.
 <h4 id="what-is-the-difference-between-this-labs-parse-html-function-and-those-of-the-previous-labs-"><strong>What is the difference between this lab’s parse HTML function and those of the previous labs ?</strong></h4>
 <p>The difference is the use of a new variable (szAgent) and a new parameter (arg_0).</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-4_variable_parameter.png" alt="variable_parameter"></p>
-<p>The variable szAgent take the value of the string *Internet Explorer 7.50/pma%d”. %d is a format string to print a digit. It take the number of loop the program did in main.</p>
+<p>The variable <strong>szAgent</strong> take the value of the string *<strong>Internet Explorer 7.50/pma%d”</strong>. %d is a format string to print a digit. It take the number of loop the program did in main.</p>
 <p>Indeed we see in the main function that ECX is push before the call of sub_401040.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-4_digit_push.png" alt="digit_push"></p>
 <h4 id="how-long-will-this-program-run-assume-that-it-is-connected-to-the-internet"><strong>How long will this program run ?(Assume that it is connected to the Internet)</strong></h4>
-<p>The program sleep 60 000ms every time it loop. It can loop 1440 times. So:</p>
-<p>60 0000 * 1440 = 86 400 000 ms
-86 400 000 / 60 = 1 440 000 ms
-1 440s / 60 = 24h</p>
-<p>The program can sleep 24 hours.</p>
+<p>The program sleep 60 000ms every time it loop. It can loop 1440 times.</p>
+<pre><code>60 0000ms * 1440 = 86 400 000 ms
+86 400 000ms / 60 = 1 440s
+1 440s / 60 = 24h
+</code></pre><p>The program can sleep <strong>24 hours</strong>.</p>
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-4_sleep.png" alt="sleep"></p>
 <h4 id="are-there-any-new-network-based-indicators-for-this-malware-"><strong>Are there any new network-based indicators for this malware ?</strong></h4>
 <ul>
-<li>User-Agent: *Internet Explorer 7.50/pma%d”</li>
+<li>User-Agent: <strong>Internet Explorer 7.50/pma%d”</strong></li>
 </ul>
 <h4 id="what-is-the-purpose-of-this-malware--2"><strong>What is the purpose of this malware ?</strong></h4>
 <p>The malware does the same things as 6-3. But there are 2 new components:</p>

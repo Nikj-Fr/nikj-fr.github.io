@@ -27,8 +27,8 @@
 <meta property="og:description" content="Malware authors try to hide themselves from antivirus and make analysis harder for analysist. One technique they use is call packing, it means to make the code more obfuscated and unreable. In this post, we&#39;ll look at one specific kind of unpacking technique that you can use to finally start the analysis of the real payload. This technique is call Self-Injection." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nikj-fr.github.io/articles/self_injection/" />
-<meta property="article:published_time" content="2020-12-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-12-05T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
+<meta property="article:published_time" content="2021-04-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-15T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
 
 
     
@@ -167,7 +167,7 @@
 	
 	
 	
-	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	<a href="mailto:nikj@protonmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
 	
 	
 	
@@ -205,7 +205,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <div class="post__meta">
     
     
-      <i class="fas fa-calendar-alt"></i> Dec 5, 2020
+      <i class="fas fa-calendar-alt"></i> Apr 15, 2021
     
     
     
@@ -228,9 +228,9 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <li>Unpack Princess Locker</li>
 </ul>
 <h3 id="introduction"><strong>Introduction</strong></h3>
-<p>Malware authors try to hide themselves from antivirus and make analysis harder for analysist. One technique they use is call <em>packing</em>, it means to make the code more obfuscated and unreable. In this post, we&rsquo;ll look at one specific kind of unpacking technique that you can use to finally start the analysis of the real payload. This technique is called <em>Self-Injection</em>.</p>
+<p>Malware authors try to hide themselves from antivirus and make analysis harder. One of technique is called &ldquo;packing&rdquo;, it means to make the code obfuscated and unreable. In this post, we&rsquo;ll look at one specific kind of unpacking technique that you can use to finally start the analysis of the real payload. This technique is called <em>Self-Injection</em>.</p>
 <p>Self-Injection is the term to define that the malware will unpack himself inside the same process as the packed binary. It will overwrite binary sections in memory, then it will transfer execution to the overwritten section of the PE file.</p>
-<p>In this tutorial, I&rsquo;ll explain how this work and how to unpack Princess Locker sample.</p>
+<p>In this tutorial, I&rsquo;ll explain how this work and how to unpack <strong>Princess Locker</strong> sample.</p>
 <h3 id="overview"><strong>Overview</strong></h3>
 <p>The techniques is split into 4 parts:</p>
 <ul>
@@ -239,71 +239,71 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <li>Setup the memory section to be executable (if it was not the case)</li>
 <li>Execution of the PE file in memory</li>
 </ul>
-<p><img src="/images/articles/tuto_self_injection_unpack/self_injection_overview.png" alt="self_injection_overview"></p>
+<p><img src="./self_injection_overview.png" alt="self_injection_overview"></p>
 <h3 id="how-to-detect-this-technique-"><strong>How to detect this technique ?</strong></h3>
 <p>Put the packed malware into a sandbox like <a href="https://www.hybrid-analysis.com/">Hybrid-Analysis</a>.</p>
-<p>In the process analysis section, if you see that there aren&rsquo;t subprocesses. The malware must use self injection.</p>
-<p><img src="/images/articles/tuto_self_injection_unpack/detection.png" alt="detection"></p>
+<p>In the process analysis section, if you see that there aren&rsquo;t any subprocesses. The malware must use <strong>self injection</strong>.</p>
+<p><img src="./detection.png" alt="detection"></p>
 <h3 id="practice-time"><strong>Practice time</strong></h3>
 <p>As an example we will unpack <strong>Princess Locker</strong> malware</p>
-<p><strong>Sha256</strong>: dc7ab2e7ed26554a11da51a184e95b01e685b1a2f99c7fc77d54d5966530bf60<br>
+<p><strong>SHA256</strong>: dc7ab2e7ed26554a11da51a184e95b01e685b1a2f99c7fc77d54d5966530bf60<br>
 <strong>Link</strong>: <a href="https://malshare.com/sample.php?action=detail&amp;hash=93cb0053e883fb262f9f795f327152f8">https://malshare.com/sample.php?action=detail&amp;hash=93cb0053e883fb262f9f795f327152f8</a><br>
 <strong>Environment</strong>: Win7_x86</p>
-<p>In order to dump the new PE file that will be write into memory we put 2 breakpoints:</p>
+<p>In order to dump the new PE file that will be writen in memory, we put 2 breakpoints:</p>
 <ul>
 <li><strong>VirtualAlloc</strong><br>
-The breakpoint is put on <em>ret</em> because EAX will contain the base address of the new memory segment that was allocated. <strong>Be carefull you must but the breakpoint on the kernelbase.dll not on kernel32.dll</strong>. This API function isn&rsquo;t in kernel32 anymore. It&rsquo;s just a redirect to kernelbase.<br>
+The breakpoint on <em>ret</em> because EAX will contain the base address of the new memory segment that was allocated.<br>
 <a href="https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc">MSDN_VirtualAlloc</a></li>
 </ul>
-<p><img src="/images/articles/tuto_self_injection_unpack/search_virtualalloc.png" alt="search_virtualalloc">
-<img src="/images/articles/tuto_self_injection_unpack/jump_virtualalloc.png" alt="jump_virtualalloc">
-<img src="/images/articles/tuto_self_injection_unpack/breakpoint_virtualalloc.png" alt="breakpoint_virtualalloc"></p>
+<p><img src="./search_virtualalloc.png" alt="search_virtualalloc.png">
+<img src="./jump_virtualalloc.png" alt="jump_virtualalloc.png">
+<img src="./breakpoint_virtualalloc.png" alt="breakpoint_virtualalloc"></p>
 <p>Once we hit the breakpoint, we can see EAX with 0x640000<br>
-<img src="/images/articles/tuto_self_injection_unpack/eax_base_address.png" alt="eax_base_address"><br>
+<img src="./eax_base_address.png" alt="eax_base_address"><br>
 When we show the content at this address, there is nothing but null bytes.
-<img src="/images/articles/tuto_self_injection_unpack/hexa_virtual_alloc.png" alt="hexa_virtual_alloc">
+<img src="./hexa_virtual_alloc.png" alt="hexa_virtual_alloc">
 We&rsquo;ll keep execute the binary. After several break we finally find something that looks like a PE file at 0x640000
-<img src="/images/articles/tuto_self_injection_unpack/pefile_virtual_alloc.png" alt="pefile_virtual_alloc">
+<img src="./pefile_virtual_alloc.png" alt="pefile_virtual_alloc">
 We can see the section table (.text, .rdata, .data). Indeed above this section table there isn&rsquo;t the header of a PE file (magic byte &ldquo;MZ&rdquo;). It&rsquo;s a particularity of this malware. We aren&rsquo;t going to cover this part in this tutorial.</p>
 <p>Now we&rsquo;ll put an execution breakpoints on this memory section. When ever the PE file is executed we can grab the content of the file.</p>
 <ul>
-<li>Execute breakpoints<br>
-Firstly we&rsquo;ll follow in memory map
-<img src="/images/articles/tuto_self_injection_unpack/follow_memory_map.png" alt="follow_memory_map">
+<li><strong>Execute breakpoints</strong><br>
+Firstly, we&rsquo;ll follow in memory map
+<img src="./follow_memory_map.png" alt="follow_memory_map">
 Then we put the breakpoint.
-<img src="/images/articles/tuto_self_injection_unpack/breakpoint_execute_memory.png" alt="breakpoint_execute_memory"></li>
+<img src="./breakpoint_execute_memory.png" alt="breakpoint_execute_memory"></li>
 </ul>
 <p>After several hits of VirtualAlloc return breakpoint, the memory segment at 0x400000 is executed.</p>
-<p><img src="/images/articles/tuto_self_injection_unpack/breakpoint_execute_memory_hit.png" alt="breakpoint_execute_memory_hit"></p>
+<p><img src="./breakpoint_execute_memory_hit.png" alt="breakpoint_execute_memory_hit"></p>
 <p>Let&rsquo;s dump the PE file which was executed in memory.</p>
-<p><img src="/images/articles/tuto_self_injection_unpack/payload_dump.png" alt="payload_dump"></p>
-<p>Open the PE file in hex editor like <a href="https://mh-nexus.de/en/hxd/">HXD</a></p>
-<p><img src="/images/articles/tuto_self_injection_unpack/final_payload.png" alt="final_payload"></p>
-<p>The unpack is over, we congrat to unpack a malware that use self injection packer.<br>
+<p><img src="./payload_dump.png" alt="payload_dump"></p>
+<p>Open the PE file in hex editor like <a href="https://mh-nexus.de/en/hxd/">HxD</a></p>
+<p><img src="./final_payload.png" alt="final_payload"></p>
+<p>The unpack is now over, congratulation you unpacked a malware that use self injection technique.<br>
 The dumped payload header is not well form. The next step to completely unpack <strong>Princess Locker</strong> is to fix the header and unmap the binary. Unmap is a word to define the translation between disk address and memory address (virtual)</p>
 <h4 id="patch-header"><strong>Patch header</strong></h4>
 <p>Firstly, you have to run a hex editor. The patch will be easy, we have to copy the bytes from the Optional Header because they can&rsquo;t be modify by packers. According to this <a href="https://github.com/corkami/pics/blob/master/binary/pe101/pe101.pdf">PE poster</a>, we&rsquo;ll use the machine magic byte <em>4C 01</em>.<br>
 To sum up we&rsquo;ll copy the bytes before <em>4C 01</em> from the original packed malware and copy them in the unpack one</p>
-<p><img src="/images/articles/tuto_self_injection_unpack/original_pe_header.png" alt="original_pe_header"></p>
+<p><img src="./original_pe_header.png" alt="original_pe_header"></p>
 <p>And paste it in the unpack PE file:
-<img src="/images/articles/tuto_self_injection_unpack/unpack_pe_header_paste.png" alt="unpack_pe_header_paste"></p>
+<img src="./unpack_pe_header_paste.png" alt="unpack_pe_header_paste"></p>
 <p>Finally, you can save the file. The last step is to unmap the binary. Indeed when you dump a file in memory, there are shifts between location on disk and location in memory. We have to line up both to recover a working PE file.</p>
 <p>Open the modified file in PE Bear</p>
-<p><img src="/images/articles/tuto_self_injection_unpack/pe_bear_open_file.png" alt="PE_Bear_open_file"></p>
+<p><img src="./pe_bear_open_file.png" alt="PE_Bear_open_file"></p>
 <p>Here are the differents modification, you must do:</p>
 <ul>
 <li>
 <p>Raw Addr must equal Virtual Addr
-<img src="/images/articles/tuto_self_injection_unpack/raw_addr_modification.png" alt="raw_addr_modification"></p>
+<img src="./raw_addr_modification.png" alt="raw_addr_modification"></p>
 </li>
 <li>
 <p>Raw Size must equal to the difference between start of next section minus end of the previous section. Ex: 3100 - 1000 = 3000
-<img src="/images/articles/tuto_self_injection_unpack/raw_size_modification.png" alt="raw_size_modification">
+<img src="./raw_size_modification.png" alt="raw_size_modification">
 Because we are unmaping a PE file, we don&rsquo;t need relocation table. It only exist on disk. Disk and memory data must be the same.</p>
 </li>
 <li>
 <p>Virtual Size must equal the Raw Size
-<img src="/images/articles/tuto_self_injection_unpack/virtual_size_modification.png" alt="virtual_size_modification"></p>
+<img src="./virtual_size_modification.png" alt="virtual_size_modification"></p>
 </li>
 <li>
 <p>Save the new file</p>
@@ -311,21 +311,21 @@ Because we are unmaping a PE file, we don&rsquo;t need relocation table. It only
 </ul>
 <p>We can see that there are still red highlight on the PE Bear tool. This show us there is a problem with section alignment. What we do now is check section alignment with Hex Editor.</p>
 <p>Between header and section, it&rsquo;s fill of null bytes. .text section start at 0x1000. So it must have null bytes until the beginning of the section.</p>
-<p><img src="/images/articles/tuto_self_injection_unpack/alignment_patch.png" alt="alignment_patch"></p>
+<p><img src="./alignment_patch.png" alt="alignment_patch"></p>
 <p>As you can see this isn&rsquo;t the case. We have to shift this data 33 bytes (16 * 2 + 1) lower to make <em>E8</em> start at 0x1000.</p>
-<p><img src="/images/articles/tuto_self_injection_unpack/insert_bytes.png" alt="insert_bytes"></p>
-<p><img src="/images/articles/tuto_self_injection_unpack/final_patch.png" alt="final_patch"></p>
+<p><img src="./insert_bytes.png" alt="insert_bytes"></p>
+<p><img src="./final_patch.png" alt="final_patch"></p>
 <p>Dump the patch file and open again PEBear. Red highlights are gone, there aren&rsquo;t problems anymore !</p>
-<p><img src="/images/articles/tuto_self_injection_unpack/final_alignment.png" alt="final_alignment"></p>
-<p>Now you could import the final unpack file in IDA to start analyse the malware !</p>
-<p><img src="/images/articles/tuto_self_injection_unpack/ida_view.png" alt="ida_view"></p>
+<p><img src="./final_alignment.png" alt="final_alignment"></p>
+<p>Now, you could import the final unpacked file in IDA to start the analysis !</p>
+<p><img src="./ida_view.png" alt="ida_view"></p>
 
   </div>
   
 
 <div class="navigation navigation-single">
     
-    <a href="/articles/suppression_application_preinstalle_windows10.md/" class="navigation-prev">
+    <a href="/articles/suppression_application_preinstalle_windows10/" class="navigation-prev">
       <i aria-hidden="true" class="fa fa-chevron-left"></i>
       <span class="navigation-tittle">Suppression des application préinstallées sous Windows 10</span>
     </a>

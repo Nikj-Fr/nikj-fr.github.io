@@ -167,7 +167,7 @@
 	
 	
 	
-	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	<a href="mailto:nikj@protonmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
 	
 	
 	
@@ -220,7 +220,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
   
   
   <div class="post">
-    <p><strong>1)a) Given what you learned about CALL and RET, explain how you would read the value of EIP ?</strong></p>
+    <p><strong>1 - A) Given what you learned about CALL and RET, explain how you would read the value of EIP ?</strong></p>
 <p>EIP is used to save the return address after a CALL or a RET for example. In this way, the program will resume correctly and it can continue the execution flow.</p>
 <p>I&rsquo;ll use a CALL to a function to modify EIP. Inside this function, we have to save the value of EIP inside a register. Next, we print the content of this register.</p>
 <p>Code:</p>
@@ -235,21 +235,41 @@ _start:
 <span style="color:#66d9ef">store_eip</span>:
     <span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">eax</span>, [<span style="color:#66d9ef">esp</span>]
     <span style="color:#a6e22e">ret</span>
-</code></pre></div><p>Explication:</p>
+</code></pre></div><p>Code Explaination:</p>
 <ul>
-<li>.text section is used for the program code</li>
-<li>(while .data is used for constants)</li>
-<li>GLOBAL _start is used to declare the symbol</li>
-<li>call the function store_eip</li>
-<li>we set eax to the value pointed by esp
+<li><strong>.text</strong> section is used for the program code (while .data is used for constants)</li>
+<li><strong>GLOBAL _start</strong> is used to declare the symbol</li>
+<li>Call the function <strong>store_eip</strong></li>
+<li>We set eax to the value pointed by esp
 Don&rsquo;t forget: when a function is call without arguments, ESP point to the bottom of the stack which contain the value of the return address function (EIP)</li>
-<li>we use int 080h to</li>
+<li>We use int 080h to use syscall. In our case, EAX = 0 so the syscall will be <strong>exit()</strong></li>
 </ul>
-<p><strong>b) Why can&rsquo;t you just do mov EAX, EIP ?</strong></p>
-<p>EIP is the pointer that return the address of where</p>
+<p>We put a breakpoint on the <code>ret</code>.
+We start the program and read EIP:</p>
+<p>image_todo</p>
+<p>Then we read the content of EAX:</p>
+<p>image_todo</p>
+<p>They are both equal</p>
+<p><strong>1 - B) Why can&rsquo;t you just do mov EAX, EIP ?</strong></p>
+<p>TODO</p>
 <p><strong>2) Come up with at least two code sequencies to set EIP to 0xAABBCCDD ?</strong></p>
-<p><strong>3) In the example function ADDME, what would happen if the stack pointer were not properly restored before executing RET ?</strong></p>
+<p>Version A:</p>
+<pre><code>SECTION .data
+SECTION .text
+GLOBAL _start
+_start:
+    mov eax, AABBCCDDh
+    call eax
+</code></pre><p>Version B:</p>
+<pre><code>SECTION .data
+SECTION .text
+GLOBAL _start
+_start:
+    jmp AABBCCDDh
+</code></pre><p><strong>3) In the example function ADDME, what would happen if the stack pointer were not properly restored before executing RET ?</strong></p>
+<p>TODO</p>
 <p><strong>4) In all of the calling conventions explained, the return value is stored in a 32-bit register (EAX). What happens when the return values does not fit in a 32-bit register ? Write a program to experiment and evaluate your answer. Does the mechanism change from compiler to compiler ?</strong></p>
+<p>TODO</p>
 
   </div>
   
@@ -261,6 +281,11 @@ Don&rsquo;t forget: when a function is call without arguments, ESP point to the 
       <span class="navigation-tittle">Practical Reverse Engineering - Ex 1</span>
     </a>
     
+    
+    <a href="/walkthroughs/pma_lab10/" class="navigation-next">
+      <span class="navigation-tittle">Practical Malware Analysis - Lab 10</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
     
 </div>
 

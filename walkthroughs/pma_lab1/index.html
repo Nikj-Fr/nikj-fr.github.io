@@ -167,7 +167,7 @@
 	
 	
 	
-	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	<a href="mailto:nikj@protonmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
 	
 	
 	
@@ -224,21 +224,21 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <h3 id="lab-1-1"><strong>Lab 1-1</strong></h3>
 <p>This lab uses the files Lab01-01.exe and Lab01-01.dll.</p>
 <h4 id="upload-the-files-to-httpwwwwvirustotalcom-and-view-the-reports-does-either-file-match-any-existing-antivirus-signature-"><strong>Upload the files to <a href="http://wwww.VirusTotal.com/">http://wwww.VirusTotal.com/</a> and view the reports. Does either file match any existing antivirus signature ?</strong></h4>
-<p>a) Lab01-01.exe
-Virus Total detected a potential Trojan. The signature (MD5) of the malware is bb7425b82141a1c0f7d60e5106676bb1</p>
-<p>50/70 positifs antivirus</p>
-<p>b) Lab01-01.dll
-The signature of the malware is 290934c61de9176ad682ffdd65f0a669</p>
-<p>42/67 positifs antivirus</p>
+<p>a) Lab01-01.exe<br>
+Virus Total detected a potential Trojan. The signature (MD5) of the malware is <em>bb7425b82141a1c0f7d60e5106676bb1</em></p>
+<p><strong>50/70</strong> positifs antivirus</p>
+<p>b) Lab01-01.dll<br>
+The signature of the malware is <em>290934c61de9176ad682ffdd65f0a669</em></p>
+<p><strong>42/67</strong> positifs antivirus</p>
 <p>Signature of malware can be generated with WinMD5..</p>
 <h4 id="when-were-these-files-compiled-"><strong>When were these files compiled ?</strong></h4>
-<p>Theses binaries were compile on 19/12/2010 at 16h16
-Are there any indications that either of these files is packed or obfuscated if so, what are these indicators ?</p>
-<p>a) PEiD
+<p>Theses binaries were compile on <strong>19/12/2010</strong> at <strong>16h16</strong></p>
+<h4 id="are-there-any-indications-that-either-of-these-files-is-packed-or-obfuscated-if-so-what-are-these-indicators-"><strong>Are there any indications that either of these files is packed or obfuscated if so, what are these indicators ?</strong></h4>
+<p>a) PEiD<br>
 We start PEiD to see if files are packed or obfuscated. The tool detect that the executable and the DLL were compile with Microsoft Visual C++ 6.0. Currently, there are no obvious footprints of a packer.</p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-1_3_peid.png" alt="image_peid"></p>
-<p>b) Dependencies Walker</p>
-<p>Three DLL are used by the malware, functions that are imported aren’t obfuscated.</p>
+<p>b) Dependencies Walker<br>
+Three DLL are used by the malware, functions that are imported aren’t obfuscated.</p>
 <ul>
 <li>KERNEL32.DLL</li>
 <li>MSVCRT.DLL</li>
@@ -278,7 +278,7 @@ We start PEiD to see if files are packed or obfuscated. The tool detect that the
 </table>
 <p>The memory size isn’t greater than the disk size. To conclude the malware isn’t packed</p>
 <h4 id="do-any-imports-hint-at-what-this-malware-does--if-so-which-imports-are-they-"><strong>Do any imports hint at what this malware does ? If so, which imports are they ?</strong></h4>
-<p>We use Dependencies Walker to list all the imported functions. Some of them can be usefull for a malware:</p>
+<p>We use <strong>Dependencies Walker</strong> to list all the imported functions. Some of them can be usefull for a malware:</p>
 <ul>
 <li>CreateFileA (Création d’un fichier)</li>
 <li>CopyFileA (Copie d’un fichier)</li>
@@ -295,23 +295,23 @@ We start PEiD to see if files are packed or obfuscated. The tool detect that the
 </ul>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-1_4_import_dll.png" alt="image_import_dll"></p>
 <h4 id="are-there-any-other-files-or-host-based-indicators-that-you-could-look-on-infected-systems-"><strong>Are there any other files or host-based indicators that you could look on infected systems ?</strong></h4>
-<p>With the strings command we can show every characters that are inside a binary. We saw that the DLL Kernel32 wasn’t used. Indeed, it was the Kerne132. The L was replace by 1</p>
+<p>With the <strong>strings command</strong> we can show every characters that are inside a binary. We saw that the DLL Kernel32 wasn’t used. Indeed, it was the <strong>Kerne132</strong>. The L was replace by 1</p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-1_5_strings_kerne123.png" alt="strings_kerne123"></p>
 <h4 id="what-network-based-indicators-could-be-used-to-find-this-malware-on-infected-machines-"><strong>What network-based indicators could be used to find this malware on infected machines ?</strong></h4>
 <p>We do the same command on the DLL this time. In the part 4, we show that the DLL was used for networks commands. We discover an IP adress that can be considered like the attacker’s one. This IP is used to communicate with the malware.</p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-1_6_strings_dll.png" alt="strings_dll"></p>
 <h4 id="what-would-you-guess-is-the-purpose-of-these-files-"><strong>What would you guess is the purpose of these files ?</strong></h4>
-<p>The malware will install a DLL backdoor call Kerne132.dll that will be able to communicate with his C2. The adress of the C2 is 127.26.152.13.</p>
-<h3 id="lab-1-2">Lab 1-2</h3>
-<p>This lab uses the files Lab01-02.exe.
-Upload the file to <a href="http://wwww.VirusTotal.com/">http://wwww.VirusTotal.com/</a>. Does it match any existing antivirus definitions ?</p>
-<p>Virus Total detected a potential Trojan. The signature of the malware is 8363436878404da0ae3e46991e355b83</p>
-<p>55/71 positifs antivirus
-Are there any indications that this file is packed or obfuscated ? If so, what are these indicators ? If the file is packed, unpack it if possible.</p>
+<p>The malware will install a DLL backdoor call <strong>Kerne132.dll</strong> that will be able to communicate with his C2. The adress of the C2 is <strong>127.26.152.13</strong>.</p>
+<h3 id="lab-1-2"><strong>Lab 1-2</strong></h3>
+<p>This lab uses the files Lab01-02.exe.</p>
+<h4 id="upload-the-file-to-httpwwwwvirustotalcom-does-it-match-any-existing-antivirus-definitions-"><strong>Upload the file to <a href="http://wwww.VirusTotal.com/">http://wwww.VirusTotal.com/</a>. Does it match any existing antivirus definitions ?</strong></h4>
+<p>Virus Total detected a potential Trojan. The signature of the malware is <em>8363436878404da0ae3e46991e355b83</em></p>
+<p><strong>55/71</strong> positifs antivirus</p>
+<h4 id="are-there-any-indications-that-this-file-is-packed-or-obfuscated--if-so-what-are-these-indicators--if-the-file-is-packed-unpack-it-if-possible"><strong>Are there any indications that this file is packed or obfuscated ? If so, what are these indicators ? If the file is packed, unpack it if possible.</strong></h4>
 <p>To see if a malware is packed we will use PEiD.
 The binary was packed with UPX in his 0.89.6 version.</p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-2_2_packed_binary.png" alt="packed_binary"></p>
-<p>To depack this binary, we will use UPX with the -d parameter.</p>
+<p>To unpack this binary, we will use UPX with the -d parameter.</p>
 <p><a href="https://sourceforge.net/projects/upx/">Téléchargement UPX</a></p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-2_2_unpacked_binary.png" alt="unpack_binary"></p>
 <p>The malware isn’t packed anymore. We can check it by listing all the characters inside the binary or by starting again PEiD.</p>
@@ -331,19 +331,19 @@ The binary was packed with UPX in his 0.89.6 version.</p>
 <li>InternetOpenA</li>
 </ul>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-2_3_import_functions_wininet.png" alt="imports_functions_wininet"></p>
-<p>With the functions used, we can say the malware use a service that it will connect to Internet.
-What host or network-based indicators could be used to identify this malware on infected machines ?</p>
-<p>We list all the characters of the binary to see if we can find a URL the malware is connecting to. We discover that the service is call MalService and the malware is connecting to <a href="http://malwareanalysisbook.com">http://malwareanalysisbook.com</a></p>
+<p>With the functions used, we can say the malware use a service that it will connect to Internet.</p>
+<h4 id="what-host-or-network-based-indicators-could-be-used-to-identify-this-malware-on-infected-machines-"><strong>What host or network-based indicators could be used to identify this malware on infected machines ?</strong></h4>
+<p>We list all the characters of the binary to see if we can find a URL the malware is connecting to. We discover that the service is call <strong>MalService</strong> and the malware is connecting to <strong><a href="http://malwareanalysisbook.com">http://malwareanalysisbook.com</a></strong></p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-2_4_strings.png" alt="strings"></p>
 <p>We can recover all those informations with IDA.</p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-2_4_ida_service.png" alt="ida_service">
 <img src="/images/walkthroughs/pma_lab1/lab-1-2_4_ida_url.png" alt="ida_url"></p>
 <h3 id="lab-1-3"><strong>Lab 1-3</strong></h3>
-<p>This lab uses the files Lab01-03.exe.
-Upload the Lab01-03.exe file to <a href="http://virustotal.com/">http://virustotal.com/</a>. Does it match any existing antivirus definitions ?</p>
-<p>Virus Total detected a potential Trojan. The signature of the malware is 7983a582939924c70e3da2da80fd3352ebc90de7b8c4c427d484ff4ff050f0aec</p>
-<p>53/70 positifs antivirus
-Are there any indications that this file is packed or obfuscated ? If so what are these indicators ? If the file is packed, unpack it if possible.</p>
+<p>This lab uses the files Lab01-03.exe.</p>
+<h4 id="upload-the-lab01-03exe-file-to-httpvirustotalcom-does-it-match-any-existing-antivirus-definitions-"><strong>Upload the Lab01-03.exe file to <a href="http://virustotal.com/">http://virustotal.com/</a>. Does it match any existing antivirus definitions ?</strong></h4>
+<p>Virus Total detected a potential Trojan. The signature of the malware is <em>7983a582939924c70e3da2da80fd3352ebc90de7b8c4c427d484ff4ff050f0aec</em></p>
+<p><strong>53/70</strong> positifs antivirus</p>
+<h4 id="are-there-any-indications-that-this-file-is-packed-or-obfuscated--if-so-what-are-these-indicators--if-the-file-is-packed-unpack-it-if-possible-1"><strong>Are there any indications that this file is packed or obfuscated ? If so what are these indicators ? If the file is packed, unpack it if possible.</strong></h4>
 <p>In order to see if the malware is packed, we will use PeID</p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-3_2_peid.png" alt="1_3_peid"></p>
 <p>This show us that the malware is packed with FSG in his 1.0 version</p>
@@ -351,10 +351,10 @@ Are there any indications that this file is packed or obfuscated ? If so what ar
 <p>Unfortunately, we will skip the next 2 questions..</p>
 <h3 id="lab-1-4"><strong>Lab 1-4</strong></h3>
 <p>This lab uses the files Lab01-04.exe.</p>
-<h4 id="upload-the-lab01-03exe-file-to-httpvirustotalcom-does-it-match-any-existing-antivirus-definitions-"><strong>Upload the Lab01-03.exe file to <a href="http://virustotal.com/">http://virustotal.com/</a>. Does it match any existing antivirus definitions ?</strong></h4>
-<p>Virus Total detected a potential Trojan/Dropper. The signature of the malware is 0fa1498340fca6c562cfa389ad3e93395f44c72fd128d7ba08579a69aaf3b126</p>
-<p>57/71 positifs antivirus</p>
-<h4 id="are-there-any-indications-that-this-file-is-packed-or-obfuscated--if-so-what-are-these-indicators--if-the-file-is-packed-unpack-it-if-possible"><strong>Are there any indications that this file is packed or obfuscated ? If so, what are these indicators ? If the file is packed, unpack it if possible.</strong></h4>
+<h4 id="upload-the-lab01-03exe-file-to-httpvirustotalcom-does-it-match-any-existing-antivirus-definitions--1"><strong>Upload the Lab01-03.exe file to <a href="http://virustotal.com/">http://virustotal.com/</a>. Does it match any existing antivirus definitions ?</strong></h4>
+<p>Virus Total detected a potential Trojan/Dropper. The signature of the malware is <em>0fa1498340fca6c562cfa389ad3e93395f44c72fd128d7ba08579a69aaf3b126</em></p>
+<p><strong>57/71</strong> positifs antivirus</p>
+<h4 id="are-there-any-indications-that-this-file-is-packed-or-obfuscated--if-so-what-are-these-indicators--if-the-file-is-packed-unpack-it-if-possible-2"><strong>Are there any indications that this file is packed or obfuscated ? If so, what are these indicators ? If the file is packed, unpack it if possible.</strong></h4>
 <p>Same as others exercices in this lab, we will use PeID.</p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-4_2_peid.png" alt="1_4_peid"></p>
 <p>The malware isn’t packed, the analysis will be easier.</p>
@@ -387,7 +387,7 @@ Are there any indications that this file is packed or obfuscated ? If so what ar
 <li>AdjustTokenPrivileges</li>
 </ul>
 <p>After some research I found that this function could be use to elevate your privileges.</p>
-<h4 id="what-host-or-network-based-indicators-could-be-used-to-identify-this-malware-on-infected-machines-"><strong>What host or network-based indicators could be used to identify this malware on infected machines ?</strong></h4>
+<h4 id="what-host-or-network-based-indicators-could-be-used-to-identify-this-malware-on-infected-machines--1"><strong>What host or network-based indicators could be used to identify this malware on infected machines ?</strong></h4>
 <p>We use the strings command to list all the characters inside the binary.</p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-4_5_strings_indicators.png" alt="1_5_strings_indicators"></p>
 <p>There are two hosts indicators:</p>
@@ -395,8 +395,8 @@ Are there any indications that this file is packed or obfuscated ? If so what ar
 <li>winup.exe</li>
 <li>system32\wupdmgrd.exe</li>
 </ul>
-<p>Also, there is one network indicator with the URL: <a href="http://practicalmalwareanalysis.com/updater.exe">http://practicalmalwareanalysis.com/updater.exe</a>
-This file has one resource in the resource section. Use Resource Hacker to examine that resource, and then use it to extract the resource. What can you learn from the resource ?</p>
+<p>Also, there is one network indicator with the URL: <a href="http://practicalmalwareanalysis.com/updater.exe">http://practicalmalwareanalysis.com/updater.exe</a></p>
+<h4 id="this-file-has-one-resource-in-the-resource-section-use-resource-hacker-to-examine-that-resource-and-then-use-it-to-extract-the-resource-what-can-you-learn-from-the-resource-"><strong>This file has one resource in the resource section. Use Resource Hacker to examine that resource, and then use it to extract the resource. What can you learn from the resource ?</strong></h4>
 <p>Inside the resources section we can see the sentence: “This program cannot be run in DOS mode”.
 This is typicaly what we found when there is a binary inside an other one.</p>
 <p><img src="/images/walkthroughs/pma_lab1/lab-1-4_6_resources.png" alt="1_6_resources"></p>
@@ -409,17 +409,12 @@ This is typicaly what we found when there is a binary inside an other one.</p>
 <li>URLMONDLL</li>
 </ul>
 <p>This DLL import the URLDownloadToFile function.</p>
-<p>The malware is able drop a binary that can download a file from <a href="http://practicalmalwareanalysis.com/updater.exe">http://practicalmalwareanalysis.com/updater.exe</a> and execute it.</p>
+<p>The malware is able <strong>drop a binary</strong> that can download a file from <strong><a href="http://practicalmalwareanalysis.com/updater.exe">http://practicalmalwareanalysis.com/updater.exe</a></strong> and execute it.</p>
 
   </div>
   
 
 <div class="navigation navigation-single">
-    
-    <a href="/walkthroughs/google_dork/" class="navigation-prev">
-      <i aria-hidden="true" class="fa fa-chevron-left"></i>
-      <span class="navigation-tittle">Google Dork</span>
-    </a>
     
     
     <a href="/walkthroughs/pma_lab3/" class="navigation-next">

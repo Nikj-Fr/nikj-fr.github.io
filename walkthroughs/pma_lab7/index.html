@@ -167,7 +167,7 @@
 	
 	
 	
-	<a href="mailto:jallet.nicolas16@gmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	<a href="mailto:nikj@protonmail.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
 	
 	
 	
@@ -257,7 +257,7 @@ If he can it means that there is already a mutex <strong>HGL345</strong> on the 
 <p><img src="/images/walkthroughs/pma_lab7/lab-7-1_timer.png" alt="timer"></p>
 <p>It open a browser with the user-agent <strong>Internet Explorer 8.0</strong> and start an infinite loop by communicating with <a href="http://www.malwareanalysisbook.com">http://www.malwareanalysisbook.com</a>. We can presume that if a lot of computers start this program, the <strong>1st january 2100</strong> the website will be DDOS (or attend unexpected huge traffic).</p>
 <h4 id="when-will-this-program-finish-executing-"><strong>When will this program finish executing ?</strong></h4>
-<p>Obviously this program never end. There aren’t any jump out of this function: sleep</p>
+<p>Obviously this program never end. There aren’t any jump out of the sleep function.</p>
 <h3 id="lab-7-2"><strong>Lab 7-2</strong></h3>
 <h4 id="how-does-this-program-achieve-persistence-"><strong>How does this program achieve persistence ?</strong></h4>
 <p>I don’t see anything that could say the program achieve persistence. What we can presume is that the program use COM Objects (Component Object Model) to do his job. The obvious <strong>OleInitialize</strong> is a pattern to start using those objects.</p>
@@ -324,17 +324,17 @@ If he can it means that there is already a mutex <strong>HGL345</strong> on the 
 <ul>
 <li>Directory: C:\</li>
 <li>Search for .exe in the above directory</li>
-<li>DLL: kerne132.dll (in the PE)</li>
-<li>Mutex: SADFHUHF</li>
+<li>DLL: <strong>kerne132.dll</strong> (in the PE)</li>
+<li>Mutex: <strong>SADFHUHF</strong></li>
 </ul>
 <p>Network signature (Not ask):</p>
 <ul>
-<li>C2: 127.26.152.13</li>
+<li>C2: <strong>127.26.152.13</strong></li>
 </ul>
 <h4 id="what-is-the-purpose-of-this-program--2"><strong>What is the purpose of this program ?</strong></h4>
 <p>This program is able to persist on the system by hijacking the native kernel32 dll with a fake one kerne132. With this new dll the malware can sleep or execute command directly from the C2.</p>
 <h4 id="how-could-you-remove-this-malware-once-it-is-installed-"><strong>How could you remove this malware once it is installed ?</strong></h4>
-<p>This program will be very difficult to remove because it infect every executables in your C:\ directory. A solution could be to reverse the process used by the malware and replace every fake kernel32.dll with the native one.</p>
+<p>This program will be very difficult to remove because it <strong>infect every executables in your C:\</strong> directory. A solution could be to reverse the process used by the malware and replace every fake kernel32.dll with the native one.</p>
 
   </div>
   
