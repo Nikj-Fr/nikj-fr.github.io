@@ -14,7 +14,7 @@
       
       <guid>https://nikj-fr.github.io/walkthroughs/pma_lab10/</guid>
       <description>Kernel Debugging with WinDbg Lab 10 This chapter explore ways to use WinDbg for kernel debugging and rootkit analysis.
-Lab 10-1 Does this program make any direct changes to the registry ? The user-space program calls the ControlService function. Can you set a breakpoint with WinDbg to see what is executed in the kernel as a result of th ecall to ControlService ? What does this program do ? Lab 10-2 **Does this program create any files ?</description>
+Lab 10-1 Does this program make any direct changes to the registry ? The user-space program calls the ControlService function. Can you set a breakpoint with WinDbg to see what is executed in the kernel as a result of th ecall to ControlService ? What does this program do ? Lab 10-2 Does this program create any files ?</description>
     </item>
     
     <item>

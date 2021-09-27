@@ -244,7 +244,14 @@ _start:
 Don&rsquo;t forget: when a function is call without arguments, ESP point to the bottom of the stack which contain the value of the return address function (EIP)</li>
 <li>We use int 080h to use syscall. In our case, EAX = 0 so the syscall will be <strong>exit()</strong></li>
 </ul>
-<p>We put a breakpoint on the <code>ret</code>.
+<p>Installation des pré-requis:</p>
+<pre><code>sudo apt install nasm
+</code></pre><p>Compilation:</p>
+<pre><code>$ nasm -f elf32 -g -F drawf prr2_ex1.asm
+$ ld -m elf_i386 -o prr_ex1 prr2_ex1.o
+</code></pre><p>We put a breakpoint on <code>call store_eip</code> and on <code>ret</code> using gdb.</p>
+<pre><code>
+</code></pre><p>We put a breakpoint on <code>ret</code> using gdb
 We start the program and read EIP:</p>
 <p>image_todo</p>
 <p>Then we read the content of EAX:</p>
