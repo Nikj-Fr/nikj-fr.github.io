@@ -16,27 +16,19 @@
     
     
 
-<title>Nmap • Nikj • </title>
+<title>Tutorial - Setup Remote Kernel Debugging • Nikj • </title>
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Nmap"/>
-<meta name="twitter:description" content="Types de scan    Parameters Description     sA ACK scan   sF FIN scan    Scanner une IP
-nmap [IP]Scanner plusieurs IPs
-nmap [IP_1, IP_2]Scanner une liste d’IPs depuis un fichier .txt
-nmap -iL [liste.txt]Scanner un sous-réseau
-nmap [IP/Mask]"/>
+<meta name="twitter:title" content="Tutorial - Setup Remote Kernel Debugging"/>
+<meta name="twitter:description" content="Setup Remote Kernel Debugging for Kernel Driver development"/>
 
-<meta property="og:title" content="Nmap" />
-<meta property="og:description" content="Types de scan    Parameters Description     sA ACK scan   sF FIN scan    Scanner une IP
-nmap [IP]Scanner plusieurs IPs
-nmap [IP_1, IP_2]Scanner une liste d’IPs depuis un fichier .txt
-nmap -iL [liste.txt]Scanner un sous-réseau
-nmap [IP/Mask]" />
+<meta property="og:title" content="Tutorial - Setup Remote Kernel Debugging" />
+<meta property="og:description" content="Setup Remote Kernel Debugging for Kernel Driver development" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nikj-fr.github.io/cheatsheets/nmap/" />
-<meta property="article:published_time" content="2020-12-21T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-12-21T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
+<meta property="og:url" content="https://nikj-fr.github.io/articles/setup_remote_kernel_debugging/" />
+<meta property="article:published_time" content="2021-04-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-10T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
 
 
     
@@ -207,20 +199,20 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
     
 <article>
   <header>
-    <h1>Nmap</h1>
+    <h1>Tutorial - Setup Remote Kernel Debugging</h1>
     
     
 <div class="post__meta">
     
     
-      <i class="fas fa-calendar-alt"></i> Dec 21, 2020
+      <i class="fas fa-calendar-alt"></i> Apr 10, 2021
     
     
     
     
     
     <br/>
-    <i class="fas fa-clock"></i> 1 min read
+    <i class="fas fa-clock"></i> 2 min read
 </div>
 
 
@@ -228,42 +220,47 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
   
   
   <div class="post">
-    <h4 id="types-de-scan"><strong>Types de scan</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Parameters</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>sA</td>
-<td>ACK scan</td>
-</tr>
-<tr>
-<td>sF</td>
-<td>FIN scan</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Scanner une IP</strong></p>
-<pre><code>nmap [IP]
-</code></pre><p><strong>Scanner plusieurs IPs</strong></p>
-<pre><code>nmap [IP_1, IP_2]
-</code></pre><p><strong>Scanner une liste d’IPs depuis un fichier .txt</strong></p>
-<pre><code>nmap -iL [liste.txt]
-</code></pre><p><strong>Scanner un sous-réseau</strong></p>
-<pre><code>nmap [IP/Mask]
-</code></pre>
+    <h3 id="setup-remote-kernel-debugging"><strong>Setup Remote Kernel Debugging</strong></h3>
+<p>I assume you know how to install a Virtual Machine and the WDK. In case you don&rsquo;t I put links besides:</p>
+<ul>
+<li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a></li>
+<li><a href="https://www.microsoft.com/en-in/software-download/windows10">Windows Tools for ISO</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk">WDK</a></li>
+<li><a href="https://www.microsoft.com/fr-fr/p/windbg/9pgjgd53tn86?rtc=1&amp;activetab=pivot:overviewtab">WinDBG</a></li>
+</ul>
+<p>I recommand you to make a <strong>snapshot</strong> before starting the following steps..</p>
+<h4 id="enable-kernel-debugging"><strong>Enable Kernel Debugging</strong></h4>
+<p>Start the command prompt as Administrator in order to run the following commands. The first one enable the debugging, and the second one defines the configuration to be used for the debugging. In our case we provide the IP address, the port of the debugger (machine that debug the VM) and a key.<br>
+Replace <code>&lt;DEBUGGER'S IP ADDRESS&gt;</code> with your host ip address (<code>ipconfig</code>).</p>
+<pre><code>bcdedit.exe /debug on
+bcdedit.exe /dbgsettings net hostip:&lt;DEBUGGER'S IP ADDRESS&gt; port:50000 key:kernel.debugging.is.easy
+</code></pre><p><img src="/images/articles/setup_remote_kernel_debugging/debug_on.png" alt="DEBUG_ON"></p>
+<p><img src="/images/articles/setup_remote_kernel_debugging/key.png" alt="KEY"></p>
+<p>Then, we have to specify the location of our network card. Press <strong>Win + X</strong>, select Device Manager and network card. Right click on the good one, properties and look on which bus your card is.</p>
+<p><img src="/images/articles/setup_remote_kernel_debugging/bus_param_properties.png" alt="BUS_PARAM_PROPERTIES"></p>
+<pre><code>bcdedit.exe /set {dbgsettings} busparams 0.3.0
+</code></pre><p><img src="/images/articles/setup_remote_kernel_debugging/bus_param.png" alt="BUS_PARAM_PROPERTIES"></p>
+<h4 id="configure-windbg"><strong>Configure WinDBG</strong></h4>
+<p>Start WinDbg (x64), then Select File -&gt; Attach to Kernel. Now enter the key defined while setting up the debuggee VM. If you followed this tutorial it was <strong>&ldquo;kernel.debugging.is.easy&rdquo;</strong>, keep the port to be <strong>50000</strong> and click OK.</p>
+<p><img src="/images/articles/setup_remote_kernel_debugging/windbg_setup.png" alt="WINDBG_SETUP"></p>
+<p>Now that the debugger is waiting.</p>
+<p><img src="/images/articles/setup_remote_kernel_debugging/windbg_waiting_connection.png" alt="WINDBG_WAITING_CONNECTION"></p>
+<p>We can start our debuggee VM and we should see the connection establishment in WinDBG window.</p>
+<p><img src="/images/articles/setup_remote_kernel_debugging/windbg_connection.png" alt="WINDBG_CONNECTION"></p>
+
   </div>
   
 
 <div class="navigation navigation-single">
     
+    <a href="/articles/suppression_application_preinstalle_windows10/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">Suppression des application préinstallées sous Windows 10</span>
+    </a>
     
-    <a href="/cheatsheets/google_dork/" class="navigation-next">
-      <span class="navigation-tittle">Google Dork</span>
+    
+    <a href="/articles/self_injection/" class="navigation-next">
+      <span class="navigation-tittle">Tutorial - Unpack Self Injection Packer</span>
       <i aria-hidden="true" class="fa fa-chevron-right"></i>
     </a>
     

@@ -6,7 +6,11 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Wed, 22 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Sep 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Practical Malware Analysis - Lab 10</title>
       <link>https://nikj-fr.github.io/walkthroughs/pma_lab10/</link>
@@ -35,6 +39,17 @@ At 0x402AFD, the number of argument is compared to 1. I didn&amp;rsquo;t set any
       
       <guid>https://nikj-fr.github.io/articles/self_injection/</guid>
       <description>Table of content  Introduction Overview How to detect the technique ? Unpack Princess Locker  Introduction Malware authors try to hide themselves from antivirus and make analysis harder. One of technique is called &amp;ldquo;packing&amp;rdquo;, it means to make the code obfuscated and unreable. In this post, we&amp;rsquo;ll look at one specific kind of unpacking technique that you can use to finally start the analysis of the real payload. This technique is called Self-Injection.</description>
+    </item>
+    
+    <item>
+      <title>Tutorial - Setup Remote Kernel Debugging</title>
+      <link>https://nikj-fr.github.io/articles/setup_remote_kernel_debugging/</link>
+      <pubDate>Sat, 10 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/articles/setup_remote_kernel_debugging/</guid>
+      <description>Setup Remote Kernel Debugging I assume you know how to install a Virtual Machine and the WDK. In case you don&amp;rsquo;t I put links besides:
+ VirtualBox Windows Tools for ISO WDK WinDBG  I recommand you to make a snapshot before starting the following steps..
+Enable Kernel Debugging Start the command prompt as Administrator in order to run the following commands. The first one enable the debugging, and the second one defines the configuration to be used for the debugging.</description>
     </item>
     
     <item>
