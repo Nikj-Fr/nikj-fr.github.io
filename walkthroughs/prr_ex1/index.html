@@ -6,17 +6,20 @@
 
     <head>
     <link href="https://gmpg.org/xfn/11" rel="profile">
+    
+    <link rel="canonical" href="https://nikj-fr.github.io/walkthroughs/prr_ex1/">
+    
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.74.1" />
+<meta name="generator" content="Hugo 0.98.0" />
 
     
     
     
 
-<title>Practical Reverse Engineering - Ex 1 • Nikj • </title>
+<title>Practical Reverse Engineering - Ex 1 • </title>
 
 
 <meta name="twitter:card" content="summary"/>
@@ -26,15 +29,16 @@
 <meta property="og:title" content="Practical Reverse Engineering - Ex 1" />
 <meta property="og:description" content="First exercice of the Practical Reverse Engineering book writen by Bruce Dang, Alexandre Gazet and Elias Bachaalany" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/prr_ex1/" />
+<meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/prr_ex1/" /><meta property="article:section" content="walkthroughs" />
 <meta property="article:published_time" content="2021-03-09T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-03-09T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
+
 
 
     
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github.min.css">
 
 
 
@@ -81,13 +85,13 @@
         
         
         <div class="author-image">
-          <a href="http://nikj-fr.github.io"><img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center"></a>
+          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
         </div>
         
       
       
       <p class="site__description">
-        <a href="http://nikj-fr.github.io"> Infosec Website | CTF Write Up </a>
+         Infosec Website | CTF Write Up 
       </p>
     </div>
     <div class="collapsible-menu">
@@ -172,14 +176,13 @@
 	
 	
 	
-	
 </section>
 
       </div>
     </div>
     
 <div class="copyright">
-  &copy; 2019 - 2021 htr3n
+  &copy; 2019 - 2022 htr3n
   
     <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
   
@@ -222,7 +225,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
   <div class="post">
     <h4 id="question"><strong>Question</strong></h4>
 <p><strong>This function uses a combination <em>SCAS</em> and <em>STOS</em> to do its work. First, explain what is the type of the [EBP+8] and [EBP+C] in line 1 and 8 respectively. Next explain what this snippet does.</strong></p>
-<pre><code>01: 8B 7D 08    mov edi, [ebp+8]
+<pre tabindex="0"><code>01: 8B 7D 08    mov edi, [ebp+8]
 02: 8B D7       mov edx, edi
 03: 33 C0       xor eax, eax
 04: 83 C9 FF    or ecx, 0FFFFFFFFh
@@ -239,13 +242,13 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p>The first parameter of the program is EBP+8, and the second argument is EBP+C.
 The <em>[]</em> means that EDI is now addressing the value stored at [EBP+8] or [EBP+C]. It&rsquo;s like a pointer in C.</p>
 <h5 id="line-1">Line 1</h5>
-<pre><code>01: 8B 7D 08    mov edi, [ebp+8]
+<pre tabindex="0"><code>01: 8B 7D 08    mov edi, [ebp+8]
 </code></pre><p>EDI is equal to the value stored at [EBP+8]</p>
 <h5 id="line-2">Line 2</h5>
-<pre><code>02: 8B D7       mov edx, edi
+<pre tabindex="0"><code>02: 8B D7       mov edx, edi
 </code></pre><p>A copy of EDI is made in EDX</p>
 <h5 id="line-3">Line 3</h5>
-<pre><code>03: 33 C0       xor eax, eax
+<pre tabindex="0"><code>03: 33 C0       xor eax, eax
 </code></pre><p>This set EAX to 0.</p>
 <table>
 <thead>
@@ -275,7 +278,7 @@ The <em>[]</em> means that EDI is now addressing the value stored at [EBP+8] or 
 </table>
 <p>The opcode <em>33 C0</em> is shorter than <em>mov eax, 0</em>. However, the execution time is the same.</p>
 <h5 id="line-4">Line 4</h5>
-<pre><code>04: 83 C9 FF    or ecx, 0FFFFFFFFh
+<pre tabindex="0"><code>04: 83 C9 FF    or ecx, 0FFFFFFFFh
 </code></pre><p>The result of this instruction doesn&rsquo;t depend on what register is prior. <strong>or</strong> of a register with a value set to 0xFFFFFFFF, result in ECX = 0xFFFFFFFF</p>
 <table>
 <thead>
@@ -304,38 +307,38 @@ The <em>[]</em> means that EDI is now addressing the value stored at [EBP+8] or 
 </tbody>
 </table>
 <h5 id="line-5">Line 5</h5>
-<pre><code>05: F2 AE       repne scasb
+<pre tabindex="0"><code>05: F2 AE       repne scasb
 </code></pre><p>SCASB decreases the value of ECX after each byte comparison by one, and increases the value of EDI by one.
 As long as AL doesn&rsquo;t match the NULL byte (0x00). If EDI contain the string: &ldquo;reverse engineering is cool&rdquo;.<br>
 This will return: &ldquo;r&rdquo;,&ldquo;e&rdquo;,&ldquo;v&rdquo;,.. and end with 0x00 after &ldquo;l&rdquo;.</p>
 <p>ecx is equal to <strong>-29</strong>. But why -29 ? There is 27 characters in the string + null byte = 28. We forget to talk about edi that was increased by one for each byte comparison. edi points to an address after the NULL byte, so 1 was added to ecx. This is why at <strong>line2</strong> we saved edi in edx.</p>
 <h5 id="line-6">Line 6</h5>
-<pre><code>06: 83 C1 02    add ecx, 2
+<pre tabindex="0"><code>06: 83 C1 02    add ecx, 2
 </code></pre><p>2 is added to ecx.
 Taking the last result of ecx in line 5 with the string: <em>&ldquo;reverse engineering is cool&rdquo;</em>, ecx would be equal to -27.</p>
 <h5 id="line-7">Line 7</h5>
-<pre><code>07: F7 D9       neg ecx
+<pre tabindex="0"><code>07: F7 D9       neg ecx
 </code></pre><p><strong>neg</strong> replace the value of the destination operand (here ecx) with it&rsquo;s two complement.
 The two complement is the result of a <strong>not</strong> and <strong>add 1</strong> to destination operand.</p>
-<pre><code>00001010    10
+<pre tabindex="0"><code>00001010    10
 11110101    not(10) = -11
 11110110    not(10)+1 = -10
 </code></pre><p>This instruction is equivalent to <em>ecx = 0 - ecx</em> &lt;=&gt; <em>ecx = -ecx</em>
 Now ecx = 27. This number correspond to the length of the first parameter.</p>
 <h5 id="line-8">Line 8</h5>
-<pre><code>08: 8A 45 0C    mov al, [ebp+0Ch]
+<pre tabindex="0"><code>08: 8A 45 0C    mov al, [ebp+0Ch]
 </code></pre><p>AL is the first 4 bytes of the eax register. [EBP+C] is equivalent to the second function parameter. The content of the address at EBP+C will be truncate to his first 4 bytes to fit in the AL register.</p>
 <h5 id="line-9">Line 9</h5>
-<pre><code>09: 8B AA       mov edi, edx
+<pre tabindex="0"><code>09: 8B AA       mov edi, edx
 </code></pre><p>EDI was modified with <strong>neg</strong> instruction, pointing to the end of the string (after the NULL byte), we now restore it the it&rsquo;s old value which was the beginning of the string.</p>
 <h5 id="line-10">Line 10</h5>
-<pre><code>10: F3 AA       rep stosb
+<pre tabindex="0"><code>10: F3 AA       rep stosb
 </code></pre><p>The REP mnemonic is used to repeat an operation.
-The STOS instruction copies the values of AL, AX or EAX into the location pointed by EDI.
+The STOS instruction copies the values of AL, AX or EAX into the location pointed by EDI. 
 stosb stores a byte from the AL register and copy it to the destination operand.
 EDI points to the beginning of our strings. It will replace ecx bytes of the strings with the byte in AL. ECX is equal to the length of the string. This instruction will overwrite the string content with 1 byte.</p>
 <h5 id="line-11">Line 11</h5>
-<pre><code>11: 8B C2       mov eax, edx
+<pre tabindex="0"><code>11: 8B C2       mov eax, edx
 </code></pre><p>At <strong>line 2</strong> edx is pointing to the string we defined in the first parameter of the function. The string is now store is eax.</p>
 <h4 id="conclusion"><strong>Conclusion</strong></h4>
 <p>This program is used to calculate the length of the first parameter of the function and overwrite it with the second parameter. Finally the first parameter is set in eax (could be used to return the value).</p>
@@ -379,7 +382,7 @@ EDI points to the beginning of our strings. It will replace ecx bytes of the str
 
 
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
         
     <script type="text/javascript">
         

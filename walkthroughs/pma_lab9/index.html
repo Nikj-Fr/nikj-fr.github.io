@@ -6,17 +6,20 @@
 
     <head>
     <link href="https://gmpg.org/xfn/11" rel="profile">
+    
+    <link rel="canonical" href="https://nikj-fr.github.io/walkthroughs/pma_lab9/">
+    
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.74.1" />
+<meta name="generator" content="Hugo 0.98.0" />
 
     
     
     
 
-<title>Practical Malware Analysis - Lab 9 • Nikj • </title>
+<title>Practical Malware Analysis - Lab 9 • </title>
 
 
 <meta name="twitter:card" content="summary"/>
@@ -26,15 +29,16 @@
 <meta property="og:title" content="Practical Malware Analysis - Lab 9" />
 <meta property="og:description" content="Sixth exercice of the Practical Malware Analysis book. The goal of this labs is to focus on OllyDBG, an x86 debugger developped by Oleh Yushuk." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/pma_lab9/" />
+<meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/pma_lab9/" /><meta property="article:section" content="walkthroughs" />
 <meta property="article:published_time" content="2021-09-15T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-09-15T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
+
 
 
     
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github.min.css">
 
 
 
@@ -81,13 +85,13 @@
         
         
         <div class="author-image">
-          <a href="http://nikj-fr.github.io"><img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center"></a>
+          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
         </div>
         
       
       
       <p class="site__description">
-        <a href="http://nikj-fr.github.io"> Infosec Website | CTF Write Up </a>
+         Infosec Website | CTF Write Up 
       </p>
     </div>
     <div class="collapsible-menu">
@@ -172,14 +176,13 @@
 	
 	
 	
-	
 </section>
 
       </div>
     </div>
     
 <div class="copyright">
-  &copy; 2019 - 2021 htr3n
+  &copy; 2019 - 2022 htr3n
   
     <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
   
@@ -225,7 +228,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p>I choose <strong>x64DBG</strong> instead of OllyDBG because I found the HMI better, and I feel more familiar with the tool.</p>
 <h3 id="lab-9-1"><strong>Lab 9-1</strong></h3>
 <h4 id="how-can-you-get-this-malware-to-install-itself-"><strong>How can you get this malware to install itself ?</strong></h4>
-<p>Firstly, let&rsquo;s put the malware in the debugger.
+<p>Firstly, let&rsquo;s put the malware in the debugger. 
 The program is immediately pauses once it hits the entrypoint.</p>
 <p><img src="/images/walkthroughs/pma_lab9/lab-9-1_initial_breakpoint.png" alt="initial_breakpoint"></p>
 <p>At <em>0x402AFD</em>, the number of argument is compared to <strong>1</strong>. I didn&rsquo;t set any parameters when starting the debug.</p>
@@ -335,14 +338,14 @@ ECX = 0x12FD58<br>
 EDX = &ldquo;1qaz2wsx3edc&rdquo;<br>
 <img src="/images/walkthroughs/pma_lab9/lab-9-2_arguments_401089.png" alt="arguments_401089"></p>
 <h4 id="what-domain-name-does-this-malware-use-"><strong>What domain name does this malware use ?</strong></h4>
-<p>The domain name is <strong><a href="http://www.practicalmalwareanalysis.com">www.practicalmalwareanalysis.com</a></strong>, it is created in the subroutine at <em>0x401089</em>.</p>
+<p>The domain name is <strong><a href="https://www.practicalmalwareanalysis.com">www.practicalmalwareanalysis.com</a></strong>, it is created in the subroutine at <em>0x401089</em>.</p>
 <h4 id="what-encoding-routine-is-being-used-to-obfuscate-the-domain-name-"><strong>What encoding routine is being used to obfuscate the domain name ?</strong></h4>
 <p>Here is the routine that is used to create the domain name.<br>
 <img src="/images/walkthroughs/pma_lab9/lab-9-2_routine_domain_name.png" alt="routine_domain_name"></p>
 <p>We put a breakpoint at <strong>xor ecx, edx</strong> to see what are the characters being xored.</p>
 <p>The first character of the string &ldquo;1qaz2wsx3edc&rdquo; (&ldquo;1&rdquo;) is being xored with the letter &ldquo;F&rdquo; which result in the &ldquo;w&rdquo; letter.<br>
 <img src="/images/walkthroughs/pma_lab9/lab-9-2_routine_domain_name_xor_1.png" alt="routine_domain_name_xor_1"></p>
-<p>After several loops, we finally constructed the entire domain string: <strong><a href="http://www.practicalmalwareanalysis.com">www.practicalmalwareanalysis.com</a></strong>.
+<p>After several loops, we finally constructed the entire domain string: <strong><a href="https://www.practicalmalwareanalysis.com">www.practicalmalwareanalysis.com</a></strong>. 
 The length of the string is 32 bytes long like the cmp it makes at <em>0x4010E3</em>.<br>
 <img src="/images/walkthroughs/pma_lab9/lab-9-2_domain_string.png" alt="domain_string"></p>
 <h4 id="what-is-the-significance-of-the-createprocessa-call-at-0x40106e-"><strong>What is the significance of the CreateProcessA call at 0x40106E ?</strong></h4>
@@ -367,7 +370,7 @@ The length of the string is 32 bytes long like the cmp it makes at <em>0x4010E3<
 </ul>
 <h4 id="what-is-the-base-address-requested-by-dll1dll-dll2dll-dll3dll-"><strong>What is the base address requested by DLL1.dll, DLL2.dll, DLL3.dll ?</strong></h4>
 <p>Let&rsquo;s use the IDA python API to return the result. Open the first DLL and write in the python area:</p>
-<pre><code>base_address = idaapi.get_imagebase()
+<pre tabindex="0"><code>base_address = idaapi.get_imagebase()
 print(hex(base_address))
 </code></pre><p>Do it for all the DLLs..<br>
 They are all loaded at <strong>0x10000000</strong></p>
@@ -456,7 +459,7 @@ Based on this, we assume that it will <strong>ping www.malwareanalysisbook[.]com
 
 
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
         
     <script type="text/javascript">
         

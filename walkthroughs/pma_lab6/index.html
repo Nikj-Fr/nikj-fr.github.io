@@ -6,17 +6,20 @@
 
     <head>
     <link href="https://gmpg.org/xfn/11" rel="profile">
+    
+    <link rel="canonical" href="https://nikj-fr.github.io/walkthroughs/pma_lab6/">
+    
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.74.1" />
+<meta name="generator" content="Hugo 0.98.0" />
 
     
     
     
 
-<title>Practical Malware Analysis - Lab 6 • Nikj • </title>
+<title>Practical Malware Analysis - Lab 6 • </title>
 
 
 <meta name="twitter:card" content="summary"/>
@@ -26,15 +29,16 @@
 <meta property="og:title" content="Practical Malware Analysis - Lab 6" />
 <meta property="og:description" content="Fourth exercice of the Practical Malware Analysis book. The goal of this labs is to help understand the overall functionality of a program by analyzing code constructs" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/pma_lab6/" />
+<meta property="og:url" content="https://nikj-fr.github.io/walkthroughs/pma_lab6/" /><meta property="article:section" content="walkthroughs" />
 <meta property="article:published_time" content="2021-01-05T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-01-05T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
+
 
 
     
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github.min.css">
 
 
 
@@ -81,13 +85,13 @@
         
         
         <div class="author-image">
-          <a href="http://nikj-fr.github.io"><img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center"></a>
+          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
         </div>
         
       
       
       <p class="site__description">
-        <a href="http://nikj-fr.github.io"> Infosec Website | CTF Write Up </a>
+         Infosec Website | CTF Write Up 
       </p>
     </div>
     <div class="collapsible-menu">
@@ -172,14 +176,13 @@
 	
 	
 	
-	
 </section>
 
       </div>
     </div>
     
 <div class="copyright">
-  &copy; 2019 - 2021 htr3n
+  &copy; 2019 - 2022 htr3n
   
     <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
   
@@ -268,7 +271,7 @@ We can check this by starting the malware..</p>
 <h4 id="are-there-any-network-based-indicators-for-this-program-"><strong>Are there any network-based indicators for this program ?</strong></h4>
 <p>There are two network indicators:</p>
 <ul>
-<li>URL: “http://practicalmalwareanalysis.com/cc.htm&rdquo;</li>
+<li>URL: “http://practicalmalwareanalysis.com/cc.htm&quot;</li>
 <li>User-Agent : “Internet Explorer 7.5 /pma”</li>
 </ul>
 <h4 id="what-is-the-purpose-of-this-malware-"><strong>What is the purpose of this malware ?</strong></h4>
@@ -299,17 +302,17 @@ At 0x40122D, var_8 is equal to al. AL is the first 8 bits of the EAX register. A
 <ul>
 <li>
 <p>ECX = ‘a’, the sub will be <strong>‘a’ - ‘a’ = 0</strong> (it substract both hexadecimal value -&gt; <strong>0x61 - 0x61 = 0</strong>)
-The program create a folder call C:\Temp.
+The program create a folder call C:\Temp. 
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_0.png" alt="switch_0"></p>
 </li>
 <li>
 <p>ECX = ‘b’, the sub will be <strong>‘b’ - ‘a’ = 1</strong> (0x62 - 0x61)
-The program copy the malware at C:\Temp, and name it cc.exe.
+The program copy the malware at C:\Temp, and name it cc.exe. 
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_1.png" alt="switch_1"></p>
 </li>
 <li>
 <p>ECX = ‘c’, the sub will be <strong>‘c’ - ‘a’ = 2</strong> (0x63 - 0x61)
-The program delete the copy of the malware name cc.exe in the Temp folder.
+The program delete the copy of the malware name cc.exe in the Temp folder. 
 <img src="/images/walkthroughs/pma_lab6/lab-6-3_switch_2.png" alt="switch_2"></p>
 </li>
 <li>
@@ -335,7 +338,7 @@ The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.
 <li>&lsquo;b&rsquo; (case ‘1’) = Copy the malware to C:\Temp and call it cc.exe</li>
 <li>&lsquo;c&rsquo; (case ‘2’) = Delete cc.exe</li>
 <li>&rsquo;d&rsquo; (case ‘3’) = Create the register key to Software\Microsoft\Windows\CurrentVersion\Run and name it “malware”</li>
-<li>&lsquo;e&rsquo; (case ‘4’) = The program sleep for 1.40 minutes</li>
+<li>&rsquo;e&rsquo; (case ‘4’) = The program sleep for 1.40 minutes</li>
 </ul>
 <h3 id="lab-6-4"><strong>Lab 6-4</strong></h3>
 <h4 id="what-is-the-difference-between-the-calls-made-from-the-main-method-in-lab6-3-and-6-4-"><strong>What is the difference between the calls made from the main method in Lab6-3 and 6-4 ?</strong></h4>
@@ -357,7 +360,7 @@ The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.
 <p><img src="/images/walkthroughs/pma_lab6/lab-6-4_digit_push.png" alt="digit_push"></p>
 <h4 id="how-long-will-this-program-run-assume-that-it-is-connected-to-the-internet"><strong>How long will this program run ?(Assume that it is connected to the Internet)</strong></h4>
 <p>The program sleep 60 000ms every time it loop. It can loop 1440 times.</p>
-<pre><code>60 0000ms * 1440 = 86 400 000 ms
+<pre tabindex="0"><code>60 0000ms * 1440 = 86 400 000 ms
 86 400 000ms / 60 = 1 440s
 1 440s / 60 = 24h
 </code></pre><p>The program can sleep <strong>24 hours</strong>.</p>
@@ -409,7 +412,7 @@ The program sleep during 186A0H (=100000) ms -&gt; 1.40 minutes.
 
 
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
         
     <script type="text/javascript">
         

@@ -6,17 +6,20 @@
 
     <head>
     <link href="https://gmpg.org/xfn/11" rel="profile">
+    
+    <link rel="canonical" href="https://nikj-fr.github.io/write-ups/ecw_osint_2020/">
+    
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.74.1" />
+<meta name="generator" content="Hugo 0.98.0" />
 
     
     
     
 
-<title>ECW 2020 - OSINT - Sneakers • Nikj • </title>
+<title>ECW 2020 - OSINT - Sneakers • </title>
 
 
 <meta name="twitter:card" content="summary"/>
@@ -32,15 +35,16 @@ Sneakers est un challenge d’OSINT maritime où l’on devait récupérer un en
 Sommaire  Sneakers 1/4 Sneakers 2/4 Sneakers 3/4 Sneakers 4/4 Retex  Sneakers 1/4 What is the name of the shipping company operating the boat in the photo below ?
 Pour les non anglophones, il faut simplement récupérer le nom de la compagnie détenant le bateau." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nikj-fr.github.io/write-ups/ecw_osint_2020/" />
+<meta property="og:url" content="https://nikj-fr.github.io/write-ups/ecw_osint_2020/" /><meta property="article:section" content="write-ups" />
 <meta property="article:published_time" content="2020-11-17T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-11-17T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
+
 
 
     
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github.min.css">
 
 
 
@@ -87,13 +91,13 @@ Pour les non anglophones, il faut simplement récupérer le nom de la compagnie 
         
         
         <div class="author-image">
-          <a href="http://nikj-fr.github.io"><img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center"></a>
+          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
         </div>
         
       
       
       <p class="site__description">
-        <a href="http://nikj-fr.github.io"> Infosec Website | CTF Write Up </a>
+         Infosec Website | CTF Write Up 
       </p>
     </div>
     <div class="collapsible-menu">
@@ -178,14 +182,13 @@ Pour les non anglophones, il faut simplement récupérer le nom de la compagnie 
 	
 	
 	
-	
 </section>
 
       </div>
     </div>
     
 <div class="copyright">
-  &copy; 2019 - 2021 htr3n
+  &copy; 2019 - 2022 htr3n
   
     <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
   
@@ -257,7 +260,7 @@ La seule information exploitable que l’on peut récupérer est que c’est un 
 <em>filetype</em>: Permet de chercher un type de document</p>
 <p>Ceci étant dit, il nous reste plus qu’a craft un “payload de recherche”.</p>
 <p>Voici le mien, très basique mais qui a plutôt bien fonctionné:</p>
-<pre><code>allintext: trans africa crew filetype: pdf
+<pre tabindex="0"><code>allintext: trans africa crew filetype: pdf
 </code></pre><p><img src="/images/write-ups/ecw_2020_osint_sneakers/recherche_google_dork.png" alt="Recherche google dork"></p>
 <p>On clique sur le 1er lien et on obtient un PDF parlant d’une compagnie qui s’appelle: Chemikalien Seetransport</p>
 <p><a href="https://www.cst-shipping.com/wp-content/uploads/2014/04/CST18001_FleetMagazine_ES_180207.pdf">Lien vers le pdf</a></p>
@@ -267,7 +270,7 @@ La seule information exploitable que l’on peut récupérer est que c’est un 
 <p>Enoncé</p>
 <p>In 2010, this company announced that it was starting to deploy its new communication system across its entire fleet. What was this communication system? (Quel est le nom du système de communication de l’entreprise est en train de déployer sur sa flotte ?)</p>
 <p>De la même manière que la première étape nous continuons d’utiliser les Google Dork</p>
-<pre><code>allintext: Chemikalien Seetransport communication
+<pre tabindex="0"><code>allintext: Chemikalien Seetransport communication
 </code></pre><p><img src="/images/write-ups/ecw_2020_osint_sneakers/recherche_google_dork_2.png" alt="Recherche google dork 2"></p>
 <p>Le 1er site que l’on rencontre est le bon, il y est mentionné une solution de communication appelé CommBox</p>
 <p><img src="/images/write-ups/ecw_2020_osint_sneakers/system_communication.png" alt="Communication system"></p>
@@ -285,10 +288,10 @@ La seule information exploitable que l’on peut récupérer est que c’est un 
 <p>Enoncé</p>
 <p>In the pdf of the presentation, at slide number 11, the URL to access the company’s Citrix is visible in the screenshot. What was the domain name used (do not modify it to submit the flag)?</p>
 <p>Recherche sur google:</p>
-<pre><code>allintext: presentation hamburg 2012 chemikalien seetransport
+<pre tabindex="0"><code>allintext: presentation hamburg 2012 chemikalien seetransport
 </code></pre><p><img src="/images/write-ups/ecw_2020_osint_sneakers/google_dork_presentation.png" alt="Recherche sneaker4"></p>
 <p>Le lien numéro 2 nous envoie vers une page qui index toutes les présentations des conférences qui ont eu lieu.</p>
-<pre><code>CTRL + F  # Pour rechercher Patric Desanti
+<pre tabindex="0"><code>CTRL + F  # Pour rechercher Patric Desanti
 </code></pre><p><img src="/images/write-ups/ecw_2020_osint_sneakers/presentation_pptx_find.png" alt="pptx find"></p>
 <p><a href="https://thedigitalship.com/conferences/presentations/2012hamburg/day1/DS_hamburg12_Desanti_Chemikalien_Seetransport.pdf">Lien vers la présentation</a></p>
 <p>On se rend à la diapo 11 du pdf et on regarde quel est le nom de domaine utilisé:</p>
@@ -328,7 +331,7 @@ La suite du scénario se déroule plutôt bien et l’utilisation de Google Dork
 
 
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
         
     <script type="text/javascript">
         

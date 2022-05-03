@@ -6,17 +6,20 @@
 
     <head>
     <link href="https://gmpg.org/xfn/11" rel="profile">
+    
+    <link rel="canonical" href="https://nikj-fr.github.io/cheatsheets/google_dork/">
+    
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.74.1" />
+<meta name="generator" content="Hugo 0.98.0" />
 
     
     
     
 
-<title>Google Dork • Nikj • </title>
+<title>Google Dork • </title>
 
 
 <meta name="twitter:card" content="summary"/>
@@ -26,15 +29,16 @@
 <meta property="og:title" content="Google Dork" />
 <meta property="og:description" content="Filtres de recherches    Filtre Description Exemple     allintext Recherche les occurrences des mots-clefs dans un texte allintext: &ldquo;keyword_1 keyword_2&rdquo;   intext Recherche les occurences d’un mot-cléf dans un texte intext: &ldquo;keyword&rdquo;   inurl Recherche du mot clé dans l’URL d’un site inurl: &ldquo;keyword&rdquo;   allinurl Recherche d’une URL qui contient les mots-clefs allinurl: &ldquo;keyword_1 keyword_2&rdquo;   intitle Recherche dans le titre des pages webs le mot-clef intitle: &ldquo;keyword&rdquo;   allintitile Recherche dans le titre des pages webs les mots-clefs allintitle: &ldquo;keyword_1 keyword_2&rdquo;   site Liste tous les résultats pour un site site: &ldquo;http://nikj-fr." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nikj-fr.github.io/cheatsheets/google_dork/" />
+<meta property="og:url" content="https://nikj-fr.github.io/cheatsheets/google_dork/" /><meta property="article:section" content="cheatsheets" />
 <meta property="article:published_time" content="2020-12-21T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-12-21T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
+
 
 
     
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github.min.css">
 
 
 
@@ -81,13 +85,13 @@
         
         
         <div class="author-image">
-          <a href="http://nikj-fr.github.io"><img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center"></a>
+          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
         </div>
         
       
       
       <p class="site__description">
-        <a href="http://nikj-fr.github.io"> Infosec Website | CTF Write Up </a>
+         Infosec Website | CTF Write Up 
       </p>
     </div>
     <div class="collapsible-menu">
@@ -172,14 +176,13 @@
 	
 	
 	
-	
 </section>
 
       </div>
     </div>
     
 <div class="copyright">
-  &copy; 2019 - 2021 htr3n
+  &copy; 2019 - 2022 htr3n
   
     <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
   
@@ -289,20 +292,20 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 </table>
 <h4 id="opérateur-de-recherche"><strong>Opérateur de recherche</strong></h4>
 <p><strong>OU</strong></p>
-<pre><code>site: root-me.fr | site: tryhackme.com
+<pre tabindex="0"><code>site: root-me.fr | site: tryhackme.com
 </code></pre><p><strong>ET</strong></p>
-<pre><code>site: root-me.fr &amp; site: tryhackme.com
+<pre tabindex="0"><code>site: root-me.fr &amp; site: tryhackme.com
 </code></pre><p><strong>Combinaison</strong></p>
-<pre><code>(site: root-me.fr | site: tryhackme.com ) &amp; intext: &quot;login&quot;
+<pre tabindex="0"><code>(site: root-me.fr | site: tryhackme.com ) &amp; intext: &#34;login&#34;
 </code></pre><p><strong>Include</strong><br>
 Trie par ordre d’occurences les résultats</p>
-<pre><code>-site: root-me.fr +site: root-me.*
+<pre tabindex="0"><code>-site: root-me.fr +site: root-me.*
 </code></pre><p><strong>Exclude</strong></p>
-<pre><code>site: root-me.* -site: root-me.fr
+<pre tabindex="0"><code>site: root-me.* -site: root-me.fr
 </code></pre><p><strong>Synonyms</strong></p>
-<pre><code>~&quot;word&quot;
+<pre tabindex="0"><code>~&#34;word&#34;
 </code></pre><p><strong>Global pattern</strong></p>
-<pre><code>site: *.fr
+<pre tabindex="0"><code>site: *.fr
 </code></pre>
   </div>
   
@@ -335,7 +338,7 @@ Trie par ordre d’occurences les résultats</p>
 
 
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
         
     <script type="text/javascript">
         

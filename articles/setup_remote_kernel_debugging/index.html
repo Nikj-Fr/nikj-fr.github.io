@@ -6,17 +6,20 @@
 
     <head>
     <link href="https://gmpg.org/xfn/11" rel="profile">
+    
+    <link rel="canonical" href="https://nikj-fr.github.io/articles/setup_remote_kernel_debugging/">
+    
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.74.1" />
+<meta name="generator" content="Hugo 0.98.0" />
 
     
     
     
 
-<title>Tutorial - Setup Remote Kernel Debugging • Nikj • </title>
+<title>Tutorial - Setup Remote Kernel Debugging • </title>
 
 
 <meta name="twitter:card" content="summary"/>
@@ -26,15 +29,16 @@
 <meta property="og:title" content="Tutorial - Setup Remote Kernel Debugging" />
 <meta property="og:description" content="Setup Remote Kernel Debugging for Kernel Driver development" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nikj-fr.github.io/articles/setup_remote_kernel_debugging/" />
+<meta property="og:url" content="https://nikj-fr.github.io/articles/setup_remote_kernel_debugging/" /><meta property="article:section" content="articles" />
 <meta property="article:published_time" content="2021-10-04T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-10-04T00:00:00+00:00" /><meta property="og:site_name" content="Infosec Website | CTF Write Up" />
+
 
 
     
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github.min.css">
 
 
 
@@ -81,13 +85,13 @@
         
         
         <div class="author-image">
-          <a href="http://nikj-fr.github.io"><img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center"></a>
+          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
         </div>
         
       
       
       <p class="site__description">
-        <a href="http://nikj-fr.github.io"> Infosec Website | CTF Write Up </a>
+         Infosec Website | CTF Write Up 
       </p>
     </div>
     <div class="collapsible-menu">
@@ -172,14 +176,13 @@
 	
 	
 	
-	
 </section>
 
       </div>
     </div>
     
 <div class="copyright">
-  &copy; 2019 - 2021 htr3n
+  &copy; 2019 - 2022 htr3n
   
     <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
   
@@ -232,13 +235,13 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <h4 id="enable-kernel-debugging"><strong>Enable Kernel Debugging</strong></h4>
 <p>Start the command prompt as Administrator in order to run the following commands. The first one enable the debugging, and the second one defines the configuration to be used for the debugging. In our case we provide the IP address, the port of the debugger (machine that debug the VM) and a key.<br>
 Replace <code>&lt;DEBUGGER'S IP ADDRESS&gt;</code> with your host ip address (<code>ipconfig</code>).</p>
-<pre><code>bcdedit.exe /debug on
-bcdedit.exe /dbgsettings net hostip:&lt;DEBUGGER'S IP ADDRESS&gt; port:50000 key:kernel.debugging.is.easy
+<pre tabindex="0"><code>bcdedit.exe /debug on
+bcdedit.exe /dbgsettings net hostip:&lt;DEBUGGER&#39;S IP ADDRESS&gt; port:50000 key:kernel.debugging.is.easy
 </code></pre><p><img src="/images/articles/setup_remote_kernel_debugging/debug_on.png" alt="DEBUG_ON"></p>
 <p><img src="/images/articles/setup_remote_kernel_debugging/key.png" alt="KEY"></p>
 <p>Then, we have to specify the location of our network card. Press <strong>Win + X</strong>, select Device Manager and network card. Right click on the good one, properties and look on which bus your card is.</p>
 <p><img src="/images/articles/setup_remote_kernel_debugging/bus_param_properties.png" alt="BUS_PARAM_PROPERTIES"></p>
-<pre><code>bcdedit.exe /set {dbgsettings} busparams 0.3.0
+<pre tabindex="0"><code>bcdedit.exe /set {dbgsettings} busparams 0.3.0
 </code></pre><p><img src="/images/articles/setup_remote_kernel_debugging/bus_param.png" alt="BUS_PARAM_PROPERTIES"></p>
 <h4 id="configure-windbg"><strong>Configure WinDBG</strong></h4>
 <p>Start WinDbg (x64), then Select File -&gt; Attach to Kernel. Now enter the key defined while setting up the debuggee VM. If you followed this tutorial it was <strong>&ldquo;kernel.debugging.is.easy&rdquo;</strong>, keep the port to be <strong>50000</strong> and click OK.</p>
@@ -258,6 +261,11 @@ bcdedit.exe /dbgsettings net hostip:&lt;DEBUGGER'S IP ADDRESS&gt; port:50000 key
       <span class="navigation-tittle">Tutorial - Unpack Self Injection Packer</span>
     </a>
     
+    
+    <a href="/articles/malware_analysis_redline_stealer/" class="navigation-next">
+      <span class="navigation-tittle">Malware Analysis - RedLine Stealer</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
     
 </div>
 
@@ -279,7 +287,7 @@ bcdedit.exe /dbgsettings net hostip:&lt;DEBUGGER'S IP ADDRESS&gt; port:50000 key
 
 
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
         
     <script type="text/javascript">
         
