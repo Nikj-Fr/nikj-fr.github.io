@@ -6,10 +6,16 @@
     <description>Recent content in Articles on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Mon, 04 Oct 2021 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://nikj-fr.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 03 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Malware Analysis - RedLine Stealer</title>
+      <link>https://nikj-fr.github.io/articles/malware_analysis_redline_stealer/</link>
+      <pubDate>Tue, 03 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/articles/malware_analysis_redline_stealer/</guid>
+      <description>Table of content  Introduction Unpacking Configuration C2 Communication Data collected Checks Browsers FTP Credentials Crypto Wallets Credit Cards VPN Credentials Remote Code Execution IoC  Introduction Redline Stealer is distributed through Phishing Emails or malicious software disguised as installation files such as Discord or cracked software. Recently, Phishing Link that downloads Chrome Extension containing Redline Stealer by abusing YouTube Video Description src.
+The sample analyzed can be download here.</description>
+    </item>
     
     <item>
       <title>Tutorial - Setup Remote Kernel Debugging</title>

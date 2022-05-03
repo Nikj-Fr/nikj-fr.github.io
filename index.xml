@@ -6,10 +6,16 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Mon, 04 Oct 2021 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 03 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Malware Analysis - RedLine Stealer</title>
+      <link>https://nikj-fr.github.io/articles/malware_analysis_redline_stealer/</link>
+      <pubDate>Tue, 03 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://nikj-fr.github.io/articles/malware_analysis_redline_stealer/</guid>
+      <description>Table of content  Introduction Unpacking Configuration C2 Communication Data collected Checks Browsers FTP Credentials Crypto Wallets Credit Cards VPN Credentials Remote Code Execution IoC  Introduction Redline Stealer is distributed through Phishing Emails or malicious software disguised as installation files such as Discord or cracked software. Recently, Phishing Link that downloads Chrome Extension containing Redline Stealer by abusing YouTube Video Description src.
+The sample analyzed can be download here.</description>
+    </item>
     
     <item>
       <title>Tutorial - Setup Remote Kernel Debugging</title>
@@ -70,7 +76,7 @@ I&amp;rsquo;ll use a CALL to a function to modify EIP. Inside this function, we 
       
       <guid>https://nikj-fr.github.io/walkthroughs/prr_ex1/</guid>
       <description>Question This function uses a combination SCAS and STOS to do its work. First, explain what is the type of the [EBP+8] and [EBP+C] in line 1 and 8 respectively. Next explain what this snippet does.
-01: 8B 7D 08 mov edi, [ebp+8] 02: 8B D7 mov edx, edi 03: 33 C0 xor eax, eax 04: 83 C9 FF or ecx, 0FFFFFFFFh 05: F2 AE repne scasb 06: 83 C1 02 add ecx, 2 07: F7 D9 neg ecx 08: 8A 45 0C mov al, [ebp+0Ch] 09: 8B AA mov edi, edx 10: F3 AA rep stosb 11: 8B C2 mov eax, edx Analysis EBP is a pointer referencing the bottom of the stack.</description>
+01: 8B 7D 08 mov edi, [ebp+8]02: 8B D7 mov edx, edi03: 33 C0 xor eax, eax04: 83 C9 FF or ecx, 0FFFFFFFFh05: F2 AE repne scasb06: 83 C1 02 add ecx, 207: F7 D9 neg ecx08: 8A 45 0C mov al, [ebp+0Ch]09: 8B AA mov edi, edx10: F3 AA rep stosb11: 8B C2 mov eax, edx Analysis EBP is a pointer referencing the bottom of the stack.</description>
     </item>
     
     <item>
@@ -121,10 +127,10 @@ Also, you can visualize it on the Graph View by turning on Line Prefixes in the 
       
       <guid>https://nikj-fr.github.io/cheatsheets/nmap/</guid>
       <description>Types de scan    Parameters Description     sA ACK scan   sF FIN scan    Scanner une IP
-nmap [IP]Scanner plusieurs IPs
-nmap [IP_1, IP_2]Scanner une liste d’IPs depuis un fichier .txt
-nmap -iL [liste.txt]Scanner un sous-réseau
-nmap [IP/Mask]</description>
+nmap [IP] Scanner plusieurs IPs
+nmap [IP_1, IP_2] Scanner une liste d’IPs depuis un fichier .txt
+nmap -iL [liste.txt] Scanner un sous-réseau
+nmap [IP/Mask] </description>
     </item>
     
     <item>

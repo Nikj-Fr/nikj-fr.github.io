@@ -6,11 +6,7 @@
     <description>Recent content in Cheatsheets on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Mon, 21 Dec 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://nikj-fr.github.io/cheatsheets/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 21 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://nikj-fr.github.io/cheatsheets/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Google Dork</title>
       <link>https://nikj-fr.github.io/cheatsheets/google_dork/</link>
@@ -27,10 +23,10 @@
       
       <guid>https://nikj-fr.github.io/cheatsheets/nmap/</guid>
       <description>Types de scan    Parameters Description     sA ACK scan   sF FIN scan    Scanner une IP
-nmap [IP]Scanner plusieurs IPs
-nmap [IP_1, IP_2]Scanner une liste d’IPs depuis un fichier .txt
-nmap -iL [liste.txt]Scanner un sous-réseau
-nmap [IP/Mask]</description>
+nmap [IP] Scanner plusieurs IPs
+nmap [IP_1, IP_2] Scanner une liste d’IPs depuis un fichier .txt
+nmap -iL [liste.txt] Scanner un sous-réseau
+nmap [IP/Mask] </description>
     </item>
     
   </channel>
