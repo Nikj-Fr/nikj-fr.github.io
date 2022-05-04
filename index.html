@@ -79,7 +79,9 @@
         
         
         <div class="author-image">
-          <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+          <a href="https://nikj-fr.github.io/">
+            <img src="https://nikj-fr.github.io/images/profil.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+          </a>
         </div>
         
       
@@ -176,7 +178,7 @@
     </div>
     
 <div class="copyright">
-  &copy; 2019 - 2022 htr3n
+  &copy; 2019 - 2022 Nikj-Fr
   
     <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
   
@@ -201,18 +203,18 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/walkthroughs/pma_lab10/" >Practical Malware Analysis - Lab 10</a>
+          <a href="/articles/malware_analysis_redline_stealer/" >Malware Analysis - RedLine Stealer</a>
         </span>
         <span class="item__date">
-          Sep 22, 2021
+          May 3, 2022
         </span>
         <span >
         
-        Eight exercice of the Practical Malware Analysis book. This chapter explore ways to use WinDbg for kernel debugging and rootkit analysis
+        RedLine Stealer is a low-cost password stealer sold on underground forums. It steals passwords, credit card information and other sensitive data and sends it to a remote location.
         
         </span>
         
-          ... <a class="read-more-symbol" href="/walkthroughs/pma_lab10/">➦</a>
+          ... <a class="read-more-symbol" href="/articles/malware_analysis_redline_stealer/">➦</a>
         
         </div>
         
@@ -222,18 +224,18 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/walkthroughs/pma_lab9/" >Practical Malware Analysis - Lab 9</a>
+          <a href="/articles/setup_remote_kernel_debugging/" >Tutorial - Setup Remote Kernel Debugging</a>
         </span>
         <span class="item__date">
-          Sep 15, 2021
+          Oct 4, 2021
         </span>
         <span >
         
-        Sixth exercice of the Practical Malware Analysis book. The goal of this labs is to focus on OllyDBG, an x86 debugger developped by Oleh Yushuk.
+        Setup Remote Kernel Debugging for Kernel Driver development
         
         </span>
         
-          ... <a class="read-more-symbol" href="/walkthroughs/pma_lab9/">➦</a>
+          ... <a class="read-more-symbol" href="/articles/setup_remote_kernel_debugging/">➦</a>
         
         </div>
         
@@ -243,18 +245,18 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/walkthroughs/prr_ex2/" >Practical Reverse Engineering - Ex 2</a>
+          <a href="/articles/self_injection/" >Tutorial - Unpack Self Injection Packer</a>
         </span>
         <span class="item__date">
-          Mar 26, 2021
+          Apr 15, 2021
         </span>
         <span >
         
-        Second exercice of the Practical Reverse Engineering book
+        Malware authors try to hide themselves from antivirus and make analysis harder for analysist. One technique they use is call packing, it means to make the code more obfuscated and unreable. In this post, we&#39;ll look at one specific kind of unpacking technique that you can use to finally start the analysis of the real payload. This technique is call Self-Injection.
         
         </span>
         
-          ... <a class="read-more-symbol" href="/walkthroughs/prr_ex2/">➦</a>
+          ... <a class="read-more-symbol" href="/articles/self_injection/">➦</a>
         
         </div>
         
@@ -264,18 +266,19 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/walkthroughs/prr_ex1/" >Practical Reverse Engineering - Ex 1</a>
+          <a href="/articles/suppression_application_preinstalle_windows10/" >Suppression des application préinstallées sous Windows 10</a>
         </span>
         <span class="item__date">
-          Mar 9, 2021
+          Oct 22, 2020
         </span>
         <span >
         
-        First exercice of the Practical Reverse Engineering book writen by Bruce Dang, Alexandre Gazet and Elias Bachaalany
+        Introduction Cet article fait suite à une envie de nettoyage de mon pc. Je vais vous partager la méthode que j’ai utilisé pour supprimer les applications pré-installées sous Windows 10. Malheureusement, quelques applications parviennent à survivre à la méthode (Hello Cortana).
+Ouverture d’un interpreteur Powershell  Rechercher le programme Powershell dans votre menu démarrer puis lancer le en tant qu’administrateur.  Lister l’ensemble des applications installées  Dans la fenêtre qui vient de s’ouvrir, utiliser la commande suivante:  Get-AppxPackage | Select Name, PackageFullName Selection du package à supprimer  Lancer la commande suivante en remplaçant le nom du package à supprimer à la place de YourPackageName  Get-AppxPackage YourPackageName | Remove-AppxPackage Liste de toutes les applications possibles de supprimer Important: Je vous conseil de ne pas supprimer le Windows Store afin de pouvoir récupérer les applications que vous allez supprimer.
         
         </span>
         
-          ... <a class="read-more-symbol" href="/walkthroughs/prr_ex1/">➦</a>
+          ... <a class="read-more-symbol" href="/articles/suppression_application_preinstalle_windows10/">➦</a>
         
         </div>
         
@@ -285,102 +288,18 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/walkthroughs/pma_lab7/" >Practical Malware Analysis - Lab 7</a>
+          <a href="/articles/wsl2/" >WSL</a>
         </span>
         <span class="item__date">
-          Jan 12, 2021
+          Oct 3, 2020
         </span>
         <span >
         
-        Fifth exercice of the Practical Malware Analysis book. The goal of this labs is to help understand how a malware interact with the operating system
+        Abstract Depuis quelques années, Microsoft s’est tourné vers l’Open Source en témoigne le rachat de Github. Ce type de licence est très apprécié de la communauté qui à la possibilité d’accéder aux codes sources et d’y effectuer des améliorations mais également par les développeurs car la communauté peut également remonter des bugs. Le seul moyen pour Microsoft d’intégrer les outils du monde Linux dans son système est de passer par la virtualisation.
         
         </span>
         
-          ... <a class="read-more-symbol" href="/walkthroughs/pma_lab7/">➦</a>
-        
-        </div>
-        
-     
-      
-        
-      
-      <div class="post-list__item">
-        <span class="item__title--big">
-          <a href="/walkthroughs/pma_lab6/" >Practical Malware Analysis - Lab 6</a>
-        </span>
-        <span class="item__date">
-          Jan 5, 2021
-        </span>
-        <span >
-        
-        Fourth exercice of the Practical Malware Analysis book. The goal of this labs is to help understand the overall functionality of a program by analyzing code constructs
-        
-        </span>
-        
-          ... <a class="read-more-symbol" href="/walkthroughs/pma_lab6/">➦</a>
-        
-        </div>
-        
-     
-      
-        
-      
-      <div class="post-list__item">
-        <span class="item__title--big">
-          <a href="/walkthroughs/pma_lab5/" >Practical Malware Analysis - Lab 5</a>
-        </span>
-        <span class="item__date">
-          Dec 28, 2020
-        </span>
-        <span >
-        
-        Third practical exercice of the Practical Malware Analysis book. The goal of this lab is to give hands-on experience with IDA Pro
-        
-        </span>
-        
-          ... <a class="read-more-symbol" href="/walkthroughs/pma_lab5/">➦</a>
-        
-        </div>
-        
-     
-      
-        
-      
-      <div class="post-list__item">
-        <span class="item__title--big">
-          <a href="/walkthroughs/pma_lab3/" >Practical Malware Analysis - Lab 3</a>
-        </span>
-        <span class="item__date">
-          Dec 21, 2020
-        </span>
-        <span >
-        
-        Second practical exercice of the Practical Malware Analysis book. The purpose of this lab is to train on basic dynamic analysis taught in the chapter 3 
-        
-        </span>
-        
-          ... <a class="read-more-symbol" href="/walkthroughs/pma_lab3/">➦</a>
-        
-        </div>
-        
-     
-      
-        
-      
-      <div class="post-list__item">
-        <span class="item__title--big">
-          <a href="/walkthroughs/pma_lab1/" >Practical Malware Analysis - Lab 1</a>
-        </span>
-        <span class="item__date">
-          Dec 5, 2020
-        </span>
-        <span >
-        
-        First practical exercice of the Practical Malware Analysis book. The purpose of this lab is to give opportunity to practice the skill taught in the chapter. In order to simulate realistic malware analysis you will be given little or no information about the program you are analysis
-        
-        </span>
-        
-          ... <a class="read-more-symbol" href="/walkthroughs/pma_lab1/">➦</a>
+          ... <a class="read-more-symbol" href="/articles/wsl2/">➦</a>
         
         </div>
         
